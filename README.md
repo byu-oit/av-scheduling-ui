@@ -1,2 +1,2 @@
 # av-scheduling-ui
-Proof of concept
+This is the user interface for a proof of concept device providing room scheduling services.
