@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MomentModule } from 'angular2-moment'
+import { MomentModule } from 'angular2-moment';
 import { FormsModule }   from '@angular/forms'; // <-- NgModel lives here
+import { NguiDatetimePickerModule } from '@ngui/datetime-picker';
 
 import { AppComponent } from './app.component';
 
@@ -12,7 +13,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     MomentModule,
-    FormsModule
+    FormsModule,
+    NguiDatetimePickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

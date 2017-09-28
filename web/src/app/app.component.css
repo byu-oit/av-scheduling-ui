@@ -32,19 +32,56 @@
   width:800px;
   height:480px;
   background-size: 800px 480px;
+  position:fixed;
+  top:0px;
+  left:0px;
 }
 .bookNow {
   display: block;
-  background-color: black;
-  opacity: 0.4;
-  width: 90%;
-  height: 90%;
+  background: url("assets/YMountain.png");
+  width:800px;
+  height:480px;
   background-size: 800px 480px;
   position: fixed;
-  top:5%;
-  left:4%;
+  top:0px;
+  left:0px;
+  z-index: 9000;
+}
+
+.book-now-container
+{
+  display: block;
+  background-color: black;
+  width:50%;
+  height:75%;
+  background-size: 800px 480px;
+  position: fixed;
+  top:15%;
+  left:0px;
   color: white;
-  z-index: 9999;
+  z-index: 9100;
+}
+.book-now-form {
+  position:fixed;
+  margin: 20px;
+  font-family: "Roboto";
+  color:white;
+  font-size: 1.10em;
+
+  z-index: 9200;
+}
+
+.book-now-form-title
+{
+}
+
+.book-now-form-start
+{
+}
+
+.book-now-form-end
+{
+
 }
 
 .scheduleEvent {
@@ -180,22 +217,31 @@
 }
 
 .scheduleButton {
-  color: rgb(254, 254, 254);
-  font-size: 16px;
+  position: fixed;
+  left: 442px;
+  top: 425px;
+  width: 138.26px;
+  height: 32.26px;
+  z-index: 23;
+
+  margin: 0 auto;
+
+  font-size: 1.10em;
   font-family: "Roboto";
   color: rgb(254, 254, 254);
-  font-weight: bold;
   line-height: 1;
+
   border-width: 1.87px;
   border-color: rgb(254, 254, 254);
   border-style: solid;
-  position:fixed;
-  margin:2%;
-  left: 55%;
-  z-index: 23;
+
+  vertical-align: middle;
+  text-align: center;
+}
+.button-label{
+  margin:8px auto;
 }
 .bookNowButton{
-  color: rgb(254, 254, 254);
   font-size: 16px;
   font-family: "Roboto";
   color: rgb(254, 254, 254);
@@ -204,8 +250,18 @@
   border-width: 1.87px;
   border-color: rgb(254, 254, 254);
   border-style: solid;
+
   position:fixed;
-  margin:2%;
+
+  margin: 0 auto;
+
+  text-align: center;
+
+  top: 425px;
+  width: 138.26px;
+  height: 32.26px;
+  z-index: 23;
+
   left: 75%;
   z-index: 23;
 }
@@ -332,4 +388,43 @@
   top: 37%;
   float:center;
   z-index: 8;
+}
+
+.book-now-clock {
+  font-size: 4.25em;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(254, 254, 254);
+  line-height: 0.5;
+  text-align: right;
+  -moz-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  -webkit-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  -ms-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  /*position: absolute;
+  left: 565.347px;*/
+
+  width:33%;
+  left: 58%;
+  position: fixed;
+  top: 60%;
+  float:left;
+  z-index: 9200;
+}
+.book-now-date {
+  font-size: 1.45em;
+  font-family: 'Roboto Slab', serif;
+  color: rgb(254, 254, 254);
+  line-height: 0.5;
+  text-align: right;
+  -moz-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  -webkit-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  -ms-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  /*position: absolute;
+  left: 565.347px;*/
+
+  width:50%;
+  left:40%;
+  position: fixed;
+  top: 75%;
+  float:center;
+  z-index: 9200;
 }
