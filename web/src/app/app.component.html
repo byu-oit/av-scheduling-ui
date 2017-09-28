@@ -1,0 +1,75 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+<div class="window">
+  <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()"></div>
+  <div class="occupiedBanner" *ngIf="occupied" (click)="reset()"></div>
+  <div class="roomTitle">
+    {{resource.name}}
+  </div>
+  <div class="availability" *ngIf="unoccupied">
+    AVAILABLE
+  </div>
+  <div class="in-use" *ngIf="occupied">
+    IN USE
+  </div>
+  <div class="eventName" *ngIf="currentEvent">
+
+  </div>
+
+  <div class="clock">
+    {{ date | amDateFormat:'hh:mm'}}
+  </div>
+  <div class="date">
+    {{date | amDateFormat:'dddd, MMM DD'}}
+  </div>
+  <div class="buttonBar">
+    <div class="scheduleButton" (click)="scheduleEvent()">
+      <img src="assets/Calendar.png" /> SCHEDULE
+    </div>
+    <div class="bookNowButton" (click)="bookNow()">BOOK NOW
+    </div>
+    <div class="cancelNowButton" (click)="cancelEvent(event)">CANCEL
+    </div>
+  </div>
+
+
+  <!--<div class="scheduleContainer">
+    <ul class="schedule">
+      <li *ngFor="let event of events" [class.selected]="event === selectedEvent" (click)="onSelect(event)">
+        {{event.id}} - {{event.name}} - {{event.start}}
+      </li>
+    </ul>
+    <div class="detail" *ngIf="selectedEvent">
+      <h2>{{selectedEvent.name}}</h2>
+      <div>
+        <label>id: </label>{{selectedEvent.id}} <br />
+        <label>name: </label>{{selectedEvent.name}}<br />
+        <label>start: </label>{{selectedEvent.start}}<br />
+        <label>end: </label>{{selectedEvent.end}}<br />
+      </div>
+    </div>
+
+
+  </div>-->
+
+</div>
+<div class="bookNow" *ngIf="bookEvent">
+  <div class="book-now-container">
+
+    <div class="book-now-title">
+      <label>Name: </label>
+      <input [(ngModel)]="newMeetingName" placeholder="Ad-hoc Meeting">
+    </div>
+    <div class="book-now-start">
+      <label>Start Time: </label>
+      <input [(ngModel)]="newMeetingStart" </div>
+      <div class="book-now-end">
+
+      </div>
+    </div>
+    <div class="scheduleEvent" *ngIf="scheduleNow">
+      Schedule it!
+    </div>
+    <div class="cancelEvent" *ngIf="cancellation">
+      Nope!
+    </div>
