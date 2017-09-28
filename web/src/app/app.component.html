@@ -66,10 +66,33 @@
       <div class="book-now-end">
 
       </div>
+  </div>
+</div>
+<div class="scheduleEvent" *ngIf="scheduleNow">
+    Schedule it!
+</div>
+<div class="cancelEvent" *ngIf="cancellation">
+  <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()">
+    <div class="cancellation-title">
+      Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
+    </div></div>
+  <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
+  <div class="cancellation-title">
+    Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
+  </div>
+</div>
+  <div class="cancelEvent-message">
+      <div class="cancel-p">
+        Are you sure you want to cancel this meeting?
+      </div>
+    <div class="cancel-meeting-title">
+      {{selectedEvent.subject}}
     </div>
-    <div class="scheduleEvent" *ngIf="scheduleNow">
-      Schedule it!
+    <div (click)="cancelPage_no()" class="cancelEvent-no-button">
+      NO
     </div>
-    <div class="cancelEvent" *ngIf="cancellation">
-      Nope!
+    <div (click)="cancelPage_yes(selectedEvent)" class="cancelEvent-yes-button">
+      YES
     </div>
+  </div>
+</div>
