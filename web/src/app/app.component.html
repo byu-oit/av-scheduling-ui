@@ -24,6 +24,8 @@
     <div class="cancelNowButton" (click)="cancelEvent(event)">CANCEL
     </div>
   </div>
+
+
   <!--<div class="scheduleContainer">
     <ul class="schedule">
       <li *ngFor="let event of events" [class.selected]="event === selectedEvent" (click)="onSelect(event)">
@@ -43,4 +45,19 @@
 
   </div>-->
 
+</div>
+<div class="bookNow" *ngIf="bookEvent">
+  <div class="book-now-container">
+
+  <div class="book-now-title">
+    <label>Name: </label>
+    <input [(ngModel)]="newMeetingName" placeholder="Ad-hoc Meeting">
+  </div>
+  <div class="book-now-start">
+    <label>Start Time: </label>
+    <input [(ngModel)]="newMeetingStart"
+  </div>
+  <div class="book-now-end">
+
+  </div>
 </div>
