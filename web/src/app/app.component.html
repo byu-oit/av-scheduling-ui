@@ -7,13 +7,18 @@
     {{resource.name}}
   </div>
   <div class="availability" *ngIf="unoccupied">
-  AVAILABLE
+    AVAILABLE
   </div>
   <div class="in-use" *ngIf="occupied">
-  IN USE
+    IN USE
   </div>
   <div class="eventName" *ngIf="currentEvent">
-
+    <div class="clock">
+      {{ date | amDateFormat:'hh:mm'}}
+    </div>
+    <div class="date">
+      {{date | amDateFormat:'dddd, MMM DD'}}
+    </div>
   </div>
   <div class="buttonBar">
     <div class="scheduleButton" (click)="scheduleEvent()">
@@ -49,15 +54,20 @@
 <div class="bookNow" *ngIf="bookEvent">
   <div class="book-now-container">
 
-  <div class="book-now-title">
-    <label>Name: </label>
-    <input [(ngModel)]="newMeetingName" placeholder="Ad-hoc Meeting">
-  </div>
-  <div class="book-now-start">
-    <label>Start Time: </label>
-    <input [(ngModel)]="newMeetingStart"
-  </div>
-  <div class="book-now-end">
+    <div class="book-now-title">
+      <label>Name: </label>
+      <input [(ngModel)]="newMeetingName" placeholder="Ad-hoc Meeting">
+    </div>
+    <div class="book-now-start">
+      <label>Start Time: </label>
+      <input [(ngModel)]="newMeetingStart" </div>
+      <div class="book-now-end">
 
-  </div>
-</div>
+      </div>
+    </div>
+    <div class="scheduleEvent" *ngIf="scheduleNow">
+      Schedule it!
+    </div>
+    <div class="cancelEvent" *ngIf="cancellation">
+      Nope!
+    </div>
