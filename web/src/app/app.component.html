@@ -13,12 +13,14 @@
     IN USE
   </div>
   <div class="eventName" *ngIf="currentEvent">
-    <div class="clock">
-      {{ date | amDateFormat:'hh:mm'}}
-    </div>
-    <div class="date">
-      {{date | amDateFormat:'dddd, MMM DD'}}
-    </div>
+
+  </div>
+
+  <div class="clock">
+    {{ date | amDateFormat:'hh:mm'}}
+  </div>
+  <div class="date">
+    {{date | amDateFormat:'dddd, MMM DD'}}
   </div>
   <div class="buttonBar">
     <div class="scheduleButton" (click)="scheduleEvent()">
