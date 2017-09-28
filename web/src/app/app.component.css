@@ -1,0 +1,252 @@
+.agenda-current-meeting {
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(255, 255, 255);
+  background-color: rgb(116, 190, 4);
+  opacity: 0.2;
+  /*position: absolute;
+  left: 72px;
+  top: 255px;
+  width: 270px;
+  height: 108px;
+  z-index: 32;*/
+
+}
+
+.detail
+{
+
+}
+
+.scheduleContainer
+{
+
+}
+.window
+{
+  display: block;
+  background: url("assets/YMountain.png");
+  width:800px;
+  height:480px;
+  background-size: 800px 480px;
+}
+.bookNow {
+  display: block;
+  background-color: black;
+  opacity: 0.4;
+  width: 90%;
+  height: 90%;
+  background-size: 800px 480px;
+  position: fixed;
+  top:5%;
+  left:4%;
+  color: white;
+  z-index: 9999;
+}
+
+.scheduleEvent {
+  display: block;
+  background-color: black;
+  opacity: 0.4;
+  top:5%;
+  left:4%;
+  width:90%;
+  height:90%;
+  background-size: 800px 480px;
+  position: fixed;
+  color: white;
+  z-index: 9999;
+}
+
+.cancelEvent {
+  display: block;
+  background-color: black;
+  position: fixed;
+  top:5%;
+  left:4%;
+  opacity: 0.4;
+  width:90%;
+  height:90%;
+  background-size: 800px 480px;
+
+  color: white;
+  z-index: 9999;
+}
+
+.schedule
+{
+
+}
+.hidden {
+  display:none;
+}
+.active
+{
+  display:block;
+}
+.buttonBar {
+  background-color: rgb(0, 0, 0);
+  background: url("assets/buttonBar.png");
+  opacity: 0.4;
+  position: absolute;
+  left: -45px;
+  top: 405px;
+  width: 884px;
+  height: 99px;
+  z-index: 7;
+}
+
+.scheduleButton {
+  color: rgb(254, 254, 254);
+  font-size: 16px;
+  font-family: "Roboto";
+  color: rgb(254, 254, 254);
+  font-weight: bold;
+  line-height: 1;
+  border-width: 1.87px;
+  border-color: rgb(254, 254, 254);
+  border-style: solid;
+  position:fixed;
+  margin:2%;
+  left: 55%;
+  z-index: 23;
+}
+.bookNowButton{
+  color: rgb(254, 254, 254);
+  font-size: 16px;
+  font-family: "Roboto";
+  color: rgb(254, 254, 254);
+  font-weight: bold;
+  line-height: 1;
+  border-width: 1.87px;
+  border-color: rgb(254, 254, 254);
+  border-style: solid;
+  position:fixed;
+  margin:2%;
+  left: 75%;
+  z-index: 23;
+}
+
+.roomTitle {
+  font-size: 2.75em;
+  font-family: "Roboto";
+  color: rgb(254, 254, 254);
+  line-height: 1;
+  text-align: left;
+  position: fixed;
+  margin-left: 6%;
+  top: 18%;
+  z-index: 10;
+}
+
+.availability {
+  font-size: 4em;
+  font-family: "Roboto";
+  color: rgb(126, 207, 0);
+  line-height: 1;
+  text-align: left;
+  position: absolute;
+  margin-top:5%;
+  margin-left:6%;
+  top: 24%;
+  z-index: 10;
+}
+
+.in-use {
+  font-size: 4em;
+  font-family: "Roboto";
+  color: rgb(255, 67, 55);
+  line-height: 1;
+  text-align: left;
+  position: absolute;
+  margin-top:5%;
+  margin-left:6%;
+  top: 24%;
+  z-index: 10;
+}
+
+
+.currentEventInUse {
+  font-size: 36px;
+  font-family: "Roboto";
+  color: rgb(255, 67, 55);
+  line-height: 1;
+  text-align: left;
+  position: absolute;
+  left: 44.88px;
+  top: 120.868px;
+  z-index: 10;
+}
+
+.currentEventAvailable {
+  font-size: 36px;
+  font-family: "Roboto";
+  color: rgb(254, 254, 254);
+  line-height: 1;
+  text-align: left;
+  position: absolute;
+  left: 43.937px;
+  top: 120.868px;
+  z-index: 9;
+}
+
+.occupiedBanner {
+  background-color: rgb(255, 67, 55);
+  opacity: 0.902;
+  position: absolute;
+  left: 0px;
+  top: -49px;
+  width: 100%;
+  height: 99px;
+  z-index: 6;
+}
+
+.unoccupiedBanner {
+  background-color: rgb(126, 207, 0);
+  opacity: 0.902;
+  position: absolute;
+  left: 0px;
+  top: -49px;
+  width: 100%;
+  height: 99px;
+  z-index: 6;
+}
+
+.clock {
+  font-size: 4.25em;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(254, 254, 254);
+  line-height: 0.5;
+  text-align: right;
+  -moz-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  -webkit-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  -ms-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  /*position: absolute;
+  left: 565.347px;*/
+
+  width:33%;
+  left: 58%;
+  position: fixed;
+  top: 22%;
+  float:left;
+  z-index: 8;
+}
+.date {
+  font-size: 1.45em;
+  font-family: 'Roboto Slab', serif;
+  color: rgb(254, 254, 254);
+  line-height: 0.5;
+  text-align: right;
+  -moz-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  -webkit-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  -ms-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
+  /*position: absolute;
+  left: 565.347px;*/
+
+  width:50%;
+  left:40%;
+  position: fixed;
+  top: 37%;
+  float:center;
+  z-index: 8;
+}
