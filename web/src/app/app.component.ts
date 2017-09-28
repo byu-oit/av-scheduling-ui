@@ -73,6 +73,7 @@ export class AppComponent {
     this.cancellation = false;
     this.scheduleNow = false;
     this.bookEvent = false;
+    this.selectedEvent = EVENTS[0];
   }
   onSelect(event: Event): void {
     this.selectedEvent = event;
@@ -98,5 +99,12 @@ export class AppComponent {
 
   scheduleEvent(): void {
     this.scheduleNow = true;
+  }
+  cancelPage_no(): void {
+
+  }
+  cancelPage_yes(): void {
+
+    this.reset();
   }
 }
