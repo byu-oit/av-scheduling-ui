@@ -17,14 +17,12 @@ WORKDIR $GOPATH
 
 COPY go-wrapper /usr/local/bin/
 
-CMD ["echo","'No CMD command was set in Dockerfile! Details about CMD command could be found in Dockerfile Guide section in our Docs. Here's the link: http://docs.resin.io/deployment/dockerfile"]
-
 RUN mkdir -p /go/src/github.com/byu-oit
 ADD . /go/src/github.com/byu-oit/av-scheduling-ui
 
-RUN go get -d -v github.com/byu-oit/av-scheduling-ui
+RUN go-wrapper download github.com/byu-oit/av-scheduling-ui
 
-WORKDIR /go/src/github.com/byu-oit/av-scheduling-ui
+WORKDIR /go/src/github.com/byu-oit/av-scheduling-ui/web
 
 RUN npm install
 RUN npm start &
