@@ -51,11 +51,13 @@
 </div>
 <div class="bookNow" *ngIf="bookEvent">
   <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()">
+    <div class="cancellation-back-arrow" (click)="reset()"></div>
     <div class="cancellation-title">
       Booking {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
   </div>
   <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
+    <div class="cancellation-back-arrow" (click)="reset()"></div>
     <div class="cancellation-title">
       Booking {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
@@ -65,7 +67,7 @@
       <form id="bookNowForm" class="bookNowForm">
         Name: <input id="newMeetingName" placeholder="Ad-hoc Meeting" />
         <br  />
-        Start Time: 
+        Start Time:
         <input id="newMeetingStart" required ngui-datetime-picker time-only=true minute-step=15 date-format="h:mm" parse-format="h:mm" />
         End Time:<input id="newMeetingEnd" required ngui-datetime-picker time-only=true minute-step=15 date-format="h:mm" parse-format="h:mm" />
       </form>
@@ -86,11 +88,13 @@
 </div>
 <div class="cancelEvent" *ngIf="cancellation">
   <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()">
+    <div class="cancellation-back-arrow" (click)="reset()"></div>
     <div class="cancellation-title">
       Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
   </div>
   <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
+    <div class="cancellation-back-arrow" (click)="reset()"></div>
     <div class="cancellation-title">
       Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
