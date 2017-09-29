@@ -1,0 +1,21 @@
+version: '3'
+services:
+    av-scheduling-ui:
+        build:
+            context: .
+            dockerfile: Dockerfile-development
+        image: byu-oit/av-scheduling-ui:${DOCKER_HUB_TAG}
+        ports:
+            - "8011:8011"
+            - "8012:8012"
+        environment:
+            - PI_HOSTNAME=$PI_HOSTNAME
+            - O365_APP_ID=$O365_APP_ID
+            - O365_COOKIE_JAR_SECRET=$O365_COOKIE_JAR_SECRET
+            - O365_OAUTH_TOKEN_URL=$O365_OAUTH_TOKEN_URL
+            - O365_CLIENT_SECRET=$O365_CLIENT_SECRET
+            - O365_OAUTH_AUTH_URL=$O365_OAUTH_AUTH_URL
+            - O365_REDIRECT_URL=$O365_REDIRECT_URL
+        network_mode: "host"
+        restart: always
+        tty: true
