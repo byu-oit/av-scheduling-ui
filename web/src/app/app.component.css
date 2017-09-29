@@ -1,8 +1,8 @@
 .agenda-current-meeting {
+  background-color: rgb(116, 190, 4);
+  border-color: rgb(255, 255, 255);
   border-style: solid;
   border-width: 1px;
-  border-color: rgb(255, 255, 255);
-  background-color: rgb(116, 190, 4);
   opacity: 0.2;
   /*position: absolute;
   left: 72px;
@@ -10,326 +10,377 @@
   width: 270px;
   height: 108px;
   z-index: 32;*/
-
 }
 
-.detail
-{
+.detail {}
 
-}
+.scheduleContainer {}
 
-.scheduleContainer
-{
-
-}
 .stayOnTop {
   z-index: 9999;
 }
-.window
-{
-  display: block;
+
+.window {
+  background-size: 800px 480px;
   background: url("assets/YMountain.png");
-  width:800px;
-  height:480px;
-  background-size: 800px 480px;
-}
-.bookNow {
   display: block;
-  background-color: black;
-  opacity: 0.4;
-  width: 90%;
-  height: 90%;
-  background-size: 800px 480px;
+  height: 480px;
+  left: 0px;
   position: fixed;
-  top:5%;
-  left:4%;
-  color: white;
-  z-index: 9999;
+  top: 0px;
+  width: 800px;
 }
 
-.scheduleEvent {
-  display: block;
-  background-color: black;
-  opacity: 0.4;
-  top:5%;
-  left:4%;
-  width:90%;
-  height:90%;
+.bookNow {
   background-size: 800px 480px;
+  background: url("assets/YMountain.png");
+  display: block;
+  height: 480px;
+  left: 0px;
   position: fixed;
+  top: 0px;
+  width: 800px;
+  z-index: 9000;
+}
+
+.book-now-container {
+  background-color: black;
+  background-size: 800px 480px;
   color: white;
+  display: block;
+  height: 75%;
+  left: 0px;
+  position: fixed;
+  top: 15%;
+  width: 50%;
+  z-index: 9100;
+}
+
+.book-now-form {
+  color: white;
+  font-family: "Roboto";
+  font-size: 1.10em;
+  margin: 20px;
+  position: fixed;
+  z-index: 9200;
+}
+
+.book-now-form-title {}
+
+.book-now-form-start {}
+
+.book-now-form-end {}
+
+.scheduleEvent {
+  background-color: black;
+  background-size: 800px 480px;
+  color: white;
+  display: block;
+  height: 90%;
+  left: 4%;
+  opacity: 0.4;
+  position: fixed;
+  top: 5%;
+  width: 90%;
   z-index: 9999;
 }
 
 .cancelEvent {
-  display: block;
-  background: url("assets/YMountain.png");
-  width:800px;
-  height:480px;
   background-size: 800px 480px;
-  position: absolute;
-  top:0;
-  left:0;
-
+  background: url("assets/YMountain.png");
   color: white;
+  display: block;
+  height: 480px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 800px;
   z-index: 9000;
 }
+
 .cancelEvent-message {
   background-color: black;
   /*opacity: 0.4;*/
+  height: 50%;
+  left: 10%;
   position: fixed;
-  height:50%;
-  width:75%;
-  top:25%;
-  left:10%;
+  top: 25%;
+  width: 75%;
   z-index: 9100;
 }
-.cancel-p{
+
+.cancel-p {
+  color: white;
+  font-family: "Roboto";
   font-size: .9em;
-  font-family: "Roboto";
-  color:white;
-  text-align: center;
   margin-top: 5%;
-}
-
-.cancel-meeting-title
-{
-  font-size: 1.25em;
-  font-family: "Roboto";
-  color:white;
   text-align: center;
-  margin: 5px auto;
 }
-.cancellation-title
-{
-  position: fixed;
-  top:0;
-  left:0;
-  margin-left: 10%;
-  margin-top:10px;
 
-  font-size: 1.75em;
+.cancel-meeting-title {
+  color: white;
   font-family: "Roboto";
-  color:white;
+  font-size: 1.25em;
+  margin: 5px auto;
+  text-align: center;
+}
+
+.cancellation-title {
+  color: white;
+  font-family: "Roboto";
+  font-size: 1.75em;
+  left: 0;
+  margin-left: 10%;
+  margin-top: 10px;
+  position: fixed;
+  top: 0;
 }
 
 .cancelEvent-no-button {
-
-  background-color: rgb(255, 67, 55);
-  margin: 10px auto;
   align-items: center;
-  text-align: center;
-
-  font-size: 1.10em;
-  font-family: "Roboto";
-  color:white;
-
-  border-width: 1.87px;
+  background-color: rgb(255, 67, 55);
   border-color: rgb(254, 254, 254);
   border-style: solid;
-
-  vertical-align: middle;
-
-  width: 128px;
+  border-width: 1.87px;
+  color: white;
+  font-family: "Roboto";
+  font-size: 1.10em;
   height: 36px;
-  position:relative;
+  margin: 10px auto;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 128px;
 }
 
 .cancelEvent-yes-button {
-
   background-color: rgb(126, 207, 0);
-  margin: 10px auto;
-  text-align: center;
-
-  font-size: 1.10em;
-  font-family: "Roboto";
-  color:white;
-
-  border-width: 1.87px;
   border-color: rgb(254, 254, 254);
   border-style: solid;
-
-  vertical-align: middle;
-
-  width: 128px;
+  border-width: 1.87px;
+  color: white;
+  font-family: "Roboto";
+  font-size: 1.10em;
   height: 36px;
+  margin: 10px auto;
   position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 128px;
 }
 
-.schedule
-{
+.schedule {}
 
-}
 .hidden {
-  display:none;
+  display: none;
 }
-.active
-{
-  display:block;
+
+.active {
+  display: block;
 }
+
 .buttonBar {
   background-color: rgb(0, 0, 0);
   background: url("assets/buttonBar.png");
+  height: 99px;
+  left: -45px;
   opacity: 0.4;
   position: absolute;
-  left: -45px;
   top: 405px;
   width: 884px;
-  height: 99px;
   z-index: 7;
 }
 
 .scheduleButton {
-  color: rgb(254, 254, 254);
-  font-size: 16px;
-  font-family: "Roboto";
-  color: rgb(254, 254, 254);
-  font-weight: bold;
-  line-height: 1;
-  border-width: 1.87px;
   border-color: rgb(254, 254, 254);
   border-style: solid;
-  position:fixed;
-  margin:2%;
-  left: 55%;
+  border-width: 1.87px;
+  color: rgb(254, 254, 254);
+  font-family: "Roboto";
+  font-size: 1.10em;
+  height: 32.26px;
+  left: 442px;
+  line-height: 1;
+  margin: 0 auto;
+  position: fixed;
+  text-align: center;
+  top: 425px;
+  vertical-align: middle;
+  width: 138.26px;
   z-index: 23;
 }
-.bookNowButton{
-  color: rgb(254, 254, 254);
-  font-size: 16px;
-  font-family: "Roboto";
-  color: rgb(254, 254, 254);
-  font-weight: bold;
-  line-height: 1;
-  border-width: 1.87px;
+
+.button-label {
+  margin: 8px auto;
+}
+
+.bookNowButton {
   border-color: rgb(254, 254, 254);
   border-style: solid;
-  position:fixed;
-  margin:2%;
+  border-width: 1.87px;
+  color: rgb(254, 254, 254);
+  font-family: "Roboto";
+  font-size: 16px;
+  font-weight: bold;
+  height: 32.26px;
   left: 75%;
+  line-height: 1;
+  margin: 0 auto;
+  position: fixed;
+  text-align: center;
+  top: 425px;
+  width: 138.26px;
   z-index: 23;
 }
 
 .roomTitle {
-  font-size: 2.75em;
-  font-family: "Roboto";
   color: rgb(254, 254, 254);
+  font-family: "Roboto";
+  font-size: 2.75em;
   line-height: 1;
-  text-align: left;
-  position: fixed;
   margin-left: 6%;
+  position: fixed;
+  text-align: left;
   top: 18%;
   z-index: 10;
 }
 
 .availability {
-  font-size: 4em;
-  font-family: "Roboto";
   color: rgb(126, 207, 0);
+  font-family: "Roboto";
+  font-size: 4em;
   line-height: 1;
-  text-align: left;
+  margin-left: 6%;
+  margin-top: 5%;
   position: absolute;
-  margin-top:5%;
-  margin-left:6%;
+  text-align: left;
   top: 24%;
   z-index: 10;
 }
 
 .in-use {
-  font-size: 4em;
-  font-family: "Roboto";
   color: rgb(255, 67, 55);
+  font-family: "Roboto";
+  font-size: 4em;
   line-height: 1;
-  text-align: left;
+  margin-left: 6%;
+  margin-top: 5%;
   position: absolute;
-  margin-top:5%;
-  margin-left:6%;
+  text-align: left;
   top: 24%;
   z-index: 10;
 }
 
-
 .currentEventInUse {
-  font-size: 36px;
-  font-family: "Roboto";
   color: rgb(255, 67, 55);
-  line-height: 1;
-  text-align: left;
-  position: absolute;
+  font-family: "Roboto";
+  font-size: 36px;
   left: 44.88px;
+  line-height: 1;
+  position: absolute;
+  text-align: left;
   top: 120.868px;
   z-index: 10;
 }
 
 .currentEventAvailable {
-  font-size: 36px;
-  font-family: "Roboto";
   color: rgb(254, 254, 254);
-  line-height: 1;
-  text-align: left;
-  position: absolute;
+  font-family: "Roboto";
+  font-size: 36px;
   left: 43.937px;
+  line-height: 1;
+  position: absolute;
+  text-align: left;
   top: 120.868px;
   z-index: 9;
 }
 
 .occupiedBanner {
   background-color: rgb(255, 67, 55);
+  height: 99px;
+  left: 0px;
   opacity: 0.902;
   position: absolute;
-  left: 0px;
   top: -49px;
   width: 100%;
-  height: 99px;
   z-index: 6;
 }
 
 .unoccupiedBanner {
   background-color: rgb(126, 207, 0);
+  height: 99px;
+  left: 0px;
   opacity: 0.902;
   position: absolute;
-  left: 0px;
   top: -49px;
   width: 100%;
-  height: 99px;
   z-index: 6;
 }
 
 .clock {
-  font-size: 4.25em;
-  font-family: 'Roboto', sans-serif;
+  -moz-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  -ms-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  -webkit-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
   color: rgb(254, 254, 254);
-  line-height: 0.5;
-  text-align: right;
-  -moz-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
-  -webkit-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
-  -ms-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
-  /*position: absolute;
-  left: 565.347px;*/
-
-  width:33%;
+  float: left;
+  font-family: 'Roboto', sans-serif;
+  font-size: 4.25em;
   left: 58%;
+  line-height: 0.5;
   position: fixed;
+  text-align: right;
   top: 22%;
-  float:left;
+  width: 33%;
   z-index: 8;
 }
-.date {
-  font-size: 1.45em;
-  font-family: 'Roboto Slab', serif;
-  color: rgb(254, 254, 254);
-  line-height: 0.5;
-  text-align: right;
-  -moz-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
-  -webkit-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
-  -ms-transform: matrix( 1.1064626399212,0,0,1.1064626399212,0,0);
-  /*position: absolute;
-  left: 565.347px;*/
 
-  width:50%;
-  left:40%;
+.date {
+  -moz-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  -ms-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  -webkit-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  color: rgb(254, 254, 254);
+  float: center;
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.45em;
+  left: 40%;
+  line-height: 0.5;
   position: fixed;
+  text-align: right;
   top: 37%;
-  float:center;
+  width: 50%;
   z-index: 8;
+}
+
+.book-now-clock {
+  -moz-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  -ms-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  -webkit-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  color: rgb(254, 254, 254);
+  float: left;
+  font-family: 'Roboto', sans-serif;
+  font-size: 4.25em;
+  left: 58%;
+  line-height: 0.5;
+  position: fixed;
+  text-align: right;
+  top: 60%;
+  width: 33%;
+  z-index: 9200;
+}
+
+.book-now-date {
+  -moz-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  -ms-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  -webkit-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  color: rgb(254, 254, 254);
+  float: center;
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.45em;
+  left: 40%;
+  line-height: 0.5;
+  position: fixed;
+  text-align: right;
+  top: 75%;
+  width: 50%;
+  z-index: 9200;
 }

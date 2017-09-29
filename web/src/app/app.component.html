@@ -17,19 +17,15 @@
   </div>
 
   <div class="clock">
-    {{ date | amDateFormat:'hh:mm'}}
+    {{ date | amDateFormat:'h:mm'}}
   </div>
   <div class="date">
     {{date | amDateFormat:'dddd, MMM DD'}}
   </div>
   <div class="buttonBar">
-    <div class="scheduleButton" (click)="scheduleEvent()">
-      <img src="assets/Calendar.png" /> SCHEDULE
-    </div>
-    <div class="bookNowButton" (click)="bookNow()">BOOK NOW
-    </div>
-    <div class="cancelNowButton" (click)="cancelEvent(event)">CANCEL
-    </div>
+    <div class="scheduleButton" (click)="scheduleEvent()"><div class="button-label">SCHEDULE</div></div>
+    <div class="bookNowButton" (click)="bookNow()"><div class="button-label">BOOK NOW</div></div>
+    <div class="cancelNowButton" (click)="cancelEvent(event)"><div class="button-label">CANCEL</div></div>
   </div>
 
 
@@ -54,37 +50,54 @@
 
 </div>
 <div class="bookNow" *ngIf="bookEvent">
-  <div class="book-now-container">
-
-    <div class="book-now-title">
-      <label>Name: </label>
-      <input [(ngModel)]="newMeetingName" placeholder="Ad-hoc Meeting">
+  <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()">
+    <div class="cancellation-title">
+      Booking {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
-    <div class="book-now-start">
-      <label>Start Time: </label>
-      <input [(ngModel)]="newMeetingStart" </div>
-      <div class="book-now-end">
+  </div>
+  <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
+    <div class="cancellation-title">
+      Booking {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
+    </div>
+  </div>
+  <div class="book-now-container">
+    <div class="book-now-form">
+      <form id="bookNowForm">
+        Name: <input id="newMeetingName" placeholder="Ad-hoc Meeting" />
+        <br  />
+        Start Time: <input id="newMeetingStart" required ngui-datetime-picker time-only=true />
+        End Time:<input id="newMeetingEnd" required ngui-datetime-picker time-only=true />
+      </form>
 
-      </div>
+    </div>
+  </div>
+  <div class="book-now-clock">
+    {{ date | amDateFormat:'h:mm'}}
+  </div>
+  <div class="book-now-date">
+    {{date | amDateFormat:'dddd, MMM DD'}}
   </div>
 </div>
+
+
 <div class="scheduleEvent" *ngIf="scheduleNow">
-    Schedule it!
+  Schedule it!
 </div>
 <div class="cancelEvent" *ngIf="cancellation">
   <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()">
     <div class="cancellation-title">
       Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
-    </div></div>
-  <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
-  <div class="cancellation-title">
-    Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
+    </div>
   </div>
-</div>
+  <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
+    <div class="cancellation-title">
+      Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
+    </div>
+  </div>
   <div class="cancelEvent-message">
-      <div class="cancel-p">
-        Are you sure you want to cancel this meeting?
-      </div>
+    <div class="cancel-p">
+      Are you sure you want to cancel this meeting?
+    </div>
     <div class="cancel-meeting-title">
       {{selectedEvent.subject}}
     </div>
