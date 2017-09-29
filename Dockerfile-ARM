@@ -25,6 +25,14 @@ ADD . /go/src/github.com/byu-oit/av-scheduling-ui
 WORKDIR /go/src/github.com/byu-oit/av-scheduling-ui
 
 RUN go get -d -v
+
+WORKDIR /go/src/github.com/byu-oit/av-scheduling-ui/web
+
+RUN npm install
+RUN npm start &
+
+WORKDIR /go/src/github.com/byu-oit/av-scheduling-ui
+
 RUN go install -v
 
 CMD ["/go/bin/av-scheduling-ui"]

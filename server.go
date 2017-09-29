@@ -27,7 +27,7 @@ func main() {
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
 
-	go startAngular(wg)
+	//go startAngular(wg)
 
 	port := ":8011"
 	const ANGULAR string = "http://localhost:4200"
