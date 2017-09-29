@@ -22,11 +22,9 @@ CMD ["echo","'No CMD command was set in Dockerfile! Details about CMD command co
 RUN mkdir -p /go/src/github.com/byu-oit
 ADD . /go/src/github.com/byu-oit/av-scheduling-ui
 
+RUN go get -d -v github.com/byu-oit/av-scheduling-ui
+
 WORKDIR /go/src/github.com/byu-oit/av-scheduling-ui
-
-RUN go get -d -v
-
-WORKDIR /go/src/github.com/byu-oit/av-scheduling-ui/web
 
 RUN npm install
 RUN npm start &
