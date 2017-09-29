@@ -22,10 +22,10 @@ func startAngular(wg *sync.WaitGroup) {
 	//	panic(lookErr)
 	//}
 
-	args_ng := []string{"ls", "serve", "--port=8011"}
+	args_ng := []string{"ng", "serve", "--port=8011"}
 	//	args_npm := []string{"npm", "install", "."}
 	env := os.Environ()
-	syscall.Chdir("$GOPATH/src/github.com/byu-oit/av-scheduling-ui/web")
+	syscall.Chdir("github.com/byu-oit/av-scheduling-ui")
 	//	npm_execErr := syscall.Exec(npm, args_npm, env)
 
 	//if npm_execErr != nil {
