@@ -1,9 +1,10 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"os/exec"
 	"sync"
 
@@ -12,11 +13,13 @@ import (
 )
 
 func startAngular(wg *sync.WaitGroup) {
-	out, err := exec.Command("cd web && npm start &").Output()
+	//This really doesn't work, but I need to get the docker image tested
+	cmd := exec.Command("npm install && npm start", os.Getenv("PATH"))
+	cmd.Dir = "$GOPATH/src/github.com/byu-oit/av-scheduling-ui/web"
+	err := cmd.Start()
 	if err != nil {
-		fmt.Printf("%s", err)
+		log.Fatal(err)
 	}
-	fmt.Printf("%s", out)
 	wg.Done() // Need to signal to waitgroup that this goroutine is done
 }
 
