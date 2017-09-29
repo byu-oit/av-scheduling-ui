@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
 	"os/exec"
@@ -12,29 +13,29 @@ import (
 )
 
 func startAngular(wg *sync.WaitGroup) {
-	ng, lookErr := exec.LookPath("ng")
+	/*ng, lookErr := exec.LookPath("ng")
+	if lookErr != nil {
+		panic(lookErr)
+	}*/
+
+	npm, lookErr := exec.LookPath("npm")
 	if lookErr != nil {
 		panic(lookErr)
 	}
 
-	//npm, lookErr := exec.LookPath("npm")
-	//if lookErr != nil {
-	//	panic(lookErr)
-	//}
-
-	args_ng := []string{"ng", "serve", "--port=8011"}
-	//	args_npm := []string{"npm", "install", "."}
+	//args_ng := []string{"ng", "serve", "--port=8011"}
+	args_npm := []string{"npm", "start"}
 	env := os.Environ()
-	syscall.Chdir("github.com/byu-oit/av-scheduling-ui")
-	//	npm_execErr := syscall.Exec(npm, args_npm, env)
+	syscall.Chdir("web")
+	npm_execErr := syscall.Exec(npm, args_npm, env)
 
-	//if npm_execErr != nil {
-	//	log.Fatal(npm_execErr)
-	//}
-	ng_execErr := syscall.Exec(ng, args_ng, env)
+	if npm_execErr != nil {
+		log.Fatal(npm_execErr)
+	}
+	/*ng_execErr := syscall.Exec(ng, args_ng, env)
 	if ng_execErr != nil {
 		panic(ng_execErr)
-	}
+	}*/
 	wg.Done() // Need to signal to waitgroup that this goroutine is done
 }
 
@@ -44,8 +45,7 @@ func main() {
 
 	go startAngular(wg)
 
-	port := ":8011"
-	//const ANGULAR string = "http://localhost:4200"
+	port := ":8012"
 
 	router := echo.New()
 	router.Pre(middleware.RemoveTrailingSlash())
