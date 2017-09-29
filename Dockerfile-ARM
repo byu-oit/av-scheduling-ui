@@ -20,7 +20,7 @@ COPY go-wrapper /usr/local/bin/
 RUN mkdir -p /go/src/github.com/byu-oit
 ADD . /go/src/github.com/byu-oit/av-scheduling-ui
 
-RUN go-wrapper download github.com/byu-oit/av-scheduling-ui
+RUN go get -d -v github.com/byu-oit/av-scheduling-ui
 
 WORKDIR /go/src/github.com/byu-oit/av-scheduling-ui/web
 
