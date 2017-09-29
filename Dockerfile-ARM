@@ -1,36 +1,22 @@
-FROM resin/raspberrypi3-alpine-buildpack-deps:latest
+FROM resin/raspberrypi3-buildpack-deps:jessie
 
-ENV GO_VERSION 1.9
+ENV NODE_VERSION 8.0.0
 
-RUN mkdir -p /usr/local/go \
-	&& curl -SLO "http://resin-packages.s3.amazonaws.com/golang/v$GO_VERSION/go$GO_VERSION.linux-alpine-armhf.tar.gz" \
-	&& echo "1a1b3f04de2031d15d5f7ea97a98da34f7ccbd9135c3bd9c3502c2cc0464b938  go1.9.linux-alpine-armhf.tar.gz" | sha256sum -c - \
-	&& tar -xzf "go$GO_VERSION.linux-alpine-armhf.tar.gz" -C /usr/local/go --strip-components=1 \
-	&& rm -f go$GO_VERSION.linux-alpine-armhf.tar.gz
+RUN curl -SLO "http://resin-packages.s3.amazonaws.com/node/v$NODE_VERSION/node-v$NODE_VERSION-linux-armv7hf.tar.gz" \
+	&& echo "fd3633733b4fc82b97a1a87c4fb67b1b7a3654fb9f65e2b96dbbba29f97c629f  node-v8.0.0-linux-armv7hf.tar.gz" | sha256sum -c - \
+	&& tar -xzf "node-v$NODE_VERSION-linux-armv7hf.tar.gz" -C /usr/local --strip-components=1 \
+	&& rm "node-v$NODE_VERSION-linux-armv7hf.tar.gz" \
+	&& npm config set unsafe-perm true -g --unsafe-perm \
+	&& rm -rf /tmp/*
 
-ENV GOROOT /usr/local/go
-ENV GOPATH /go
-ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+RUN mkdir -p /web
+WORKDIR /web
+RUN git clone https://github.com/byu-oit/av-scheduling-ui.git
 
-RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
-WORKDIR $GOPATH
-
-COPY go-wrapper /usr/local/bin/
-
-RUN mkdir -p /go/src/github.com/byu-oit
-ADD . /go/src/github.com/byu-oit/av-scheduling-ui
-
-RUN go get -d -v github.com/byu-oit/av-scheduling-ui
-
-WORKDIR /go/src/github.com/byu-oit/av-scheduling-ui/web
+WORKDIR /web/av-scheduling-ui/web
 
 RUN npm install
-RUN npm start &
-
-WORKDIR /go/src/github.com/byu-oit/av-scheduling-ui
-
-RUN go install -v
-
-CMD ["/go/bin/av-scheduling-ui"]
 
 EXPOSE 8011
+
+CMD ng serve --port 8011

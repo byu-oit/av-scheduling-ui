@@ -62,11 +62,12 @@
   </div>
   <div class="book-now-container">
     <div class="book-now-form">
-      <form id="bookNowForm">
+      <form id="bookNowForm" class="bookNowForm">
         Name: <input id="newMeetingName" placeholder="Ad-hoc Meeting" />
         <br  />
-        Start Time: <input id="newMeetingStart" required ngui-datetime-picker time-only=true />
-        End Time:<input id="newMeetingEnd" required ngui-datetime-picker time-only=true />
+        Start Time: 
+        <input id="newMeetingStart" required ngui-datetime-picker time-only=true minute-step=15 date-format="h:mm" parse-format="h:mm" />
+        End Time:<input id="newMeetingEnd" required ngui-datetime-picker time-only=true minute-step=15 date-format="h:mm" parse-format="h:mm" />
       </form>
 
     </div>
