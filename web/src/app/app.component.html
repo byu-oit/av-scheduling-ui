@@ -25,7 +25,7 @@
   <div class="buttonBar">
     <div class="scheduleButton" (click)="scheduleEvent()"><div class="button-label">SCHEDULE</div></div>
     <div class="bookNowButton" (click)="bookNow()"><div class="button-label">BOOK NOW</div></div>
-    <div class="cancelNowButton" (click)="cancelEvent(event)"><div class="button-label">CANCEL</div></div>
+    <div class="cancelNowButton" *ngIf="eventinprogress" (click)="cancelEvent(event)"><div class="button-label">CANCEL</div></div>
   </div>
 
 
@@ -52,13 +52,13 @@
 <div class="bookNow" *ngIf="bookEvent">
   <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()">
     <div class="cancellation-back-arrow" (click)="reset()"></div>
-    <div class="cancellation-title">
+    <div class="subpage-title">
       Booking {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
   </div>
   <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
     <div class="cancellation-back-arrow" (click)="reset()"></div>
-    <div class="cancellation-title">
+    <div class="subpage-title">
       Booking {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
   </div>
@@ -85,28 +85,26 @@
 
 <div class="scheduleEvent" *ngIf="scheduleNow">
   <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()">
-    <div class="cancellation-back-arrow" (click)="reset()"></div>
-    <div class="cancellation-title">
-      Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
+    <div class="x-button" (click)="reset()"></div>
+    <div class="subpage-title">
+      {{resource.name}} Schedule
     </div>
   </div>
   <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
-    <div class="cancellation-back-arrow" (click)="reset()"></div>
-    <div class="cancellation-title">
-      Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
+    <div class="x-button" (click)="reset()"></div>
+    <div class="subpage-title">
+      {{resource.name}} Schedule
     </div>
   </div>
 </div>
 <div class="cancelEvent" *ngIf="cancellation">
   <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()">
-    <div class="cancellation-back-arrow" (click)="reset()"></div>
-    <div class="cancellation-title">
+    <div class="subpage-title">
       Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
   </div>
   <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
-    <div class="cancellation-back-arrow" (click)="reset()"></div>
-    <div class="cancellation-title">
+    <div class="subpage-title">
       Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
   </div>

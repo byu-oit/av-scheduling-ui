@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 export class Event {
-  //odata_etag: string;
   id: string;
   subject: string;
   start: StartEndTime;
@@ -9,7 +8,7 @@ export class Event {
   location: Location;
 }
 export class StartEndTime{
-  dateTime: Date;
+  dateTime: string;
   timeZone: string;
 }
 export class Location {
@@ -19,32 +18,55 @@ export class Resource {
   id: string;
   busy: boolean;
   name: string;
+  o365Name: string;
 }
+
+export class EventBody {
+  contentType: string;
+  content: string;
+}
+
+type attendeeType  =  "required" | "optional";
+
+export class emailAddressDetail {
+  address: string;
+  name: string;
+}
+
+export class Attendee {
+  emailAddress: emailAddressDetail;
+  type: attendeeType;
+}
+
+export class NewEventRequest {
+  subject: string;
+  body: EventBody;
+  start: StartEndTime
+  end: StartEndTime;
+  location: { displayName:string };
+  attendees: Attendee[] = [DEFAULTATTENDEE]
+}
+
+declare var newEvent: Event;
+
+const NOEVENTS_MESSAGES: string[] = ["No Events Today","Your schedule is clear","My schedule is wide open"]
 
 const RESOURCE: Resource = {
   id: "ITB-1109",
   busy: false,
-  name: "ITB 1109"
+  name: "ITB 1109",
+  o365Name: "ITB-1109"
 }
 
-const EVENTS: Event[] = [
-  {
-    //odata_etag: "W/\"kal774q57USEnNvMn5Fi3gAAA7Zpzg==\"",
-    id: "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwEAAA=",
-    subject: "Dan's meeting",
-    start: {
-      dateTime: new Date("2017-09-28T04:00:00.0000000"),
-      timeZone: "UTC"
-    },
-    end: {
-      dateTime:  new Date("2017-09-28T04:30:00.0000000"),
-      timeZone: "UTC"
-    },
-    location: {
-      displayName: "itb-1109"
-    }
-  }
-]
+const DEFAULTATTENDEE: Attendee = {
+  emailAddress: {
+    address: "itb-1109@byu.edu",
+    name: "ITB-1109"
+  },
+  type: "required"
+}
+
+const TIMEZONE = "Mountain Standard Time";
 
 @Component({
   selector: 'app-root',
@@ -53,8 +75,8 @@ const EVENTS: Event[] = [
 })
 export class AppComponent {
   title = 'app';
-  events = EVENTS;
   resource = RESOURCE;
+  events: Event[] = [];
   selectedEvent: Event;
   date: Date;
   occupied: boolean;
@@ -62,18 +84,20 @@ export class AppComponent {
   cancellation: boolean;
   scheduleNow: boolean;
   bookEvent: boolean;
-  currentEvent: boolean;
+  currentEvent: Event;
+  eventinprogress: boolean;
 
   ngOnInit(): void {
     this.utcTime();
     this.occupied = this.resource.busy;
     this.unoccupied = !(this.occupied)
-    this.currentEvent = false;
+    this.currentEvent = null;
 
     this.cancellation = false;
     this.scheduleNow = false;
     this.bookEvent = false;
-    this.selectedEvent = EVENTS[0];
+    this.selectedEvent = null;
+    this.eventinprogress = ( this.currentEvent === null ? true : false );
   }
   onSelect(event: Event): void {
     this.selectedEvent = event;
@@ -84,6 +108,40 @@ export class AppComponent {
     }, 1000);
   }
 
+  refreshData(): void {
+
+  }
+
+  getCurrentEvent(): void {
+
+  }
+
+  submitEvent(tmpSubject: string, tmpStartTime: string, tmpEndTime: string): void {
+
+    var startTime: StartEndTime = new StartEndTime();
+    var endTime: StartEndTime = new StartEndTime();
+    var req: NewEventRequest = new NewEventRequest();
+
+    endTime.timeZone = TIMEZONE;
+    startTime.timeZone = TIMEZONE;
+
+    startTime.dateTime = tmpStartTime;
+    endTime.dateTime = tmpEndTime;
+
+    newEvent.start = startTime;
+    newEvent.end = endTime;
+
+    req.start = startTime;
+    req.end = endTime;
+    req.subject = tmpSubject;
+
+    /////////
+    ///  SUBMIT
+    ///////
+
+    this.refreshData();
+  }
+
   reset(): void {
     this.cancellation = false;
     this.scheduleNow = false;
@@ -91,17 +149,20 @@ export class AppComponent {
   }
 
   cancelEvent(event: Event): void {
+    this.reset();
     this.cancellation = true;
   }
   bookNow(): void {
+    this.reset();
     this.bookEvent = true;
   }
 
   scheduleEvent(): void {
+    this.reset();
     this.scheduleNow = true;
   }
   cancelPage_no(): void {
-
+    this.reset();
   }
   cancelPage_yes(): void {
 

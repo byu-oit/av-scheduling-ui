@@ -1,16 +1,43 @@
-.agenda-current-meeting {
-  background-color: rgb(116, 190, 4);
-  border-color: rgb(255, 255, 255);
-  border-style: solid;
-  border-width: 1px;
-  opacity: 0.2;
-  /*position: absolute;
-  left: 72px;
-  top: 255px;
-  width: 270px;
-  height: 108px;
-  z-index: 32;*/
+.font-size-1 {
+  font-size: .9em;
 }
+.font-size-2 {
+  font-size: 1.10em;
+}
+.font-size-3 {
+  font-size: 1.25em;
+}
+.font-size-4 {
+  font-size: 1.45em;
+}
+.font-size-5 {
+  font-size: 2.75em;
+}
+.font-size-6 {
+  font-size: 4.0em;
+}
+.font-size-7 {
+  font-size: 4.25em;
+}
+.font-size-8 {
+  font-size: 16px;
+}
+.font-size-9 {
+  font-size: 36px;
+}
+
+.font-sans {
+  font-family: 'Roboto', sans-serif;
+}
+
+.font-serif {
+  font-family: 'Roboto Slab', serif;
+}
+
+.x-button {
+  background-image: url('assets/X.svg');
+}
+
 .bookNowForm {
   color: black;
 }
@@ -23,7 +50,7 @@
   z-index: 9999;
 }
 
-.window {
+.window, .bookNow, .scheduleEvent, .cancelEvent {
   background-size: 800px 480px;
   background: url("assets/YMountain.png");
   display: block;
@@ -32,18 +59,6 @@
   position: fixed;
   top: 0px;
   width: 800px;
-}
-
-.bookNow {
-  background-size: 800px 480px;
-  background: url("assets/YMountain.png");
-  display: block;
-  height: 480px;
-  left: 0px;
-  position: fixed;
-  top: 0px;
-  width: 800px;
-  z-index: 9000;
 }
 
 .book-now-container {
@@ -88,6 +103,32 @@
   z-index: 9000;
 }
 
+.agenda-view-table
+{
+  left: 72px;
+  z-index: 32;
+}
+
+.agenda-view-row
+{
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(255, 255, 255);
+  position: relative;
+  width: 270px;
+  height: 108px;
+}
+
+.agenda-view-row-unavailable {
+  background-color: rgb(0, 0, 0);
+  opacity: 0.6;
+}
+
+.agenda-view-row-available {
+  background-color: rgb(116, 190, 4);
+  opacity: 0.2;
+}
+
 .cancelEvent {
   background-size: 800px 480px;
   background: url("assets/YMountain.png");
@@ -120,12 +161,17 @@
   text-align: center;
 }
 
-.cancel-meeting-title {
+.subpage-title {
   color: white;
   font-family: "Roboto";
   font-size: 1.25em;
+  font-style: oblique;
   margin: 5px auto;
   text-align: center;
+  top: 15px;
+  left: 0;
+  position: fixed;
+  margin: auto auto auto 26px;
 }
 
 .cancellation-title {
