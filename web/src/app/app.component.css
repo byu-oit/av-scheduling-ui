@@ -84,12 +84,6 @@
   z-index: 9200;
 }
 
-.book-now-form-title {}
-
-.book-now-form-start {}
-
-.book-now-form-end {}
-
 .scheduleEvent {
   background-color: black;
   background-size: 800px 480px;
@@ -164,14 +158,27 @@
 .subpage-title {
   color: white;
   font-family: "Roboto";
-  font-size: 1.25em;
+  /*font-size: 1.25em;*/
+  font-size: 2em;
   font-style: oblique;
-  margin: 5px auto;
   text-align: center;
   top: 15px;
   left: 0;
   position: fixed;
   margin: auto auto auto 26px;
+}
+.subpage-title-booking
+{
+  color: white;
+  font-family: "Roboto";
+  font-size: 2em;
+  font-style: oblique;
+  left: 0px;
+  margin: 6px auto auto 80px;
+  position: fixed;
+  text-align: center;
+  top: 0px;
+  width:auto;
 }
 
 .cancellation-title {
@@ -198,6 +205,12 @@
   background-image: url('./assets/arrow.png')
 }
 
+.cancel-book-now-button {
+  position:fixed;
+  left: 78%;
+  top: 87%;
+  z-index: 9001;
+}
 
 .cancelEvent-no-button {
   align-items: center;
@@ -413,6 +426,203 @@
   width: 50%;
   z-index: 8;
 }
+
+.book-now-title-block
+{
+  height: 38px;
+  height: 120px;
+  width: auto;
+}
+/*
+.Booking_panel {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 800px;
+  height: 480px;
+  z-index: 96;
+}*/
+.book-now-title-input {
+  font-size: 30px;
+  font-family: "RobotoSlab";
+  color: rgb(254, 254, 254);
+  line-height: 1.2;
+  text-align: left;
+  position: relative;
+  display:inline-block;
+  width: 275px;
+  margin-left: 25px;
+  height: inherit;
+  /*left: 133.264px;
+  top: 184.828px;*/
+  z-index: 95;
+}
+.book-now-end-label {
+  font-size: 16px;
+  font-family: "Roboto";
+  color: rgb(254, 254, 254);
+  line-height: 1.125;
+  text-align: left;
+  position: absolute;
+  left: 275.937px;
+  top: 292px;
+  z-index: 94;
+}
+.book-now-start-label{
+  font-size: 16px;
+  font-family: "Roboto";
+  color: rgb(254, 254, 254);
+  line-height: 1.125;
+  text-align: left;
+  position: absolute;
+  left: 56.162px;
+  top: 292px;
+  z-index: 93;
+}
+.book-now-title {
+  font-size: 16px;
+  font-family: "Roboto";
+  color: rgb(254, 254, 254);
+  line-height: 1.125;
+  text-align: right;
+  position: relative;
+  display: inline-block;
+  /*left: 58.203px;
+  top: 162px;*/
+  z-index: 92;
+}
+.Rectangle_3_copy_8 {
+  background-color: rgb(254, 254, 254);
+  opacity: 0.2;
+  position: absolute;
+  left: 117px;
+  top: 140px;
+  width: 347px;
+  height: 124px;
+  z-index: 90;
+}
+._3pm {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 800px;
+  height: 480px;
+  z-index: 89;
+}
+.:00_PM_copy {
+  font-size: 24px;
+  font-family: "RobotoSlab";
+  color: rgb(254, 254, 254);
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: left;
+  -moz-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -webkit-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -ms-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  position: absolute;
+  left: 370.231px;
+  top: 359px;
+  z-index: 88;
+}
+._3 {
+  font-size: 24px;
+  font-family: "RobotoSlab";
+  color: rgb(254, 254, 254);
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: right;
+  -moz-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -webkit-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -ms-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  position: absolute;
+  left: 300.78px;
+  top: 359px;
+  z-index: 87;
+}
+/*._3_BLUR {
+  background-image: url("3 BLUR.png");
+  position: absolute;
+  left: 296px;
+  top: 342px;
+  width: 22px;
+  height: 70px;
+  z-index: 86;
+}*/
+.Layer_2_copy {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 0px;
+  height: 0px;
+  z-index: 85;
+}
+.Rectangle_3_copy_7 {
+  background-color: rgb(254, 254, 254);
+  opacity: 0.2;
+  position: absolute;
+  left: 277px;
+  top: 350px;
+  width: 58px;
+  height: 55px;
+  z-index: 82;
+}
+._2pm {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 800px;
+  height: 480px;
+  z-index: 80;
+}
+.:00_PM {
+  font-size: 24px;
+  font-family: "RobotoSlab";
+  color: rgb(254, 254, 254);
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: left;
+  -moz-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -webkit-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -ms-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  position: absolute;
+  left: 149.231px;
+  top: 359px;
+  z-index: 79;
+}
+._2 {
+  font-size: 24px;
+  font-family: "RobotoSlab";
+  color: rgb(254, 254, 254);
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: right;
+  -moz-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -webkit-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -ms-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  position: absolute;
+  left: 79.54px;
+  top: 359px;
+  z-index: 78;
+}
+.Layer_2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 0px;
+  height: 0px;
+  z-index: 77;
+}
+.Rectangle_3 {
+  background-color: rgb(254, 254, 254);
+  opacity: 0.2;
+  position: absolute;
+  left: 56px;
+  top: 350px;
+  width: 58px;
+  height: 55px;
+  z-index: 74;
+}
+
 
 .book-now-clock {
   -moz-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);

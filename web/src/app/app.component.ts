@@ -86,6 +86,7 @@ export class AppComponent {
   bookEvent: boolean;
   currentEvent: Event;
   eventinprogress: boolean;
+  newEvent: Event;
 
   ngOnInit(): void {
     this.utcTime();
@@ -97,7 +98,9 @@ export class AppComponent {
     this.scheduleNow = false;
     this.bookEvent = false;
     this.selectedEvent = null;
-    this.eventinprogress = ( this.currentEvent === null ? true : false );
+    //this.eventinprogress = ( this.currentEvent === null ? true : false );
+    this.eventinprogress = false;
+    this.newEvent = null;
   }
   onSelect(event: Event): void {
     this.selectedEvent = event;
@@ -155,6 +158,7 @@ export class AppComponent {
   bookNow(): void {
     this.reset();
     this.bookEvent = true;
+    this.newEvent = new Event();
   }
 
   scheduleEvent(): void {
