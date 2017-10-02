@@ -42,6 +42,12 @@
   font-family: 'Roboto Slab', serif;
 }
 
+.fancy-font {
+  color: rgb(254, 254, 254);
+  float: center;
+  font-family: 'Roboto Slab', serif;
+}
+
 .x-button {
   background-image: url('assets/X.svg');
 }
@@ -49,6 +55,7 @@
 .bookNowForm {
   color: black;
 }
+
 
 .detail {}
 
@@ -58,11 +65,11 @@
   z-index: 9999;
 }
 
-.occupied {
+.unoccupied {
   background-color: rgb(126, 207, 0);
 }
 
-.unoccupied {
+.occupied {
   background-color: rgb(255, 67, 55);
 }
 
@@ -77,35 +84,25 @@
   width: 800px;
 }
 
-.book-now-container {
+.book-now-container-background {
   background-color: black;
   background-size: 800px 480px;
   opacity: 0.502;
-  color: white;
-  /*display: block;
-  height: 75%;
-  left: 0px;
-  position: fixed;
-  top: 15%;
-  width: 50%;
-  z-index: 9100;*/
   position: absolute;
   left: -113px;
-  top: 15%;
+  top: 25%;
   width: 78%;
-  height: 81%;
+  height: 71%;
   z-index: 71;
 }
-
-.Rectangle_3_copy {
-  background-color: rgb(0, 0, 0);
-  opacity: 0.502;
+.book-now-container {
+  color: white;
   position: absolute;
   left: -113px;
-  top: 106px;
-  width: 621px;
-  height: 350px;
-  z-index: 71;
+  top: 25%;
+  width: 78%;
+  height: 71%;
+  z-index: 72;
 }
 
 .book-now-form {
@@ -168,26 +165,26 @@
   z-index: 9000;
 }
 
------ .Rectangle_1_copy_3 {
-  background-color: rgb(126, 207, 0);
-  opacity: 0.902;
-  position: absolute;
-  left: -45px;
-  top: -16px;
-  width: 884px;
-  height: 99px;
-  z-index: 68;
-}
-
---- .cancelEvent-message {
+.cancelEvent-message-background {
   background-color: black;
-  /*opacity: 0.4;*/
-  height: 50%;
-  left: 10%;
+  opacity: 0.4;
+  height: 61%;
+  left: 0;
+  margin: 5%;
   position: fixed;
   top: 25%;
-  width: 75%;
+  width: 90%;
   z-index: 9100;
+}
+
+.cancelEvent-message-container {
+  height: 61%;
+  left: 0;
+  margin: 5%;
+  position: fixed;
+  top: 25%;
+  width: 90%;
+  z-index: 9200;
 }
 
 .cancel-p {
@@ -210,18 +207,30 @@
   position: fixed;
   margin: auto auto auto 26px;
 }
+.cancel-subpage-title {
+  color: white;
+  font-family: "Roboto";
+  /*font-size: 1.25em;*/
+  font-size: 2em;
+  font-style: oblique;
+  text-align: center;
+  /*top: 15px;*/
+  left: 0;
+  position: fixed;
+  margin: 29px;
+}
 
 .subpage-title-booking {
   color: white;
   font-family: "Roboto";
+  /*font-size: 1.25em;*/
   font-size: 2em;
   font-style: oblique;
-  left: 0px;
-  margin: 6px auto auto 80px;
-  position: fixed;
   text-align: center;
-  top: 0px;
-  width: auto;
+  /*top: 15px;*/
+  left: 0;
+  position: fixed;
+  margin: 29px auto 29px 80px;
 }
 
 .cancellation-title {
@@ -239,7 +248,7 @@
   position: fixed;
   left: 25px;
   top: 0px;
-  margin-top: 6px;
+  margin-top: 29px;
   width: 40px;
   height: 40px;
   z-index: 9800;
@@ -255,9 +264,15 @@
   z-index: 9001;
 }
 
+.cancel-meeting-title {
+  margin: 2% auto 5% auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
 .cancelEvent-no-button {
   align-items: center;
-  background-color: rgb(255, 67, 55);
+  background-image:url('./assets/NO_BUTTON.png');
   border-color: rgb(254, 254, 254);
   border-style: solid;
   border-width: 1.87px;
@@ -273,7 +288,8 @@
 }
 
 .cancelEvent-yes-button {
-  background-color: rgb(126, 207, 0);
+  align-items: center;
+  background-image:url('./assets/YES_BUTTON.png');
   border-color: rgb(254, 254, 254);
   border-style: solid;
   border-width: 1.87px;
@@ -298,7 +314,7 @@
   display: block;
 }
 
-.buttonBar {
+.buttonBarBackground {
   background-color: rgb(0, 0, 0);
   background: url("assets/buttonBar.png");
   height: 99px;
@@ -308,6 +324,16 @@
   top: 405px;
   width: 884px;
   z-index: 7;
+}
+
+
+.buttonBar {
+  height: 99px;
+  left: -45px;
+  position: absolute;
+  top: 405px;
+  width: 884px;
+  z-index: 100;
 }
 
 .scheduleButton {
@@ -426,6 +452,17 @@
 }
 
 .booking-banner {
+  background-size: 800px 83px;
+  opacity: 0.902;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 800px;
+  height: 99px;
+  z-index: 68;
+}
+
+.cancel-banner {
   background-color: rgb(126, 207, 0);
   background-size: 800px 83px;
   opacity: 0.902;
@@ -516,20 +553,17 @@
 }
 
 textarea {
-  /*-webkit-appearance: textfield-multiline;*/
-  background-color: rgb(254, 254, 254);
+  background-color: rgb(102, 102, 102);
+  color: white;
   display: block;
-  font-family: "RobotoSlab";
-  font-size: 30px;
-  font-size: x-large;
   height: inherit;
-  line-height: 1.2;
-  margin-left: 132px;
-  opacity: 0.2;
+  line-height: 1.6;
+  margin-left: 88px;
   position: fixed;
   text-align: left;
-  width: 312px;
+  width: 355px;
   z-index: 9999;
+  overflow:hidden;
 }
 
 .book-now-end-label {
@@ -540,8 +574,7 @@ textarea {
   text-align: left;
   position: fixed;
   left: 288px;
-  top: 260px;
-  ;
+  top: 306px;
   z-index: 9000;
   width: 100px;
 }
@@ -556,7 +589,7 @@ textarea {
   text-align: left;
   position: fixed;
   left: 288px;
-  top: 350px;
+  top: 355px;
   z-index: 94;
   width: 100px;
 }
@@ -571,7 +604,7 @@ textarea {
   text-align: left;
   position: fixed;
   left: 50px;
-  top: 350px;
+  top: 355px;
   z-index: 94;
   width: 100px;
 }
@@ -586,7 +619,7 @@ textarea {
   text-align: left;
   position: fixed;
   left: 130px;
-  top: 350px;
+  top: 355px;
   z-index: 94;
   width: 100px;
 }
@@ -601,7 +634,7 @@ textarea {
   text-align: left;
   position: fixed;
   left: 200px;
-  top: 350px;
+  top: 355px;
   z-index: 94;
   width: 100px;
 }
@@ -618,7 +651,7 @@ textarea {
   text-align: left;
   position: fixed;
   left: 288px;
-  top: 350px;
+  top: 355px;
   z-index: 94;
   width: 100px;
 }
@@ -633,7 +666,7 @@ textarea {
   text-align: left;
   position: fixed;
   left: 325px;
-  top: 350px;
+  top: 355px;
   z-index: 94;
   width: 100px;
 }
@@ -648,7 +681,7 @@ textarea {
   text-align: left;
   position: fixed;
   left: 375px;
-  top: 350px;
+  top: 355px;
   z-index: 94;
   width: 100px;
 }
@@ -663,7 +696,7 @@ textarea {
   text-align: left;
   position: fixed;
   left: 50px;
-  top: 260px;
+  top: 306px;
   z-index: 93;
   width: 100px;
 }
@@ -679,151 +712,7 @@ textarea {
   z-index: 9003;
   top: 38px;
   width: 25%;
-  left: 76px;
-}
-
-.Rectangle_3_copy_8 {
-  background-color: rgb(254, 254, 254);
-  opacity: 0.2;
-  position: absolute;
-  left: 117px;
-  top: 140px;
-  width: 347px;
-  height: 124px;
-  z-index: 90;
-}
-
-._3pm {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 800px;
-  height: 480px;
-  z-index: 89;
-}
-
-.:00_PM_copy {
-  font-size: 24px;
-  font-family: "RobotoSlab";
-  color: rgb(254, 254, 254);
-  font-weight: bold;
-  line-height: 1.5;
-  text-align: left;
-  -moz-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  -webkit-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  -ms-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  position: absolute;
-  left: 370.231px;
-  top: 359px;
-  z-index: 88;
-}
-
-._3 {
-  font-size: 24px;
-  font-family: "RobotoSlab";
-  color: rgb(254, 254, 254);
-  font-weight: bold;
-  line-height: 1.5;
-  text-align: right;
-  -moz-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  -webkit-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  -ms-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  position: absolute;
-  left: 300.78px;
-  top: 359px;
-  z-index: 87;
-}
-
-
-/*._3_BLUR {
-  background-image: url("3 BLUR.png");
-  position: absolute;
-  left: 296px;
-  top: 342px;
-  width: 22px;
-  height: 70px;
-  z-index: 86;
-}*/
-
-.Layer_2_copy {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 0px;
-  height: 0px;
-  z-index: 85;
-}
-
-.Rectangle_3_copy_7 {
-  background-color: rgb(254, 254, 254);
-  opacity: 0.2;
-  position: absolute;
-  left: 277px;
-  top: 350px;
-  width: 58px;
-  height: 55px;
-  z-index: 82;
-}
-
-._2pm {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 800px;
-  height: 480px;
-  z-index: 80;
-}
-
-.:00_PM {
-  font-size: 24px;
-  font-family: "RobotoSlab";
-  color: rgb(254, 254, 254);
-  font-weight: bold;
-  line-height: 1.5;
-  text-align: left;
-  -moz-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  -webkit-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  -ms-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  position: absolute;
-  left: 149.231px;
-  top: 359px;
-  z-index: 79;
-}
-
-._2 {
-  font-size: 24px;
-  font-family: "RobotoSlab";
-  color: rgb(254, 254, 254);
-  font-weight: bold;
-  line-height: 1.5;
-  text-align: right;
-  -moz-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  -webkit-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  -ms-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
-  position: absolute;
-  left: 79.54px;
-  top: 359px;
-  z-index: 78;
-}
-
-.Layer_2 {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 0px;
-  height: 0px;
-  z-index: 77;
-}
-
-.Rectangle_3 {
-  background-color: rgb(254, 254, 254);
-  opacity: 0.2;
-  position: absolute;
-  left: 56px;
-  top: 350px;
-  width: 58px;
-  height: 55px;
-  z-index: 74;
+  left: 30px;
 }
 
 .book-now-clock {

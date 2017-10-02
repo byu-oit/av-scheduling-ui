@@ -22,11 +22,12 @@
   <div class="date">
     {{date | amDateFormat:'dddd, MMM DD'}}
   </div>
-  <div class="buttonBar">
+  <div class="buttonBarBackground"></div>
+  <!--<div class="buttonBar">  -->
     <div class="scheduleButton" (click)="scheduleEvent()"><div class="button-label">SCHEDULE</div></div>
     <div class="bookNowButton" (click)="bookNow()"><div class="button-label">BOOK NOW</div></div>
-    <div class="cancelNowButton" (click)="cancelEvent(event)"><div class="button-label">CANCEL</div></div>
-  </div>
+    <div class="cancelNowButton" (click)="cancelEvent(event)" *ngIf="currentEvent"><div class="button-label">CANCEL</div></div>
+  <!--</div>-->
 
 
   <!--<div class="scheduleContainer">
@@ -62,11 +63,12 @@
       Booking {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
   </div>
+ <div class="book-now-container-background"></div>
  <div class="book-now-container">
     <div class="book-now-form">
       <div class="book-now-title-block font-size-3">
         <label class="book-now-title">TITLE</label>
-        <textarea name="book-now-title-input" cols="3" rows="2" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer egestas non lectus ac pretium. Pellentesque rhoncus lorem eu vestibulum mattis. Praesent ipsum dolor, dapibus et velit id, imperdiet elementum magna. Nullam vulputate nisl laoreet fringilla lacinia. Donec augue felis, tempor eu felis nec, tristique imperdiet nulla. Suspendisse fermentum urna nulla. Sed vehicula risus nec eros venenatis interdum. Vivamus gravida metus rutrum, ornare lacus sed, egestas lectus. Etiam eleifend ultrices purus, eget rutrum nisl vestibulum eget. Vivamus et velit sollicitudin nibh semper volutpat. Donec lacinia est mi, non tempor enim fringilla a. Aenean non tellus non mauris interdum suscipit eu eu nibh. Proin fermentum tristique tellus. Donec lobortis sem et neque tempus semper. Integer auctor venenatis augue sit amet tristique."></textarea>
+        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="fancy-font font-size-2">Ad-hoc meeting with really long title just because Ad-hoc meeting with really long title just because</textarea>
       </div>
       <div class="book-now-start-block">
         <div id="book-now-start-label">
@@ -140,28 +142,26 @@
   </div>
 </div>
 <div class="cancelEvent" *ngIf="cancellation">
-  <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()">
-    <div class="subpage-title">
+  <div class="cancel-banner" *ngIf="unoccupied">
+    <div class="cancel-subpage-title">
       Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
   </div>
-  <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
-    <div class="subpage-title">
+  <div class="cancel-banner" *ngIf="occupied">
+    <div class="cancel-subpage-title">
       Canceling {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
   </div>
-  <div class="cancelEvent-message">
+  <div class="cancelEvent-message-background"></div>
+  <div class="cancelEvent-message-container">
+
     <div class="cancel-p">
       Are you sure you want to cancel this meeting?
     </div>
-    <div class="cancel-meeting-title">
-      {{selectedEvent.subject}}
+    <div class="cancel-meeting-title fancy-font">
+      PLACEHOLDER{{selectedEvent.subject}}
     </div>
-    <div (click)="cancelPage_no()" class="cancelEvent-no-button">
-      <img src="assets/NO_BUTTON.svg" />
-    </div>
-    <div (click)="cancelPage_yes(selectedEvent)" class="cancelEvent-yes-button">
-      YES
-    </div>
+    <div (click)="cancelPage_no()" class="cancelEvent-no-button"></div>
+    <div (click)="cancelPage_yes(selectedEvent)" class="cancelEvent-yes-button"></div>
   </div>
 </div>
