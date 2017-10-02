@@ -52,12 +52,12 @@ func main() {
 	router.Use(middleware.CORS())
 
 	// Use the `secure` routing group to require authentication
-	secure := router.Group("", echo.WrapMiddleware(authmiddleware.Authenticate))
+	//secure := router.Group("", echo.WrapMiddleware(authmiddleware.Authenticate))
 
 	router.Static("/*", "public")
 
 	//secure.POST("/calendar/event")
-	secure.GET(path, handler, middleware)
+	//secure.GET(path, handler, middleware)
 	/*TARGET_URL, err := url.Parse(ANGULAR)
 	if err != nil {
 		router.Logger.Fatal(err)
