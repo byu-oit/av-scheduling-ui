@@ -257,6 +257,19 @@
   background-image: url('./assets/arrow.png')
 }
 
+.schedule-back-x {
+  position: fixed;
+  left: 25px;
+  top: 0px;
+  margin-top: 29px;
+  width: 40px;
+  height: 40px;
+  z-index: 9800;
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-image: url('./assets/arrow.png')
+}
+
 .cancel-book-now-button {
   position: fixed;
   left: 78%;
@@ -440,13 +453,30 @@
   z-index: 9;
 }
 
+.eventName {
+  position: fixed;
+  top:250px;
+  left:50px;
+}
+
+
+.unoccupiedBanner {
+  background-color: rgb(126, 207, 0);
+  height: 99px;
+  left: 0px;
+  opacity: 0.902;
+  position: absolute;
+  top: -49px;
+  width: 100%;
+  z-index: 6;
+}
 .occupiedBanner {
   background-color: rgb(255, 67, 55);
   height: 99px;
   left: 0px;
   opacity: 0.902;
   position: absolute;
-  top: --16;
+  top: -49px;
   width: 100%;
   z-index: 6;
 }
@@ -462,6 +492,16 @@
   z-index: 68;
 }
 
+.agenda-banner {
+  background-size: 800px 83px;
+  opacity: 0.902;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 800px;
+  height: 99px;
+  z-index: 68;
+}
 .cancel-banner {
   background-color: rgb(126, 207, 0);
   background-size: 800px 83px;
@@ -474,16 +514,6 @@
   z-index: 68;
 }
 
-.unoccupiedBanner {
-  background-color: rgb(126, 207, 0);
-  height: 99px;
-  left: 0px;
-  opacity: 0.902;
-  position: absolute;
-  top: -49px;
-  width: 100%;
-  z-index: 6;
-}
 
 .clock {
   -moz-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);

@@ -62,6 +62,159 @@ const RESOURCE: Resource = {
   o365Name: "ITB-1109"
 }
 
+const EVENTS: Event[] = [
+        {
+            "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwNAAA=",
+            "subject": "Super secret, uber important meeting between AV Management regarding the future of all",
+            "start": {
+                "dateTime": "2017-10-02T20:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2017-10-02T22:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "location": {
+                "displayName": "ITB-1109"
+            }
+        },
+        {
+            "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqKAAA=",
+            "subject": "Test",
+            "start": {
+                "dateTime": "2017-10-02T14:30:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2017-10-02T15:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "location": {
+              "displayName": "ITB-1109"
+            }
+        },
+        {
+            "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqJAAA=",
+            "subject": "Lunch Meeting",
+            "start": {
+                "dateTime": "2017-10-02T18:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2017-10-02T19:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "location": {
+              "displayName": "ITB-1109"
+            }
+        },
+        {
+            "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwKAAA=",
+            "subject": "AWS Certification Training",
+            "start": {
+                "dateTime": "2017-10-02T17:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2017-10-02T18:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "location": {
+              "displayName": "ITB-1109"
+            }
+        },
+        {
+            "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwJAAA=",
+            "subject": "AV Engineering Meeting",
+            "start": {
+                "dateTime": "2017-10-02T15:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2017-10-02T16:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "location": {
+                "displayName": "ITB-1109"
+            }
+        },
+        {
+            "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwHAAA=",
+            "subject": "This was submitted via Postman",
+            "start": {
+                "dateTime": "2017-10-01T20:00:00.0002702",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2017-10-01T20:30:00.0002702",
+                "timeZone": "UTC"
+            },
+            "location": {
+              "displayName": "ITB-1109"
+            }
+        },
+        {
+            "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwGAAA=",
+            "subject": "This was submitted via Postman",
+            "start": {
+                "dateTime": "2017-09-29T19:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2017-09-29T19:30:00.0000000",
+                "timeZone": "UTC"
+            },
+            "location": {
+                "displayName": "ITB-1109"
+            }
+        },
+        {
+            "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwEAAA=",
+            "subject": "Dan's meeting",
+            "start": {
+                "dateTime": "2017-09-28T04:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2017-09-28T04:30:00.0000000",
+                "timeZone": "UTC"
+            },
+            "location": {
+                "displayName": "itb-1109"
+            }
+        },
+        {
+            "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAD9qKjsAAA=",
+            "subject": "tesst",
+            "start": {
+                "dateTime": "2017-09-28T00:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2017-09-28T00:30:00.0000000",
+                "timeZone": "UTC"
+            },
+            "location": {
+              "displayName": "ITB-1109"
+            }
+        },
+        {
+            "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqIAAA=",
+            "subject": "Test",
+            "start": {
+                "dateTime": "2017-09-27T21:00:00.0000000",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2017-09-27T21:30:00.0000000",
+                "timeZone": "UTC"
+            },
+            "location": {
+              "displayName": "ITB-1109"
+            }
+        }
+    ]
+
 const DEFAULTATTENDEE: Attendee = {
   emailAddress: {
     address: "itb-1109@byu.edu",
@@ -80,7 +233,8 @@ const TIMEZONE = "Mountain Standard Time";
 export class AppComponent {
   title = 'app';
   resource = RESOURCE;
-  events: Event[] = [];
+  //events: Event[] = [];
+  events = EVENTS;
   selectedEvent: Event;
   date: Date;
   occupied: boolean;
@@ -103,9 +257,10 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.utcTime();
-    this.occupied = this.resource.busy;
+    //this.occupied = this.resource.busy;
+    this.occupied = true;
     this.unoccupied = !(this.occupied)
-    this.currentEvent = null;
+    this.currentEvent = this.events[4];
 
     this.cancellation = false;
     this.scheduleNow = false;
@@ -200,7 +355,7 @@ export class AppComponent {
       var eI = +(this.newEventEndHour);
       eH = (eI + 12).toString();
     }
-    
+
     s += sH + ":" + this.newEventStartMinute + ":000";
     e += eH + ":" + this.newEventEndMinute + ":000";
     alert("start: " + s +"; end: " + e);

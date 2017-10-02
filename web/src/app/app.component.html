@@ -12,7 +12,8 @@
   <div class="in-use" *ngIf="occupied">
     IN USE
   </div>
-  <div class="eventName" *ngIf="currentEvent">
+  <div class="eventName fancy-font font-size-5" *ngIf="currentEvent">
+    {{currentEvent.subject}}
 
   </div>
 
@@ -128,17 +129,24 @@
 
 
 <div class="scheduleEvent" *ngIf="scheduleNow">
-  <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()">
-    <div class="x-button" (click)="reset()"></div>
-    <div class="subpage-title">
+  <div class="agenda-banner unoccupied" *ngIf="unoccupied" (click)="reset()">
+    <div class="schedule-back-x" (click)="reset()"></div>
+    <div class="subpage-title-booking">
       {{resource.name}} Schedule
     </div>
   </div>
-  <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
-    <div class="x-button" (click)="reset()"></div>
-    <div class="subpage-title">
+  <div class="agenda-banner occupied" *ngIf="occupied" (click)="reset()">
+    <div class="schedule-back-x" (click)="reset()"></div>
+    <div class="subpage-title-booking">
       {{resource.name}} Schedule
     </div>
+  </div>
+  <div class="agenda">
+    <ul>
+      <li *ngFor="let event of events">{{event.subject}}
+
+      </li>
+    </ul>
   </div>
 </div>
 <div class="cancelEvent" *ngIf="cancellation">
