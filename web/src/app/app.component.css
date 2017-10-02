@@ -129,8 +129,11 @@
 }
 
 .agenda-view-table {
-  left: 72px;
+  left: 14px;
+  top: 100px;
   z-index: 32;
+  position: fixed;
+  width: 40%;
 }
 
 .agenda-view-row {
@@ -150,6 +153,17 @@
 .agenda-view-row-available {
   background-color: rgb(116, 190, 4);
   opacity: 0.2;
+}
+
+ul {
+  list-style: none;
+}
+li{
+  margin: 5px;
+}
+.agenda-view-row-container
+{
+  
 }
 
 .cancelEvent {

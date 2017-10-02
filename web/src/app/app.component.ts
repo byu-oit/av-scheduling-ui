@@ -373,4 +373,20 @@ export class AppComponent {
 
     this.reset();
   }
+  durationString(selectedEvent): string {
+    var duration = "";
+    var Date_Start = new Date(selectedEvent.start.dateTime);
+    var Date_End = new Date(selectedEvent.end.dateTime);
+    var Difference = Date_End.valueOf() - Date_Start.valueOf();
+    var diffDays = Math.floor(Difference / 86400000); // days
+    var diffHrs = Math.floor((Difference % 86400000) / 3600000); // hours
+    var diffMins = Math.round(((Difference % 86400000) % 3600000) / 60000); // minutes
+    if (diffMins > 0){
+      duration = diffMins.toString() + " Minutes"
+    }
+    if (diffHrs > 0){
+      duration = diffHrs + " Hours " + duration;
+    }
+    return(duration);
+  }
 }

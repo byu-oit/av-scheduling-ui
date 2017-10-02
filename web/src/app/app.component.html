@@ -141,10 +141,17 @@
       {{resource.name}} Schedule
     </div>
   </div>
-  <div class="agenda">
-    <ul>
-      <li *ngFor="let event of events">{{event.subject}}
-
+  <div class="agenda-view-table">
+    <ul class="agenda">
+      <li *ngFor="let event of events" class="agenda-view-row-unavailable">
+        <div class="agenda-view-row-container">
+          <p class="agenda-row-section1">
+            {{event.subject}}
+          </p>
+          <p class="agenda-row-section2">
+            {{duration(event)}}
+          </p>
+        </div>
       </li>
     </ul>
   </div>
