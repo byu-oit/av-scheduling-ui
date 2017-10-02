@@ -1,27 +1,35 @@
 .font-size-1 {
   font-size: .9em;
 }
+
 .font-size-2 {
   font-size: 1.10em;
 }
+
 .font-size-3 {
   font-size: 1.25em;
 }
+
 .font-size-4 {
   font-size: 1.45em;
 }
+
 .font-size-5 {
   font-size: 2.75em;
 }
+
 .font-size-6 {
   font-size: 4.0em;
 }
+
 .font-size-7 {
   font-size: 4.25em;
 }
+
 .font-size-8 {
   font-size: 16px;
 }
+
 .font-size-9 {
   font-size: 36px;
 }
@@ -50,6 +58,14 @@
   z-index: 9999;
 }
 
+.occupied {
+  background-color: rgb(126, 207, 0);
+}
+
+.unoccupied {
+  background-color: rgb(255, 67, 55);
+}
+
 .window, .bookNow, .scheduleEvent, .cancelEvent {
   background-size: 800px 480px;
   background: url("assets/YMountain.png");
@@ -64,14 +80,32 @@
 .book-now-container {
   background-color: black;
   background-size: 800px 480px;
+  opacity: 0.502;
   color: white;
-  display: block;
+  /*display: block;
   height: 75%;
   left: 0px;
   position: fixed;
   top: 15%;
   width: 50%;
-  z-index: 9100;
+  z-index: 9100;*/
+  position: absolute;
+  left: -113px;
+  top: 15%;
+  width: 78%;
+  height: 81%;
+  z-index: 71;
+}
+
+.Rectangle_3_copy {
+  background-color: rgb(0, 0, 0);
+  opacity: 0.502;
+  position: absolute;
+  left: -113px;
+  top: 106px;
+  width: 621px;
+  height: 350px;
+  z-index: 71;
 }
 
 .book-now-form {
@@ -80,7 +114,7 @@
   font-size: 1.10em;
   margin: 20px;
   position: fixed;
-  left:0;
+  left: 0;
   z-index: 9200;
 }
 
@@ -93,18 +127,16 @@
   left: 0;
   position: fixed;
   top: 0;
-  width:100%;
+  width: 100%;
   z-index: 9000;
 }
 
-.agenda-view-table
-{
+.agenda-view-table {
   left: 72px;
   z-index: 32;
 }
 
-.agenda-view-row
-{
+.agenda-view-row {
   border-style: solid;
   border-width: 1px;
   border-color: rgb(255, 255, 255);
@@ -136,7 +168,18 @@
   z-index: 9000;
 }
 
-.cancelEvent-message {
+----- .Rectangle_1_copy_3 {
+  background-color: rgb(126, 207, 0);
+  opacity: 0.902;
+  position: absolute;
+  left: -45px;
+  top: -16px;
+  width: 884px;
+  height: 99px;
+  z-index: 68;
+}
+
+--- .cancelEvent-message {
   background-color: black;
   /*opacity: 0.4;*/
   height: 50%;
@@ -167,8 +210,8 @@
   position: fixed;
   margin: auto auto auto 26px;
 }
-.subpage-title-booking
-{
+
+.subpage-title-booking {
   color: white;
   font-family: "Roboto";
   font-size: 2em;
@@ -178,7 +221,7 @@
   position: fixed;
   text-align: center;
   top: 0px;
-  width:auto;
+  width: auto;
 }
 
 .cancellation-title {
@@ -206,7 +249,7 @@
 }
 
 .cancel-book-now-button {
-  position:fixed;
+  position: fixed;
   left: 78%;
   top: 87%;
   z-index: 9001;
@@ -377,9 +420,21 @@
   left: 0px;
   opacity: 0.902;
   position: absolute;
-  top: -49px;
+  top: --16;
   width: 100%;
   z-index: 6;
+}
+
+.booking-banner {
+  background-color: rgb(126, 207, 0);
+  background-size: 800px 83px;
+  opacity: 0.902;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 800px;
+  height: 99px;
+  z-index: 68;
 }
 
 .unoccupiedBanner {
@@ -427,12 +482,13 @@
   z-index: 8;
 }
 
-.book-now-title-block
-{
-  height: 38px;
+.book-now-title-block {
+  /*height: 38px;*/
   height: 120px;
   width: auto;
 }
+
+
 /*
 .Booking_panel {
   position: absolute;
@@ -442,43 +498,176 @@
   height: 480px;
   z-index: 96;
 }*/
+
 .book-now-title-input {
   font-size: 30px;
   font-family: "RobotoSlab";
-  color: rgb(254, 254, 254);
+  color: white !important;
   line-height: 1.2;
   text-align: left;
-  position: relative;
-  display:inline-block;
-  width: 275px;
-  margin-left: 25px;
+  position: fixed;
+  display: block;
+  width: auto;
+  margin-left: 132px;
   height: inherit;
-  /*left: 133.264px;
-  top: 184.828px;*/
-  z-index: 95;
+  z-index: 9999;
+  background-color: rgb(254, 254, 254);
+  opacity: 0.2;
 }
+
+textarea {
+  /*-webkit-appearance: textfield-multiline;*/
+  background-color: rgb(254, 254, 254);
+  display: block;
+  font-family: "RobotoSlab";
+  font-size: 30px;
+  font-size: x-large;
+  height: inherit;
+  line-height: 1.2;
+  margin-left: 132px;
+  opacity: 0.2;
+  position: fixed;
+  text-align: left;
+  width: 312px;
+  z-index: 9999;
+}
+
 .book-now-end-label {
   font-size: 16px;
   font-family: "Roboto";
-  color: rgb(254, 254, 254);
+  color: white !important;
   line-height: 1.125;
   text-align: left;
-  position: absolute;
-  left: 275.937px;
-  top: 292px;
-  z-index: 94;
+  position: fixed;
+  left: 288px;
+  top: 260px;
+  ;
+  z-index: 9000;
+  width: 100px;
 }
-.book-now-start-label{
+
+.book-now-end-hour {
+  /*-webkit-appearance: menulist-button;*/
+  height: 50px;
+  font-size: 16px;
+  font-family: "Roboto";
+  color: white !important;
+  line-height: 1.125;
+  text-align: left;
+  position: fixed;
+  left: 288px;
+  top: 350px;
+  z-index: 94;
+  width: 100px;
+}
+
+.book-now-start-hour {
+  /*-webkit-appearance: menulist-button;*/
+  height: 50px;
+  font-size: 16px;
+  font-family: "Roboto";
+  color: white !important;
+  line-height: 1.125;
+  text-align: left;
+  position: fixed;
+  left: 50px;
+  top: 350px;
+  z-index: 94;
+  width: 100px;
+}
+
+.book-now-start-minutes {
+  /*-webkit-appearance: menulist-button;*/
+  height: 50px;
+  font-size: 16px;
+  font-family: "Roboto";
+  color: white !important;
+  line-height: 1.125;
+  text-align: left;
+  position: fixed;
+  left: 130px;
+  top: 350px;
+  z-index: 94;
+  width: 100px;
+}
+
+.book-now-start-ampm {
+  /*-webkit-appearance: menulist-button;*/
+  height: 50px;
+  font-size: 16px;
+  font-family: "Roboto";
+  color: white !important;
+  line-height: 1.125;
+  text-align: left;
+  position: fixed;
+  left: 200px;
+  top: 350px;
+  z-index: 94;
+  width: 100px;
+}
+
+.book-now-end-block {}
+
+.book-now-end-hour {
+  /*-webkit-appearance: menulist-button;*/
+  height: 50px;
+  font-size: 16px;
+  font-family: "Roboto";
+  color: white !important;
+  line-height: 1.125;
+  text-align: left;
+  position: fixed;
+  left: 288px;
+  top: 350px;
+  z-index: 94;
+  width: 100px;
+}
+
+.book-now-end-minutes {
+  /*-webkit-appearance: menulist-button;*/
+  height: 50px;
+  font-size: 16px;
+  font-family: "Roboto";
+  color: white !important;
+  line-height: 1.125;
+  text-align: left;
+  position: fixed;
+  left: 325px;
+  top: 350px;
+  z-index: 94;
+  width: 100px;
+}
+
+.book-now-end-ampm {
+  /*-webkit-appearance: menulist-button;*/
+  height: 50px;
+  font-size: 16px;
+  font-family: "Roboto";
+  color: white !important;
+  line-height: 1.125;
+  text-align: left;
+  position: fixed;
+  left: 375px;
+  top: 350px;
+  z-index: 94;
+  width: 100px;
+}
+
+.book-now-start-label {
+  /*  -webkit-appearance: menulist-button;*/
+  height: 50px;
   font-size: 16px;
   font-family: "Roboto";
   color: rgb(254, 254, 254);
   line-height: 1.125;
   text-align: left;
-  position: absolute;
-  left: 56.162px;
-  top: 292px;
+  position: fixed;
+  left: 50px;
+  top: 260px;
   z-index: 93;
+  width: 100px;
 }
+
 .book-now-title {
   font-size: 16px;
   font-family: "Roboto";
@@ -486,11 +675,13 @@
   line-height: 1.125;
   text-align: right;
   position: relative;
-  display: inline-block;
-  /*left: 58.203px;
-  top: 162px;*/
-  z-index: 92;
+  display: block;
+  z-index: 9003;
+  top: 38px;
+  width: 25%;
+  left: 76px;
 }
+
 .Rectangle_3_copy_8 {
   background-color: rgb(254, 254, 254);
   opacity: 0.2;
@@ -501,6 +692,7 @@
   height: 124px;
   z-index: 90;
 }
+
 ._3pm {
   position: absolute;
   left: 0px;
@@ -509,6 +701,7 @@
   height: 480px;
   z-index: 89;
 }
+
 .:00_PM_copy {
   font-size: 24px;
   font-family: "RobotoSlab";
@@ -516,14 +709,15 @@
   font-weight: bold;
   line-height: 1.5;
   text-align: left;
-  -moz-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
-  -webkit-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
-  -ms-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -moz-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
+  -webkit-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
+  -ms-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
   position: absolute;
   left: 370.231px;
   top: 359px;
   z-index: 88;
 }
+
 ._3 {
   font-size: 24px;
   font-family: "RobotoSlab";
@@ -531,14 +725,16 @@
   font-weight: bold;
   line-height: 1.5;
   text-align: right;
-  -moz-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
-  -webkit-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
-  -ms-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -moz-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
+  -webkit-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
+  -ms-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
   position: absolute;
   left: 300.78px;
   top: 359px;
   z-index: 87;
 }
+
+
 /*._3_BLUR {
   background-image: url("3 BLUR.png");
   position: absolute;
@@ -548,6 +744,7 @@
   height: 70px;
   z-index: 86;
 }*/
+
 .Layer_2_copy {
   position: absolute;
   left: 0px;
@@ -556,6 +753,7 @@
   height: 0px;
   z-index: 85;
 }
+
 .Rectangle_3_copy_7 {
   background-color: rgb(254, 254, 254);
   opacity: 0.2;
@@ -566,6 +764,7 @@
   height: 55px;
   z-index: 82;
 }
+
 ._2pm {
   position: absolute;
   left: 0px;
@@ -574,6 +773,7 @@
   height: 480px;
   z-index: 80;
 }
+
 .:00_PM {
   font-size: 24px;
   font-family: "RobotoSlab";
@@ -581,14 +781,15 @@
   font-weight: bold;
   line-height: 1.5;
   text-align: left;
-  -moz-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
-  -webkit-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
-  -ms-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -moz-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
+  -webkit-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
+  -ms-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
   position: absolute;
   left: 149.231px;
   top: 359px;
   z-index: 79;
 }
+
 ._2 {
   font-size: 24px;
   font-family: "RobotoSlab";
@@ -596,14 +797,15 @@
   font-weight: bold;
   line-height: 1.5;
   text-align: right;
-  -moz-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
-  -webkit-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
-  -ms-transform: matrix( 1.85137935722436,0,0,1.85137935722436,0,0);
+  -moz-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
+  -webkit-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
+  -ms-transform: matrix( 1.85137935722436, 0, 0, 1.85137935722436, 0, 0);
   position: absolute;
   left: 79.54px;
   top: 359px;
   z-index: 78;
 }
+
 .Layer_2 {
   position: absolute;
   left: 0px;
@@ -612,6 +814,7 @@
   height: 0px;
   z-index: 77;
 }
+
 .Rectangle_3 {
   background-color: rgb(254, 254, 254);
   opacity: 0.2;
@@ -622,7 +825,6 @@
   height: 55px;
   z-index: 74;
 }
-
 
 .book-now-clock {
   -moz-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);

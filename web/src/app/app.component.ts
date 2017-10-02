@@ -47,6 +47,10 @@ export class NewEventRequest {
   attendees: Attendee[] = [DEFAULTATTENDEE]
 }
 
+const HOURS: string[] = ["1","2","3","4","5","6","7","8","9","10","11","12"];
+const MINUTES: string[] = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"];
+const AMPM: string[] = ["AM","PM"]
+
 declare var newEvent: Event;
 
 const NOEVENTS_MESSAGES: string[] = ["No Events Today","Your schedule is clear","My schedule is wide open"]
@@ -87,6 +91,15 @@ export class AppComponent {
   currentEvent: Event;
   eventinprogress: boolean;
   newEvent: Event;
+  hours = HOURS;
+  minutes = MINUTES;
+  amPm = AMPM;
+  newEventStartHour: number;
+  newEventStartMinute: number;
+  newEventStartAmPm: string;
+  newEventEndHour: number;
+  newEventEndMinute: number;
+  newEventEndAmPm: string;
 
   ngOnInit(): void {
     this.utcTime();
@@ -158,7 +171,40 @@ export class AppComponent {
   bookNow(): void {
     this.reset();
     this.bookEvent = true;
+  }
+  bookNewEvent(): void {
+    //this.reset();
+    var d = new Date();
+    this.bookEvent = true;
     this.newEvent = new Event();
+    var year = d.getFullYear().toString();
+    var month = d.getMonth().toString();
+    var day = d.getDay().toString();
+    var s = "" + year + "-" + month + "-" + day +"T";
+    var e = "" + year + "-" + month + "-" + day +"T";
+    var sH = "";
+    var eH = "";
+    if (this.newEventStartAmPm === "AM")
+    {
+      sH = (this.newEventStartHour).toString();
+    }
+    else{
+      var sI = +(this.newEventStartHour);
+      sH = (sI + 12).toString();
+    }
+    if (this.newEventEndAmPm === "AM")
+    {
+      eH = (this.newEventEndHour).toString();
+    }
+    else {
+      var eI = +(this.newEventEndHour);
+      eH = (eI + 12).toString();
+    }
+    
+    s += sH + ":" + this.newEventStartMinute + ":000";
+    e += eH + ":" + this.newEventEndMinute + ":000";
+    alert("start: " + s +"; end: " + e);
+    this.reset();
   }
 
   scheduleEvent(): void {

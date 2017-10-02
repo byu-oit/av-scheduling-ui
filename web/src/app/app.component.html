@@ -25,7 +25,7 @@
   <div class="buttonBar">
     <div class="scheduleButton" (click)="scheduleEvent()"><div class="button-label">SCHEDULE</div></div>
     <div class="bookNowButton" (click)="bookNow()"><div class="button-label">BOOK NOW</div></div>
-    <div class="cancelNowButton" *ngIf="eventinprogress" (click)="cancelEvent(event)"><div class="button-label">CANCEL</div></div>
+    <div class="cancelNowButton" (click)="cancelEvent(event)"><div class="button-label">CANCEL</div></div>
   </div>
 
 
@@ -50,14 +50,14 @@
 
 </div>
 <div class="bookNow" *ngIf="bookEvent">
-  <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()">
-    <div class="cancellation-back-arrow" (click)="reset()"></div>
+  <div class="booking-banner unoccupied" *ngIf="unoccupied" (click)="reset()">
+    <div class="cancellation-back-arrow" (click)="bookNewEvent()"></div>
     <div class="subpage-title-booking">
       Booking {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
   </div>
-  <div class="occupiedBanner" *ngIf="occupied" (click)="reset()">
-    <div class="cancellation-back-arrow" (click)="reset()"></div>
+  <div class="booking-banner occupied" *ngIf="occupied" (click)="reset()">
+    <div class="cancellation-back-arrow" (click)="bookNewEvent()"></div>
     <div class="subpage-title-booking">
       Booking {{resource.name}} for {{date | amDateFormat:'dddd, MMM DD'}}
     </div>
@@ -66,15 +66,47 @@
     <div class="book-now-form">
       <div class="book-now-title-block font-size-3">
         <label class="book-now-title">TITLE</label>
-        <input placeholder="Ad-hoc Meeting" class="book-now-title-input">
+        <textarea name="book-now-title-input" cols="3" rows="2" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer egestas non lectus ac pretium. Pellentesque rhoncus lorem eu vestibulum mattis. Praesent ipsum dolor, dapibus et velit id, imperdiet elementum magna. Nullam vulputate nisl laoreet fringilla lacinia. Donec augue felis, tempor eu felis nec, tristique imperdiet nulla. Suspendisse fermentum urna nulla. Sed vehicula risus nec eros venenatis interdum. Vivamus gravida metus rutrum, ornare lacus sed, egestas lectus. Etiam eleifend ultrices purus, eget rutrum nisl vestibulum eget. Vivamus et velit sollicitudin nibh semper volutpat. Donec lacinia est mi, non tempor enim fringilla a. Aenean non tellus non mauris interdum suscipit eu eu nibh. Proin fermentum tristique tellus. Donec lobortis sem et neque tempus semper. Integer auctor venenatis augue sit amet tristique."></textarea>
       </div>
       <div class="book-now-start-block">
-        <label class="book-now-start-label">START</label>
-        <input id="newMeetingStart" required ngui-datetime-picker time-only=true minute-step=15 date-format="h:mm" parse-format="h:mm" />
+        <div id="book-now-start-label">
+          <label class="book-now-start-label">START TIME</label>
+        </div>
+        <div class="book-now-start-hour">
+          <select [(ngModel)]="newEventStartHour">
+            <option *ngFor="let hour of hours" [value]="hour" [attr.selected]="this.newEventStartHour==hour ? true : null">{{hour}}</option>
+          </select>
+        </div>
+        <div class="book-now-start-minutes">
+          <select [(ngModel)]="newEventStartMinute">
+            <option *ngFor="let minute of minutes" [value]="minute" [attr.selected]="this.newEventStartMinute==minute ? true : null">: {{minute}}</option>
+          </select>
+        </div>
+        <div class="book-now-start-ampm">
+          <select [(ngModel)]="newEventStartAmPm">
+            <option *ngFor="let opt of amPm" [value]="opt.value" [attr.selected]="this.newEventStartAmPm==opt ? true : null">{{opt}}</option>
+          </select>
+        </div>
       </div>
       <div class="book-now-end-block">
-        <label class="book-now-end-label">End Time:</label>
-        <input id="newMeetingEnd" required ngui-datetime-picker time-only=true minute-step=15 date-format="h:mm" parse-format="h:mm" />
+        <div id="book-now-end-label">
+          <label class="book-now-end-label">END TIME</label>
+        </div>
+        <div class="book-now-end-hour">
+          <select [(ngModel)]="newEventEndHour">
+            <option *ngFor="let hour of hours" [value]="hour" [attr.selected]="this.newEventEndHour==hour ? true : null">{{hour}}</option>
+          </select>
+        </div>
+        <div class="book-now-end-minutes">
+          <select [(ngModel)]="newEventEndMinute">
+            <option *ngFor="let minute of minutes" [value]="minute" [attr.selected]="this.newEventEndMinute==minute ? true : null">: {{minute}}</option>
+          </select>
+        </div>
+        <div class="book-now-end-ampm">
+          <select [(ngModel)]="newEventEndAmPm">
+            <option *ngFor="let opt of amPm" [value]="opt.value" [attr.selected]="this.newEventEndAmPm==opt ? true : null">{{opt}}</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
@@ -126,7 +158,7 @@
       {{selectedEvent.subject}}
     </div>
     <div (click)="cancelPage_no()" class="cancelEvent-no-button">
-      NO
+      <img src="assets/NO_BUTTON.svg" />
     </div>
     <div (click)="cancelPage_yes(selectedEvent)" class="cancelEvent-yes-button">
       YES
