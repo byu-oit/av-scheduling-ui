@@ -370,7 +370,6 @@ export class AppComponent {
     this.reset();
   }
   cancelPage_yes(): void {
-
     this.reset();
   }
   durationString(selectedEvent): string {
