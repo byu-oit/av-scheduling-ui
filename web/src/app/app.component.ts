@@ -62,6 +62,7 @@ const RESOURCE: Resource = {
   o365Name: "ITB-1109"
 }
 
+//dev events
 const EVENTS: Event[] = [
         {
             "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwNAAA=",
