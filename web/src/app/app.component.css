@@ -157,6 +157,9 @@
 
 ul {
   list-style: none;
+  text-indent: 2em;
+  overflow: scroll;
+  height: 80%;
 }
 li{
   margin: 5px;
