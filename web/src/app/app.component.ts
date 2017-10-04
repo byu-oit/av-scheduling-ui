@@ -66,13 +66,13 @@ const RESOURCE: Resource = {
 const EVENTS: Event[] = [
         {
             "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwNAAA=",
-            "subject": "Super secret, uber important meeting between AV Management regarding the future of all",
+            "subject": "Super secret, uber important meeting between AV Manage...",
             "start": {
-                "dateTime": "2017-10-02T20:00:00.0000000",
+                "dateTime": "2017-10-04T20:00:00.0000000",
                 "timeZone": "UTC"
             },
             "end": {
-                "dateTime": "2017-10-02T22:00:00.0000000",
+                "dateTime": "2017-10-04T22:00:00.0000000",
                 "timeZone": "UTC"
             },
             "location": {
@@ -83,11 +83,11 @@ const EVENTS: Event[] = [
             "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqKAAA=",
             "subject": "Test",
             "start": {
-                "dateTime": "2017-10-02T14:30:00.0000000",
+                "dateTime": "2017-10-04T14:30:00.0000000",
                 "timeZone": "UTC"
             },
             "end": {
-                "dateTime": "2017-10-02T15:00:00.0000000",
+                "dateTime": "2017-10-04T15:00:00.0000000",
                 "timeZone": "UTC"
             },
             "location": {
@@ -98,11 +98,11 @@ const EVENTS: Event[] = [
             "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqJAAA=",
             "subject": "Lunch Meeting",
             "start": {
-                "dateTime": "2017-10-02T18:00:00.0000000",
+                "dateTime": "2017-10-04T18:00:00.0000000",
                 "timeZone": "UTC"
             },
             "end": {
-                "dateTime": "2017-10-02T19:00:00.0000000",
+                "dateTime": "2017-10-04T19:00:00.0000000",
                 "timeZone": "UTC"
             },
             "location": {
@@ -113,11 +113,11 @@ const EVENTS: Event[] = [
             "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwKAAA=",
             "subject": "AWS Certification Training",
             "start": {
-                "dateTime": "2017-10-02T17:00:00.0000000",
+                "dateTime": "2017-10-04T17:00:00.0000000",
                 "timeZone": "UTC"
             },
             "end": {
-                "dateTime": "2017-10-02T18:00:00.0000000",
+                "dateTime": "2017-10-04T18:00:00.0000000",
                 "timeZone": "UTC"
             },
             "location": {
@@ -128,11 +128,11 @@ const EVENTS: Event[] = [
             "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwJAAA=",
             "subject": "AV Engineering Meeting",
             "start": {
-                "dateTime": "2017-10-02T15:00:00.0000000",
+                "dateTime": "2017-10-04T15:00:00.0000000",
                 "timeZone": "UTC"
             },
             "end": {
-                "dateTime": "2017-10-02T16:00:00.0000000",
+                "dateTime": "2017-10-04T16:00:00.0000000",
                 "timeZone": "UTC"
             },
             "location": {
@@ -261,7 +261,8 @@ export class AppComponent {
     //this.occupied = this.resource.busy;
     this.occupied = true;
     this.unoccupied = !(this.occupied)
-    this.currentEvent = this.events[4];
+    this.currentEvent = this.events[0];
+    //this.currentEvent = null;
 
     this.cancellation = false;
     this.scheduleNow = false;
@@ -359,7 +360,7 @@ export class AppComponent {
 
     s += sH + ":" + this.newEventStartMinute + ":000";
     e += eH + ":" + this.newEventEndMinute + ":000";
-    alert("start: " + s +"; end: " + e);
+    //alert("start: " + s +"; end: " + e);
     this.reset();
   }
 
