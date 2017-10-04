@@ -6,3 +6,4 @@ node_modules/*
 web/node_modules/*
 vendor/*
 web/bower_components/*
+certs/*
