@@ -140,6 +140,9 @@
   border-style: solid;
   border-width: 1px;
   border-color: rgb(255, 255, 255);
+  Font: Roboto Regular 16s;
+  height: 72px;
+  padding: 8px 16px 0 16px;
   position: relative;
   width: 270px;
   height: 108px;
@@ -158,12 +161,45 @@
 ul {
   list-style: none;
   text-indent: 2em;
-  overflow: scroll;
-  height: 80%;
+  overflow-y: scroll;
+  height: 346px;
+  width: 460px;
+  scroll-behavior: smooth;
 }
 li{
   margin: 5px;
 }
+
+@scrollbar-height: 5px;
+@scrollbar-padding: 15px;
+
+::-webkit-scrollbar {
+   height: ((@scrollbar-padding * 2) + @scrollbar-height);
+	background-color: rgba(255,255,255,0);
+  padding: 15px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+	/*border: 16px solid rgba(255,255,255,0);*/
+  border: 7px solid rgba(255,255,255,0);
+
+	background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track {
+	/*background-color: #ccc;*/
+  background-color: #F2F2F2;
+}
+
+::-webkit-scrollbar-thumb {
+	/*background-color: #212121;*/
+  background-color: #002E5D;
+	&:hover {
+		border: @scrollbar-padding solid rgba(255,255,255,0);
+	}
+}
+
 .agenda-view-row-container
 {
 
@@ -775,6 +811,23 @@ textarea {
   position: fixed;
   text-align: right;
   top: 60%;
+  width: 33%;
+  z-index: 9200;
+}
+
+.book-now-clock-small {
+  -moz-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  -ms-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  -webkit-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
+  color: rgb(254, 254, 254);
+  float: left;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.25em;
+  left: 62%;
+  line-height: 0.5;
+  position: fixed;
+  text-align: right;
+  top: 37px;
   width: 33%;
   z-index: 9200;
 }

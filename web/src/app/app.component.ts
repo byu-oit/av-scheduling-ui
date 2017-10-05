@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import {IVirtualScrollOptions} from 'od-virtualscroll';
+
 export class Event {
   id: string;
   subject: string;
@@ -52,13 +54,14 @@ export class timeIncrement {
   id: number;
   value: string;
   dateTimeValue: string;
+  hour: number;
+  minute: number;
 }
 
 const HOURS: string[] = ["1","2","3","4","5","6","7","8","9","10","11","12"];
 const MINUTES: string[] = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"];
 const AMPM: string[] = ["AM","PM"]
-const quarterTimeIncrements: timeIncrement[] = [{"id":1,"value":"12:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":2,"value":"12:15 AM","dateTimeValue":"00:15:00.000Z"},{"id":3,"value":"12:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":4,"value":"12:45 AM","dateTimeValue":"00:45:00.000Z"},{"id":5,"value":"01:00 AM","dateTimeValue":"01:00:00.000Z"},{"id":6,"value":"01:15 AM","dateTimeValue":"01:15:00.000Z"},{"id":7,"value":"01:30 AM","dateTimeValue":"01:30:00.000Z"},{"id":8,"value":"01:45 AM","dateTimeValue":"01:45:00.000Z"},{"id":9,"value":"02:00 AM","dateTimeValue":"02:00:00.000Z"},{"id":10,"value":"02:15 AM","dateTimeValue":"02:15:00.000Z"},{"id":11,"value":"02:30 AM","dateTimeValue":"02:30:00.000Z"},{"id":12,"value":"02:45 AM","dateTimeValue":"02:45:00.000Z"},{"id":13,"value":"03:00 AM","dateTimeValue":"03:00:00.000Z"},{"id":14,"value":"03:15 AM","dateTimeValue":"03:15:00.000Z"},{"id":15,"value":"03:30 AM","dateTimeValue":"03:30:00.000Z"},{"id":16,"value":"03:45 AM","dateTimeValue":"03:45:00.000Z"},{"id":17,"value":"04:00 AM","dateTimeValue":"04:00:00.000Z"},{"id":18,"value":"04:15 AM","dateTimeValue":"04:15:00.000Z"},{"id":19,"value":"04:30 AM","dateTimeValue":"04:30:00.000Z"},{"id":20,"value":"04:45 AM","dateTimeValue":"04:45:00.000Z"},{"id":21,"value":"05:00 AM","dateTimeValue":"05:00:00.000Z"},{"id":22,"value":"05:15 AM","dateTimeValue":"05:15:00.000Z"},{"id":23,"value":"05:30 AM","dateTimeValue":"05:30:00.000Z"},{"id":24,"value":"05:45 AM","dateTimeValue":"05:45:00.000Z"},{"id":25,"value":"06:00 AM","dateTimeValue":"06:00:00.000Z"},{"id":26,"value":"06:15 AM","dateTimeValue":"06:15:00.000Z"},{"id":27,"value":"06:30 AM","dateTimeValue":"06:30:00.000Z"},{"id":28,"value":"06:45 AM","dateTimeValue":"06:45:00.000Z"},{"id":29,"value":"07:00 AM","dateTimeValue":"07:00:00.000Z"},{"id":30,"value":"07:15 AM","dateTimeValue":"07:15:00.000Z"},{"id":31,"value":"07:30 AM","dateTimeValue":"07:30:00.000Z"},{"id":32,"value":"07:45 AM","dateTimeValue":"07:45:00.000Z"},{"id":33,"value":"08:00 AM","dateTimeValue":"08:00:00.000Z"},{"id":34,"value":"08:15 AM","dateTimeValue":"08:15:00.000Z"},{"id":35,"value":"08:30 AM","dateTimeValue":"08:30:00.000Z"},{"id":36,"value":"08:45 AM","dateTimeValue":"08:45:00.000Z"},{"id":37,"value":"09:00 AM","dateTimeValue":"09:00:00.000Z"},{"id":38,"value":"09:15 AM","dateTimeValue":"09:15:00.000Z"},{"id":39,"value":"09:30 AM","dateTimeValue":"09:30:00.000Z"},{"id":40,"value":"09:45 AM","dateTimeValue":"09:45:00.000Z"},{"id":41,"value":"10:00 AM","dateTimeValue":"10:00:00.000Z"},{"id":42,"value":"10:15 AM","dateTimeValue":"10:15:00.000Z"},{"id":43,"value":"10:30 AM","dateTimeValue":"10:30:00.000Z"},{"id":44,"value":"10:45 AM","dateTimeValue":"10:45:00.000Z"},{"id":45,"value":"11:00 AM","dateTimeValue":"11:00:00.000Z"},{"id":46,"value":"11:15 AM","dateTimeValue":"11:15:00.000Z"},{"id":47,"value":"11:30 AM","dateTimeValue":"11:30:00.000Z"},{"id":48,"value":"11:45 AM","dateTimeValue":"11:45:00.000Z"},{"id":49,"value":"12:00 PM","dateTimeValue":"12:00:00.000Z"},{"id":50,"value":"12:15 PM","dateTimeValue":"12:15:00.000Z"},{"id":51,"value":"12:30 PM","dateTimeValue":"12:30:00.000Z"},{"id":52,"value":"12:45 PM","dateTimeValue":"12:45:00.000Z"},{"id":53,"value":"01:00 PM","dateTimeValue":"13:00:00.000Z"},{"id":54,"value":"01:15 PM","dateTimeValue":"13:15:00.000Z"},{"id":55,"value":"01:30 PM","dateTimeValue":"13:30:00.000Z"},{"id":56,"value":"01:45 PM","dateTimeValue":"13:45:00.000Z"},{"id":57,"value":"02:00 PM","dateTimeValue":"14:00:00.000Z"},{"id":58,"value":"02:15 PM","dateTimeValue":"14:15:00.000Z"},{"id":59,"value":"02:30 PM","dateTimeValue":"14:30:00.000Z"},{"id":60,"value":"02:45 PM","dateTimeValue":"14:45:00.000Z"},{"id":61,"value":"03:00 PM","dateTimeValue":"15:00:00.000Z"},{"id":62,"value":"03:15 PM","dateTimeValue":"15:15:00.000Z"},{"id":63,"value":"03:30 PM","dateTimeValue":"15:30:00.000Z"},{"id":64,"value":"03:45 PM","dateTimeValue":"15:45:00.000Z"},{"id":65,"value":"04:00 PM","dateTimeValue":"16:00:00.000Z"},{"id":66,"value":"04:15 PM","dateTimeValue":"16:15:00.000Z"},{"id":67,"value":"04:30 PM","dateTimeValue":"16:30:00.000Z"},{"id":68,"value":"04:45 PM","dateTimeValue":"16:45:00.000Z"},{"id":69,"value":"05:00 PM","dateTimeValue":"17:00:00.000Z"},{"id":70,"value":"05:15 PM","dateTimeValue":"17:15:00.000Z"},{"id":71,"value":"05:30 PM","dateTimeValue":"17:30:00.000Z"},{"id":72,"value":"05:45 PM","dateTimeValue":"17:45:00.000Z"},{"id":73,"value":"06:00 PM","dateTimeValue":"18:00:00.000Z"},{"id":74,"value":"06:15 PM","dateTimeValue":"18:15:00.000Z"},{"id":75,"value":"06:30 PM","dateTimeValue":"18:30:00.000Z"},{"id":76,"value":"06:45 PM","dateTimeValue":"18:45:00.000Z"},{"id":77,"value":"07:00 PM","dateTimeValue":"19:00:00.000Z"},{"id":78,"value":"07:15 PM","dateTimeValue":"19:15:00.000Z"},{"id":79,"value":"07:30 PM","dateTimeValue":"19:30:00.000Z"},{"id":80,"value":"07:45 PM","dateTimeValue":"19:45:00.000Z"},{"id":81,"value":"08:00 PM","dateTimeValue":"20:00:00.000Z"},{"id":82,"value":"08:15 PM","dateTimeValue":"20:15:00.000Z"},{"id":83,"value":"08:30 PM","dateTimeValue":"20:30:00.000Z"},{"id":84,"value":"08:45 PM","dateTimeValue":"20:45:00.000Z"},{"id":85,"value":"09:00 PM","dateTimeValue":"21:00:00.000Z"},{"id":86,"value":"09:15 PM","dateTimeValue":"21:15:00.000Z"},{"id":87,"value":"09:30 PM","dateTimeValue":"21:30:00.000Z"},{"id":88,"value":"09:45 PM","dateTimeValue":"21:45:00.000Z"},{"id":89,"value":"10:00 PM","dateTimeValue":"22:00:00.000Z"},{"id":90,"value":"10:15 PM","dateTimeValue":"22:15:00.000Z"},{"id":91,"value":"10:30 PM","dateTimeValue":"22:30:00.000Z"},{"id":92,"value":"10:45 PM","dateTimeValue":"22:45:00.000Z"},{"id":93,"value":"11:00 PM","dateTimeValue":"23:00:00.000Z"},{"id":94,"value":"11:15 PM","dateTimeValue":"23:15:00.000Z"},{"id":95,"value":"11:30 PM","dateTimeValue":"23:30:00.000Z"},{"id":96,"value":"11:45 PM","dateTimeValue":"23:45:00.000Z"}]
-const halfTimeIncrements: timeIncrement[] = [{"id":1,"value":"12:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":2,"value":"12:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":3,"value":"-11:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":4,"value":"-11:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":5,"value":"-10:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":6,"value":"-10:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":7,"value":"-9:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":8,"value":"-9:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":9,"value":"-8:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":10,"value":"-8:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":11,"value":"-7:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":12,"value":"-7:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":13,"value":"-6:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":14,"value":"-6:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":15,"value":"-5:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":16,"value":"-5:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":17,"value":"-4:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":18,"value":"-4:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":19,"value":"-3:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":20,"value":"-3:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":21,"value":"10:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":22,"value":"10:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":23,"value":"11:00 AM","dateTimeValue":"00:00:00.000Z"},{"id":24,"value":"11:30 AM","dateTimeValue":"00:30:00.000Z"},{"id":25,"value":"12:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":26,"value":"12:30 PM","dateTimeValue":"00:30:00.000Z"},{"id":27,"value":"1:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":28,"value":"1:30 PM","dateTimeValue":"00:30:00.000Z"},{"id":29,"value":"2:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":30,"value":"2:30 PM","dateTimeValue":"00:30:00.000Z"},{"id":31,"value":"3:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":32,"value":"3:30 PM","dateTimeValue":"00:30:00.000Z"},{"id":33,"value":"4:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":34,"value":"4:30 PM","dateTimeValue":"00:30:00.000Z"},{"id":35,"value":"5:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":36,"value":"5:30 PM","dateTimeValue":"00:30:00.000Z"},{"id":37,"value":"6:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":38,"value":"6:30 PM","dateTimeValue":"00:30:00.000Z"},{"id":39,"value":"7:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":40,"value":"7:30 PM","dateTimeValue":"00:30:00.000Z"},{"id":41,"value":"8:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":42,"value":"8:30 PM","dateTimeValue":"00:30:00.000Z"},{"id":43,"value":"9:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":44,"value":"9:30 PM","dateTimeValue":"00:30:00.000Z"},{"id":45,"value":"10:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":46,"value":"10:30 PM","dateTimeValue":"00:30:00.000Z"},{"id":47,"value":"11:00 PM","dateTimeValue":"00:00:00.000Z"},{"id":48,"value":"11:30 PM","dateTimeValue":"00:30:00.000Z"}]
+const halfTimeIncrements: timeIncrement[] = [{"id":1,"value":"12:00 AM","dateTimeValue":"00:00:00.000Z","hour":12,"minute":0},{"id":2,"value":"12:30 AM","dateTimeValue":"00:30:00.000Z","hour":12,"minute":30},{"id":3,"value":"11:00 AM","dateTimeValue":"00:00:00.000Z","hour":1,"minute":0},{"id":4,"value":"11:30 AM","dateTimeValue":"00:30:00.000Z","hour":1,"minute":30},{"id":5,"value":"10:00 AM","dateTimeValue":"00:00:00.000Z","hour":2,"minute":0},{"id":6,"value":"10:30 AM","dateTimeValue":"00:30:00.000Z","hour":2,"minute":30},{"id":7,"value":"9:00 AM","dateTimeValue":"00:00:00.000Z","hour":3,"minute":0},{"id":8,"value":"9:30 AM","dateTimeValue":"00:30:00.000Z","hour":3,"minute":30},{"id":9,"value":"8:00 AM","dateTimeValue":"00:00:00.000Z","hour":4,"minute":0},{"id":10,"value":"8:30 AM","dateTimeValue":"00:30:00.000Z","hour":4,"minute":30},{"id":11,"value":"7:00 AM","dateTimeValue":"00:00:00.000Z","hour":5,"minute":0},{"id":12,"value":"7:30 AM","dateTimeValue":"00:30:00.000Z","hour":5,"minute":30},{"id":13,"value":"6:00 AM","dateTimeValue":"00:00:00.000Z","hour":6,"minute":0},{"id":14,"value":"6:30 AM","dateTimeValue":"00:30:00.000Z","hour":6,"minute":30},{"id":15,"value":"5:00 AM","dateTimeValue":"00:00:00.000Z","hour":7,"minute":0},{"id":16,"value":"5:30 AM","dateTimeValue":"00:30:00.000Z","hour":7,"minute":30},{"id":17,"value":"4:00 AM","dateTimeValue":"00:00:00.000Z","hour":8,"minute":0},{"id":18,"value":"4:30 AM","dateTimeValue":"00:30:00.000Z","hour":8,"minute":30},{"id":19,"value":"3:00 AM","dateTimeValue":"00:00:00.000Z","hour":9,"minute":0},{"id":20,"value":"3:30 AM","dateTimeValue":"00:30:00.000Z","hour":9,"minute":30},{"id":21,"value":"10:00 AM","dateTimeValue":"00:00:00.000Z","hour":10,"minute":0},{"id":22,"value":"10:30 AM","dateTimeValue":"00:30:00.000Z","hour":10,"minute":30},{"id":23,"value":"11:00 AM","dateTimeValue":"00:00:00.000Z","hour":11,"minute":0},{"id":24,"value":"11:30 AM","dateTimeValue":"00:30:00.000Z","hour":11,"minute":30},{"id":25,"value":"12:00 PM","dateTimeValue":"00:00:00.000Z","hour":12,"minute":0},{"id":26,"value":"12:30 PM","dateTimeValue":"00:30:00.000Z","hour":12,"minute":30},{"id":27,"value":"1:00 PM","dateTimeValue":"00:00:00.000Z","hour":13,"minute":0},{"id":28,"value":"1:30 PM","dateTimeValue":"00:30:00.000Z","hour":13,"minute":30},{"id":29,"value":"2:00 PM","dateTimeValue":"00:00:00.000Z","hour":14,"minute":0},{"id":30,"value":"2:30 PM","dateTimeValue":"00:30:00.000Z","hour":14,"minute":30},{"id":31,"value":"3:00 PM","dateTimeValue":"00:00:00.000Z","hour":15,"minute":0},{"id":32,"value":"3:30 PM","dateTimeValue":"00:30:00.000Z","hour":15,"minute":30},{"id":33,"value":"4:00 PM","dateTimeValue":"00:00:00.000Z","hour":16,"minute":0},{"id":34,"value":"4:30 PM","dateTimeValue":"00:30:00.000Z","hour":16,"minute":30},{"id":35,"value":"5:00 PM","dateTimeValue":"00:00:00.000Z","hour":17,"minute":0},{"id":36,"value":"5:30 PM","dateTimeValue":"00:30:00.000Z","hour":17,"minute":30},{"id":37,"value":"6:00 PM","dateTimeValue":"00:00:00.000Z","hour":18,"minute":0},{"id":38,"value":"6:30 PM","dateTimeValue":"00:30:00.000Z","hour":18,"minute":30},{"id":39,"value":"7:00 PM","dateTimeValue":"00:00:00.000Z","hour":19,"minute":0},{"id":40,"value":"7:30 PM","dateTimeValue":"00:30:00.000Z","hour":19,"minute":30},{"id":41,"value":"8:00 PM","dateTimeValue":"00:00:00.000Z","hour":20,"minute":0},{"id":42,"value":"8:30 PM","dateTimeValue":"00:30:00.000Z","hour":20,"minute":30},{"id":43,"value":"9:00 PM","dateTimeValue":"00:00:00.000Z","hour":21,"minute":0},{"id":44,"value":"9:30 PM","dateTimeValue":"00:30:00.000Z","hour":21,"minute":30},{"id":45,"value":"10:00 PM","dateTimeValue":"00:00:00.000Z","hour":22,"minute":0},{"id":46,"value":"10:30 PM","dateTimeValue":"00:30:00.000Z","hour":22,"minute":30},{"id":47,"value":"11:00 PM","dateTimeValue":"00:00:00.000Z","hour":23,"minute":0},{"id":48,"value":"11:30 PM","dateTimeValue":"00:30:00.000Z","hour":23,"minute":30}];
 
 declare var newEvent: Event;
 
@@ -73,7 +76,229 @@ const RESOURCE: Resource = {
 
 //dev events
 const EVENTS: Event[] = [
-        {
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwNAAA=",
+      "subject": "Super secret, uber important meeting between AV Manage...",
+      "start": {
+          "dateTime": "2017-10-04T20:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T22:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+          "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqKAAA=",
+      "subject": "Test",
+      "start": {
+          "dateTime": "2017-10-04T14:30:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T15:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+        "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqJAAA=",
+      "subject": "Lunch Meeting",
+      "start": {
+          "dateTime": "2017-10-04T18:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T19:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+        "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwKAAA=",
+      "subject": "AWS Certification Training",
+      "start": {
+          "dateTime": "2017-10-04T17:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T18:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+        "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwJAAA=",
+      "subject": "AV Engineering Meeting",
+      "start": {
+          "dateTime": "2017-10-04T15:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T16:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+          "displayName": "ITB-1109"
+      }
+  },{
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwNAAA=",
+      "subject": "Super secret, uber important meeting between AV Manage...",
+      "start": {
+          "dateTime": "2017-10-04T20:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T22:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+          "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqKAAA=",
+      "subject": "Test",
+      "start": {
+          "dateTime": "2017-10-04T14:30:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T15:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+        "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqJAAA=",
+      "subject": "Lunch Meeting",
+      "start": {
+          "dateTime": "2017-10-04T18:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T19:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+        "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwKAAA=",
+      "subject": "AWS Certification Training",
+      "start": {
+          "dateTime": "2017-10-04T17:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T18:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+        "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwJAAA=",
+      "subject": "AV Engineering Meeting",
+      "start": {
+          "dateTime": "2017-10-04T15:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T16:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+          "displayName": "ITB-1109"
+      }
+  },{
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwNAAA=",
+      "subject": "Super secret, uber important meeting between AV Manage...",
+      "start": {
+          "dateTime": "2017-10-04T20:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T22:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+          "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqKAAA=",
+      "subject": "Test",
+      "start": {
+          "dateTime": "2017-10-04T14:30:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T15:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+        "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqJAAA=",
+      "subject": "Lunch Meeting",
+      "start": {
+          "dateTime": "2017-10-04T18:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T19:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+        "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwKAAA=",
+      "subject": "AWS Certification Training",
+      "start": {
+          "dateTime": "2017-10-04T17:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T18:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+        "displayName": "ITB-1109"
+      }
+  },
+  {
+      "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwJAAA=",
+      "subject": "AV Engineering Meeting",
+      "start": {
+          "dateTime": "2017-10-04T15:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "end": {
+          "dateTime": "2017-10-04T16:00:00.0000000",
+          "timeZone": "UTC"
+      },
+      "location": {
+          "displayName": "ITB-1109"
+      }
+  },{
             "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwNAAA=",
             "subject": "Super secret, uber important meeting between AV Manage...",
             "start": {
@@ -241,36 +466,48 @@ const TIMEZONE = "Mountain Standard Time";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
-  resource = RESOURCE;
-  //events: Event[] = [];
-  events = EVENTS;
-  selectedEvent: Event;
-  date: Date;
-  occupied: boolean;
-  unoccupied: boolean;
-  cancellation: boolean;
-  scheduleNow: boolean;
+  amPm = AMPM;
   bookEvent: boolean;
+  calendarWorkdayEndHour: number;
+  calendarWorkdayStartHour: number;
+  cancellation: boolean;
   currentEvent: Event;
+  $options: IVirtualScrollOptions = {itemHeight:20, numAdditionalRows: 1, numLimitColumns: 1};
+
+  date: Date;
   eventinprogress: boolean;
-  newEvent: Event;
+  events = EVENTS;
+  //events: Event[] = [];
   hours = HOURS;
   minutes = MINUTES;
-  amPm = AMPM;
-  newEventStartHour: number;
-  newEventStartMinute: number;
-  newEventStartAmPm: string;
+  newEvent: Event;
+  newEventEndAmPm: string;
   newEventEndHour: number;
   newEventEndMinute: number;
-  newEventEndAmPm: string;
+  newEventEndTime: string;
+  newEventStartAmPm: string;
+  newEventStartHour: number;
+  newEventStartMinute: number;
+  newEventStartTime: string;
+  occupied: boolean;
+  resource = RESOURCE;
+  scheduleNow: boolean;
+  selectedEvent: Event;
+  timeIncrements = halfTimeIncrements;
+  title = 'app';
+  unoccupied: boolean;
+  validTimeIncrements: timeIncrement[] = [];
 
   ngOnInit(): void {
+    document.addEventListener("touchstart", function(){}, true)
     this.utcTime();
     //this.occupied = this.resource.busy;
     this.occupied = true;
     this.unoccupied = !(this.occupied)
     this.currentEvent = this.events[0];
+
+    this.calendarWorkdayStartHour = 8;
+    this.calendarWorkdayEndHour = 5;
     //this.currentEvent = null;
 
     this.cancellation = false;
@@ -280,6 +517,16 @@ export class AppComponent {
     //this.eventinprogress = ( this.currentEvent === null ? true : false );
     this.eventinprogress = false;
     this.newEvent = null;
+
+    //Calculate valid time increments to display
+    /*
+    for (var i=0; i < this.timeIncrements.length; i++){
+      var tmp = this.timeIncrements[i];
+      if (tmp.hour >= this.calendarWorkdayStartHour && tmp.hour <= this.calendarWorkdayEndHour){
+        this.validTimeIncrements.push(tmp);
+      }
+    }
+    alert(this.validTimeIncrements);*/
   }
   onSelect(event: Event): void {
     this.selectedEvent = event;
