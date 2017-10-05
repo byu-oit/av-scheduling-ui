@@ -141,12 +141,17 @@
     <ul class="agenda">
       <li *ngFor="let event of events" class="agenda-view-row-unavailable">
         <div class="agenda-view-row-container">
-          <p class="agenda-row-section1">
+          <div class="agenda-row-section1">
             {{event.subject}}
-          </p>
-          <!--<p class="agenda-row-section2">
-            {{duration(event)}}
-          </p>-->
+          </div>
+          <div class="agenda-row-section2">
+            <div class="agenda-row-duration">
+              {{durationString(event)}}
+            </div>
+            <div class="agenda-row-start-end">
+              {{event.start.dateTime | amDateFormat:'h:mm'}} - {{event.end.dateTime | amDateFormat:'h:mm'}}
+            </div>
+          </div>
         </div>
       </li>
     </ul>

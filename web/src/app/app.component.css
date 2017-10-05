@@ -157,6 +157,10 @@
   background-color: rgb(116, 190, 4);
   opacity: 0.2;
 }
+.agenda-row-section1{}
+.agenda-row-section2{}
+.agenda-row-duration{}
+.agenda-row-start-end{}
 
 ul {
   list-style: none;
