@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import {IVirtualScrollOptions} from 'od-virtualscroll';
-
 export class Event {
   id: string;
   subject: string;
@@ -472,7 +470,6 @@ export class AppComponent {
   calendarWorkdayStartHour: number;
   cancellation: boolean;
   currentEvent: Event;
-  $options: IVirtualScrollOptions = {itemHeight:20, numAdditionalRows: 1, numLimitColumns: 1};
 
   date: Date;
   eventinprogress: boolean;
