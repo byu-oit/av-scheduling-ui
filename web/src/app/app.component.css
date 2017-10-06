@@ -232,12 +232,14 @@ li{
 
 ::-webkit-scrollbar-track {
 	/*background-color: #ccc;*/
-  background-color: #F2F2F2;
+  /*background-color: #F2F2F2; Dark Button */
+  background-color: #666666;
 }
 
 ::-webkit-scrollbar-thumb {
 	/*background-color: #212121;*/
-  background-color: #002E5D;
+  /*background-color: #002E5D;  Dark Button */
+  background-color: #F2F2F2;
 	&:hover {
 		border: @scrollbar-padding solid rgba(255,255,255,0);
 	}
