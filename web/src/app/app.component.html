@@ -52,14 +52,14 @@
     <div class="book-now-form">
       <div class="book-now-title-block font-size-3">
         <label class="book-now-title">TITLE</label>
-        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class=.font-serif font-size-2">Ad-hoc meeting with really long title just because Ad-hoc meeting with really long title just because</textarea>
+        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class=".font-serif font-size-2">Ad-hoc meeting with really long title just because Ad-hoc meeting with really long title just because</textarea>
       </div>
       <div class="book-now-start-block">
         <div id="book-now-start-label">
           <label class="book-now-start-label">START TIME</label>
         </div>
         <div class="book-now-start-select">
-          <select [(ngModel)]="newEventEndTime">
+          <select [(ngModel)]="newEventStartTime" class="font-size-2">
             <option *ngFor="let inc of timeIncrements" value="{{inc.id}}">{{inc.value}}</option>
           </select>
         </div>
@@ -84,6 +84,9 @@
           <label class="book-now-end-label">END TIME</label>
         </div>
         <div class="book-now-end-select">
+          <select [(ngModel)]="newEventEndTime" class="font-size-2">
+            <option *ngFor="let inc of timeIncrements" value="{{inc.id}}">{{inc.value}}</option>
+          </select>
 
         </div>
         <!--<div class="book-now-end-hour">
@@ -136,6 +139,11 @@
     <div class="book-now-clock-small">
       {{ date | amDateFormat:'h:mm a'}}
     </div>
+  </div>
+  <div class="agenda-time-reference-sidebar">
+    <ul class="refHours">
+      <li *ngFor="let hour of refHours" class="refHours-hour">{{hour}}  -- </li>
+    </ul>
   </div>
   <div class="agenda-view-table">
     <ul class="agenda">

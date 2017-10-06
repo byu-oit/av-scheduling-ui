@@ -116,6 +116,25 @@
   z-index: 9200;
 }
 
+.book-now-start-select
+{
+  position: fixed;
+  top: 70%;
+  left: 5%;
+}
+
+.book-now-end-select
+{
+  position: fixed;
+  top: 70%;
+  left: 35%;
+}
+select
+{
+  width:125%;
+  height: 30px;
+}
+
 .scheduleEvent {
   background-color: black;
   background-size: 800px 480px;
@@ -135,6 +154,16 @@
   z-index: 32;
   position: fixed;
   width: 80%;
+}
+
+.agenda-time-reference-sidebar
+{
+  left:0;
+  top: 100px;
+  z-index: 32;
+  position: absolute;
+  width: 80%;
+  display: none;
 }
 
 .agenda-view-row {
@@ -799,7 +828,7 @@ textarea {
   text-align: left;
   position: fixed;
   left: 50px;
-  top: 306px;
+  top: 310px;
   z-index: 93;
   width: 100px;
 }
@@ -811,7 +840,7 @@ textarea {
   z-index: 9003;
   top: 38px;
   width: 25%;
-  left: 30px;
+  left: 20px;
 }
 
 .book-now-clock {
