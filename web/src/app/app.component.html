@@ -12,7 +12,7 @@
   <div class="in-use" *ngIf="occupied">
     IN USE
   </div>
-  <div class="eventName fancy-font font-size-5" *ngIf="currentEvent">
+  <div class="eventName.font-serif font-size-5" *ngIf="currentEvent">
     {{currentEvent.subject}}
   </div>
 
@@ -52,7 +52,7 @@
     <div class="book-now-form">
       <div class="book-now-title-block font-size-3">
         <label class="book-now-title">TITLE</label>
-        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="fancy-font font-size-2">Ad-hoc meeting with really long title just because Ad-hoc meeting with really long title just because</textarea>
+        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class=.font-serif font-size-2">Ad-hoc meeting with really long title just because Ad-hoc meeting with really long title just because</textarea>
       </div>
       <div class="book-now-start-block">
         <div id="book-now-start-label">
@@ -134,22 +134,23 @@
       {{resource.name}} Schedule
     </div>
     <div class="book-now-clock-small">
-      {{ date | amDateFormat:'h:mm'}}
+      {{ date | amDateFormat:'h:mm a'}}
     </div>
   </div>
   <div class="agenda-view-table">
     <ul class="agenda">
       <li *ngFor="let event of events" class="agenda-view-row-unavailable">
         <div class="agenda-view-row-container">
-          <div class="agenda-row-section1">
+          <div class="agenda-row-section1 font-serif font-size-2">
             {{event.subject}}
           </div>
           <div class="agenda-row-section2">
-            <div class="agenda-row-duration">
+            <div class="agenda-row-duration font-sans font-size-2"><strong>
               {{durationString(event)}}
+              </strong>
             </div>
-            <div class="agenda-row-start-end">
-              {{event.start.dateTime | amDateFormat:'h:mm'}} - {{event.end.dateTime | amDateFormat:'h:mm'}}
+            <div class="agenda-row-start-end font-serif font-size-2">
+              {{event.start.dateTime | amDateFormat:'h:mm a'}} - {{event.end.dateTime | amDateFormat:'h:mm a'}}
             </div>
           </div>
         </div>
@@ -180,7 +181,7 @@
     <div class="cancel-p">
       Are you sure you want to cancel this meeting?
     </div>
-    <div class="cancel-meeting-title fancy-font">
+    <div class="cancel-meeting-title.font-serif">
       {{selectedEvent.subject}}
     </div>
     <div (click)="cancelPage_no()" class="cancelEvent-no-button"></div>

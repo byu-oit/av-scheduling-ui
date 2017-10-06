@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import * as data from './config.json';
 
-type AttendeeType  =  "required" | "optional";
+type AttendeeType = "required" | "optional";
 
 export class Attendee {
   emailAddress: EmailAddressDetail;
@@ -34,7 +35,7 @@ export class NewEventRequest {
   body: EventBody;
   start: StartEndTime
   end: StartEndTime;
-  location: { displayName:string };
+  location: { displayName: string };
   attendees: Attendee[] = [DEFAULTATTENDEE]
 }
 
@@ -45,7 +46,7 @@ export class Resource {
   o365Name: string;
 }
 
-export class StartEndTime{
+export class StartEndTime {
   dateTime: string;
   timeZone: string;
 }
@@ -57,15 +58,15 @@ export class TimeIncrement {
   hour: number;
   minute: number;
 }
-
-const HOURS: string[] = ["1","2","3","4","5","6","7","8","9","10","11","12"];
-const MINUTES: string[] = ["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"];
-const AMPM: string[] = ["AM","PM"]
-const halfTimeIncrements: TimeIncrement[] = [{"id":1,"value":"12:00 AM","dateTimeValue":"00:00:00.000Z","hour":12,"minute":0},{"id":2,"value":"12:30 AM","dateTimeValue":"00:30:00.000Z","hour":12,"minute":30},{"id":3,"value":"11:00 AM","dateTimeValue":"00:00:00.000Z","hour":1,"minute":0},{"id":4,"value":"11:30 AM","dateTimeValue":"00:30:00.000Z","hour":1,"minute":30},{"id":5,"value":"10:00 AM","dateTimeValue":"00:00:00.000Z","hour":2,"minute":0},{"id":6,"value":"10:30 AM","dateTimeValue":"00:30:00.000Z","hour":2,"minute":30},{"id":7,"value":"9:00 AM","dateTimeValue":"00:00:00.000Z","hour":3,"minute":0},{"id":8,"value":"9:30 AM","dateTimeValue":"00:30:00.000Z","hour":3,"minute":30},{"id":9,"value":"8:00 AM","dateTimeValue":"00:00:00.000Z","hour":4,"minute":0},{"id":10,"value":"8:30 AM","dateTimeValue":"00:30:00.000Z","hour":4,"minute":30},{"id":11,"value":"7:00 AM","dateTimeValue":"00:00:00.000Z","hour":5,"minute":0},{"id":12,"value":"7:30 AM","dateTimeValue":"00:30:00.000Z","hour":5,"minute":30},{"id":13,"value":"6:00 AM","dateTimeValue":"00:00:00.000Z","hour":6,"minute":0},{"id":14,"value":"6:30 AM","dateTimeValue":"00:30:00.000Z","hour":6,"minute":30},{"id":15,"value":"5:00 AM","dateTimeValue":"00:00:00.000Z","hour":7,"minute":0},{"id":16,"value":"5:30 AM","dateTimeValue":"00:30:00.000Z","hour":7,"minute":30},{"id":17,"value":"4:00 AM","dateTimeValue":"00:00:00.000Z","hour":8,"minute":0},{"id":18,"value":"4:30 AM","dateTimeValue":"00:30:00.000Z","hour":8,"minute":30},{"id":19,"value":"3:00 AM","dateTimeValue":"00:00:00.000Z","hour":9,"minute":0},{"id":20,"value":"3:30 AM","dateTimeValue":"00:30:00.000Z","hour":9,"minute":30},{"id":21,"value":"10:00 AM","dateTimeValue":"00:00:00.000Z","hour":10,"minute":0},{"id":22,"value":"10:30 AM","dateTimeValue":"00:30:00.000Z","hour":10,"minute":30},{"id":23,"value":"11:00 AM","dateTimeValue":"00:00:00.000Z","hour":11,"minute":0},{"id":24,"value":"11:30 AM","dateTimeValue":"00:30:00.000Z","hour":11,"minute":30},{"id":25,"value":"12:00 PM","dateTimeValue":"00:00:00.000Z","hour":12,"minute":0},{"id":26,"value":"12:30 PM","dateTimeValue":"00:30:00.000Z","hour":12,"minute":30},{"id":27,"value":"1:00 PM","dateTimeValue":"00:00:00.000Z","hour":13,"minute":0},{"id":28,"value":"1:30 PM","dateTimeValue":"00:30:00.000Z","hour":13,"minute":30},{"id":29,"value":"2:00 PM","dateTimeValue":"00:00:00.000Z","hour":14,"minute":0},{"id":30,"value":"2:30 PM","dateTimeValue":"00:30:00.000Z","hour":14,"minute":30},{"id":31,"value":"3:00 PM","dateTimeValue":"00:00:00.000Z","hour":15,"minute":0},{"id":32,"value":"3:30 PM","dateTimeValue":"00:30:00.000Z","hour":15,"minute":30},{"id":33,"value":"4:00 PM","dateTimeValue":"00:00:00.000Z","hour":16,"minute":0},{"id":34,"value":"4:30 PM","dateTimeValue":"00:30:00.000Z","hour":16,"minute":30},{"id":35,"value":"5:00 PM","dateTimeValue":"00:00:00.000Z","hour":17,"minute":0},{"id":36,"value":"5:30 PM","dateTimeValue":"00:30:00.000Z","hour":17,"minute":30},{"id":37,"value":"6:00 PM","dateTimeValue":"00:00:00.000Z","hour":18,"minute":0},{"id":38,"value":"6:30 PM","dateTimeValue":"00:30:00.000Z","hour":18,"minute":30},{"id":39,"value":"7:00 PM","dateTimeValue":"00:00:00.000Z","hour":19,"minute":0},{"id":40,"value":"7:30 PM","dateTimeValue":"00:30:00.000Z","hour":19,"minute":30},{"id":41,"value":"8:00 PM","dateTimeValue":"00:00:00.000Z","hour":20,"minute":0},{"id":42,"value":"8:30 PM","dateTimeValue":"00:30:00.000Z","hour":20,"minute":30},{"id":43,"value":"9:00 PM","dateTimeValue":"00:00:00.000Z","hour":21,"minute":0},{"id":44,"value":"9:30 PM","dateTimeValue":"00:30:00.000Z","hour":21,"minute":30},{"id":45,"value":"10:00 PM","dateTimeValue":"00:00:00.000Z","hour":22,"minute":0},{"id":46,"value":"10:30 PM","dateTimeValue":"00:30:00.000Z","hour":22,"minute":30},{"id":47,"value":"11:00 PM","dateTimeValue":"00:00:00.000Z","hour":23,"minute":0},{"id":48,"value":"11:30 PM","dateTimeValue":"00:30:00.000Z","hour":23,"minute":30}];
+const hostname = (<any>data).hostname;
+const HOURS: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+const MINUTES: string[] = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"];
+const AMPM: string[] = ["AM", "PM"]
+const halfTimeIncrements: TimeIncrement[] = [{ "id": 1, "value": "12:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 12, "minute": 0 }, { "id": 2, "value": "12:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 12, "minute": 30 }, { "id": 3, "value": "11:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 1, "minute": 0 }, { "id": 4, "value": "11:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 1, "minute": 30 }, { "id": 5, "value": "10:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 2, "minute": 0 }, { "id": 6, "value": "10:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 2, "minute": 30 }, { "id": 7, "value": "9:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 3, "minute": 0 }, { "id": 8, "value": "9:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 3, "minute": 30 }, { "id": 9, "value": "8:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 4, "minute": 0 }, { "id": 10, "value": "8:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 4, "minute": 30 }, { "id": 11, "value": "7:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 5, "minute": 0 }, { "id": 12, "value": "7:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 5, "minute": 30 }, { "id": 13, "value": "6:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 6, "minute": 0 }, { "id": 14, "value": "6:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 6, "minute": 30 }, { "id": 15, "value": "5:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 7, "minute": 0 }, { "id": 16, "value": "5:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 7, "minute": 30 }, { "id": 17, "value": "4:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 8, "minute": 0 }, { "id": 18, "value": "4:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 8, "minute": 30 }, { "id": 19, "value": "3:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 9, "minute": 0 }, { "id": 20, "value": "3:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 9, "minute": 30 }, { "id": 21, "value": "10:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 10, "minute": 0 }, { "id": 22, "value": "10:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 10, "minute": 30 }, { "id": 23, "value": "11:00 AM", "dateTimeValue": "00:00:00.000Z", "hour": 11, "minute": 0 }, { "id": 24, "value": "11:30 AM", "dateTimeValue": "00:30:00.000Z", "hour": 11, "minute": 30 }, { "id": 25, "value": "12:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 12, "minute": 0 }, { "id": 26, "value": "12:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 12, "minute": 30 }, { "id": 27, "value": "1:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 13, "minute": 0 }, { "id": 28, "value": "1:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 13, "minute": 30 }, { "id": 29, "value": "2:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 14, "minute": 0 }, { "id": 30, "value": "2:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 14, "minute": 30 }, { "id": 31, "value": "3:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 15, "minute": 0 }, { "id": 32, "value": "3:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 15, "minute": 30 }, { "id": 33, "value": "4:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 16, "minute": 0 }, { "id": 34, "value": "4:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 16, "minute": 30 }, { "id": 35, "value": "5:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 17, "minute": 0 }, { "id": 36, "value": "5:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 17, "minute": 30 }, { "id": 37, "value": "6:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 18, "minute": 0 }, { "id": 38, "value": "6:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 18, "minute": 30 }, { "id": 39, "value": "7:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 19, "minute": 0 }, { "id": 40, "value": "7:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 19, "minute": 30 }, { "id": 41, "value": "8:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 20, "minute": 0 }, { "id": 42, "value": "8:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 20, "minute": 30 }, { "id": 43, "value": "9:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 21, "minute": 0 }, { "id": 44, "value": "9:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 21, "minute": 30 }, { "id": 45, "value": "10:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 22, "minute": 0 }, { "id": 46, "value": "10:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 22, "minute": 30 }, { "id": 47, "value": "11:00 PM", "dateTimeValue": "00:00:00.000Z", "hour": 23, "minute": 0 }, { "id": 48, "value": "11:30 PM", "dateTimeValue": "00:30:00.000Z", "hour": 23, "minute": 30 }];
 
 declare var newEvent: Event;
 
-const NOEVENTS_MESSAGES: string[] = ["No Events Today","Your schedule is clear","My schedule is wide open"]
+const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear", "My schedule is wide open"]
 
 //dev events
 const EVENTS: Event[] = [
@@ -458,6 +459,7 @@ const TIMEZONE = "Mountain Standard Time";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   amPm = AMPM;
   bookEvent: boolean;
@@ -494,12 +496,7 @@ export class AppComponent {
     document.addEventListener("touchstart", function(){}, true)
     this.utcTime();
 
-    this.resource = {
-      id: "ITB-1109",
-      busy: false,
-      name: "ITB 1109",
-      o365Name: "ITB-1109"
-    }
+    this.deriveVariablesFromHostname(this.resource);
 
     //this.currentEvent = null;
     //this.eventinprogress = ( this.currentEvent === null ? true : false );
@@ -540,6 +537,18 @@ export class AppComponent {
   }
 
   getCurrentEvent(): void {
+
+  }
+
+  deriveVariablesFromHostname(res: Resource): void {
+    var buildingAndRoom = hostname.split(" ", 2);
+    var building = buildingAndRoom[0];
+    var room = buildingAndRoom[1];
+
+    res.id = building + "-" + room;
+    res.busy = false;
+    res.name = building + " " + room;
+    res.o365Name = res.id;
 
   }
 
