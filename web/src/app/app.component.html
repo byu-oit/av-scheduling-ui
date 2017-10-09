@@ -23,11 +23,13 @@
     {{date | amDateFormat:'dddd, MMM DD'}}
   </div>
   <div class="buttonBarBackground"></div>
+  <div class="helpButton font-size-4 fancy-font" (click)="helpClick()">?
+  </div>
   <div class="scheduleButton" (click)="scheduleEvent()">
     <div class="calendarIcon"></div><div class="button-label">VIEW SCHEDULE</div>
   </div>
-  <div class="bookNowButton" (click)="bookNow()">
-    <div class="button-label">BOOK NOW</div>
+  <div *ngIf="" class="bookNowButton" (click)="bookNow()">
+    <div class="plusIcon"></div><div class="button-label">BOOK NOW</div>
   </div>
   <!--<div class="cancelNowButton" (click)="cancelEvent(event)" *ngIf="currentEvent">
     <div class="button-label">CANCEL</div>

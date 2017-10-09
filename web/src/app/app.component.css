@@ -444,6 +444,30 @@ li{
   margin: 6px auto 6px 4px;
 }
 
+.plusIcon {
+  background: url("assets/Plus@1x.svg") no-repeat top left;
+  background-size: contain;
+  height: 18px;
+  width: 20px;
+  float:left;
+  margin: 6px auto 6px 4px;
+}
+.helpButton {
+  width: 30px;
+  height: 30px;
+  margin: 0 20px;
+  text-align: center;
+  color: white;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  position:relative;
+  top: 78%;
+  float:left;
+
+  /*box-shadow: 0 0 0 4px transparent;*/
+}
+
 .hidden {
   display: none;
 }

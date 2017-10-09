@@ -504,7 +504,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     document.addEventListener("touchstart", function(){}, true)
-    
+
     this.utcTime();
 
     //this.deriveVariablesFromHostname(this.resource);
@@ -550,6 +550,10 @@ export class AppComponent {
 
   getCurrentEvent(): void {
 
+  }
+
+  helpClick(): void {
+    
   }
 
   deriveVariablesFromHostname(res: Resource): void {
