@@ -166,6 +166,19 @@ select
   display: none;
 }
 
+.sidebar-starttime, .sidebar-endtime {
+  position:absolute;
+  height:25%;
+  width: 10%;
+}
+
+.sidebar-elipsis
+ {
+   position:absolute;
+   height: 50%;
+   width: 10%;
+ }
+
 .agenda-view-row {
   border-style: solid;
   border-width: 1px;
@@ -832,7 +845,7 @@ textarea {
   left: 50px;
   top: 310px;
   z-index: 93;
-  width: 100px;
+  width: 110px;
 }
 
 .book-now-title {

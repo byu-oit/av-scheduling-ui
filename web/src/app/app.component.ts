@@ -515,10 +515,10 @@ export class AppComponent {
     this.calendarWorkdayEndHour = 5;
     this.calendarWorkdayStartHour = 8;
     this.cancellation = false;
-    this.currentEvent = null;
+    this.currentEvent = this.events[1];
     this.eventinprogress = false;
     this.newEvent = null;
-    this.occupied = false;
+    this.occupied = true;
     this.scheduleNow = false;
     this.selectedEvent = null;
     this.unoccupied = !(this.occupied)

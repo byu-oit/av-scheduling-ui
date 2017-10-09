@@ -137,7 +137,7 @@
       {{resource.name}} Schedule
     </div>
     <div class="book-now-clock-small">
-      {{ date | amDateFormat:'h:mm a'}}
+      {{ date | amDateFormat:'h:mm'}}
     </div>
   </div>
   <div class="agenda-time-reference-sidebar">
@@ -145,10 +145,21 @@
       <li *ngFor="let hour of refHours" class="refHours-hour">{{hour}}  -- </li>
     </ul>
   </div>
-  <div class="agenda-view-table">
+  <div id="agenda" class="agenda-view-table">
     <ul class="agenda">
       <li *ngFor="let event of events" class="agenda-view-row-unavailable">
         <div class="agenda-view-row-container">
+          <div class="agenda-sidebar">
+            <div class="sidebar-starttime">
+            {{event.start.dateTime | amDateFormat:'h'}}
+            </div>
+            <div class="sidebar-elipsis">
+
+            </div>
+            <div class="sidebar-endtime">
+              {{event.end.dateTime | amDateFormat:'h'}}
+            </div>
+          </div>
           <div class="agenda-row-section1 font-serif font-size-2">
             {{event.subject}}
           </div>
