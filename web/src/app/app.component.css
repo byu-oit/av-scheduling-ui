@@ -509,7 +509,8 @@ li{
   left: 406px;
   line-height: 1;
   margin: 0 auto;
-  position: fixed;
+  position: relative;
+  float:right;
   text-align: center;
   top: 425px;
   vertical-align: middle;
@@ -534,7 +535,8 @@ li{
   left: 75%;
   line-height: 1;
   margin: 0 auto;
-  position: fixed;
+  position: relative;
+  float:right;
   text-align: center;
   top: 425px;
   width: 138.26px;

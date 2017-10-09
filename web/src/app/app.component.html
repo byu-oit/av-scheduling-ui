@@ -28,7 +28,7 @@
   <div class="scheduleButton" (click)="scheduleEvent()">
     <div class="calendarIcon"></div><div class="button-label">VIEW SCHEDULE</div>
   </div>
-  <div *ngIf="" class="bookNowButton" (click)="bookNow()">
+  <div *ngIf="occupied == false" class="bookNowButton" (click)="bookNow()">
     <div class="plusIcon"></div><div class="button-label">BOOK NOW</div>
   </div>
   <!--<div class="cancelNowButton" (click)="cancelEvent(event)" *ngIf="currentEvent">
