@@ -436,7 +436,13 @@ li{
   width: 128px;
 }
 
-.schedule {}
+.calendarIcon {
+  background-image: url("assets/Calendar.png");
+  height: 18px;
+  width: 20px;
+  float:left;
+  margin: 6px auto 6px 4px;
+}
 
 .hidden {
   display: none;
@@ -483,12 +489,13 @@ li{
   text-align: center;
   top: 425px;
   vertical-align: middle;
-  width: 138.26px;
+  width: 166px;
   z-index: 23;
 }
 
 .button-label {
   margin: 8px auto;
+  float:right;
 }
 
 .bookNowButton {

@@ -4,25 +4,10 @@
   <meta charset="utf-8">
   <title>Room Schedule</title>
   <base href="/">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
   <app-root></app-root>
-  <script src="https://unpkg.com/impetus@0.8.7/dist/impetus.min.js" type="text/javascript"></script>
-  <script type="text/javascript">
-		var agenda = document.getElementById('agenda');
-		var agendaParent = agenda.offsetParent;
-    /// TODO: look into scrolling via impetus
-		var agendaImpetus = new Impetus({
-			source: agenda,
-      multiplier: 0.7,
-      update: function(x, y) {
-				this.style.left = x + 'px';
-				this.style.top = y + 'px';
-			}
-		});
-</script>
 </body>
 </html>

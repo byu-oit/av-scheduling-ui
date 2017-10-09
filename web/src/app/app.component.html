@@ -24,14 +24,14 @@
   </div>
   <div class="buttonBarBackground"></div>
   <div class="scheduleButton" (click)="scheduleEvent()">
-    <div class="button-label">SCHEDULE</div>
+    <div class="calendarIcon"></div><div class="button-label">VIEW SCHEDULE</div>
   </div>
   <div class="bookNowButton" (click)="bookNow()">
     <div class="button-label">BOOK NOW</div>
   </div>
-  <div class="cancelNowButton" (click)="cancelEvent(event)" *ngIf="currentEvent">
+  <!--<div class="cancelNowButton" (click)="cancelEvent(event)" *ngIf="currentEvent">
     <div class="button-label">CANCEL</div>
-  </div>
+  </div> -->
 
 </div>
 <div class="bookNow" *ngIf="bookEvent">
