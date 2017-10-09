@@ -506,13 +506,13 @@ li{
   font-family: "Roboto";
   font-size: 1.10em;
   height: 32.26px;
-  left: 406px;
+  /*left: 406px;*/
   line-height: 1;
-  margin: 0 auto;
-  position: relative;
+  margin: 0 20px 0 0;
   float:right;
   text-align: center;
-  top: 425px;
+  position:relative;
+  top: 78%;
   vertical-align: middle;
   width: 175px;
   z-index: 23;
@@ -532,14 +532,15 @@ li{
   font-size: 16px;
   font-weight: bold;
   height: 32.26px;
-  left: 75%;
+  /*left: 75%;*/
   line-height: 1;
-  margin: 0 auto;
-  position: relative;
+  margin: 0 20px 0 0;
   float:right;
   text-align: center;
-  top: 425px;
-  width: 138.26px;
+  position:relative;
+  top: 78%;
+  vertical-align: middle;
+  width: 175px;
   z-index: 23;
 }
 
