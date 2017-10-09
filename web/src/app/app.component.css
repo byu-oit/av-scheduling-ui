@@ -482,19 +482,19 @@ li{
   font-family: "Roboto";
   font-size: 1.10em;
   height: 32.26px;
-  left: 442px;
+  left: 406px;
   line-height: 1;
   margin: 0 auto;
   position: fixed;
   text-align: center;
   top: 425px;
   vertical-align: middle;
-  width: 166px;
+  width: 175px;
   z-index: 23;
 }
 
 .button-label {
-  margin: 8px auto;
+  margin: 8px;
   float:right;
 }
 
