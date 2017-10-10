@@ -494,10 +494,11 @@ li{
   background-color: transparent;
   border-radius: 50%;
   border: 3px solid #fff;
-  position:relative;
-  top: 78%;
+  position:fixed;
+  top: 88%;
   float:left;
   z-index:8000;
+  left: 0;
 
   /*box-shadow: 0 0 0 4px transparent;*/
 }
@@ -522,6 +523,15 @@ li{
   z-index: 7;
 }
 
+.buttonWrapper {
+  height: 99px;
+  left: -45px;
+  position: absolute;
+  top: 405px;
+  width: 884px;
+  z-index: 10;
+}
+
 
 .buttonBar {
   height: 99px;
@@ -540,13 +550,13 @@ li{
   font-family: "Roboto";
   font-size: 1.10em;
   height: 32.26px;
-  /*left: 406px;*/
+  left: 71%;
   line-height: 1;
   margin: 0 20px 0 0;
   float:right;
   text-align: center;
-  position:relative;
-  top: 78%;
+  position:fixed;
+  top: 88%;
   vertical-align: middle;
   width: 175px;
   z-index: 23;
