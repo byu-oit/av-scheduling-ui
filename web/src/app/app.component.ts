@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 //import * as data from './config.json';
 
 type AttendeeType = "required" | "optional";
@@ -469,7 +470,7 @@ const TIMEZONE = "Mountain Standard Time";
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   amPm = AMPM;
   bookEvent: boolean;
   calendarWorkdayEndHour: number;
@@ -502,11 +503,12 @@ export class AppComponent {
   validTimeIncrements: TimeIncrement[] = [];
   refHours = refHours;
 
+  constructor(@Inject(DOCUMENT) private document: Document) { }
+
   ngOnInit(): void {
-    document.addEventListener("touchstart", function(){}, true)
+    document.addEventListener("touchstart", function(){}, true);
 
     this.utcTime();
-
     //this.deriveVariablesFromHostname(this.resource);
 
     //this.currentEvent = null;
@@ -535,6 +537,7 @@ export class AppComponent {
     }
     alert(this.validTimeIncrements);*/
   }
+
   onSelect(event: Event): void {
     this.selectedEvent = event;
   }
