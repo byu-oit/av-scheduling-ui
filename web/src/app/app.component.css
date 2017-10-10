@@ -406,7 +406,7 @@ li{
   z-index: 9800;
   background-repeat: no-repeat;
   background-size: auto;
-  background-image: url('./assets/arrow.png')
+  background-image: url('assets/arrow.png')
 }
 
 .schedule-back-x {
@@ -419,7 +419,7 @@ li{
   z-index: 9800;
   background-repeat: no-repeat;
   background-size: auto;
-  background-image: url('./assets/arrow.png')
+  background-image: url('assets/arrow.png')
 }
 
 .cancel-book-now-button {
@@ -437,7 +437,7 @@ li{
 
 .cancelEvent-no-button {
   align-items: center;
-  background-image:url('./assets/NO_BUTTON.png');
+  background-image:url('assets/NO_BUTTON.png');
   border-color: rgb(254, 254, 254);
   border-style: solid;
   border-width: 1.87px;
@@ -454,7 +454,7 @@ li{
 
 .cancelEvent-yes-button {
   align-items: center;
-  background-image:url('./assets/YES_BUTTON.png');
+  background-image:url('assets/YES_BUTTON.png');
   border-color: rgb(254, 254, 254);
   border-style: solid;
   border-width: 1.87px;
@@ -470,7 +470,7 @@ li{
 }
 
 .calendarIcon {
-  background-image: url("./assets/Calendar.png");
+  background-image: url("assets/CALENDAR.png");
   height: 18px;
   width: 20px;
   float:left;
@@ -478,7 +478,7 @@ li{
 }
 
 .plusIcon {
-  background: url("./assets/Plus.png") no-repeat top left;
+  background: url("assets/Plus.png") no-repeat top left;
   background-size: contain;
   height: 18px;
   width: 20px;
@@ -512,7 +512,7 @@ li{
 
 .buttonBarBackground {
   background-color: rgb(0, 0, 0);
-  background: url("./assets/buttonBar.png");
+  background: url("assets/buttonBar.png");
   height: 99px;
   left: -45px;
   opacity: 0.4;
