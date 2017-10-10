@@ -464,6 +464,7 @@ li{
   position:relative;
   top: 78%;
   float:left;
+  z-index:8000;
 
   /*box-shadow: 0 0 0 4px transparent;*/
 }
