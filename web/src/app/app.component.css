@@ -519,6 +519,26 @@ li{
   z-index: 23;
 }
 
+.book-now-save-button {
+  border-color: rgb(254, 254, 254);
+  border-style: solid;
+  border-width: 1.87px;
+  color: rgb(254, 254, 254);
+  font-family: "Roboto";
+  font-size: 1.10em;
+  height: 32.36px;
+  /*left: 406px;*/
+  line-height: 1;
+  margin: 0 20px 0 0;
+  float:right;
+  text-align: center;
+  position:fixed;
+  top: 78%;
+  left: 79%;
+  vertical-align: middle;
+  width: 123px;
+  z-index: 9002;
+}
 .button-label {
   margin: 8px;
   float:right;
