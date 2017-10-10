@@ -553,7 +553,7 @@ export class AppComponent {
   }
 
   helpClick(): void {
-    
+    alert("help clicked");
   }
 
   deriveVariablesFromHostname(res: Resource): void {
