@@ -25,7 +25,7 @@
   <div class="buttonBarBackground"></div>
   <div class="buttonWrapper">
     <div (click)="helpClick()" class="helpButton font-size-4 fancy-font">?</div>
-    <div *ngIf="occupied == false" class="bookNowButton" (click)="bookNow()">
+    <div class="bookNowButton" (click)="bookNow()">
       <div class="plusIcon"></div>
       <div class="button-label">BOOK NOW</div>
     </div>
@@ -92,7 +92,6 @@
           <select [(ngModel)]="newEventEndTime" class="font-size-2">
             <option *ngFor="let inc of timeIncrements" value="{{inc.id}}">{{inc.value}}</option>
           </select>
-
         </div>
         <!--<div class="book-now-end-hour">
           <select [(ngModel)]="newEventEndHour">
@@ -157,6 +156,14 @@
           <div class="refHours-view-row-container">{{hour}}</div>
         </li>
       </ul>
+    </div>
+    <div class="current-time-bar-wrapper">
+      <div class="current-time-bar-top">
+
+      </div>
+      <div class="current-time-bar-bottom">
+        
+      </div>
     </div>
     <div id="agenda" class="agenda-view-table">
       <ul class="agenda">
