@@ -33,19 +33,18 @@
 .font-size-9 {
   font-size: 36px;
 }
+.font-size-10
+{
+  font-size: 1.6em;
+}
 
 .font-sans {
+  color: rgb(254, 254, 254);
   font-family: 'Roboto', sans-serif;
 }
 
 .font-serif {
   color: rgb(254, 254, 254);
-  font-family: 'Roboto Slab', serif;
-}
-
-.fancy-font {
-  color: rgb(254, 254, 254);
-  float: center;
   font-family: 'Roboto Slab', serif;
 }
 
@@ -528,7 +527,7 @@ li{
   left: -45px;
   position: absolute;
   top: 405px;
-  width: 884px;
+  width: 100%;
   z-index: 10;
 }
 
@@ -542,25 +541,7 @@ li{
   z-index: 100;
 }
 
-.scheduleButton {
-  border-color: rgb(254, 254, 254);
-  border-style: solid;
-  border-width: 1.87px;
-  color: rgb(254, 254, 254);
-  font-family: "Roboto";
-  font-size: 1.10em;
-  height: 32.26px;
-  left: 71%;
-  line-height: 1;
-  margin: 0 20px 0 0;
-  float:right;
-  text-align: center;
-  position:fixed;
-  top: 88%;
-  vertical-align: middle;
-  width: 185px;
-  z-index: 23;
-}
+
 
 .book-now-save-button {
   border-color: rgb(254, 254, 254);
@@ -587,26 +568,25 @@ li{
   float:right;
 }
 
-.bookNowButton {
+.bookNowButton, .scheduleButton {
   border-color: rgb(254, 254, 254);
   border-style: solid;
   border-width: 1.87px;
   color: rgb(254, 254, 254);
   font-family: "Roboto";
-  font-size: 16px;
+  font-size: 1.10em;
   font-weight: bold;
   height: 32.26px;
-  /*left: 75%;*/
   line-height: 1;
-  margin: 0 20px 0 0;
+  margin: 20px 0 20px 15px;
   float:right;
   text-align: center;
   position:relative;
-  top: 78%;
   vertical-align: middle;
   width: auto;
   z-index: 23;
 }
+
 .current-time-bar-wrapper {
   position: fixed;
   top:315px;

@@ -24,7 +24,7 @@
   </div>
   <div class="buttonBarBackground"></div>
   <div class="buttonWrapper">
-    <div (click)="helpClick()" class="helpButton font-size-4 fancy-font">?</div>
+    <div (click)="helpClick()" class="helpButton font-size-10 fancy-font">?</div>
     <div class="bookNowButton" (click)="bookNow()">
       <div class="plusIcon"></div>
       <div class="button-label">BOOK NOW</div>
@@ -65,7 +65,7 @@
         </div>
         <div class="book-now-start-select">
           <select [(ngModel)]="newEventStartTime" class="font-size-2">
-            <option *ngFor="let inc of timeIncrements" value="{{inc.id}}">{{inc.value}}</option>
+            <option *ngFor="let inc of validTimeIncrements" value="{{inc.id}}">{{inc.value}}</option>
           </select>
         </div>
         <!--<div class="book-now-start-hour">
@@ -90,7 +90,7 @@
         </div>
         <div class="book-now-end-select">
           <select [(ngModel)]="newEventEndTime" class="font-size-2">
-            <option *ngFor="let inc of timeIncrements" value="{{inc.id}}">{{inc.value}}</option>
+            <option *ngFor="let inc of validTimeIncrements" value="{{inc.id}}">{{inc.value}}</option>
           </select>
         </div>
         <!--<div class="book-now-end-hour">
