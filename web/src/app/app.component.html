@@ -151,7 +151,7 @@
   </div>
   <div id="agenda-lower-section-wrapper"class="agenda-lower-section-wrapper">
     <div id="agenda-time-reference-sidebar" class="agenda-time-reference-sidebar font-sans">
-      <ul class="refHours">
+      <ul class="refHours" (scroll)="scrollPopup()">
         <li *ngFor="let hour of refHours" class="refHours-hour">
           <div class="refHours-view-row-container">{{hour}}</div>
         </li>
@@ -166,7 +166,7 @@
       </div>
     </div>
     <div id="agenda" class="agenda-view-table">
-      <ul class="agenda">
+      <ul class="agenda" (scroll)="scrollPopup()">
         <li *ngFor="let event of events" class="agenda-view-row-unavailable">
           <div class="agenda-view-row-container">
             <div class="agenda-row-section1 font-serif font-size-2">

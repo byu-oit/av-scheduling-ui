@@ -279,6 +279,9 @@ export class AppComponent implements OnInit {
   helpClick(): void {
     this.helpRequest();
   }
+  scrollPopup(): void {
+    alert("Scrolling!");
+  }
 
   deriveVariablesFromHostname(res: Resource): void {
     var buildingAndRoom = hostname.split(" ", 2);
@@ -387,5 +390,13 @@ export class AppComponent implements OnInit {
       duration = diffHrs + " Hours " + duration;
     }
     return (duration);
+  }
+  selectByClass(selector: string): HTMLCollectionOf<Element>{
+    var elements = document.getElementsByClassName(selector);
+    return elements;
+  }
+  selectById(selector: string): HTMLElement {
+    var element = document.getElementById(selector);
+    return element;
   }
 }
