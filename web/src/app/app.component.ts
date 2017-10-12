@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
@@ -80,53 +80,143 @@ declare var newEvent: Event;
 
 const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear", "My schedule is wide open"]
 
-const EVENTS: Event[] = [
-  {
-    "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwNAAA=",
-    "subject": "AV Services Team Meeting",
-    "start": {
-      "dateTime": "2017-10-10T20:00:00.0000000",
-      "timeZone": "UTC"
+const EVENTS: Event[] = [{
+        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-TBAAA=",
+        "subject": "Time Reporting",
+        "start": {
+            "dateTime": "2017-10-13T16:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "end": {
+            "dateTime": "2017-10-13T17:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "location": {
+            "displayName": ""
+        }
     },
-    "end": {
-      "dateTime": "2017-10-10T22:00:00.0000000",
-      "timeZone": "UTC"
+    {
+        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-TAAAA=",
+        "subject": "Lunch",
+        "start": {
+            "dateTime": "2017-10-09T18:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "end": {
+            "dateTime": "2017-10-09T19:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "location": {
+            "displayName": ""
+        }
     },
-    "location": {
-      "displayName": "ITB-1109"
+    {
+        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S-AAA=",
+        "subject": "Devotional",
+        "start": {
+            "dateTime": "2017-10-10T17:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "end": {
+            "dateTime": "2017-10-10T18:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "location": {
+            "displayName": ""
+        }
+    },
+    {
+        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S_AAA=",
+        "subject": "Show and  Tell",
+        "start": {
+            "dateTime": "2017-10-10T20:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "end": {
+            "dateTime": "2017-10-10T21:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "location": {
+            "displayName": ""
+        }
+    },
+    {
+        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S9AAA=",
+        "subject": "AV Meeting",
+        "start": {
+            "dateTime": "2017-10-09T14:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "end": {
+            "dateTime": "2017-10-09T15:30:00.0000000",
+            "timeZone": "UTC"
+        },
+        "location": {
+            "displayName": ""
+        }
+    },
+    {
+        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqKAAA=",
+        "subject": "Test",
+        "start": {
+            "dateTime": "2017-10-05T14:30:00.0000000",
+            "timeZone": "UTC"
+        },
+        "end": {
+            "dateTime": "2017-10-05T15:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "location": {
+            "displayName": ""
+        }
+    },
+    {
+        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqJAAA=",
+        "subject": "Lunch Meeting",
+        "start": {
+            "dateTime": "2017-10-05T18:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "end": {
+            "dateTime": "2017-10-05T19:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "location": {
+            "displayName": ""
+        }
+    },
+    {
+        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwKAAA=",
+        "subject": "AWS Certification Training",
+        "start": {
+            "dateTime": "2017-10-05T17:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "end": {
+            "dateTime": "2017-10-05T18:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "location": {
+            "displayName": "ITB-1109"
+        }
+    },
+    {
+        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwJAAA=",
+        "subject": "AV Engineering Meeting",
+        "start": {
+            "dateTime": "2017-10-05T15:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "end": {
+            "dateTime": "2017-10-05T16:00:00.0000000",
+            "timeZone": "UTC"
+        },
+        "location": {
+            "displayName": "ITB-1109"
+        }
     }
-  },
-  {
-    "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqKAAA=",
-    "subject": "OIT All-hands meeting",
-    "start": {
-      "dateTime": "2017-10-10T14:30:00.0000000",
-      "timeZone": "UTC"
-    },
-    "end": {
-      "dateTime": "2017-10-10T15:00:00.0000000",
-      "timeZone": "UTC"
-    },
-    "location": {
-      "displayName": "ITB-1109"
-    }
-  },
-  {
-    "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwKAAA=",
-    "subject": "AWS Certification Training",
-    "start": {
-      "dateTime": "2017-10-10T17:00:00.0000000",
-      "timeZone": "UTC"
-    },
-    "end": {
-      "dateTime": "2017-10-10T18:00:00.0000000",
-      "timeZone": "UTC"
-    },
-    "location": {
-      "displayName": "ITB-1109"
-    }
-  }
 ]
+
 
 const DEFAULTATTENDEE: Attendee = {
   emailAddress: {
@@ -275,8 +365,13 @@ export class AppComponent implements OnInit {
   helpClick(): void {
     this.helpRequest();
   }
-  scrollPopup(): void {
-    alert("Scrolling!");
+  scrollReferenceEvent(elem): void {
+    var a = document.getElementById("agenda");
+    a.scrollTop
+  }
+  scrollAgendaEvent(elem): void {
+    var a = document.getElementById("refHours");
+    a.scrollTop = elem.scrollTop;
   }
 
   deriveVariablesFromHostname(res: Resource): void {
