@@ -4,7 +4,9 @@
 web/package-lock.json
 node_modules/*
 web/node_modules/*
-web/src/environments/*
+web/src/environments/*.ts
 vendor/*
 web/bower_components/*
 certs/*
+
+web/src/environments/environment.ts
