@@ -149,7 +149,7 @@
       {{ date | amDateFormat:'h:mm'}}
     </div>
   </div>
-  <div id="agenda-lower-section-wrapper"class="agenda-lower-section-wrapper">
+  <div id="agenda-lower-section-wrapper" class="agenda-lower-section-wrapper">
     <div id="agenda-time-reference-sidebar" class="agenda-time-reference-sidebar font-sans white">
       <ul id="refHours" class="refHours" (scroll)="scrollAgendaEvent($event.target)">
         <li *ngFor="let hour of refHours" class="refHours-hour">
@@ -217,6 +217,8 @@
     <div (click)="cancelPage_yes(selectedEvent)" class="cancelEvent-yes-button"></div>
   </div>
 </div>
-<div>
-
+<div *ngIf="helpRequested" class="modal stayOnTop helpModal">
+  <div class="modalContent">
+    Your help request has been received.
+  </div>
 </div>

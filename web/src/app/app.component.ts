@@ -291,7 +291,12 @@ export class AppComponent implements OnInit {
   }
 
   helpClick(): void {
-    this.helpRequest();
+    this.helpRequested = true;
+    
+    setTimeout(function(){
+      var m = document.getElementsByClassName("modal")[0];
+      m.classList.add("hidden");
+    }, 2000);
   }
   scrollReferenceEvent(elem): void {
     var a = document.getElementById("agenda");
