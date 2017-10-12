@@ -38,13 +38,15 @@
   font-size: 1.6em;
 }
 
-.font-sans {
+.white {
   color: rgb(254, 254, 254);
+}
+
+.font-sans {
   font-family: 'Roboto', sans-serif;
 }
 
 .font-serif {
-  color: rgb(254, 254, 254);
   font-family: 'Roboto Slab', serif;
 }
 

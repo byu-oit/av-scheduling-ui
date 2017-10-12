@@ -57,14 +57,14 @@
     <div class="book-now-form">
       <div class="book-now-title-block font-size-3">
         <label class="book-now-title">TITLE</label>
-        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class=".font-serif font-size-2">Ad-hoc meeting with really long title just because Ad-hoc meeting with really long title just because</textarea>
+        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="font-serif font-size-2 white">Ad-hoc meeting with really long title just because Ad-hoc meeting with really long title just because</textarea>
       </div>
       <div class="book-now-start-block">
         <div id="book-now-start-label">
           <label class="book-now-start-label">START TIME</label>
         </div>
         <div class="book-now-start-select">
-          <select [(ngModel)]="newEventStartTime" class="font-size-2">
+          <select [(ngModel)]="newEventStartTime" class="font-size-2 font-sans white">
             <option *ngFor="let inc of validTimeIncrements" value="{{inc.id}}">{{inc.value}}</option>
           </select>
         </div>
@@ -150,7 +150,7 @@
     </div>
   </div>
   <div id="agenda-lower-section-wrapper"class="agenda-lower-section-wrapper">
-    <div id="agenda-time-reference-sidebar" class="agenda-time-reference-sidebar font-sans">
+    <div id="agenda-time-reference-sidebar" class="agenda-time-reference-sidebar font-sans white">
       <ul class="refHours" (scroll)="scrollPopup()">
         <li *ngFor="let hour of refHours" class="refHours-hour">
           <div class="refHours-view-row-container">{{hour}}</div>
@@ -169,15 +169,15 @@
       <ul class="agenda" (scroll)="scrollPopup()">
         <li *ngFor="let event of events" class="agenda-view-row-unavailable">
           <div class="agenda-view-row-container">
-            <div class="agenda-row-section1 font-serif font-size-2">
+            <div class="agenda-row-section1 font-serif font-size-2 white">
               {{event.subject}}
             </div>
             <div class="agenda-row-section2">
-              <div class="agenda-row-duration font-sans font-size-2"><strong>
+              <div class="agenda-row-duration font-sans font-size-2 white"><strong>
               {{durationString(event)}}
               </strong>
               </div>
-              <div class="agenda-row-start-end font-serif font-size-2">
+              <div class="agenda-row-start-end font-serif font-size-2 white">
                 {{event.start.dateTime | amDateFormat:'h:mm a'}} - {{event.end.dateTime | amDateFormat:'h:mm a'}}
               </div>
             </div>
@@ -210,7 +210,7 @@
     <div class="cancel-p">
       Are you sure you want to cancel this meeting?
     </div>
-    <div class="cancel-meeting-title.font-serif">
+    <div class="cancel-meeting-title font-serif white">
       {{selectedEvent.subject}}
     </div>
     <div (click)="cancelPage_no()" class="cancelEvent-no-button"></div>
