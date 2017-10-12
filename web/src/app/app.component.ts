@@ -71,7 +71,8 @@ const RESOURCE: Resource = {
 }
 //const hostname = (<any>data).hostname;
 const hostname = "ITB-1109-SP1"
-const refHours: string[] = ["8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8"];
+//const refHours: string[] = ["8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8"];
+const refHours: string[] = ["8", "9", "11", "1", "4"];
 const HOURS: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 const MINUTES: string[] = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"]
 const AMPM: string[] = ["AM", "PM"]
@@ -84,11 +85,11 @@ const EVENTS: Event[] = [{
         "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-TBAAA=",
         "subject": "Time Reporting",
         "start": {
-            "dateTime": "2017-10-13T16:00:00.0000000",
+            "dateTime": "2017-10-13T08:00:00.0000000",
             "timeZone": "UTC"
         },
         "end": {
-            "dateTime": "2017-10-13T17:00:00.0000000",
+            "dateTime": "2017-10-13T09:00:00.0000000",
             "timeZone": "UTC"
         },
         "location": {
@@ -99,11 +100,11 @@ const EVENTS: Event[] = [{
         "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-TAAAA=",
         "subject": "Lunch",
         "start": {
-            "dateTime": "2017-10-09T18:00:00.0000000",
+            "dateTime": "2017-10-13T09:00:00.0000000",
             "timeZone": "UTC"
         },
         "end": {
-            "dateTime": "2017-10-09T19:00:00.0000000",
+            "dateTime": "2017-10-13T10:00:00.0000000",
             "timeZone": "UTC"
         },
         "location": {
@@ -114,11 +115,11 @@ const EVENTS: Event[] = [{
         "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S-AAA=",
         "subject": "Devotional",
         "start": {
-            "dateTime": "2017-10-10T17:00:00.0000000",
+            "dateTime": "2017-10-13T11:00:00.0000000",
             "timeZone": "UTC"
         },
         "end": {
-            "dateTime": "2017-10-10T18:00:00.0000000",
+            "dateTime": "2017-10-13T01:00:00.0000000",
             "timeZone": "UTC"
         },
         "location": {
@@ -129,90 +130,15 @@ const EVENTS: Event[] = [{
         "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S_AAA=",
         "subject": "Show and  Tell",
         "start": {
-            "dateTime": "2017-10-10T20:00:00.0000000",
+            "dateTime": "2017-10-13T01:00:00.0000000",
             "timeZone": "UTC"
         },
         "end": {
-            "dateTime": "2017-10-10T21:00:00.0000000",
+            "dateTime": "2017-10-13T04:00:00.0000000",
             "timeZone": "UTC"
         },
         "location": {
             "displayName": ""
-        }
-    },
-    {
-        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S9AAA=",
-        "subject": "AV Meeting",
-        "start": {
-            "dateTime": "2017-10-09T14:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "end": {
-            "dateTime": "2017-10-09T15:30:00.0000000",
-            "timeZone": "UTC"
-        },
-        "location": {
-            "displayName": ""
-        }
-    },
-    {
-        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqKAAA=",
-        "subject": "Test",
-        "start": {
-            "dateTime": "2017-10-05T14:30:00.0000000",
-            "timeZone": "UTC"
-        },
-        "end": {
-            "dateTime": "2017-10-05T15:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "location": {
-            "displayName": ""
-        }
-    },
-    {
-        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAADV2YEL_ZdnT5PBuKemHdHAAAK1ZLqJAAA=",
-        "subject": "Lunch Meeting",
-        "start": {
-            "dateTime": "2017-10-05T18:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "end": {
-            "dateTime": "2017-10-05T19:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "location": {
-            "displayName": ""
-        }
-    },
-    {
-        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwKAAA=",
-        "subject": "AWS Certification Training",
-        "start": {
-            "dateTime": "2017-10-05T17:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "end": {
-            "dateTime": "2017-10-05T18:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "location": {
-            "displayName": "ITB-1109"
-        }
-    },
-    {
-        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwJAAA=",
-        "subject": "AV Engineering Meeting",
-        "start": {
-            "dateTime": "2017-10-05T15:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "end": {
-            "dateTime": "2017-10-05T16:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "location": {
-            "displayName": "ITB-1109"
         }
     }
 ]
