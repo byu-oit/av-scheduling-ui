@@ -175,6 +175,7 @@ export class AppComponent implements OnInit {
   };
   eventinprogress: boolean;
   events = EVENTS;
+  helpRequested: boolean;
   hours = HOURS;
   LOCALE = "en-us";
   minutes = MINUTES;
@@ -254,6 +255,7 @@ export class AppComponent implements OnInit {
     this.calendarWorkdayStartHour = 8;
     //this.currentEvent = this.events[1];
     this.eventinprogress = false;
+    this.helpRequested = false;
     this.newEvent = null;
     this.occupied = false;
     this.scheduleNow = false;
