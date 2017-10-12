@@ -1,15 +1,9 @@
-import { Component, HostListener, Inject, OnInit, Pipe, PipeTransform, Injectable } from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
+import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
-@Pipe({
-  name: 'arrayFilter'
-})
-@Injectable()
-export class AttributeFilterPipe implements PipeTransform {
-  transform(array: any[], filterFrom: any[]): any {
-    return array.filter(item => item.value.indexOf(filterFrom[0].value) !== -1);
-  }
-}
+import { environment } from '../environments/environment';
+
 //import * as data from './config.json';
 
 type AttendeeType = "required" | "optional";
@@ -77,8 +71,8 @@ const RESOURCE: Resource = {
 }
 //const hostname = (<any>data).hostname;
 const hostname = "ITB-1109-SP1"
-const refHours: string[] = ["8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8"]
-const HOURS: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+const refHours: string[] = ["8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8"];
+const HOURS: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 const MINUTES: string[] = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"]
 const AMPM: string[] = ["AM", "PM"]
 
@@ -86,7 +80,6 @@ declare var newEvent: Event;
 
 const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear", "My schedule is wide open"]
 
-//dev events
 const EVENTS: Event[] = [
   {
     "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAADthwNAAA=",
@@ -189,7 +182,8 @@ export class AppComponent implements OnInit {
   unoccupied: boolean;
   validTimeIncrements: TimeIncrement[] = [];
 
-  constructor( @Inject(DOCUMENT) private document: Document) { }
+  //constructor( @Inject(DOCUMENT) private document: Document) { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     document.addEventListener("touchstart", function() { }, true);
@@ -209,6 +203,7 @@ export class AppComponent implements OnInit {
     }
     else {
       m = (((minutes + 15) / 30 | 0) * 30) % 60;
+      //m = (Math.round(minutes/30) * 30) % 60;
     }
     //    var h = ((((minutes/105) + .5) | 0) + hours) % 24;  // Not quite right.
     d.setMinutes(m);
@@ -254,19 +249,22 @@ export class AppComponent implements OnInit {
   }
 
   evalTime(time: Date): void {
-    //var t = this.todayMillis + this.validTimeIncrements[0].milliseconds;
+    /*var t = this.todayMillis + this.validTimeIncrements[0].milliseconds;
     if (time.getTime() > ((new Date().getTime() + (this.schedulingWindow * 6000)))) {
       this.validTimeIncrements.shift(); // Remove first time increment
-    }
+    }*/
+  }
+  helpRequest(): void {
+    var resp = this.http.post(environment.slack_webhook_url,"{\"text\":\"Help request from " + this.resource.name +"\"}").subscribe();
+    console.log(resp);
   }
 
   onSelect(event: Event): void {
     this.selectedEvent = event;
   }
   utcTime(): void {
-    setInterval(() => {         //replaced function() by ()=>
+    setInterval(() => {
       this.date = new Date();
-      //this.evalTime(this.date); // update validTimeIncrements
     }, 1000);
   }
 
@@ -279,7 +277,7 @@ export class AppComponent implements OnInit {
   }
 
   helpClick(): void {
-    alert("help clicked");
+    this.helpRequest();
   }
 
   deriveVariablesFromHostname(res: Resource): void {
@@ -291,11 +289,9 @@ export class AppComponent implements OnInit {
     res.busy = false;
     res.name = building + " " + room;
     res.o365Name = res.id;
-
   }
 
   submitEvent(tmpSubject: string, tmpStartTime: string, tmpEndTime: string): void {
-
     var startTime: StartEndTime = new StartEndTime();
     var endTime: StartEndTime = new StartEndTime();
     var req: NewEventRequest = new NewEventRequest();

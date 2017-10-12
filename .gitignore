@@ -8,5 +8,24 @@ web/src/environments/*.ts
 vendor/*
 web/bower_components/*
 certs/*
+fromPi/*
+mockup/*
+tmp/*
+
+web/src/environments/environment.ts
+
+config.json
+
+data/Copy of Copy of timeIncrements.xlsx
+
+data/Copy of timeIncrements.xlsx
+
+data/timeIncrements.xlsx
+
+event.go
+
+events.json
+
+web/data.json
 
 web/src/environments/environment.ts

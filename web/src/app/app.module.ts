@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MomentModule } from 'angular2-moment';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms'; // <-- NgModel lives here
-
+import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -12,7 +12,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    MomentModule
+    MomentModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
