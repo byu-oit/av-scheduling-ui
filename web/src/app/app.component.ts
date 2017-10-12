@@ -319,6 +319,9 @@ export class AppComponent implements OnInit {
     this.cancellation = false;
     this.scheduleNow = false;
     this.bookEvent = false;
+
+    this.newEventEndTimeId = null;
+    this.newEventStartTimeId = null;
   }
 
   cancelEvent(event: Event): void {
