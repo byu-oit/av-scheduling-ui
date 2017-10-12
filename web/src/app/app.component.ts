@@ -162,19 +162,14 @@ export class AppComponent implements OnInit {
   LOCALE = "en-us";
   minutes = MINUTES;
   newEvent: Event;
-  newEventEndAmPm: string;
-  newEventEndHour: number;
-  newEventEndMinute: number;
-  newEventEndTime: string;
-  newEventStartAmPm: string;
-  newEventStartHour: number;
-  newEventStartMinute: number;
-  newEventStartTime: string;
+  newEventEndTimeId: string;
+  newEventStartTimeId: string;
   occupied: boolean;
   refHours = refHours;
   resource = RESOURCE;
   scheduleNow: boolean;
   selectedEvent: Event;
+  selectedStartValue: number;
   timeIncrement = 30; // minutes to increment select boxes by
   title = 'Room Scheduler';
   //todayMillis: number;
@@ -244,6 +239,7 @@ export class AppComponent implements OnInit {
     this.occupied = false;
     this.scheduleNow = false;
     this.selectedEvent = null;
+    this.selectedStartValue = 0;
     this.unoccupied = !(this.occupied);
 
   }
@@ -334,7 +330,7 @@ export class AppComponent implements OnInit {
     this.bookEvent = true;
   }
   bookNewEvent(): void {
-    //this.reset();
+    /*//this.reset();
     var d = new Date();
     this.bookEvent = true;
     this.newEvent = new Event();
@@ -361,10 +357,13 @@ export class AppComponent implements OnInit {
     }
 
     s += sH + ":" + this.newEventStartMinute + ":000";
-    e += eH + ":" + this.newEventEndMinute + ":000";
+    e += eH + ":" + this.newEventEndMinute + ":000";*/
     this.reset();
   }
-
+  onStartChange(selectedStartOption): void {
+    var i =  Number(selectedStartOption) + 1;
+    this.newEventEndTimeId = i.toString();
+  }
   scheduleEvent(): void {
     this.reset();
     this.scheduleNow = true;

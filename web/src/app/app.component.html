@@ -57,14 +57,14 @@
     <div class="book-now-form">
       <div class="book-now-title-block font-size-3">
         <label class="book-now-title">TITLE</label>
-        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="font-serif font-size-2 white">Ad-hoc meeting with really long title just because Ad-hoc meeting with really long title just because</textarea>
+        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="font-serif font-size-2 white">Ad-hoc meeting</textarea>
       </div>
       <div class="book-now-start-block">
         <div id="book-now-start-label">
           <label class="book-now-start-label">START TIME</label>
         </div>
         <div class="book-now-start-select">
-          <select [(ngModel)]="newEventStartTime" class="font-size-2 font-sans">
+          <select id="newEventStartTime" [(ngModel)]="newEventStartTimeId" class="font-size-2 font-sans" (change)="onStartChange($event.target.value)">
             <option *ngFor="let inc of validTimeIncrements" value="{{inc.id}}">{{inc.value}}</option>
           </select>
         </div>
@@ -89,7 +89,7 @@
           <label class="book-now-end-label">END TIME</label>
         </div>
         <div class="book-now-end-select">
-          <select [(ngModel)]="newEventEndTime" class="font-size-2 font-sans">
+          <select id="newEventEndTime" [(ngModel)]="newEventEndTimeId" class="font-size-2 font-sans">
             <option *ngFor="let inc of validTimeIncrements" value="{{inc.id}}">{{inc.value}}</option>
           </select>
         </div>
