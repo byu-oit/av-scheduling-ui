@@ -169,6 +169,7 @@ export class AppComponent implements OnInit {
   cancellation: boolean;
   currentEvent: Event;
   date: Date;
+  dayMillis: number;
   timeOptions = {
     hour: "2-digit", minute: "2-digit"
   };
@@ -249,6 +250,8 @@ export class AppComponent implements OnInit {
     this.calendarWorkdayStartHour = 8;
     this.cancellation = false;
     this.currentEvent = null;
+    this.calendarWorkdayEndHour = 17;
+    this.calendarWorkdayStartHour = 8;
     //this.currentEvent = this.events[1];
     this.eventinprogress = false;
     this.newEvent = null;
@@ -261,10 +264,7 @@ export class AppComponent implements OnInit {
   }
 
   evalTime(time: Date): void {
-    /*var t = this.todayMillis + this.validTimeIncrements[0].milliseconds;
-    if (time.getTime() > ((new Date().getTime() + (this.schedulingWindow * 6000)))) {
-      this.validTimeIncrements.shift(); // Remove first time increment
-    }*/
+    //var timeDiff =
   }
   helpRequest(): void {
     var resp = this.http.post(environment.slack_webhook_url,"{\"text\":\"Help request from " + this.resource.name +"\"}").subscribe();
