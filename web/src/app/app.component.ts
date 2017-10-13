@@ -72,7 +72,7 @@ const RESOURCE: Resource = {
 //const hostname = (<any>data).hostname;
 const hostname = "ITB-1109-SP1"
 //const refHours: string[] = ["8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8"];
-const refHours: string[] = ["8", "9", "11", "1", "4"];
+const refHours: string[] = ["8", "9", "10", "11", "12","1", "2","3", "4","5"];
 const HOURS: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 const MINUTES: string[] = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"]
 const AMPM: string[] = ["AM", "PM"]
@@ -161,6 +161,7 @@ const TIMEZONE = "Mountain Standard Time";
 })
 
 export class AppComponent implements OnInit {
+
   //events: Event[] = [];
   amPm = AMPM;
   bookEvent: boolean;
@@ -175,15 +176,18 @@ export class AppComponent implements OnInit {
   };
   eventinprogress: boolean;
   events = EVENTS;
+  //events: Event[] = [];
   helpRequested: boolean;
+  helpPressed: boolean;
   hours = HOURS;
   LOCALE = "en-us";
   minutes = MINUTES;
   newEvent: Event;
+  newEventTitle: string;
   newEventEndTimeId: string;
   newEventStartTimeId: string;
   occupied: boolean;
-  refHours = refHours;
+  refHours: string[] = [];
   resource = RESOURCE;
   scheduleNow: boolean;
   selectedEvent: Event;
@@ -194,6 +198,7 @@ export class AppComponent implements OnInit {
   schedulingWindow = 5; // minutes after a time window start time when the resource still be scheduled
   unoccupied: boolean;
   validTimeIncrements: TimeIncrement[] = [];
+  percentOfDayExpended: number;
 
   //constructor( @Inject(DOCUMENT) private document: Document) { }
   constructor(private http: HttpClient) { }
@@ -247,8 +252,6 @@ export class AppComponent implements OnInit {
     //this.eventinprogress = ( this.currentEvent === null ? true : false );
     //this.occupied = this.resource.busy;
     this.bookEvent = false;
-    this.calendarWorkdayEndHour = 5;
-    this.calendarWorkdayStartHour = 8;
     this.cancellation = false;
     this.currentEvent = null;
     this.calendarWorkdayEndHour = 17;
@@ -263,6 +266,34 @@ export class AppComponent implements OnInit {
     this.selectedStartValue = 0;
     this.unoccupied = !(this.occupied);
 
+    for (var i = this.calendarWorkdayStartHour; i <= this.calendarWorkdayEndHour; i++){
+      if (i > 12){
+        var iNum = +i;
+        var nNum = iNum - 12 ;
+
+        this.refHours.push(nNum.toString());
+      }
+      else {
+        this.refHours.push(i.toString());
+      }
+      var newDate = new Date()
+      newDate.setHours(i);
+    }
+    console.log(new Date().getTime())
+    console.log(new Date('10/13/2017 11:59pm').getTime())
+
+  }
+  percent(): void {
+    setInterval(function () {
+    var secondsInADay = 24 * 60 * 60;
+    var now = new Date();
+    var hours = now.getHours() * 60 * 60;
+    var minutes = now.getMinutes() * 60;
+    var seconds = now.getSeconds();
+    var totalSeconds = hours + minutes + seconds;
+    var percentSeconds = 100 * totalSeconds/secondsInADay;
+    this.percentOfDayExpended = percentSeconds;
+    }, 1000);
   }
 
   evalTime(time: Date): void {
@@ -291,7 +322,7 @@ export class AppComponent implements OnInit {
   }
 
   helpClick(): void {
-    this.helpRequested = true;
+    this.helpPressed = true;
   }
 
   resetModal(): void {
@@ -313,11 +344,15 @@ export class AppComponent implements OnInit {
   }
   scrollReferenceEvent(elem): void {
     var a = document.getElementById("agenda");
-    a.scrollTop
+    var t = document.getElementById("current-time-bar-wrapper");
+    a.scrollTop = elem.scrollTop;
+    t.scrollTop = elem.scrollTop;
   }
   scrollAgendaEvent(elem): void {
     var a = document.getElementById("refHours");
+    var t = document.getElementById("current-time-bar-wrapper");
     a.scrollTop = elem.scrollTop;
+    t.scrollTop = elem.scrollTop;
   }
 
   deriveVariablesFromHostname(res: Resource): void {

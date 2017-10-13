@@ -1,5 +1,6 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+
 <div class="window">
   <div class="unoccupiedBanner" *ngIf="unoccupied" (click)="reset()"></div>
   <div class="occupiedBanner" *ngIf="occupied" (click)="reset()"></div>
@@ -57,7 +58,7 @@
     <div class="book-now-form">
       <div class="book-now-title-block font-size-3">
         <label class="book-now-title">TITLE</label>
-        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="font-serif font-size-2 white">Ad-hoc meeting</textarea>
+        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="font-serif font-size-2 white" ng-virtual-keyboard ng-virtual-keyboard-layout="alphanumeric" ng-virtual-keyboard-placeholder="Ad-hoc meeting" [(ngModel)]="newEventTitle"></textarea>
       </div>
       <div class="book-now-start-block">
         <div id="book-now-start-label">
@@ -157,8 +158,8 @@
         </li>
       </ul>
     </div>
-    <div class="current-time-bar-wrapper">
-      <div class="current-time-bar-top">
+    <div id="current-time-bar-wrapper" class="current-time-bar-wrapper">
+      <div class="current-time-bar-top" [style.top]="percentOfDayExpended">
 
       </div>
       <div class="current-time-bar-bottom">
@@ -219,7 +220,7 @@
 </div>
 <div *ngIf="helpPressed || helpRequested" class="modal helpModal">
 </div>
-<div *ngIf="helpPressed" class="modalContent">
+<div *ngIf="helpPressed" class="modalContent stayOnTop">
   <div class="help-cancel"></div>
   <div class="help-message-background"></div>
   <div class="help-message-container">

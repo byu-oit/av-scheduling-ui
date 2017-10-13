@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MomentModule } from 'angular2-moment';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms'; // <-- NgModel lives here
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+//import { NgVirtualKeyboardModule } from '@protacon/ng-virtual-keyboard';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     MomentModule,
-    HttpClientModule,
+    HttpClientModule
+    //NgVirtualKeyboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
