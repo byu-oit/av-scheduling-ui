@@ -82,65 +82,65 @@ declare var newEvent: Event;
 const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear", "My schedule is wide open"]
 
 const EVENTS: Event[] = [{
-        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-TBAAA=",
-        "subject": "Time Reporting",
-        "start": {
-            "dateTime": "2017-10-13T08:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "end": {
-            "dateTime": "2017-10-13T09:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "location": {
-            "displayName": ""
-        }
-    },
-    {
-        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-TAAAA=",
-        "subject": "Lunch",
-        "start": {
-            "dateTime": "2017-10-13T09:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "end": {
-            "dateTime": "2017-10-13T10:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "location": {
-            "displayName": ""
-        }
-    },
-    {
-        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S-AAA=",
-        "subject": "Devotional",
-        "start": {
-            "dateTime": "2017-10-13T11:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "end": {
-            "dateTime": "2017-10-13T01:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "location": {
-            "displayName": ""
-        }
-    },
-    {
-        "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S_AAA=",
-        "subject": "Show and  Tell",
-        "start": {
-            "dateTime": "2017-10-13T01:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "end": {
-            "dateTime": "2017-10-13T04:00:00.0000000",
-            "timeZone": "UTC"
-        },
-        "location": {
-            "displayName": ""
-        }
-    }
+  "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-TBAAA=",
+  "subject": "Time Reporting",
+  "start": {
+    "dateTime": "2017-10-13T08:00:00.0000000",
+    "timeZone": "UTC"
+  },
+  "end": {
+    "dateTime": "2017-10-13T09:00:00.0000000",
+    "timeZone": "UTC"
+  },
+  "location": {
+    "displayName": ""
+  }
+},
+{
+  "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-TAAAA=",
+  "subject": "Lunch",
+  "start": {
+    "dateTime": "2017-10-13T09:00:00.0000000",
+    "timeZone": "UTC"
+  },
+  "end": {
+    "dateTime": "2017-10-13T10:00:00.0000000",
+    "timeZone": "UTC"
+  },
+  "location": {
+    "displayName": ""
+  }
+},
+{
+  "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S-AAA=",
+  "subject": "Devotional",
+  "start": {
+    "dateTime": "2017-10-13T11:00:00.0000000",
+    "timeZone": "UTC"
+  },
+  "end": {
+    "dateTime": "2017-10-13T01:00:00.0000000",
+    "timeZone": "UTC"
+  },
+  "location": {
+    "displayName": ""
+  }
+},
+{
+  "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S_AAA=",
+  "subject": "Show and  Tell",
+  "start": {
+    "dateTime": "2017-10-13T01:00:00.0000000",
+    "timeZone": "UTC"
+  },
+  "end": {
+    "dateTime": "2017-10-13T04:00:00.0000000",
+    "timeZone": "UTC"
+  },
+  "location": {
+    "displayName": ""
+  }
+}
 ]
 
 
@@ -196,7 +196,7 @@ export class AppComponent implements OnInit {
   validTimeIncrements: TimeIncrement[] = [];
 
   //constructor( @Inject(DOCUMENT) private document: Document) { }
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     document.addEventListener("touchstart", function() { }, true);
@@ -234,7 +234,7 @@ export class AppComponent implements OnInit {
         this.validTimeIncrements.push({
           id: i,
           dateTimeValue: d,
-          value: d.toLocaleTimeString(this.LOCALE,this.timeOptions)
+          value: d.toLocaleTimeString(this.LOCALE, this.timeOptions)
           //value: hours.toString() + ":" + mins.toString() + " " + amPm
         });
       }
@@ -269,7 +269,7 @@ export class AppComponent implements OnInit {
     //var timeDiff =
   }
   helpRequest(): void {
-    var resp = this.http.post(environment.slack_webhook_url,"{\"text\":\"Help request from " + this.resource.name +"\"}").subscribe();
+    var resp = this.http.post(environment.slack_webhook_url, "{\"text\":\"Help request from " + this.resource.name + "\"}").subscribe();
     console.log(resp);
   }
 
@@ -295,20 +295,20 @@ export class AppComponent implements OnInit {
   }
 
   resetModal(): void {
-    setTimeout(function(){
-      var m = document.getElementsByClassName("modal");
-      for (var mChild in m){
-        setTimeout(function(){
-          var m = document.getElementsByClassName("modal")[0];
-          m.classList.add("hidden");
+    var m = document.getElementsByClassName("modal");
+    for (var mChild in m) {
+      setTimeout(function() {
+        var m = document.getElementsByClassName("modal")[0];
+        m.classList.add("hidden");
         }, 2000);
       }
+  }
   helpInformationRequest(): void {
-    resetModal();
+    this.resetModal();
     // show information;
   }
-  sendHelp(): void{
-    resetModal();
+  sendHelp(): void {
+    this.resetModal();
     //send help
   }
   scrollReferenceEvent(elem): void {
@@ -405,7 +405,7 @@ export class AppComponent implements OnInit {
     this.reset();
   }
   onStartChange(selectedStartOption): void {
-    var i =  Number(selectedStartOption) + 1;
+    var i = Number(selectedStartOption) + 1;
     this.newEventEndTimeId = i.toString();
   }
   scheduleEvent(): void {
@@ -434,7 +434,7 @@ export class AppComponent implements OnInit {
     }
     return (duration);
   }
-  selectByClass(selector: string): HTMLCollectionOf<Element>{
+  selectByClass(selector: string): HTMLCollectionOf<Element> {
     var elements = document.getElementsByClassName(selector);
     return elements;
   }
