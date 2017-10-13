@@ -102,6 +102,22 @@
   left:10%;
   text-align: center;
 }
+.help-cancel{
+  position: relative;
+  top:0;
+  left:0;
+  margin: 5px auto auto 5px;
+  width: 38px;
+  height: 38px;
+  z-index: 9800;
+  background-repeat: no-repeat;
+  background-size: 36px 36px;
+  background-image: url('assets/X.png')
+}
+.help-message-background {
+
+}
+.help-message-container{}
 
 .unoccupied {
   background-color: rgb(126, 207, 0);

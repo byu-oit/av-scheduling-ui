@@ -292,11 +292,24 @@ export class AppComponent implements OnInit {
 
   helpClick(): void {
     this.helpRequested = true;
+  }
 
+  resetModal(): void {
     setTimeout(function(){
-      var m = document.getElementsByClassName("modal")[0];
-      m.classList.add("hidden");
-    }, 2000);
+      var m = document.getElementsByClassName("modal");
+      for (var mChild in m){
+        setTimeout(function(){
+          var m = document.getElementsByClassName("modal")[0];
+          m.classList.add("hidden");
+        }, 2000);
+      }
+  helpInformationRequest(): void {
+    resetModal();
+    // show information;
+  }
+  sendHelp(): void{
+    resetModal();
+    //send help
   }
   scrollReferenceEvent(elem): void {
     var a = document.getElementById("agenda");
