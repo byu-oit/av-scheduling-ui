@@ -217,8 +217,8 @@
     <div (click)="cancelPage_yes(selectedEvent)" class="cancelEvent-yes-button"></div>
   </div>
 </div>
-<div *ngIf="helpRequested" class="modal stayOnTop helpModal">
-  <div class="modalContent">
-    Your help request has been received.
-  </div>
+<div *ngIf="helpRequested" class="modal helpModal">
+</div>
+<div *ngIf="helpRequested" class="modalContent font-size-6 font-sans stayOnTop">
+  Your help request has been received.
 </div>

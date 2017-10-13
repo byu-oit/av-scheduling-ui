@@ -68,10 +68,13 @@
 }
 
 .modal {
-  height: 80%;
-  width: 80%;
+  height: 100%;
+  width: 100%;
   background-color: rgb(0, 0, 0);
   opacity: 0.4;
+  top:0;
+  left:0;
+  position:fixed;
 }
 
 .helpModal {
@@ -80,12 +83,6 @@
   -moz-transition: opacity 3s ease-in-out;
   -ms-transition: opacity 3s ease-in-out;
   -o-transition: opacity 3s ease-in-out;
-  left:0;
-  opacity: 1;
-  position: fixed;
-  text-align: center;
-  top: 0;
-  margin: 10%;
 }
 
 .hidden {
@@ -94,11 +91,16 @@
 
 .modalContent{
   background-size: auto;
-  background-color: #F2F2F2;
+  /*background-color: #F2F2F2;*/
+  background-color: white;
   color: #141414;
-  width: 100%;
-  height: 100%;
-  position: relative;
+  width: 80%;
+  height: 33%;
+  position: fixed;
+  vertical-align: middle;
+  top: 33%;
+  left:10%;
+  text-align: center;
 }
 
 .unoccupied {

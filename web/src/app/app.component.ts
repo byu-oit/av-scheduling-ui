@@ -292,7 +292,7 @@ export class AppComponent implements OnInit {
 
   helpClick(): void {
     this.helpRequested = true;
-    
+
     setTimeout(function(){
       var m = document.getElementsByClassName("modal")[0];
       m.classList.add("hidden");
