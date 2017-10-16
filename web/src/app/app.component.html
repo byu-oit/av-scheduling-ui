@@ -13,7 +13,7 @@
   <div class="in-use" *ngIf="occupied">
     IN USE
   </div>
-  <div class="eventName font-serif font-size-5" *ngIf="currentEvent">
+  <div class="white eventName font-serif font-size-5" *ngIf="currentEvent">
     {{currentEvent.subject}}
   </div>
 
@@ -220,18 +220,19 @@
 </div>
 <div *ngIf="helpPressed || helpRequested" class="modal helpModal">
 </div>
-<div *ngIf="helpPressed" class="modalContent stayOnTop">
-  <div class="help-cancel"></div>
+<!--<div *ngIf="helpRequested" class="modalContent stayOnTop">
+<<div class="help-cancel" (click)="resetModal()"></div>
   <div class="help-message-background"></div>
   <div class="help-message-container">
 
     <div class="font-size-3 font-sans">
       What sort of help would you like?
     </div>
-    <div (click)="helpInformationRequest()" class="helpInformationRequest font-serif white">HOW DO I...?</div>
-    <div (click)="sendHelp()" class="sendHelp font-serif white">SEND HELP</div>
+    <div (click)="helpInformationRequest()" class="helpInformationRequest font-serif">HOW DO I...?</div>
+    <div (click)="sendHelp()" class="sendHelp font-serif">SEND HELP</div>
   </div>
-</div>
-<div *ngIf="helpRequested" class="modalContent font-size-6 font-sans stayOnTop">
+</div> -->
+<div *ngIf="helpRequested" class="modalContent font-size-6 font-sans">
   Your help request has been received.
 </div>
+<help-modal></help-modal>
