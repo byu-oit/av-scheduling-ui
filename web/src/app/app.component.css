@@ -521,22 +521,21 @@ li{
   vertical-align: middle;
   width: 128px;
 }
-
+.buttonIcon {
+  background-size: contain;
+  width: 20px;
+  float:left;
+  margin: 6px auto 6px 10px;
+}
 .calendarIcon {
   background-image: url("assets/CALENDAR.png");
   height: 18px;
-  width: 20px;
-  float:left;
-  margin: 6px auto 6px 4px;
 }
 
 .plusIcon {
   background: url("assets/Plus.png") no-repeat top left;
-  background-size: contain;
-  height: 18px;
-  width: 20px;
-  float:left;
-  margin: 6px auto 6px 8px;
+  height: 21px;
+  margin-top:5px;
 }
 .helpButton {
   width: 30px;
@@ -634,7 +633,7 @@ li{
   z-index: 9002;
 }
 .button-label {
-  margin: 8px;
+  margin: 8px 12px;
   float:right;
 }
 
@@ -648,7 +647,7 @@ li{
   font-weight: bold;
   height: 32.26px;
   line-height: 1;
-  margin: 20px 0 20px 15px;
+  margin: 18px 0 18px 15px;
   float:right;
   text-align: center;
   position:relative;
