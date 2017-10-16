@@ -15,7 +15,7 @@
 }
 
 .font-size-5 {
-  font-size: 2.75em;
+  font-size: 2em;
 }
 
 .font-size-6 {
@@ -555,6 +555,20 @@ li{
 
   /*box-shadow: 0 0 0 4px transparent;*/
 }
+/*
+.helpButton2 {
+  width: ;
+  height: 30px;
+  margin: 0 20px;
+  text-align: center;
+  color: black;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 3px solid black;
+  position:relative;
+
+  box-shadow: 0 0 0 4px transparent;
+}*/
 
 .hidden {
   display: none;

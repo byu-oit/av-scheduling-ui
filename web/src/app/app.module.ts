@@ -4,20 +4,26 @@ import { MomentModule } from 'angular2-moment';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms'; // <-- NgModel lives here
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { SimpleTimer } from 'ng2-simple-timer';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HelpModal } from './helpModal';
+
 //import { NgVirtualKeyboardModule } from '@protacon/ng-virtual-keyboard';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HelpModal
   ],
   imports: [
     BrowserModule,
     FormsModule,
     MomentModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
     //NgVirtualKeyboardModule
   ],
-  providers: [],
+  providers: [SimpleTimer],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,9 @@ import { Component, ElementRef, HostListener, Inject, OnInit } from '@angular/co
 import { DOCUMENT } from '@angular/platform-browser';
 import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
+import { SimpleTimer } from 'ng2-simple-timer';
+import { HelpModal } from './helpModal';
+
 import { environment } from '../environments/environment';
 
 //import * as data from './config.json';
@@ -72,7 +75,7 @@ const RESOURCE: Resource = {
 //const hostname = (<any>data).hostname;
 const hostname = "ITB-1109-SP1"
 //const refHours: string[] = ["8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8"];
-const refHours: string[] = ["8", "9", "10", "11", "12","1", "2","3", "4","5"];
+const refHours: string[] = ["8", "9", "11", "1", "4"];
 const HOURS: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 const MINUTES: string[] = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"]
 const AMPM: string[] = ["AM", "PM"]
@@ -162,6 +165,8 @@ const TIMEZONE = "Mountain Standard Time";
 
 export class AppComponent implements OnInit {
 
+  transitionTimer: SimpleTimer;
+
   //events: Event[] = [];
   amPm = AMPM;
   bookEvent: boolean;
@@ -181,13 +186,16 @@ export class AppComponent implements OnInit {
   helpPressed: boolean;
   hours = HOURS;
   LOCALE = "en-us";
+  modalTransitionTimerCounter = 0;
+  modalTransitionTimerID = "modalTransitionTimer";
+  modalTimeout = environment.popupWindowTimeout;
   minutes = MINUTES;
   newEvent: Event;
   newEventTitle: string;
   newEventEndTimeId: string;
   newEventStartTimeId: string;
   occupied: boolean;
-  refHours: string[] = [];
+  refHours = refHours;
   resource = RESOURCE;
   scheduleNow: boolean;
   selectedEvent: Event;
@@ -206,6 +214,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     document.addEventListener("touchstart", function() { }, true);
     this.utcTime();
+
+    this.transitionTimer = new SimpleTimer();
 
     // Populate valid time scheduling window
     var d = new Date();
@@ -259,6 +269,7 @@ export class AppComponent implements OnInit {
     //this.currentEvent = this.events[1];
     this.eventinprogress = false;
     this.helpRequested = false;
+    this.helpPressed = false;
     this.newEvent = null;
     this.occupied = false;
     this.scheduleNow = false;
@@ -283,6 +294,11 @@ export class AppComponent implements OnInit {
     console.log(new Date('10/13/2017 11:59pm').getTime())
 
   }
+
+  resetTransitionTimer(): void {
+    this.transitionTimer.delTimer('modalTransition');
+  }
+
   percent(): void {
     setInterval(function () {
     var secondsInADay = 24 * 60 * 60;
@@ -322,17 +338,41 @@ export class AppComponent implements OnInit {
   }
 
   helpClick(): void {
-    this.helpPressed = true;
+    this.helpRequested = true;
+    this.transitionTimer.newTimer('modalTransition',1);
+		this.subscribeHelpTimer();
+  }
+
+  subscribeHelpTimer(){
+    if (this.modalTransitionTimerID) {
+			// Unsubscribe if timer Id is defined
+			this.transitionTimer.unsubscribe(this.modalTransitionTimerID);
+      this.modalTransitionTimerCounter = 0;
+		} else {
+			// Subscribe if timer Id is undefined
+			this.modalTransitionTimerID = this.transitionTimer.subscribe('modalTransition', () => this.modalTimerCallback());
+		}
+  }
+
+  modalTimerCallback(): void {
+    if (this.modalTransitionTimerCounter <= this.modalTimeout){
+    	this.modalTransitionTimerCounter++;
+    } else {
+      this.subscribeHelpTimer();
+      this.resetModal();
+    }
   }
 
   resetModal(): void {
-    var m = document.getElementsByClassName("modal");
+    this.helpPressed = false;
+    this.helpRequested = false;
+    /*var m = document.getElementsByClassName("modal");
     for (var mChild in m) {
       setTimeout(function() {
         var m = document.getElementsByClassName("modal")[0];
         m.classList.add("hidden");
         }, 2000);
-      }
+      }*/
   }
   helpInformationRequest(): void {
     this.resetModal();
