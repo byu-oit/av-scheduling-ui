@@ -6,14 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { SimpleTimer } from 'ng2-simple-timer';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HelpModal } from './helpModal';
+//import { HelpModal } from './helpModal';
 
 //import { NgVirtualKeyboardModule } from '@protacon/ng-virtual-keyboard';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HelpModal
+    AppComponent
+    //HelpModal
   ],
   imports: [
     BrowserModule,

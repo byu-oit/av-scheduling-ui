@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
 import { SimpleTimer } from 'ng2-simple-timer';
-import { HelpModal } from './helpModal';
+//import { HelpModal } from './helpModal';
 
 import { environment } from '../environments/environment';
 
