@@ -5,6 +5,9 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"path/filepath"
+	"runtime"
+	"strconv"
 	"sync"
 	"syscall"
 
@@ -12,13 +15,107 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
+var (
+	_, b, _, _ = runtime.Caller(0)
+	basepath   = filepath.Dir(b)
+)
+
+type jsonobject struct {
+	Object ObjectType
+}
+
+type ObjectType struct {
+	Buffer_size int
+	Conf        conf
+}
+
+type conf struct {
+	clientId           string
+	clientSecret       string
+	domain             string
+	hostname           string
+	o365               bool
+	oauth_auth_url     string
+	oauth_token_url    string
+	popupWindowTimeout int
+	production         bool
+	redirect_url       string
+	resource_name      string
+	resource_id        string
+	showHelpButton     bool
+	slack_webhook_url  string
+	tenant             string
+	timeZone           string
+}
+
+func bootstrapEnvironment(wg *sync.WaitGroup) {
+	env_dev := basepath + "/web/src/environments/environment.ts"
+	env_prd := basepath + "/web/src/environments/environment.prod.ts"
+
+	// Development Server environment
+	defaultDev := conf{}
+	defaultDev.clientId = os.Getenv("O365_APP_ID")
+	defaultDev.clientSecret = os.Getenv("")
+	defaultDev.domain = os.Getenv("O365_DOMAIN")
+	defaultDev.hostname = os.Getenv("SPANEL_HOSTNAME")
+	defaultDev.o365, _ = strconv.ParseBool(os.Getenv("SPANEL_IS_HOSTED_ON_O365"))
+	defaultDev.oauth_auth_url = os.Getenv("O365_OAUTH_AUTH_URL")
+	defaultDev.oauth_token_url = os.Getenv("O365_OAUTH_TOKEN_URL")
+	defaultDev.popupWindowTimeout, _ = strconv.Atoi(os.Getenv("SPANEL_POPUP_TIMEOUT"))
+	defaultDev.production = false
+	defaultDev.redirect_url = os.Getenv("O365_REDIRECT_URL")
+	defaultDev.resource_name = os.Getenv("O365_RESOURCE_NAME")
+	defaultDev.resource_id = os.Getenv("O365_RESOURCE_ID")
+	defaultDev.showHelpButton, _ = strconv.ParseBool(os.Getenv("SPANEL_SHOW_HELP_BUTTON"))
+	defaultDev.slack_webhook_url = os.Getenv("SPANEL_SLACK_WEBHOOK_URL")
+	defaultDev.tenant = os.Getenv("O365_TENANT")
+	defaultDev.timeZone = os.Getenv("SPANEL_TIMEZONE")
+
+	//Production Angular Server environment
+	defaultPrd := conf{}
+	defaultPrd.clientId = os.Getenv("O365_APP_ID")
+	defaultPrd.clientSecret = os.Getenv("")
+	defaultPrd.domain = os.Getenv("O365_DOMAIN")
+	defaultPrd.hostname = os.Getenv("SPANEL_HOSTNAME")
+	defaultPrd.o365, _ = strconv.ParseBool(os.Getenv("SPANEL_IS_HOSTED_ON_O365"))
+	defaultPrd.oauth_auth_url = os.Getenv("O365_OAUTH_AUTH_URL")
+	defaultPrd.oauth_token_url = os.Getenv("O365_OAUTH_TOKEN_URL")
+	defaultPrd.popupWindowTimeout, _ = strconv.Atoi(os.Getenv("SPANEL_POPUP_TIMEOUT"))
+	defaultPrd.production = true
+	defaultPrd.redirect_url = os.Getenv("O365_REDIRECT_URL")
+	defaultPrd.resource_name = os.Getenv("O365_RESOURCE_NAME")
+	defaultPrd.resource_id = os.Getenv("O365_RESOURCE_ID")
+	defaultPrd.showHelpButton, _ = strconv.ParseBool(os.Getenv("SPANEL_SHOW_HELP_BUTTON"))
+	defaultPrd.slack_webhook_url = os.Getenv("SPANEL_SLACK_WEBHOOK_URL")
+	defaultPrd.tenant = os.Getenv("O365_TENANT")
+	defaultPrd.timeZone = os.Getenv("SPANEL_TIMEZONE")
+
+	if _, err_dev := os.Stat(env_dev); os.IsNotExist(err_dev) {
+		// path/to/whatever does not exist
+	}
+
+	if _, err_prd := os.Stat(env_prd); os.IsNotExist(err_prd) {
+		// path/to/whatever does not exist
+	}
+
+	wg.Done() // Need to signal to waitgroup that this goroutine is done
+}
+
 func startAngular(wg *sync.WaitGroup) {
 
 	npm, lookErr := exec.LookPath("npm")
 	if lookErr != nil {
 		panic(lookErr)
 	}
-
+	isProd, envVarErr := strconv.ParseBool(os.Getenv("SPANEL_IS_PRODUCTION"))
+	if envVarErr != nil {
+		os.Setenv("NODE_ENV", "development")
+	}
+	if isProd {
+		os.Setenv("NODE_ENV", "production")
+	} else {
+		os.Setenv("NODE_ENV", "development")
+	}
 	args_npm := []string{"npm", "start"}
 	env := os.Environ()
 	syscall.Chdir("web")
@@ -33,7 +130,7 @@ func startAngular(wg *sync.WaitGroup) {
 
 func main() {
 	wg := new(sync.WaitGroup)
-	wg.Add(1)
+	wg.Add(2)
 
 	go startAngular(wg)
 
