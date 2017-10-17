@@ -183,9 +183,12 @@ export class Event {
   SeriesMasterId: string
   ShowAs: FreeBusyStatus
   Start: Date
+  Subject: string
   Type: number //The event type: SingleInstance = 0, Occurrence = 1, Exception = 2, SeriesMaster = 3.
   WebLink: string
-  constructor() { }
+  constructor() {
+
+  }
 }
 
 export class Calendar {

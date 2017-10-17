@@ -6,9 +6,9 @@ import { SimpleTimer } from 'ng2-simple-timer';
 //import { HelpModal } from './helpModal';
 
 import { environment } from '../environments/environment';
-
+import {Event} from './model/o365.model';
 //import * as data from './config.json';
-
+/*
 type AttendeeType = "required" | "optional";
 
 export class Attendee {
@@ -37,15 +37,7 @@ export class EventBody {
 export class Location {
   displayName: string;
 }
-
-export class NewEventRequest {
-  subject: string;
-  body: EventBody;
-  start: StartEndTime
-  end: StartEndTime;
-  location: { displayName: string };
-  attendees: Attendee[] = [DEFAULTATTENDEE]
-}
+*/
 
 export class Resource {
   id: string;
@@ -53,11 +45,11 @@ export class Resource {
   name: string;
   o365Name: string;
 }
-
+/*
 export class StartEndTime {
   dateTime: string;
   timeZone: string;
-}
+}*/
 
 export class TimeIncrement {
   id: number;
@@ -67,13 +59,13 @@ export class TimeIncrement {
 }
 
 const RESOURCE: Resource = {
-  id: "ITB-1109",
-  name: "ITB 1109",
-  o365Name: "ITB-1109",
+  id: environment.hostname,
+  name: environment.resource_name,
+  o365Name: environment.resource_id,
   busy: false
 }
 //const hostname = (<any>data).hostname;
-const hostname = "ITB-1109-SP1"
+const hostname = environment.hostname;
 //const refHours: string[] = ["8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8"];
 const refHours: string[] = ["8", "9", "11", "1", "4"];
 const HOURS: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
@@ -84,7 +76,7 @@ declare var newEvent: Event;
 
 const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear", "My schedule is wide open"]
 
-const EVENTS: Event[] = [{
+/*const EVENTS: Event[] = [{
   "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-TBAAA=",
   "subject": "Time Reporting",
   "start": {
@@ -145,17 +137,17 @@ const EVENTS: Event[] = [{
   }
 }
 ]
-
-
+*/
+/*
 const DEFAULTATTENDEE: Attendee = {
   emailAddress: {
     address: "itb-1109@byu.edu",
     name: "ITB-1109"
   },
   type: "required"
-}
+}*/
 
-const TIMEZONE = "Mountain Standard Time";
+const TIMEZONE = environment.timeZone;
 
 @Component({
   selector: 'app-root',
@@ -180,8 +172,8 @@ export class AppComponent implements OnInit {
     hour: "2-digit", minute: "2-digit"
   };
   eventinprogress: boolean;
-  events = EVENTS;
-  //events: Event[] = [];
+  //events = EVENTS;
+  events: Event[] = [];
   helpRequested: boolean;
   helpPressed: boolean;
   hours = HOURS;
@@ -407,9 +399,9 @@ export class AppComponent implements OnInit {
   }
 
   submitEvent(tmpSubject: string, tmpStartTime: string, tmpEndTime: string): void {
-    var startTime: StartEndTime = new StartEndTime();
-    var endTime: StartEndTime = new StartEndTime();
-    var req: NewEventRequest = new NewEventRequest();
+    var startTime: Date = new Date();
+    var endTime: Date = new Date();
+    var req: Event = new Event();
 
     endTime.timeZone = TIMEZONE;
     startTime.timeZone = TIMEZONE;
