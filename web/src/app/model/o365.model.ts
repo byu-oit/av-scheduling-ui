@@ -11,17 +11,17 @@ type ResponseType = 'tResponded';
 type Sensitivity = 'Normal' | 'Personal' | 'Private' | 'Confidential'; //Indicates the level of privacy.
 type TaskStatus = 'Completed' | 'Deferred' | 'InProgress' | 'NotStarted' | 'WaitingOnOthers'; //Specifies the state or progress of a task.
 
+export class Attendee {
+  emailAddress: EmailAddressDetail;
+  type: AttendeeType;
+  constructor() { }
+}
 export class EmailAddressDetail {
   address: string;
   name: string;
   constructor() { }
 }
 
-export class Attendee {
-  emailAddress: EmailAddressDetail;
-  type: AttendeeType;
-  constructor() { }
-}
 
 export class CalendarColor {
   Name: string

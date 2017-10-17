@@ -131,7 +131,7 @@
 </div>
 
 
-<div class="scheduleEvent" *ngIf="scheduleNow">
+<div class="scheduleEvent" *ngIf="showAgenda">
   <div class="agenda-banner unoccupied" *ngIf="unoccupied">
     <div class="schedule-back-x" (click)="reset()"></div>
     <div class="subpage-title-booking">
@@ -171,7 +171,7 @@
         <li *ngFor="let event of events" class="agenda-view-row-unavailable">
           <div class="agenda-view-row-container">
             <div class="agenda-row-section1 font-serif font-size-2 white">
-              {{event.subject}}
+              {{event.Subject}}
             </div>
             <div class="agenda-row-section2">
               <div class="agenda-row-duration font-sans font-size-2 white"><strong>
@@ -179,7 +179,7 @@
               </strong>
               </div>
               <div class="agenda-row-start-end font-serif font-size-2 white">
-                {{event.start.dateTime | amDateFormat:'h:mm a'}} - {{event.end.dateTime | amDateFormat:'h:mm a'}}
+                {{event.Start | amDateFormat:'h:mm a'}} - {{event.End | amDateFormat:'h:mm a'}}
               </div>
             </div>
           </div>

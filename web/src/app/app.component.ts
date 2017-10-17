@@ -6,7 +6,7 @@ import { SimpleTimer } from 'ng2-simple-timer';
 //import { HelpModal } from './helpModal';
 
 import { environment } from '../environments/environment';
-import {Event, Timeslot} from './model/o365.model';
+import { Event, Timeslot } from './model/o365.model';
 //import * as data from './config.json';
 /*
 type AttendeeType = "required" | "optional";
@@ -172,8 +172,6 @@ export class AppComponent implements OnInit {
   timeOptions = {
     hour: "2-digit", minute: "2-digit"
   };
-  eventinprogress: boolean;
-  //events = EVENTS;
   events: Event[] = [];
   helpRequested: boolean;
   helpPressed: boolean;
@@ -190,7 +188,7 @@ export class AppComponent implements OnInit {
   occupied: boolean;
   refHours = refHours;
   resource = RESOURCE;
-  scheduleNow: boolean;
+  showAgenda: boolean;
   selectedEvent: Event;
   selectedStartValue: number;
   timeIncrement = 30; // minutes to increment select boxes by
@@ -251,53 +249,53 @@ export class AppComponent implements OnInit {
     }
 
     //Populate timeslots
-    for (var j=0; j<96; j++){
-      var tmpTime = new Date();
+    for (var j = 0; j < 96; j++) {
+      var tmpTime1 = new Date();
+      var tmpTime2 = new Date(tmpTime1.valueOf());
       var t2 = 0;
-      if (j<96){
-        t2 = j+1;
+
+      var t = new Timeslot();
+      tmpTime1.setMinutes(j * 15);
+      console.log(j.toString() +".1: " + tmpTime1.toString());
+
+      t.Start = tmpTime1;
+      if (j < 96) {
+        t2 = j + 1;
       }
       else {
         t2 = j;
       }
-      var t = new Timeslot();
-      tmpTime.setMinutes(j*15);
-
-      t.Start = tmpTime;
-      tmpTime.setMinutes(t2*15);
-      t.End = tmpTime;
+      tmpTime2.setMinutes((j+1) * 15);
+      console.log(j.toString() +".2: " + tmpTime2.toString());
+      t.End = tmpTime2;
+      console.log(j.toString() +".t: " + t.Start.toString() + "|"+t.End.toString());
 
       this.timeSlots.push(t);
-      tmpTime = null;
+      tmpTime1 = null;
+      tmpTime2 = null;
     }
 
 
 
     //this.deriveVariablesFromHostname(this.resource);
-
-    //this.currentEvent = null;
-    //this.eventinprogress = ( this.currentEvent === null ? true : false );
-    //this.occupied = this.resource.busy;
     this.bookEvent = false;
     this.cancellation = false;
-    this.currentEvent = null;
     this.calendarWorkdayEndHour = 17;
     this.calendarWorkdayStartHour = 8;
-    //this.currentEvent = this.events[1];
-    this.eventinprogress = false;
+    this.currentEvent = this.events[1];
     this.helpRequested = false;
     this.helpPressed = false;
     this.newEvent = null;
     this.occupied = false;
-    this.scheduleNow = false;
+    this.showAgenda = false;
     this.selectedEvent = null;
     this.selectedStartValue = 0;
     this.unoccupied = !(this.occupied);
 
-    for (var i = this.calendarWorkdayStartHour; i <= this.calendarWorkdayEndHour; i++){
-      if (i > 12){
+    for (var i = this.calendarWorkdayStartHour; i <= this.calendarWorkdayEndHour; i++) {
+      if (i > 12) {
         var iNum = +i;
-        var nNum = iNum - 12 ;
+        var nNum = iNum - 12;
 
         this.refHours.push(nNum.toString());
       }
@@ -307,169 +305,11 @@ export class AppComponent implements OnInit {
       var newDate = new Date()
       newDate.setHours(i);
     }
-
-
-  }
-
-  currentTimePeriod(): number { // Return time period (0<x<96) for current time
-    var now = new Date();
-    var msIn15Min: number = 900000;
-    var secondsInADay: number = 24 * 60 * 60;
-    var hours: number = now.getHours() * 60 * 60;
-    var minutes: number = now.getMinutes() * 60;
-    var seconds: number = now.getSeconds();
-    var ms: number = (hours + minutes + seconds) * 1000;
-    var t1: number = now.getTime();
-    now.setHours(0);
-    now.setMinutes(0);
-    now.setSeconds(0);
-    var t2 = now.getTime();
-    var ret = 0;
-    ret = Math.floor((t1-t2) / msIn15Min);
-    return ret;
-  }
-
-  resetTransitionTimer(): void {
-    this.transitionTimer.delTimer('modalTransition');
-  }
-
-  percent(): void {
-    setInterval(function () {
-    var secondsInADay = 24 * 60 * 60;
-    var now = new Date();
-    var hours = now.getHours() * 60 * 60;
-    var minutes = now.getMinutes() * 60;
-    var seconds = now.getSeconds();
-    var totalSeconds = hours + minutes + seconds;
-    var percentSeconds = 100 * totalSeconds/secondsInADay;
-    this.percentOfDayExpended = percentSeconds;
-    }, 1000);
-  }
-
-  evalTime(time: Date): void {
-    //var timeDiff =
-  }
-  helpRequest(): void {
-    var resp = this.http.post(environment.slack_webhook_url, "{\"text\":\"Help request from " + this.resource.name + "\"}").subscribe();
-    console.log(resp);
-  }
-
-  onSelect(event: Event): void {
-    this.selectedEvent = event;
-  }
-  utcTime(): void {
-    setInterval(() => {
-      this.date = new Date();
-      this.timePeriod = this.timeSlots[this.currentTimePeriod()];
-    }, 1000);
-  }
-
-  refreshData(): void {
-
-  }
-
-  getCurrentEvent(): void {
-
-  }
-
-  helpClick(): void {
-    this.helpRequested = true;
-    this.transitionTimer.newTimer('modalTransition',1);
-		this.subscribeHelpTimer();
-  }
-
-  subscribeHelpTimer(){
-    if (this.modalTransitionTimerID) {
-			// Unsubscribe if timer Id is defined
-			this.transitionTimer.unsubscribe(this.modalTransitionTimerID);
-      this.modalTransitionTimerCounter = 0;
-		} else {
-			// Subscribe if timer Id is undefined
-			this.modalTransitionTimerID = this.transitionTimer.subscribe('modalTransition', () => this.modalTimerCallback());
-		}
-  }
-
-  modalTimerCallback(): void {
-    if (this.modalTransitionTimerCounter <= this.modalTimeout){
-    	this.modalTransitionTimerCounter++;
-    } else {
-      this.subscribeHelpTimer();
-      this.resetModal();
-    }
-  }
-
-  resetModal(): void {
-    this.helpPressed = false;
-    this.helpRequested = false;
-    /*var m = document.getElementsByClassName("modal");
-    for (var mChild in m) {
-      setTimeout(function() {
-        var m = document.getElementsByClassName("modal")[0];
-        m.classList.add("hidden");
-        }, 2000);
-      }*/
-  }
-  helpInformationRequest(): void {
-    this.resetModal();
-    // show information;
-  }
-  sendHelp(): void {
-    this.resetModal();
-    //send help
-  }
-  scrollReferenceEvent(elem): void {
-    var a = document.getElementById("agenda");
-    var t = document.getElementById("current-time-bar-wrapper");
-    a.scrollTop = elem.scrollTop;
-    t.scrollTop = elem.scrollTop;
-  }
-  scrollAgendaEvent(elem): void {
-    var a = document.getElementById("refHours");
-    var t = document.getElementById("current-time-bar-wrapper");
-    a.scrollTop = elem.scrollTop;
-    t.scrollTop = elem.scrollTop;
-  }
-
-  deriveVariablesFromHostname(res: Resource): void {
-    var buildingAndRoom = hostname.split(" ", 2);
-    var building = buildingAndRoom[0];
-    var room = buildingAndRoom[1];
-
-    res.id = building + "-" + room;
-    res.busy = false;
-    res.name = building + " " + room;
-    res.o365Name = res.id;
-  }
-
-  submitEvent(tmpSubject: string, tmpStartTime: string, tmpEndTime: string): void {
-    var req: Event = new Event();
-    req.Subject = tmpSubject;
-    req.End = new Date(tmpEndTime);
-    req.Start = new Date(tmpStartTime);
-    /////////
-    ///  SUBMIT
-    ///////
-
     this.refreshData();
+
   }
 
-  reset(): void {
-    this.cancellation = false;
-    this.scheduleNow = false;
-    this.bookEvent = false;
 
-    this.newEventEndTimeId = null;
-    this.newEventStartTimeId = null;
-  }
-
-  cancelEvent(event: Event): void {
-    this.reset();
-    this.cancellation = true;
-  }
-  bookNow(): void {
-    this.reset();
-    this.bookEvent = true;
-  }
   bookNewEvent(): void {
     /*//this.reset();
     var d = new Date();
@@ -501,24 +341,53 @@ export class AppComponent implements OnInit {
     e += eH + ":" + this.newEventEndMinute + ":000";*/
     this.reset();
   }
-  onStartChange(selectedStartOption): void {
-    var i = Number(selectedStartOption) + 1;
-    this.newEventEndTimeId = i.toString();
-  }
-  scheduleEvent(): void {
+  bookNow(): void {
     this.reset();
-    this.scheduleNow = true;
+    this.bookEvent = true;
   }
+  cancelEvent(event: Event): void {
+    this.reset();
+    this.cancellation = true;
+  }
+
   cancelPage_no(): void {
     this.reset();
   }
   cancelPage_yes(): void {
     this.reset();
   }
+  currentTimePeriod(): number { // Return time period (0<x<96) for current time
+    var now = new Date();
+    var msIn15Min: number = 900000;
+    var secondsInADay: number = 24 * 60 * 60;
+    var hours: number = now.getHours() * 60 * 60;
+    var minutes: number = now.getMinutes() * 60;
+    var seconds: number = now.getSeconds();
+    var ms: number = (hours + minutes + seconds) * 1000;
+    var t1: number = now.getTime();
+    now.setHours(0);
+    now.setMinutes(0);
+    now.setSeconds(0);
+    var t2 = now.getTime();
+    var ret = 0;
+    ret = Math.floor((t1 - t2) / msIn15Min);
+    return ret;
+  }
+
+  deriveVariablesFromHostname(res: Resource): void {
+    var buildingAndRoom = hostname.split(" ", 2);
+    var building = buildingAndRoom[0];
+    var room = buildingAndRoom[1];
+
+    res.id = building + "-" + room;
+    res.busy = false;
+    res.name = building + " " + room;
+    res.o365Name = res.id;
+  }
   durationString(selectedEvent): string {
     var duration = "";
-    var Date_Start = new Date(selectedEvent.start.dateTime);
-    var Date_End = new Date(selectedEvent.end.dateTime);
+    var Date_Start = new Date(selectedEvent.start);
+    var Date_End = new Date(selectedEvent.end);
     var Difference = Date_End.valueOf() - Date_Start.valueOf();
     var diffDays = Math.floor(Difference / 86400000); // days
     var diffHrs = Math.floor((Difference % 86400000) / 3600000); // hours
@@ -531,6 +400,99 @@ export class AppComponent implements OnInit {
     }
     return (duration);
   }
+  evalTime(time: Date): void {
+    //var timeDiff =
+  }
+  helpClick(): void {
+    this.helpRequested = true;
+    this.transitionTimer.newTimer('modalTransition', 1);
+    this.subscribeHelpTimer();
+  }
+  helpInformationRequest(): void {
+    this.resetModal();
+    // show information;
+  }
+  helpRequest(): void {
+    var resp = this.http.post(environment.slack_webhook_url, "{\"text\":\"Help request from " + this.resource.name + "\"}").subscribe();
+    console.log(resp);
+  }
+  modalTimerCallback(): void {
+    if (this.modalTransitionTimerCounter <= this.modalTimeout) {
+      this.modalTransitionTimerCounter++;
+    } else {
+      this.subscribeHelpTimer();
+      this.resetModal();
+    }
+  }
+  onSelect(event: Event): void {
+    this.selectedEvent = event;
+  }
+  onStartChange(selectedStartOption): void {
+    var i = Number(selectedStartOption) + 1;
+    this.newEventEndTimeId = i.toString();
+  }
+  percent(): void {
+    setInterval(function() {
+      var secondsInADay = 24 * 60 * 60;
+      var now = new Date();
+      var hours = now.getHours() * 60 * 60;
+      var minutes = now.getMinutes() * 60;
+      var seconds = now.getSeconds();
+      var totalSeconds = hours + minutes + seconds;
+      var percentSeconds = 100 * totalSeconds / secondsInADay;
+      this.percentOfDayExpended = percentSeconds;
+    }, 1000);
+  }
+  refreshData(): void {
+    this.events = [];
+    for (var i = 0; i < this.timeSlots.length; i++) {
+      var e = new Event();
+      e.Subject = "Available";
+      e.Start = this.timeSlots[i].Start;
+      e.End = this.timeSlots[i].End;
+      this.events.push(e);
+    }
+    //console.log(this.events);
+  }
+  reset(): void {
+    this.cancellation = false;
+    this.showAgenda = false;
+    this.bookEvent = false;
+
+    this.newEventEndTimeId = null;
+    this.newEventStartTimeId = null;
+  }
+  resetModal(): void {
+    this.helpPressed = false;
+    this.helpRequested = false;
+    /*var m = document.getElementsByClassName("modal");
+    for (var mChild in m) {
+      setTimeout(function() {
+        var m = document.getElementsByClassName("modal")[0];
+        m.classList.add("hidden");
+        }, 2000);
+      }*/
+  }
+  resetTransitionTimer(): void {
+    this.transitionTimer.delTimer('modalTransition');
+  }
+  scheduleEvent(): void {
+    this.reset();
+    this.refreshData();
+    this.showAgenda = true;
+  }
+  scrollReferenceEvent(elem): void {
+    var a = document.getElementById("agenda");
+    var t = document.getElementById("current-time-bar-wrapper");
+    a.scrollTop = elem.scrollTop;
+    t.scrollTop = elem.scrollTop;
+  }
+  scrollAgendaEvent(elem): void {
+    var a = document.getElementById("refHours");
+    var t = document.getElementById("current-time-bar-wrapper");
+    a.scrollTop = elem.scrollTop;
+    t.scrollTop = elem.scrollTop;
+  }
   selectByClass(selector: string): HTMLCollectionOf<Element> {
     var elements = document.getElementsByClassName(selector);
     return elements;
@@ -538,5 +500,36 @@ export class AppComponent implements OnInit {
   selectById(selector: string): HTMLElement {
     var element = document.getElementById(selector);
     return element;
+  }
+  sendHelp(): void {
+    this.resetModal();
+    //send help
+  }
+  submitEvent(tmpSubject: string, tmpStartTime: string, tmpEndTime: string): void {
+    var req: Event = new Event();
+    req.Subject = tmpSubject;
+    req.End = new Date(tmpEndTime);
+    req.Start = new Date(tmpStartTime);
+    /////////
+    ///  SUBMIT
+    ///////
+
+    this.refreshData();
+  }
+  subscribeHelpTimer() {
+    if (this.modalTransitionTimerID) {
+      // Unsubscribe if timer Id is defined
+      this.transitionTimer.unsubscribe(this.modalTransitionTimerID);
+      this.modalTransitionTimerCounter = 0;
+    } else {
+      // Subscribe if timer Id is undefined
+      this.modalTransitionTimerID = this.transitionTimer.subscribe('modalTransition', () => this.modalTimerCallback());
+    }
+  }
+  utcTime(): void {
+    setInterval(() => {
+      this.date = new Date();
+      this.timePeriod = this.timeSlots[this.currentTimePeriod()];
+    }, 1000);
   }
 }
