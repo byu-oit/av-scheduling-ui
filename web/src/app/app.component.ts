@@ -67,7 +67,7 @@ const RESOURCE: Resource = {
 //const hostname = (<any>data).hostname;
 const hostname = environment.hostname;
 //const refHours: string[] = ["8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8"];
-const refHours: string[] = ["8", "9", "11", "1", "4"];
+//const refHours: string[] = ["8", "9", "11", "1", "4"];
 const HOURS: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 const MINUTES: string[] = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"]
 const AMPM: string[] = ["AM", "PM"]
@@ -186,7 +186,7 @@ export class AppComponent implements OnInit {
   newEventEndTimeId: string;
   newEventStartTimeId: string;
   occupied: boolean;
-  refHours = refHours;
+  refHours: string[] = [];
   resource = RESOURCE;
   showAgenda: boolean;
   selectedEvent: Event;
@@ -268,10 +268,22 @@ export class AppComponent implements OnInit {
       t.End = tmpTime2;
 
       this.timeSlots.push(t);
+      /*var h = t.Start.getHours();
+      if (t.Start.getHours() > 12) {
+        h = +(t.Start.getHours()) - 12;
+      }
+      if (this.refHours.length <= 0) {
+        this.refHours.push(h.toPrecision(1).toString());
+      }
+      else {
+        if (this.refHours[-1].valueOf() != h.toPrecision(1).toString()) {
+          this.refHours.push(h.toPrecision(1).toString());
+        }
+      }*/
       tmpTime1 = null;
       tmpTime2 = null;
     }
-
+    console.log(this.timeSlots);
 
 
     //this.deriveVariablesFromHostname(this.resource);
@@ -289,7 +301,8 @@ export class AppComponent implements OnInit {
     this.selectedStartValue = 0;
     this.unoccupied = !(this.occupied);
 
-    for (var i = this.calendarWorkdayStartHour; i <= this.calendarWorkdayEndHour; i++) {
+    /*for (var i = this.calendarWorkdayStartHour; i <= this.calendarWorkdayEndHour; i++) {
+
       if (i > 12) {
         var iNum = +i;
         var nNum = iNum - 12;
@@ -301,9 +314,18 @@ export class AppComponent implements OnInit {
       }
       var newDate = new Date()
       newDate.setHours(i);
-    }
+    }*/
     this.refreshData();
 
+  }
+
+  availabilityClass(e: Event): string {
+    if (e.Subject.toString() == 'Available') {
+      return "agenda-view-row-available";
+    }
+    else {
+      return "agenda-view-row-unavailable";
+    }
   }
 
 
@@ -357,13 +379,13 @@ export class AppComponent implements OnInit {
     console.log("Consolidating events");
     var consolidate = true;
     var i = this.events.length - 1;
-    console.log(i.toString());
+    //console.log(i.toString());
     while (consolidate) {
       //var e1: Event = this.events[i];
       //var e2: Event = this.events[i-1];
       if (i > 0) {
-        console.log(i.toString() + ".1: " + this.events[i]);
-        console.log(i.toString() + ".2: " + this.events[i-1]);
+        //console.log(i.toString() + ".1: " + this.events[i]);
+        //console.log(i.toString() + ".2: " + this.events[i-1]);
         if (this.events[i].Subject === this.events[i - 1].Subject) {
           this.events[i - 1].End = new Date(this.events[i].End.getDate());
           this.events.pop();
@@ -382,8 +404,27 @@ export class AppComponent implements OnInit {
       }
     }
   }
+  /*getTimePeriod(d:Date): number {
+    var t = new Date(d.getDate());
+    var msIn15Min: number = 900000;
+    var secondsInADay: number = 24 * 60 * 60;
+    var hours: number = t.getHours() * 60 * 60;
+    var minutes: number = t.getMinutes() * 60;
+    var seconds: number = t.getSeconds();
+    var ms: number = (hours + minutes + seconds) * 1000;
+    var t1: number = t.getTime();
+    t.setHours(0);
+    t.setMinutes(0);
+    t.setSeconds(0);
+    var t2 = t.getTime();
+    var ret = 0;
+    ret = Math.floor((t1 - t2) / msIn15Min);
+    return ret;
+  }*/
   currentTimePeriod(): number { // Return time period (0<x<96) for current time
     var now = new Date();
+    //var ret = this.getTimePeriod(now);
+    //return ret;
     var msIn15Min: number = 900000;
     var secondsInADay: number = 24 * 60 * 60;
     var hours: number = now.getHours() * 60 * 60;
@@ -479,7 +520,7 @@ export class AppComponent implements OnInit {
       this.events.push(e);
     }
     //console.log(this.events);
-    this.consolidate_events();
+    //this.consolidate_events();
   }
   reset(): void {
     this.cancellation = false;

@@ -261,7 +261,7 @@ select
   border-width: 1px;
   border-color: rgb(255, 255, 255);
   Font: Roboto Regular 16s;
-  height: 72px;
+  /*height: 72px;*/
   padding: 8px 16px 0 16px;
   position: relative;
   width: 270px;
@@ -270,11 +270,13 @@ select
 
 .agenda-view-row-unavailable {
   background-color: rgb(0, 0, 0);
+  background-size: 270px 108px;
   opacity: 0.6;
 }
 
 .agenda-view-row-available {
   background-color: rgb(116, 190, 4);
+  background-size: 270px 108px;
   opacity: 0.2;
 }
 .agenda-row-section1, .agenda-row-section2 {
@@ -538,21 +540,22 @@ li{
   margin-top:5px;
 }
 .helpButton {
-  width: 30px;
-  height: 30px;
-  margin: 0 20px;
-  text-align: center;
-  color: white;
+  /*box-shadow: 0 0 0 4px transparent;*/
+  /*margin: 0 20px;*/
   background-color: transparent;
   border-radius: 50%;
   border: 3px solid #fff;
-  position:fixed;
-  top: 88%;
+  color: white;
   float:left;
-  z-index:8000;
+  height: 30px;
   left: 0;
-
-  /*box-shadow: 0 0 0 4px transparent;*/
+  margin:18px;
+  position:fixed;
+  text-align: center;
+  /*top: 88%;*/
+  vertical-align: middle;
+  width: 30px;
+  z-index:8000;
 }
 /*
 .helpButton2 {

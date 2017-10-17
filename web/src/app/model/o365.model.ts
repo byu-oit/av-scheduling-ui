@@ -141,6 +141,10 @@ export class Timeslot {
   Start: Date
   End: Date
   constructor() { }
+  /*constructor(start: Date, end: Date){
+    this.Start = new Date(start.getDate());
+    this.End = new Date(end.getDate());
+  }*/
 }
 
 export class TimeConstraint {
