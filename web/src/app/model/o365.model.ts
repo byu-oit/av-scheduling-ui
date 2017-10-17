@@ -1,0 +1,150 @@
+type ActivityDomain = 'Work' | 'Personal' | 'Unrestricted' | 'Unknown'; //The nature of an activity.
+type AttendeeType = "required" | "optional";
+type AutomaticRepliesStatus = 'AlwaysEnabled' | 'Disabled' | 'Scheduled'; //The configuration status for automatically sending a reply when the user's mailbox receives a message.
+type ExternalAudienceScope = 'All' | 'ContactsOnly' | 'None'; //The set of external audience to send the ExternalReplyMessage to.
+type FreeBusyStatus = 'Busy' | 'Free' | 'Oof' | 'Tentative' | 'Unknown' | 'WorkingElsewhere'; //Specifies the availability status of an attendee for a meeting.
+type Importance = 'Low' | 'Medium' | 'High';
+type InferenceClassificationType = 'Focused' | 'Other';  //Represents the inferred relevance of a message for a user to focus on.
+type ReferenceAttachmentPermissions = 'Other' | 'View' | 'Edit' | 'AnonymousView' | 'AnonymousEdit' | 'OrganizationView' | 'OrganizationEdit'; //Access permissions for the file or folder of the reference attachment.
+type ReferenceAttachmentProviders = 'Dropbox' | 'OneDriveBusiness' | 'OneDriveConsumer' | 'Other'; //Possible file storage providers for reference attachments.
+type ResponseType = 'None' | 'Organizer' | 'TentativelyAccepted' | 'Accepted' | 'Declined' | 'NotResponded';
+type Sensitivity = 'Normal' | 'Personal' | 'Private' | 'Confidential'; //Indicates the level of privacy.
+type TaskStatus = 'Completed' | 'Deferred' | 'InProgress' | 'NotStarted' | 'WaitingOnOthers'; //Specifies the state or progress of a task.
+
+export class EmailAddressDetail {
+  address: string;
+  name: string;
+}
+
+export class Attendee {
+  emailAddress: EmailAddressDetail;
+  type: AttendeeType;
+}
+
+export class CalendarColor {
+  Name: string
+  Value: number
+  // LightBlue=0, LightGreen=1, LightOrange=2, LightGray=3, LightYellow=4, LightTeal=5, LightPink=6, LightBrown=7, LightRed=8, MaxColor=9, Auto=-1
+}
+
+export class EmailAddress {
+  Name: string //The display name of the person or entity.
+  Address: string	 //The email address of the person or entity.
+}
+
+
+export class ItemBody {
+  ContentType: number //The content type: Text = 0, HTML = 1.
+  Content: string //The text or HTML content
+}
+export class GeoCoordinates {
+  Altitude: number	//The altitude of the location.
+  Latitude: number	//The latitude of the location.
+  Longitude: number	//The longitude of the location.
+  Accuracy: number	//The accuracy of the sensor providing the latitude and longitude.
+  AltitudeAccuracy: number	//The accuracy of the sensor providing the altitude.
+}
+export class PhysicalAddress {
+  Street: string	//The street.
+  City: string	//The city.
+  State: string	//The state.
+  CountryOrRegion: string	//The country or region. It's a free-format string value, for example, "United States".
+  PostalCode: string	//The postal code.
+}
+
+export class Location {
+  DisplayName: string	//The name associated with the location.
+  Address: PhysicalAddress	//The physical address of the location.
+  Coordinate: GeoCoordinates	//The geographic coordinates and elevation of the location.
+  LocationEmailAddress: string	//Optional email address of the location.
+}
+
+export class Recipient {
+  EmailAddress: EmailAddress
+}
+
+export class RecurrencePattern {
+  Type: number //	The recurrence pattern type: Daily = 0, Weekly = 1, AbsoluteMonthly = 2, RelativeMonthly = 3, AbsoluteYearly = 4, RelativeYearly = 5.
+  Interval: number            //	The number of units of a given recurrence type between occurrences.
+  DayOfMonth: number          //The day of month that the item occurs on.
+  Month: number          //The month that the item occurs on. This is a number from 1 to 12.
+  DaysOfWeek: number[]	    //A collection of days of the week: Sunday = 0, Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5, Saturday = 6.
+  FirstDayOfWeek: number 	//The day of the week: Sunday = 0, Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5, Saturday = 6.
+  Index: number	           //The week index: First = 0, Second = 1, Third = 2, Fourth = 3, Last = 4.
+}
+export class RecurrenceRange {
+  Type: number	 //The recurrence range: EndDate = 0, NoEnd = 1, Numbered = 2.
+  StartDate: Date	//The start date of the series.
+  EndDate: Date	//The end date of the series.
+  NumberOfOccurrences: number	//How many times to repeat the event.
+}
+export class PatternedRecurrence {
+  Pattern: RecurrencePattern
+  Range: RecurrenceRange
+}
+
+
+export class ResponseStatus {
+  Response: ResponseType
+  Time: Date    //The date and time that the response was returned.
+}
+export class Timeslot {
+  Start: Date
+  End: Date
+}
+export class TimeConstraint {
+  ActivityDomain: ActivityDomain
+  Timeslots: Timeslot[]
+}
+export class Event {
+  Attachments: any[]
+  Attendees: Attendee[]
+  Body: ItemBody
+  BodyPreview: string
+  Calendar: Calendar
+  Categories: string[]
+  ChangeKey: string
+  CreatedDateTime: Date
+  LastModifiedDateTime: Date
+  End: Date
+  Extensions: any[]
+  HasAttachments: boolean
+  Id: string
+  Importance: Importance
+  Instances: Event[]
+  iCalUID: string
+  IsAllDay: boolean
+  IsCancelled: boolean
+  IsOrganizer: boolean
+  IsReminderOn: Boolean
+  Location: Location
+  OnlineMeetingUrl: string
+  Organizer: Recipient
+  OriginalEndTimeZone: string
+  OriginalStartTimeZone: string
+  Recurrence: PatternedRecurrence
+  ReminderMinutesBeforeStart: number
+  ResponseRequested: boolean
+  ResponseStatus: ResponseStatus
+  Sensitivity: Sensitivity
+  SeriesMasterId: string
+  ShowAs: FreeBusyStatus
+  Start: Date
+  Type: number //The event type: SingleInstance = 0, Occurrence = 1, Exception = 2, SeriesMaster = 3.
+  WebLink: string
+}
+
+export class Calendar {
+  CanEdit: boolean
+  CanShare: boolean
+  CanViewPrivateItems: boolean
+  ChangeKey: string
+  Color: CalendarColor
+  Id: string
+  Name: string
+  Owner: EmailAddress
+  CalendarView: Event[]
+  Events: Event[]
+  MultiValueExtendedProperties: any[]
+  SingleValueExtendedProperties: any[]
+}
