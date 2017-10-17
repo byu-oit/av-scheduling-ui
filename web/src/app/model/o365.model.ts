@@ -7,7 +7,7 @@ type Importance = 'Low' | 'Medium' | 'High';
 type InferenceClassificationType = 'Focused' | 'Other';  //Represents the inferred relevance of a message for a user to focus on.
 type ReferenceAttachmentPermissions = 'Other' | 'View' | 'Edit' | 'AnonymousView' | 'AnonymousEdit' | 'OrganizationView' | 'OrganizationEdit'; //Access permissions for the file or folder of the reference attachment.
 type ReferenceAttachmentProviders = 'Dropbox' | 'OneDriveBusiness' | 'OneDriveConsumer' | 'Other'; //Possible file storage providers for reference attachments.
-type ResponseType = 'None' | 'Organizer' | 'TentativelyAccepted' | 'Accepted' | 'Declined' | 'NotResponded';
+type ResponseType = 'tResponded';
 type Sensitivity = 'Normal' | 'Personal' | 'Private' | 'Confidential'; //Indicates the level of privacy.
 type TaskStatus = 'Completed' | 'Deferred' | 'InProgress' | 'NotStarted' | 'WaitingOnOthers'; //Specifies the state or progress of a task.
 
@@ -61,6 +61,38 @@ export class Location {
 
 export class Recipient {
   EmailAddress: EmailAddress
+}
+
+export class Folder {
+  ChildFolderCount: number //The number of folders in the folder.	No
+  ChildFolders: Folder[]	//The collection of child folders in the folder. Navigation property.
+  DisplayName: string	//The folder's display name.
+  Id: string	//The folder's unique identifier. You can use the following well-known names to access the corresponding folder: Inbox, Drafts, SentItems, DeletedItems.
+  Messages: any[]	//The collection of messages in the folder. Navigation property.
+  ParentFolderId: string	//The unique identifier for the folder's parent folder.
+  TotalItemCount: number	//The number of items in the folder.	No
+  UnreadItemCount: number	//The number of items in the folder marked as unread.	No
+  MultiValueExtendedProperties: any[]	//A collection of multi-value extended properties of type MultiValueLegacyExtendedProperty. This is a navigation property. Find more information about extended properties.
+  SingleValueExtendedProperties: any[]	//A collection of single-value extended properties of type SingleValueLegacyExtendedProperty. This is a navigation property. Find more information about extended properties.
+}
+
+export class User {
+  Alias: string	//The user's alias. Typically the SMTP address of the user.
+  Calendar: Calendar	//The user's primary calendar. Navigation property.
+  CalendarGroups: any[]	//The user's calendar groups. Navigation property.
+  Calendars: Calendar[]	//The user's calendars. Navigation property.
+  CalendarView: Event[]	//The calendar view for the calendar. Navigation property.
+  ContactFolders: any[]	//The user's contacts folders. Navigation property.
+  Contacts: any[]	//The user's contacts. Navigation property.
+  DisplayName: string	//The user's display name.
+  Events: Event[]	//The user's events. Default is to show Events under the Default Calendar. Navigation property.
+  Id: string	//The unique identifier for the user.
+  InferenceClassification: any	//Relevance classification of the user's messages based on explicit designations which override inferred relevance or importance. Navigation property.
+  MailboxGuid: string	//The GUID assigned to the user's mailbox.	No
+  MailboxSettings: any	//Settings for the primary mailbox of the signed-in user.		No
+  MailFolders: Folder[]	//The folders in a mailbox. Navigation property.
+  Messages: any[]	//The messages in a mailbox or folder. Navigation property.
+  RootFolder: Folder	//The root folder of the user's mailbox. Navigation property.
 }
 
 export class RecurrencePattern {
