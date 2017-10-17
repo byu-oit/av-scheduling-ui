@@ -256,7 +256,6 @@ export class AppComponent implements OnInit {
 
       var t = new Timeslot();
       tmpTime1.setMinutes(j * 15);
-      console.log(j.toString() +".1: " + tmpTime1.toString());
 
       t.Start = tmpTime1;
       if (j < 96) {
@@ -265,10 +264,8 @@ export class AppComponent implements OnInit {
       else {
         t2 = j;
       }
-      tmpTime2.setMinutes((j+1) * 15);
-      console.log(j.toString() +".2: " + tmpTime2.toString());
+      tmpTime2.setMinutes((j + 1) * 15);
       t.End = tmpTime2;
-      console.log(j.toString() +".t: " + t.Start.toString() + "|"+t.End.toString());
 
       this.timeSlots.push(t);
       tmpTime1 = null;
@@ -355,6 +352,35 @@ export class AppComponent implements OnInit {
   }
   cancelPage_yes(): void {
     this.reset();
+  }
+  consolidate_events(): void {
+    console.log("Consolidating events");
+    var consolidate = true;
+    var i = this.events.length - 1;
+    console.log(i.toString());
+    while (consolidate) {
+      //var e1: Event = this.events[i];
+      //var e2: Event = this.events[i-1];
+      if (i > 0) {
+        console.log(i.toString() + ".1: " + this.events[i]);
+        console.log(i.toString() + ".2: " + this.events[i-1]);
+        if (this.events[i].Subject === this.events[i - 1].Subject) {
+          this.events[i - 1].End = new Date(this.events[i].End.getDate());
+          this.events.pop();
+          i = this.events.length - 1;
+        }
+        else {
+          i--;
+        }
+        if (i == 0) {
+          consolidate = false;
+          break;
+        }
+      }
+      else {
+        break;
+      }
+    }
   }
   currentTimePeriod(): number { // Return time period (0<x<96) for current time
     var now = new Date();
@@ -453,6 +479,7 @@ export class AppComponent implements OnInit {
       this.events.push(e);
     }
     //console.log(this.events);
+    this.consolidate_events();
   }
   reset(): void {
     this.cancellation = false;
