@@ -6,7 +6,7 @@ import { SimpleTimer } from 'ng2-simple-timer';
 //import { HelpModal } from './helpModal';
 
 import { environment } from '../environments/environment';
-import {Event} from './model/o365.model';
+import {Event, Timeslot} from './model/o365.model';
 //import * as data from './config.json';
 /*
 type AttendeeType = "required" | "optional";
@@ -166,6 +166,7 @@ export class AppComponent implements OnInit {
   calendarWorkdayStartHour: number;
   cancellation: boolean;
   currentEvent: Event;
+  timePeriod: Timeslot;
   date: Date;
   dayMillis: number;
   timeOptions = {
@@ -193,6 +194,7 @@ export class AppComponent implements OnInit {
   selectedEvent: Event;
   selectedStartValue: number;
   timeIncrement = 30; // minutes to increment select boxes by
+  timeSlots: Timeslot[] = [];
   title = 'Room Scheduler';
   //todayMillis: number;
   schedulingWindow = 5; // minutes after a time window start time when the resource still be scheduled
@@ -248,6 +250,29 @@ export class AppComponent implements OnInit {
       d.setMinutes(mins + this.timeIncrement);
     }
 
+    //Populate timeslots
+    for (var j=0; j<96; j++){
+      var tmpTime = new Date();
+      var t2 = 0;
+      if (j<96){
+        t2 = j+1;
+      }
+      else {
+        t2 = j;
+      }
+      var t = new Timeslot();
+      tmpTime.setMinutes(j*15);
+
+      t.Start = tmpTime;
+      tmpTime.setMinutes(t2*15);
+      t.End = tmpTime;
+
+      this.timeSlots.push(t);
+      tmpTime = null;
+    }
+
+
+
     //this.deriveVariablesFromHostname(this.resource);
 
     //this.currentEvent = null;
@@ -282,9 +307,26 @@ export class AppComponent implements OnInit {
       var newDate = new Date()
       newDate.setHours(i);
     }
-    console.log(new Date().getTime())
-    console.log(new Date('10/13/2017 11:59pm').getTime())
 
+
+  }
+
+  currentTimePeriod(): number { // Return time period (0<x<96) for current time
+    var now = new Date();
+    var msIn15Min: number = 900000;
+    var secondsInADay: number = 24 * 60 * 60;
+    var hours: number = now.getHours() * 60 * 60;
+    var minutes: number = now.getMinutes() * 60;
+    var seconds: number = now.getSeconds();
+    var ms: number = (hours + minutes + seconds) * 1000;
+    var t1: number = now.getTime();
+    now.setHours(0);
+    now.setMinutes(0);
+    now.setSeconds(0);
+    var t2 = now.getTime();
+    var ret = 0;
+    ret = Math.floor((t1-t2) / msIn15Min);
+    return ret;
   }
 
   resetTransitionTimer(): void {
@@ -318,6 +360,7 @@ export class AppComponent implements OnInit {
   utcTime(): void {
     setInterval(() => {
       this.date = new Date();
+      this.timePeriod = this.timeSlots[this.currentTimePeriod()];
     }, 1000);
   }
 
@@ -399,23 +442,10 @@ export class AppComponent implements OnInit {
   }
 
   submitEvent(tmpSubject: string, tmpStartTime: string, tmpEndTime: string): void {
-    var startTime: Date = new Date();
-    var endTime: Date = new Date();
     var req: Event = new Event();
-
-    endTime.timeZone = TIMEZONE;
-    startTime.timeZone = TIMEZONE;
-
-    startTime.dateTime = tmpStartTime;
-    endTime.dateTime = tmpEndTime;
-
-    newEvent.start = startTime;
-    newEvent.end = endTime;
-
-    req.start = startTime;
-    req.end = endTime;
-    req.subject = tmpSubject;
-
+    req.Subject = tmpSubject;
+    req.End = new Date(tmpEndTime);
+    req.Start = new Date(tmpStartTime);
     /////////
     ///  SUBMIT
     ///////
