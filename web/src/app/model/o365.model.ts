@@ -14,42 +14,49 @@ type TaskStatus = 'Completed' | 'Deferred' | 'InProgress' | 'NotStarted' | 'Wait
 export class EmailAddressDetail {
   address: string;
   name: string;
+  constructor() { }
 }
 
 export class Attendee {
   emailAddress: EmailAddressDetail;
   type: AttendeeType;
+  constructor() { }
 }
 
 export class CalendarColor {
   Name: string
-  Value: number
-  // LightBlue=0, LightGreen=1, LightOrange=2, LightGray=3, LightYellow=4, LightTeal=5, LightPink=6, LightBrown=7, LightRed=8, MaxColor=9, Auto=-1
+  Value: number // LightBlue=0, LightGreen=1, LightOrange=2, LightGray=3, LightYellow=4, LightTeal=5, LightPink=6, LightBrown=7, LightRed=8, MaxColor=9, Auto=-1
+  constructor() { }
 }
 
 export class EmailAddress {
   Name: string //The display name of the person or entity.
   Address: string	 //The email address of the person or entity.
+  constructor() { }
 }
-
 
 export class ItemBody {
   ContentType: number //The content type: Text = 0, HTML = 1.
   Content: string //The text or HTML content
+  constructor() { }
 }
+
 export class GeoCoordinates {
   Altitude: number	//The altitude of the location.
   Latitude: number	//The latitude of the location.
   Longitude: number	//The longitude of the location.
   Accuracy: number	//The accuracy of the sensor providing the latitude and longitude.
   AltitudeAccuracy: number	//The accuracy of the sensor providing the altitude.
+  constructor() { }
 }
+
 export class PhysicalAddress {
   Street: string	//The street.
   City: string	//The city.
   State: string	//The state.
   CountryOrRegion: string	//The country or region. It's a free-format string value, for example, "United States".
   PostalCode: string	//The postal code.
+  constructor() { }
 }
 
 export class Location {
@@ -57,10 +64,12 @@ export class Location {
   Address: PhysicalAddress	//The physical address of the location.
   Coordinate: GeoCoordinates	//The geographic coordinates and elevation of the location.
   LocationEmailAddress: string	//Optional email address of the location.
+  constructor() { }
 }
 
 export class Recipient {
   EmailAddress: EmailAddress
+  constructor() { }
 }
 
 export class Folder {
@@ -74,6 +83,7 @@ export class Folder {
   UnreadItemCount: number	//The number of items in the folder marked as unread.	No
   MultiValueExtendedProperties: any[]	//A collection of multi-value extended properties of type MultiValueLegacyExtendedProperty. This is a navigation property. Find more information about extended properties.
   SingleValueExtendedProperties: any[]	//A collection of single-value extended properties of type SingleValueLegacyExtendedProperty. This is a navigation property. Find more information about extended properties.
+  constructor() { }
 }
 
 export class User {
@@ -93,6 +103,7 @@ export class User {
   MailFolders: Folder[]	//The folders in a mailbox. Navigation property.
   Messages: any[]	//The messages in a mailbox or folder. Navigation property.
   RootFolder: Folder	//The root folder of the user's mailbox. Navigation property.
+  constructor() { }
 }
 
 export class RecurrencePattern {
@@ -103,31 +114,41 @@ export class RecurrencePattern {
   DaysOfWeek: number[]	    //A collection of days of the week: Sunday = 0, Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5, Saturday = 6.
   FirstDayOfWeek: number 	//The day of the week: Sunday = 0, Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5, Saturday = 6.
   Index: number	           //The week index: First = 0, Second = 1, Third = 2, Fourth = 3, Last = 4.
+  constructor() { }
 }
+
 export class RecurrenceRange {
   Type: number	 //The recurrence range: EndDate = 0, NoEnd = 1, Numbered = 2.
   StartDate: Date	//The start date of the series.
   EndDate: Date	//The end date of the series.
   NumberOfOccurrences: number	//How many times to repeat the event.
+  constructor() { }
 }
+
 export class PatternedRecurrence {
   Pattern: RecurrencePattern
   Range: RecurrenceRange
+  constructor() { }
 }
-
 
 export class ResponseStatus {
   Response: ResponseType
   Time: Date    //The date and time that the response was returned.
+  constructor() { }
 }
+
 export class Timeslot {
   Start: Date
   End: Date
+  constructor() { }
 }
+
 export class TimeConstraint {
   ActivityDomain: ActivityDomain
   Timeslots: Timeslot[]
+  constructor() { }
 }
+
 export class Event {
   Attachments: any[]
   Attendees: Attendee[]
@@ -164,6 +185,7 @@ export class Event {
   Start: Date
   Type: number //The event type: SingleInstance = 0, Occurrence = 1, Exception = 2, SeriesMaster = 3.
   WebLink: string
+  constructor() { }
 }
 
 export class Calendar {
@@ -179,4 +201,5 @@ export class Calendar {
   Events: Event[]
   MultiValueExtendedProperties: any[]
   SingleValueExtendedProperties: any[]
+  constructor() { }
 }
