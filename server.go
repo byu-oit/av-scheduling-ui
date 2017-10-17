@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"io"
 	"log"
 	"net/http"
@@ -23,103 +22,40 @@ var (
 	basepath   = filepath.Dir(b)
 )
 
-type jsonobject struct {
-	Object ObjectType
-}
-
-type ObjectType struct {
-	Buffer_size int
-	Conf        conf
-}
-
-type conf struct {
-	clientId           string
-	clientSecret       string
-	domain             string
-	hostname           string
-	o365               bool
-	oauth_auth_url     string
-	oauth_token_url    string
-	popupWindowTimeout int
-	production         bool
-	redirect_url       string
-	resource_name      string
-	resource_id        string
-	showHelpButton     bool
-	slack_webhook_url  string
-	tenant             string
-	timeZone           string
-}
-
 func bootstrapEnvironment(wg *sync.WaitGroup) {
 	env_dev := basepath + "/web/src/environments/environment.ts"
 	env_prd := basepath + "/web/src/environments/environment.prod.ts"
-
 	// Development Server environment
-	defaultDev := conf{}
-	defaultDev.clientId = os.Getenv("O365_APP_ID")
-	defaultDev.clientSecret = os.Getenv("")
-	defaultDev.domain = os.Getenv("O365_DOMAIN")
-	defaultDev.hostname = os.Getenv("SPANEL_HOSTNAME")
-	defaultDev.o365, _ = strconv.ParseBool(os.Getenv("SPANEL_IS_HOSTED_ON_O365"))
-	defaultDev.oauth_auth_url = os.Getenv("O365_OAUTH_AUTH_URL")
-	defaultDev.oauth_token_url = os.Getenv("O365_OAUTH_TOKEN_URL")
-	defaultDev.popupWindowTimeout, _ = strconv.Atoi(os.Getenv("SPANEL_POPUP_TIMEOUT"))
-	defaultDev.production = false
-	defaultDev.redirect_url = os.Getenv("O365_REDIRECT_URL")
-	defaultDev.resource_name = os.Getenv("O365_RESOURCE_NAME")
-	defaultDev.resource_id = os.Getenv("O365_RESOURCE_ID")
-	defaultDev.showHelpButton, _ = strconv.ParseBool(os.Getenv("SPANEL_SHOW_HELP_BUTTON"))
-	defaultDev.slack_webhook_url = os.Getenv("SPANEL_SLACK_WEBHOOK_URL")
-	defaultDev.tenant = os.Getenv("O365_TENANT")
-	defaultDev.timeZone = os.Getenv("SPANEL_TIMEZONE")
+	prefix := "export const environment = {"
 
-	//Production Angular Server environment
-	defaultPrd := conf{}
-	defaultPrd.clientId = os.Getenv("O365_APP_ID")
-	defaultPrd.clientSecret = os.Getenv("")
-	defaultPrd.domain = os.Getenv("O365_DOMAIN")
-	defaultPrd.hostname = os.Getenv("SPANEL_HOSTNAME")
-	defaultPrd.o365, _ = strconv.ParseBool(os.Getenv("SPANEL_IS_HOSTED_ON_O365"))
-	defaultPrd.oauth_auth_url = os.Getenv("O365_OAUTH_AUTH_URL")
-	defaultPrd.oauth_token_url = os.Getenv("O365_OAUTH_TOKEN_URL")
-	defaultPrd.popupWindowTimeout, _ = strconv.Atoi(os.Getenv("SPANEL_POPUP_TIMEOUT"))
-	defaultPrd.production = true
-	defaultPrd.redirect_url = os.Getenv("O365_REDIRECT_URL")
-	defaultPrd.resource_name = os.Getenv("O365_RESOURCE_NAME")
-	defaultPrd.resource_id = os.Getenv("O365_RESOURCE_ID")
-	defaultPrd.showHelpButton, _ = strconv.ParseBool(os.Getenv("SPANEL_SHOW_HELP_BUTTON"))
-	defaultPrd.slack_webhook_url = os.Getenv("SPANEL_SLACK_WEBHOOK_URL")
-	defaultPrd.tenant = os.Getenv("O365_TENANT")
-	defaultPrd.timeZone = os.Getenv("SPANEL_TIMEZONE")
+	devStrings := []string{prefix, "clientId: '", os.Getenv("O365_APP_ID"), "',", "clientSecret: '", os.Getenv("O365_CLIENT_SECRET"), "',", "domain: '", os.Getenv("O365_DOMAIN"), "',", "hostname: '", os.Getenv("SPANEL_HOSTNAME"), "',", "o365: ", os.Getenv("SPANEL_IS_HOSTED_ON_O365"), ",", "oauth_auth_url: '", os.Getenv("O365_OAUTH_AUTH_URL"), "',", "oauth_token_url: '", os.Getenv("O365_OAUTH_TOKEN_URL"), "',", "popupWindowTimeout: ", os.Getenv("SPANEL_POPUP_TIMEOUT"), ",", "production: ", "false,", "redirect_url: '", os.Getenv("O365_REDIRECT_URL"), "',", "resource_name: '", os.Getenv("O365_RESOURCE_NAME"), "',", "resource_id: '", os.Getenv("O365_RESOURCE_ID"), "',", "showHelpButton: ", os.Getenv("SPANEL_SHOW_HELP_BUTTON"), ",", "slack_webhook_url: '", os.Getenv("SPANEL_SLACK_WEBHOOK_URL"), "',", "tenant: '", os.Getenv("O365_TENANT"), "',", "timeZone: '", os.Getenv("SPANEL_TIMEZONE"), "'};"}
+	prdStrings := []string{prefix, "clientId: '", os.Getenv("O365_APP_ID"), "',", "clientSecret: '", os.Getenv("O365_CLIENT_SECRET"), "',", "domain: '", os.Getenv("O365_DOMAIN"), "',", "hostname: '", os.Getenv("SPANEL_HOSTNAME"), "',", "o365: ", os.Getenv("SPANEL_IS_HOSTED_ON_O365"), ",", "oauth_auth_url: '", os.Getenv("O365_OAUTH_AUTH_URL"), "',", "oauth_token_url: '", os.Getenv("O365_OAUTH_TOKEN_URL"), "',", "popupWindowTimeout: ", os.Getenv("SPANEL_POPUP_TIMEOUT"), ",", "production: ", "true,", "redirect_url: '", os.Getenv("O365_REDIRECT_URL"), "',", "resource_name: '", os.Getenv("O365_RESOURCE_NAME"), "',", "resource_id: '", os.Getenv("O365_RESOURCE_ID"), "',", "showHelpButton: ", os.Getenv("SPANEL_SHOW_HELP_BUTTON"), ",", "slack_webhook_url: '", os.Getenv("SPANEL_SLACK_WEBHOOK_URL"), "',", "tenant: '", os.Getenv("O365_TENANT"), "',", "timeZone: '", os.Getenv("SPANEL_TIMEZONE"), "'};"}
+	devLines := strings.Join(devStrings, "")
+	prdLines := strings.Join(prdStrings, "")
+	//log.Println(devLines)
 
-	prefix := "export const environment = "
 	if _, err_dev := os.Stat(env_dev); os.IsNotExist(err_dev) {
-		devData, _ := json.Marshal(defaultDev)
-		strDev := prefix + string(devData)
 		devFile, errDevFile := os.Create(env_dev)
 		if errDevFile != nil {
-			log.Fatal(errDevFile)
+			log.Fatal(errDevFile.Error())
 		}
-		defer devFile.Close()
-		_, devWriteErr := io.Copy(devFile, strings.NewReader(strDev))
-		if devWriteErr != nil {
-			log.Fatal(devWriteErr)
+		if _, errDevFile = io.WriteString(devFile, devLines); errDevFile != nil {
+			devFile.Close()
+			log.Fatal(errDevFile.Error())
 		}
+		devFile.Close()
 	}
 
 	if _, err_prd := os.Stat(env_prd); os.IsNotExist(err_prd) {
-		prdData, _ := json.Marshal(defaultPrd)
-		strPrd := prefix + string(prdData)
 		prdFile, errPrdFile := os.Create(env_prd)
 		if errPrdFile != nil {
-			log.Fatal(errPrdFile)
+			log.Fatal(errPrdFile.Error())
 		}
-		defer prdFile.Close()
-		_, prdWriteErr := io.Copy(prdFile, strings.NewReader(strPrd))
-		if prdWriteErr != nil {
-			log.Fatal(prdWriteErr)
+		if _, errPrdFile = io.WriteString(prdFile, prdLines); errPrdFile != nil {
+			prdFile.Close()
+			log.Fatal(errPrdFile.Error())
 		}
+		prdFile.Close()
 	}
 
 	wg.Done() // Need to signal to waitgroup that this goroutine is done
@@ -155,10 +91,10 @@ func startAngular(wg *sync.WaitGroup) {
 
 func main() {
 	wg := new(sync.WaitGroup)
-	wg.Add(1)
+	wg.Add(2)
 
 	go bootstrapEnvironment(wg)
-	//go startAngular(wg)
+	go startAngular(wg)
 
 	port := ":8012"
 
