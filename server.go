@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -8,6 +10,7 @@ import (
 	"path/filepath"
 	"runtime"
 	"strconv"
+	"strings"
 	"sync"
 	"syscall"
 
@@ -90,12 +93,33 @@ func bootstrapEnvironment(wg *sync.WaitGroup) {
 	defaultPrd.tenant = os.Getenv("O365_TENANT")
 	defaultPrd.timeZone = os.Getenv("SPANEL_TIMEZONE")
 
+	prefix := "export const environment = "
 	if _, err_dev := os.Stat(env_dev); os.IsNotExist(err_dev) {
-		// path/to/whatever does not exist
+		devData, _ := json.Marshal(defaultDev)
+		strDev := prefix + string(devData)
+		devFile, errDevFile := os.Create(env_dev)
+		if errDevFile != nil {
+			log.Fatal(errDevFile)
+		}
+		defer devFile.Close()
+		_, devWriteErr := io.Copy(devFile, strings.NewReader(strDev))
+		if devWriteErr != nil {
+			log.Fatal(devWriteErr)
+		}
 	}
 
 	if _, err_prd := os.Stat(env_prd); os.IsNotExist(err_prd) {
-		// path/to/whatever does not exist
+		prdData, _ := json.Marshal(defaultPrd)
+		strPrd := prefix + string(prdData)
+		prdFile, errPrdFile := os.Create(env_prd)
+		if errPrdFile != nil {
+			log.Fatal(errPrdFile)
+		}
+		defer prdFile.Close()
+		_, prdWriteErr := io.Copy(prdFile, strings.NewReader(strPrd))
+		if prdWriteErr != nil {
+			log.Fatal(prdWriteErr)
+		}
 	}
 
 	wg.Done() // Need to signal to waitgroup that this goroutine is done
@@ -116,6 +140,7 @@ func startAngular(wg *sync.WaitGroup) {
 	} else {
 		os.Setenv("NODE_ENV", "development")
 	}
+
 	args_npm := []string{"npm", "start"}
 	env := os.Environ()
 	syscall.Chdir("web")
@@ -130,9 +155,10 @@ func startAngular(wg *sync.WaitGroup) {
 
 func main() {
 	wg := new(sync.WaitGroup)
-	wg.Add(2)
+	wg.Add(1)
 
-	go startAngular(wg)
+	go bootstrapEnvironment(wg)
+	//go startAngular(wg)
 
 	port := ":8012"
 
