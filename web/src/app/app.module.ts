@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms'; // <-- NgModel lives here
 import { MomentModule } from 'angular2-moment';
 import { HttpClientModule } from '@angular/common/http';
-import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+//import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { InputTextModule, ProgressBarModule, GrowlModule } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
@@ -42,7 +42,7 @@ type StoreType = {
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(public appRef: ApplicationRef, public appState: AppState) { }
+/*  constructor(public appRef: ApplicationRef, public appState: AppState) { }
 
 
   hmrOnInit(store: StoreType) {
@@ -78,5 +78,6 @@ export class AppModule {
     // display new elements
     store.disposeOldHosts();
     delete store.disposeOldHosts;
-  }
+  }*/
+  constructor(){}
  }
