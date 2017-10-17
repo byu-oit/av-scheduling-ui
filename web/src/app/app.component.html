@@ -218,7 +218,7 @@
     <div (click)="cancelPage_yes(selectedEvent)" class="cancelEvent-yes-button"></div>
   </div>
 </div>
-<div *ngIf="helpPressed || helpRequested" class="modal helpModal stayOnTop" (click)="reset()">
+<div *ngIf="helpPressed || helpRequested" class="modal helpModal stayOnTop" (click)="resetModal()">
 </div>
 <!--<div *ngIf="helpRequested" class="modalContent stayOnTop">
 <<div class="help-cancel" (click)="resetModal()"></div>
@@ -232,6 +232,6 @@
     <div (click)="sendHelp()" class="sendHelp font-serif">SEND HELP</div>
   </div>
 </div> -->
-<div *ngIf="helpRequested" class="modalContent font-size-6 font-sans stayOnTop" (click)="reset()">
+<div *ngIf="helpRequested" class="modalContent font-size-6 font-sans stayOnTop" (click)="resetModal()">
   Your help request has been received.
 </div>
