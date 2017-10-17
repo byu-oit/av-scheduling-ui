@@ -189,6 +189,7 @@ export class AppComponent implements OnInit {
   refHours: string[] = [];
   resource = RESOURCE;
   showAgenda: boolean;
+  showHelpButton: boolean;
   selectedEvent: Event;
   selectedStartValue: number;
   timeIncrement = 30; // minutes to increment select boxes by
@@ -297,6 +298,7 @@ export class AppComponent implements OnInit {
     this.newEvent = null;
     this.occupied = false;
     this.showAgenda = false;
+    this.showHelpButton = environment.showHelpButton;
     this.selectedEvent = null;
     this.selectedStartValue = 0;
     this.unoccupied = !(this.occupied);
