@@ -58,6 +58,57 @@
   color: black;
 }
 
+/* NEW ADDITIONS */
+.buttonTransparencyBackground {
+  background-color: rgb(0, 0, 0);
+  opacity: 0.502;
+  z-index: 200;
+}
+.buttonWhiteBorder {
+  border-color: rgb(254, 254, 254);
+  border-style: solid;
+  border-width: 3.74px;
+  z-index: 210;
+}
+.buttonText {
+  color: rgb(254, 254, 254);
+  font-family: "Roboto";
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+  text-align: center;
+  transform: matrix(2,0,0,2,0,0);
+  -moz-transform: matrix( 2,0,0,2,0,0);
+  -ms-transform: matrix( 2,0,0,2,0,0);
+  -webkit-transform: matrix( 2,0,0,2,0,0);
+  z-index: 300;
+}
+.saveTray{
+  background: url('assets/SaveTray.svg') no-repeat top left;
+  height: 21px;
+  margin-top:5px;
+}
+
+.saveButtonContainer_v2 {
+  left: 79%;
+  margin: 0 20px 0 0;
+  position:fixed;
+  top: 78%;
+  vertical-align: middle;
+  width: 123px;
+  position: absolute;
+}
+
+.book-now-save-icon
+{
+  position:relative;
+  float:left;
+  height: inherit;
+}
+/*
+ END NEW ADDITIONS
+*/
+
 
 .detail {}
 
@@ -616,24 +667,23 @@ li{
 .book-now-save-button {
   /*background-color: rgb(0, 0, 0);
   background: url("assets/buttonBar.png");
-  opacity: 0.4;*/
   border-color: rgb(254, 254, 254);
   border-style: solid;
   border-width: 1.87px;
   color: rgb(254, 254, 254);
+  float:right;
   font-family: "Roboto";
   font-size: 1.10em;
   height: 32.36px;
   line-height: 1;
+  opacity: 0.4;*/
+  left: 79%;
   margin: 0 20px 0 0;
-  float:right;
-  text-align: center;
   position:fixed;
   top: 78%;
-  left: 79%;
   vertical-align: middle;
   width: 123px;
-  z-index: 9002;
+  /*z-index: 9002;*/
 }
 .button-label {
   margin: 8px 12px;
@@ -877,11 +927,11 @@ textarea {
   height: inherit;
   line-height: 1.6;
   margin-left: 88px;
+  overflow:hidden;
   position: fixed;
+  resize: none;
   text-align: left;
   width: 355px;
-  z-index: 9999;
-  overflow:hidden;
 }
 
 .book-now-end-label {
