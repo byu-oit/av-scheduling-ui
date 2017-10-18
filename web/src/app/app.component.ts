@@ -192,7 +192,7 @@ export class AppComponent implements OnInit {
   showHelpButton: boolean;
   selectedEvent: Event;
   selectedStartValue: number;
-  timeIncrement = 30; // minutes to increment select boxes by
+  timeIncrement = environment.time_slot_size; // minutes to increment select boxes by
   timeSlots: Timeslot[] = [];
   title = 'Room Scheduler';
   //todayMillis: number;
@@ -522,7 +522,7 @@ export class AppComponent implements OnInit {
       this.events.push(e);
     }
     //console.log(this.events);
-    //this.consolidate_events();
+    this.consolidate_events();
   }
   reset(): void {
     this.cancellation = false;
