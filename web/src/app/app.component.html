@@ -62,7 +62,7 @@
           <label class="book-now-start-label">START TIME</label>
         </div>
         <div class="book-now-start-select">
-          <select id="newEventStartTime" [(ngModel)]="newEventStartTimeId" class="font-size-2 font-sans" (change)="onStartChange($event.target.value)">
+          <select id="newEventStartTime" [(ngModel)]="newEventStartTimeId" (change)="onStartChange($event.target.value)">
             <option *ngFor="let inc of validTimeIncrements" value="{{inc.id}}">{{inc.value}}</option>
           </select>
         </div>
@@ -87,7 +87,7 @@
           <label class="book-now-end-label">END TIME</label>
         </div>
         <div class="book-now-end-select">
-          <select id="newEventEndTime" [(ngModel)]="newEventEndTimeId" class="font-size-2 font-sans">
+          <select id="newEventEndTime" [(ngModel)]="newEventEndTimeId">
             <option *ngFor="let inc of validTimeIncrements" value="{{inc.id}}">{{inc.value}}</option>
           </select>
         </div>

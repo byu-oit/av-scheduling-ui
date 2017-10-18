@@ -266,20 +266,42 @@
 
 .book-now-start-select {
   position: fixed;
-  top: 70%;
-  left: 5%;
+  top: 75%;
+  left: 13%;
 }
 
 .book-now-end-select {
   position: fixed;
-  top: 70%;
-  left: 35%;
+  top: 75%;
+  left: 42%;
 }
 
 select {
-  width: 125%;
-  height: 30px;
+  -moz-transform: matrix( 2.78609839089217, 0, 0, 2.78609839089217, 0, 0);
+  -ms-transform: matrix( 2.78609839089217, 0, 0, 2.78609839089217, 0, 0);
+  -webkit-transform: matrix( 2.78609839089217, 0, 0, 2.78609839089217, 0, 0);
+  /*background-color: rgb(156, 156, 156);*/
+  background-color: rgb(62,64,68);
+  border-radius: 10px;
+  border: none;
+  color: rgb(254, 254, 254);
+  font-family: "Roboto";
+  font-size: .1em;
+  font-weight: 300;
+  height: 14px;
+  line-height: 1.4;
+  opacity: 0.702;
+  width: 59px;
 }
+&[disabled], &:disabled{
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+&:invalid {
+  color: rgb(156, 156, 156);
+}
+
+
 
 .scheduleEvent {
   background-color: black;
@@ -940,28 +962,35 @@ li {
 }
 
 textarea {
-  background-color: rgb(102, 102, 102);
+  /*background-color: rgb(102, 102, 102);*/
+  background-color: rgb(62,64,68);
+  font-size: 1.2em;
+  font-weight: 200;
   color: white;
   display: block;
   height: inherit;
-  line-height: 1.6;
+  line-height: 1.4;
   margin-left: 88px;
   overflow: hidden;
+  padding-top:10px;
+  padding-left:25px;
+  padding-right:25px;
   position: fixed;
   resize: none;
   text-align: left;
-  width: 355px;
+  width: 308px;
 }
 
 .book-now-end-label {
-  font-size: 16px;
+  font-size: 18px;
   font-family: "Roboto";
-  color: white !important;
+  color: white;
+  font-weight: 200;
   line-height: 1.125;
   text-align: left;
   position: fixed;
   left: 288px;
-  top: 306px;
+  top: 320px;
   z-index: 9000;
   width: 100px;
 }
@@ -1082,13 +1111,19 @@ textarea {
 
 .book-now-start-label {
   /*  -webkit-appearance: menulist-button;*/
+  color: white;
+  font-family: "Roboto";
+  font-size: 18px;
+  font-weight: 200;
   height: 50px;
-  text-align: left;
+  left: 7%;
+  line-height: 1.125;
   position: fixed;
-  left: 50px;
-  top: 310px;
-  z-index: 93;
+  text-align: left;
+  top: 320px;
   width: 110px;
+  z-index: 9000;
+
 }
 
 .book-now-title {
@@ -1150,4 +1185,12 @@ textarea {
   top: 75%;
   width: 50%;
   z-index: 9200;
+}
+
+html
+{
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
 }
