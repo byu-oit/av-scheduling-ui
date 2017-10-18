@@ -901,12 +901,12 @@ li {
   color: rgb(254, 254, 254);
   float: left;
   font-family: 'Roboto', sans-serif;
-  font-size: 4.5em;
+  font-size: 5.2em;
   left: 58%;
   line-height: 0.5;
   position: fixed;
   text-align: right;
-  top: 28%;
+  top: 30%;
   width: 33%;
   z-index: 8;
 }
@@ -923,27 +923,15 @@ li {
   line-height: 0.5;
   position: fixed;
   text-align: right;
-  top: 43%;
-  width: 50%;
+  top: 45%;
+  width: 52%;
   z-index: 8;
 }
 
 .book-now-title-block {
-  /*height: 38px;*/
   height: 120px;
   width: auto;
 }
-
-
-/*
-.Booking_panel {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 800px;
-  height: 480px;
-  z-index: 96;
-}*/
 
 .book-now-title-input {
   font-size: 30px;
