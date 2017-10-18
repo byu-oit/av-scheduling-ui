@@ -48,7 +48,7 @@ export class Resource {
 /*
 export class StartEndTime {
   dateTime: string;
-  timeZone: string;
+  timezone: string;
 }*/
 
 export class TimeIncrement {
@@ -81,11 +81,11 @@ const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear"
   "subject": "Time Reporting",
   "start": {
     "dateTime": "2017-10-13T08:00:00.0000000",
-    "timeZone": "UTC"
+    "timezone": "UTC"
   },
   "end": {
     "dateTime": "2017-10-13T09:00:00.0000000",
-    "timeZone": "UTC"
+    "timezone": "UTC"
   },
   "location": {
     "displayName": ""
@@ -96,11 +96,11 @@ const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear"
   "subject": "Lunch",
   "start": {
     "dateTime": "2017-10-13T09:00:00.0000000",
-    "timeZone": "UTC"
+    "timezone": "UTC"
   },
   "end": {
     "dateTime": "2017-10-13T10:00:00.0000000",
-    "timeZone": "UTC"
+    "timezone": "UTC"
   },
   "location": {
     "displayName": ""
@@ -111,11 +111,11 @@ const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear"
   "subject": "Devotional",
   "start": {
     "dateTime": "2017-10-13T11:00:00.0000000",
-    "timeZone": "UTC"
+    "timezone": "UTC"
   },
   "end": {
     "dateTime": "2017-10-13T01:00:00.0000000",
-    "timeZone": "UTC"
+    "timezone": "UTC"
   },
   "location": {
     "displayName": ""
@@ -126,11 +126,11 @@ const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear"
   "subject": "Show and  Tell",
   "start": {
     "dateTime": "2017-10-13T01:00:00.0000000",
-    "timeZone": "UTC"
+    "timezone": "UTC"
   },
   "end": {
     "dateTime": "2017-10-13T04:00:00.0000000",
-    "timeZone": "UTC"
+    "timezone": "UTC"
   },
   "location": {
     "displayName": ""
@@ -147,7 +147,7 @@ const DEFAULTATTENDEE: Attendee = {
   type: "required"
 }*/
 
-const TIMEZONE = environment.timeZone;
+const TIMEZONE = environment.timezone;
 
 @Component({
   selector: 'app-root',

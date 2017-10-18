@@ -33,8 +33,8 @@
 .font-size-9 {
   font-size: 36px;
 }
-.font-size-10
-{
+
+.font-size-10 {
   font-size: 1.6em;
 }
 
@@ -58,18 +58,59 @@
   color: black;
 }
 
+
 /* NEW ADDITIONS */
+
 .buttonTransparencyBackground {
   background-color: rgb(0, 0, 0);
+  background-position: left top;
+  background-size: auto;
+  height: 40px;
   opacity: 0.502;
+  position: fixed;
   z-index: 200;
+  width: 160px;
 }
+
 .buttonWhiteBorder {
   border-color: rgb(254, 254, 254);
   border-style: solid;
   border-width: 3.74px;
   z-index: 210;
 }
+
+.book-now-save-button,.book-now-save-button > .button-label {
+  left: 73%;
+  margin: 0 20px 0 0;
+  position: fixed;
+  top: 73%;
+  vertical-align: middle;
+  width: 160px;
+  /*z-index: 9002;*/
+}
+
+.cancel-book-now-button, .cancel-book-now-button > .button-label {
+  left: 73%;
+  margin: 0 20px 0 0;
+  position: fixed;
+  top: 85%;
+  vertical-align: middle;
+  width: 160px;
+  /*z-index: 9001;*/
+}
+
+.button-label {
+  float: right;
+  margin: 8px 12px;
+  text-align: left;
+  vertical-align: center;
+  z-index: 1000;
+}
+.book-now-save-button > .button-label, .cancel-book-now-button > .button-label  {
+  z-index: auto;
+}
+
+
 .buttonText {
   color: rgb(254, 254, 254);
   font-family: "Roboto";
@@ -77,38 +118,39 @@
   font-weight: bold;
   line-height: 1;
   text-align: center;
-  transform: matrix(2,0,0,2,0,0);
-  -moz-transform: matrix( 2,0,0,2,0,0);
-  -ms-transform: matrix( 2,0,0,2,0,0);
-  -webkit-transform: matrix( 2,0,0,2,0,0);
+  transform: matrix(2, 0, 0, 2, 0, 0);
+  -moz-transform: matrix( 2, 0, 0, 2, 0, 0);
+  -ms-transform: matrix( 2, 0, 0, 2, 0, 0);
+  -webkit-transform: matrix( 2, 0, 0, 2, 0, 0);
   z-index: 300;
 }
-.saveTray{
+
+.saveTray {
   background: url('assets/SaveTray.svg') no-repeat top left;
   height: 21px;
-  margin-top:5px;
+  margin-top: 5px;
 }
 
 .saveButtonContainer_v2 {
   left: 79%;
   margin: 0 20px 0 0;
-  position:fixed;
+  position: fixed;
   top: 78%;
   vertical-align: middle;
   width: 123px;
   position: absolute;
 }
 
-.book-now-save-icon
-{
-  position:relative;
-  float:left;
+.book-now-save-icon {
+  position: relative;
+  float: left;
   height: inherit;
 }
+
+
 /*
  END NEW ADDITIONS
 */
-
 
 .detail {}
 
@@ -123,9 +165,9 @@
   width: 100%;
   background-color: rgb(0, 0, 0);
   opacity: 0.4;
-  top:0;
-  left:0;
-  position:fixed;
+  top: 0;
+  left: 0;
+  position: fixed;
 }
 
 .helpModal {
@@ -140,7 +182,7 @@
   visibility: hidden;
 }
 
-.modalContent{
+.modalContent {
   background-size: auto;
   /*background-color: #F2F2F2;*/
   background-color: white;
@@ -150,13 +192,14 @@
   position: fixed;
   vertical-align: middle;
   top: 33%;
-  left:10%;
+  left: 10%;
   text-align: center;
 }
-.help-cancel{
+
+.help-cancel {
   position: relative;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   margin: 5px auto auto 5px;
   width: 38px;
   height: 38px;
@@ -165,10 +208,10 @@
   background-size: 36px 36px;
   background-image: url('assets/X.png')
 }
-.help-message-background {
 
-}
-.help-message-container{}
+.help-message-background {}
+
+.help-message-container {}
 
 .unoccupied {
   background-color: rgb(126, 207, 0);
@@ -200,6 +243,7 @@
   height: 71%;
   z-index: 71;
 }
+
 .book-now-container {
   color: white;
   position: absolute;
@@ -220,22 +264,20 @@
   z-index: 9200;
 }
 
-.book-now-start-select
-{
+.book-now-start-select {
   position: fixed;
   top: 70%;
   left: 5%;
 }
 
-.book-now-end-select
-{
+.book-now-end-select {
   position: fixed;
   top: 70%;
   left: 35%;
 }
-select
-{
-  width:125%;
+
+select {
+  width: 125%;
   height: 30px;
 }
 
@@ -251,7 +293,8 @@ select
   width: 100%;
   z-index: 9000;
 }
-.agenda-lower-section-wrapper{
+
+.agenda-lower-section-wrapper {
   width: 100%;
   background-size: 800px 83%;
   opacity: 0.902;
@@ -268,20 +311,21 @@ select
   top: 0;
   z-index: 32;
   position: absolute;
-  float:right;
+  float: right;
   width: 80%;
 }
-.agenda-time-reference-sidebar
-{
-  height:100%;
+
+.agenda-time-reference-sidebar {
+  height: 100%;
   left: 0;
   top: 0;
   z-index: 32;
   position: relative;
   float: left;
   width: 10%;
-  overflow:hidden;
+  overflow: hidden;
 }
+
 .refHours {
   width: 100%;
   height: 100%;
@@ -289,23 +333,22 @@ select
   padding-right: 17px;
   padding-left: 36px;
 }
-.refHours-hour {
 
+.refHours-hour {
   border-top: 1px solid white;
 }
 
 .sidebar-starttime, .sidebar-endtime {
-  position:absolute;
-  height:25%;
+  position: absolute;
+  height: 25%;
   width: 10%;
 }
 
-.sidebar-elipsis
- {
-   position:absolute;
-   height: 50%;
-   width: 10%;
- }
+.sidebar-elipsis {
+  position: absolute;
+  height: 50%;
+  width: 10%;
+}
 
 .agenda-view-row {
   border-style: solid;
@@ -330,14 +373,17 @@ select
   background-size: 270px 108px;
   opacity: 0.2;
 }
+
 .agenda-row-section1, .agenda-row-section2 {
   margin: 5px auto;
 }
+
 .agenda-row-duration {
-  float:left;
+  float: left;
   line-height: 2em;
   position: relative;
 }
+
 .agenda-row-start-end {
   float: right;
   line-height: 2em;
@@ -352,52 +398,49 @@ ul {
   width: 100%;
   scroll-behavior: smooth;
 }
-li{
+
+li {
   margin: 5px;
 }
 
 @scrollbar-height: 5px;
 @scrollbar-padding: 15px;
-
 ::-webkit-scrollbar {
-   height: ((@scrollbar-padding * 2) + @scrollbar-height);
-	background-color: rgba(255,255,255,0);
+  height: ((@scrollbar-padding * 2) + @scrollbar-height);
+  background-color: rgba(255, 255, 255, 0);
   padding: 15px;
 }
 
-::-webkit-scrollbar-track,
-::-webkit-scrollbar-thumb {
-	/*border: 16px solid rgba(255,255,255,0);*/
-  border: 11px solid rgba(255,255,255,0);
-
-	background-clip: padding-box;
+::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb {
+  /*border: 16px solid rgba(255,255,255,0);*/
+  border: 11px solid rgba(255, 255, 255, 0);
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-track {
-	/*background-color: #ccc;*/
+  /*background-color: #ccc;*/
   /*background-color: #F2F2F2; Dark Button */
   background-color: #666666;
 }
 
 ::-webkit-scrollbar-thumb {
-	/*background-color: #212121;*/
+  /*background-color: #212121;*/
   /*background-color: #002E5D;  Dark Button */
   background-color: #F2F2F2;
-	&:hover {
-		border: @scrollbar-padding solid rgba(255,255,255,0);
-	}
+  &:hover {
+    border: @scrollbar-padding solid rgba(255, 255, 255, 0);
+  }
 }
 
-.agenda-view-row-container
-{
+.agenda-view-row-container {
   height: 5.25em;
   margin-left: 20px;
   margin-right: 20px;
   padding-bottom: 12px;
   padding-top: 12px;
 }
-.refHours-view-row-container
-{
+
+.refHours-view-row-container {
   height: 5.25em;
   margin-left: 20px;
   margin-right: 20px;
@@ -465,6 +508,7 @@ li{
   position: fixed;
   margin: auto auto auto 26px;
 }
+
 .cancel-subpage-title {
   color: white;
   font-family: "Roboto";
@@ -528,13 +572,6 @@ li{
   background-image: url('assets/arrow.png')
 }
 
-.cancel-book-now-button {
-  position: fixed;
-  left: 78%;
-  top: 87%;
-  z-index: 9001;
-}
-
 .cancel-meeting-title {
   margin: 2% auto 5% auto;
   text-align: center;
@@ -543,7 +580,7 @@ li{
 
 .cancelEvent-no-button {
   align-items: center;
-  background-image:url('assets/NO_BUTTON.png');
+  background-image: url('assets/NO_BUTTON.png');
   border-color: rgb(254, 254, 254);
   border-style: solid;
   border-width: 1.87px;
@@ -560,7 +597,7 @@ li{
 
 .cancelEvent-yes-button {
   align-items: center;
-  background-image:url('assets/YES_BUTTON.png');
+  background-image: url('assets/YES_BUTTON.png');
   border-color: rgb(254, 254, 254);
   border-style: solid;
   border-width: 1.87px;
@@ -574,12 +611,14 @@ li{
   vertical-align: middle;
   width: 128px;
 }
+
 .buttonIcon {
   background-size: contain;
   width: 20px;
-  float:left;
+  float: left;
   margin: 6px auto 6px 10px;
 }
+
 .calendarIcon {
   background-image: url("assets/CALENDAR.png");
   height: 18px;
@@ -588,8 +627,9 @@ li{
 .plusIcon {
   background: url("assets/Plus.png") no-repeat top left;
   height: 21px;
-  margin-top:5px;
+  margin-top: 5px;
 }
+
 .helpButton {
   /*box-shadow: 0 0 0 4px transparent;*/
   /*margin: 0 20px;*/
@@ -597,17 +637,19 @@ li{
   border-radius: 50%;
   border: 3px solid #fff;
   color: white;
-  float:left;
+  float: left;
   height: 30px;
   left: 0;
-  margin:18px;
-  position:fixed;
+  margin: 18px;
+  position: fixed;
   text-align: center;
   /*top: 88%;*/
   vertical-align: middle;
   width: 30px;
-  z-index:8000;
+  z-index: 8000;
 }
+
+
 /*
 .helpButton2 {
   width: ;
@@ -652,7 +694,6 @@ li{
   z-index: 10;
 }
 
-
 .buttonBar {
   height: 99px;
   left: -45px;
@@ -661,35 +702,6 @@ li{
   width: 884px;
   z-index: 100;
 }
-
-
-
-.book-now-save-button {
-  /*background-color: rgb(0, 0, 0);
-  background: url("assets/buttonBar.png");
-  border-color: rgb(254, 254, 254);
-  border-style: solid;
-  border-width: 1.87px;
-  color: rgb(254, 254, 254);
-  float:right;
-  font-family: "Roboto";
-  font-size: 1.10em;
-  height: 32.36px;
-  line-height: 1;
-  opacity: 0.4;*/
-  left: 79%;
-  margin: 0 20px 0 0;
-  position:fixed;
-  top: 78%;
-  vertical-align: middle;
-  width: 123px;
-  /*z-index: 9002;*/
-}
-.button-label {
-  margin: 8px 12px;
-  float:right;
-}
-
 .bookNowButton, .scheduleButton {
   border-color: rgb(254, 254, 254);
   border-style: solid;
@@ -701,9 +713,9 @@ li{
   height: 32.26px;
   line-height: 1;
   margin: 18px 0 18px 15px;
-  float:right;
+  float: right;
   text-align: center;
-  position:relative;
+  position: relative;
   vertical-align: middle;
   width: auto;
   z-index: 23;
@@ -711,22 +723,23 @@ li{
 
 .current-time-bar-wrapper {
   position: fixed;
-  top:315px;
-  left:5%;
-  width:90%;
+  top: 315px;
+  left: 5%;
+  width: 90%;
 }
+
 .current-time-bar-top {
   position: fixed;
-  width:86%;
-  height:2px;
+  width: 86%;
+  height: 2px;
   border-bottom: 1px solid rgb(86, 180, 239);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(82, 168, 236, 0.6);
 }
 
 .current-time-bar-bottom {
   position: relative;
-  width:100%;
-  height:auto;
+  width: 100%;
+  height: auto;
 }
 
 .roomTitle {
@@ -793,10 +806,9 @@ li{
 
 .eventName {
   position: fixed;
-  top:250px;
-  left:50px;
+  top: 250px;
+  left: 50px;
 }
-
 
 .unoccupiedBanner {
   background-color: rgb(126, 207, 0);
@@ -808,6 +820,7 @@ li{
   width: 100%;
   z-index: 6;
 }
+
 .occupiedBanner {
   background-color: rgb(255, 67, 55);
   height: 99px;
@@ -819,7 +832,7 @@ li{
   z-index: 6;
 }
 
-.booking-banner {
+.booking-banner-background, .booking-banner {
   background-size: 800px 83px;
   opacity: 0.902;
   position: absolute;
@@ -827,7 +840,13 @@ li{
   top: 0px;
   width: 800px;
   height: 99px;
+}
+.booking-banner-background
+{
   z-index: 68;
+}
+.booking-banner {
+  z-index: 80;
 }
 
 .agenda-banner {
@@ -840,6 +859,7 @@ li{
   height: 99px;
   z-index: 68;
 }
+
 .cancel-banner {
   background-color: rgb(126, 207, 0);
   background-size: 800px 83px;
@@ -851,7 +871,6 @@ li{
   height: 99px;
   z-index: 68;
 }
-
 
 .clock {
   -moz-transform: matrix( 1.1064626399212, 0, 0, 1.1064626399212, 0, 0);
@@ -927,7 +946,7 @@ textarea {
   height: inherit;
   line-height: 1.6;
   margin-left: 88px;
-  overflow:hidden;
+  overflow: hidden;
   position: fixed;
   resize: none;
   text-align: left;
@@ -1053,6 +1072,7 @@ textarea {
   z-index: 94;
   width: 100px;
 }
+
 .book-now-row-text {
   font-size: 16px;
   font-family: "Roboto";
