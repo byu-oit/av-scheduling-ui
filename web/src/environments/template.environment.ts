@@ -14,5 +14,6 @@ export const environment = {
   showHelpButton: false,
   slack_webhook_url: "SLACK_CHANNEL_INCOMING_WEBHOOK_URL",
   tenant: 'byu.onmicrosoft.com',
+  time_slot_size: 30,
   timezone: 'Mountain Standard Time'
 };
