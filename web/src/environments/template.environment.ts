@@ -2,6 +2,8 @@ export const environment = {
   clientId: 'MICROSOFT_APP_ID',                             // Client/App ID for identity registered with API provider (i.e. https://apps.dev.microsoft.com)
   clientSecret: 'PASSWORD_FOR_SPECIFIED_APP_ID',            // Client Secret for identity registered with API provider (i.e. https://apps.dev.microsoft.com)
   domain: 'byu.edu',                                        // Domain following the resource_id
+  exchange_username: 'exchuser',                            // Username for accessing delegated Exchange resources
+  exchange_password: 'exchpw',                              // Password for user to access delegated Exchange resources         
   hostname: 'YOUR_HOSTNAME',                                // Hostname of the device
   o365: true,                                               // If false, resources are assumed to be hosted in Exchange Server
   oauth_auth_url: 'https://login.microsoftonline.com/byu.onmicrosoft.com/oauth2/v2.0/authorize?client_id={clientId}&response_type=code&response_mode=query',
