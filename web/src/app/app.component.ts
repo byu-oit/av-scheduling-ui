@@ -7,6 +7,7 @@ import { SimpleTimer } from 'ng2-simple-timer';
 
 import { environment } from '../environments/environment';
 import { Event, Timeslot } from './model/o365.model';
+import * as angular from 'angular';
 //import * as data from './config.json';
 /*
 type AttendeeType = "required" | "optional";
@@ -154,6 +155,7 @@ const TIMEZONE = environment.timezone;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 
 export class AppComponent implements OnInit {
 
@@ -514,6 +516,14 @@ export class AppComponent implements OnInit {
   }
   refreshData(): void {
     this.events = [];
+    console.log("refresh data");
+
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://localhost:5000/v1.0/exchange/calendar/events', true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    var data = request.send();
+    console.log(data);
+
     for (var i = 0; i < this.timeSlots.length; i++) {
       var e = new Event();
       e.Subject = "Available";
