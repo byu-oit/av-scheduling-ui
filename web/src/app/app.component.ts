@@ -160,7 +160,7 @@ const TIMEZONE = environment.timezone;
 export class AppComponent implements OnInit {
 
   transitionTimer: SimpleTimer;
-
+  controller = this.controller;
   //events: Event[] = [];
   amPm = AMPM;
   bookEvent: boolean;
@@ -514,15 +514,62 @@ export class AppComponent implements OnInit {
       this.percentOfDayExpended = percentSeconds;
     }, 1000);
   }
+  processData(str): any{
+    console.log(str);
+    var text = JSON.parse(str);
+    var converted = angular.fromJson(str);
+    console.log("converted");
+    console.log(converted)
+  }
   refreshData(): void {
     this.events = [];
     console.log("refresh data");
+    //callback(this.processData.bind(this));
 
     var request = new XMLHttpRequest();
+
+    var callback = this.processData;
+    request.onreadystatechange = function() {
+      //(<any>this).processData(request.responseText);
+      "use strict";
+      if (request.readyState === 4) {
+
+        callback(request.responseText);
+        //console.log(xmlRequest.responseText);
+        var text = JSON.parse(request.responseText);
+        var jsonData = request.responseText;
+        var converted = angular.fromJson(jsonData);
+        var events = [];
+        /*try {
+          var currentData = document.getElementById('data');
+          var current = currentData.innerText;
+          document.removeChild(currentData);
+        }
+        catch{
+          console.log("No current data");
+        }
+
+        var d  = document.createElement("div");
+        d.id = 'jsondata';
+        d.classList.add('hidden');
+        d.innerText = current;
+        //console.log("converted");*/
+        for (var cIter = 0; cIter < converted.length; cIter++){
+          var e = new Event();
+          e.Subject = converted[cIter].subject.toString();
+          e.Start = converted[cIter].start;
+          e.End = converted[cIter].end;
+          events.push(e);
+        }
+        //document.appendChild(d);
+      }
+    }
     request.open('GET', 'http://localhost:5000/v1.0/exchange/calendar/events', true);
     request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Access-Control-Allow-Headers','Content-Type');
+    request.setRequestHeader('Access-Control-Allow-Headers','Content-Type, X-Requested-With');
     var data = request.send();
-    console.log(data);
+
 
     for (var i = 0; i < this.timeSlots.length; i++) {
       var e = new Event();
