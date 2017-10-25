@@ -520,6 +520,13 @@ export class AppComponent implements OnInit {
     var converted = angular.fromJson(str);
     console.log("converted");
     console.log(converted)
+    for (var cIter = 0; cIter < converted.length; cIter++){
+      var e = new Event();
+      e.Subject = converted[cIter].subject.toString();
+      e.Start = converted[cIter].start;
+      e.End = converted[cIter].end;
+      this.events.push(e);
+    }
   }
   refreshData(): void {
     this.events = [];
@@ -592,6 +599,7 @@ export class AppComponent implements OnInit {
   resetModal(): void {
     this.helpPressed = false;
     this.helpRequested = false;
+    this.helpRequest();
     /*var m = document.getElementsByClassName("modal");
     for (var mChild in m) {
       setTimeout(function() {
