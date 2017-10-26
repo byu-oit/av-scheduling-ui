@@ -1,44 +1,21 @@
 import { Component, ElementRef, HostListener, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
-import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
 
 import { SimpleTimer } from 'ng2-simple-timer';
 //import { HelpModal } from './helpModal';
 
 import { environment } from '../environments/environment';
 import { Event, Timeslot } from './model/o365.model';
+//import { Observable } from 'rxjs/Observable';
+//import { Observer } from 'rxjs/Observer';
+//import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/map';
+//import 'rxjs/Rx';
+import 'rxjs/add/operator/toPromise';
+
+
 import * as angular from 'angular';
-//import * as data from './config.json';
-/*
-type AttendeeType = "required" | "optional";
-
-export class Attendee {
-  emailAddress: EmailAddressDetail;
-  type: AttendeeType;
-}
-
-export class EmailAddressDetail {
-  address: string;
-  name: string;
-}
-
-export class Event {
-  id: string;
-  subject: string;
-  start: StartEndTime;
-  end: StartEndTime;
-  location: Location;
-}
-
-export class EventBody {
-  contentType: string;
-  content: string;
-}
-
-export class Location {
-  displayName: string;
-}
-*/
 
 export class Resource {
   id: string;
@@ -46,17 +23,11 @@ export class Resource {
   name: string;
   o365Name: string;
 }
-/*
-export class StartEndTime {
-  dateTime: string;
-  timezone: string;
-}*/
 
 export class TimeIncrement {
   id: number;
   value: string;
   dateTimeValue: Date;
-  //milliseconds: number;
 }
 
 const RESOURCE: Resource = {
@@ -65,10 +36,8 @@ const RESOURCE: Resource = {
   o365Name: environment.resource_id,
   busy: false
 }
-//const hostname = (<any>data).hostname;
+
 const hostname = environment.hostname;
-//const refHours: string[] = ["8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8"];
-//const refHours: string[] = ["8", "9", "11", "1", "4"];
 const HOURS: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 const MINUTES: string[] = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"]
 const AMPM: string[] = ["AM", "PM"]
@@ -76,77 +45,6 @@ const AMPM: string[] = ["AM", "PM"]
 declare var newEvent: Event;
 
 const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear", "My schedule is wide open"]
-
-/*const EVENTS: Event[] = [{
-  "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-TBAAA=",
-  "subject": "Time Reporting",
-  "start": {
-    "dateTime": "2017-10-13T08:00:00.0000000",
-    "timezone": "UTC"
-  },
-  "end": {
-    "dateTime": "2017-10-13T09:00:00.0000000",
-    "timezone": "UTC"
-  },
-  "location": {
-    "displayName": ""
-  }
-},
-{
-  "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-TAAAA=",
-  "subject": "Lunch",
-  "start": {
-    "dateTime": "2017-10-13T09:00:00.0000000",
-    "timezone": "UTC"
-  },
-  "end": {
-    "dateTime": "2017-10-13T10:00:00.0000000",
-    "timezone": "UTC"
-  },
-  "location": {
-    "displayName": ""
-  }
-},
-{
-  "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S-AAA=",
-  "subject": "Devotional",
-  "start": {
-    "dateTime": "2017-10-13T11:00:00.0000000",
-    "timezone": "UTC"
-  },
-  "end": {
-    "dateTime": "2017-10-13T01:00:00.0000000",
-    "timezone": "UTC"
-  },
-  "location": {
-    "displayName": ""
-  }
-},
-{
-  "id": "AAMkAGYyOWNlMTE5LTIwMjgtNGEwZC1iMDBhLTRkNDE2MDZmMGNkMABGAAAAAACvXGSow_mFT5i0N4qoQmUZBwAjYARZJafSQaeN02GBwVpfAAAAAAENAACRqXvvirntRISc28yfkWLeAAAKQ-S_AAA=",
-  "subject": "Show and  Tell",
-  "start": {
-    "dateTime": "2017-10-13T01:00:00.0000000",
-    "timezone": "UTC"
-  },
-  "end": {
-    "dateTime": "2017-10-13T04:00:00.0000000",
-    "timezone": "UTC"
-  },
-  "location": {
-    "displayName": ""
-  }
-}
-]
-*/
-/*
-const DEFAULTATTENDEE: Attendee = {
-  emailAddress: {
-    address: "itb-1109@byu.edu",
-    name: "ITB-1109"
-  },
-  type: "required"
-}*/
 
 const TIMEZONE = environment.timezone;
 
@@ -158,10 +56,8 @@ const TIMEZONE = environment.timezone;
 
 
 export class AppComponent implements OnInit {
-
   transitionTimer: SimpleTimer;
   controller = this.controller;
-  //events: Event[] = [];
   amPm = AMPM;
   bookEvent: boolean;
   calendarWorkdayEndHour: number;
@@ -197,13 +93,11 @@ export class AppComponent implements OnInit {
   timeIncrement = environment.time_slot_size; // minutes to increment select boxes by
   timeSlots: Timeslot[] = [];
   title = 'Room Scheduler';
-  //todayMillis: number;
   schedulingWindow = 5; // minutes after a time window start time when the resource still be scheduled
   unoccupied: boolean;
   validTimeIncrements: TimeIncrement[] = [];
   percentOfDayExpended: number;
 
-  //constructor( @Inject(DOCUMENT) private document: Document) { }
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -514,68 +408,45 @@ export class AppComponent implements OnInit {
       this.percentOfDayExpended = percentSeconds;
     }, 1000);
   }
-  processData(str): any{
-    console.log(str);
-    var text = JSON.parse(str);
-    var converted = angular.fromJson(str);
-    console.log("converted");
-    console.log(converted)
-    for (var cIter = 0; cIter < converted.length; cIter++){
-      var e = new Event();
-      e.Subject = converted[cIter].subject.toString();
-      e.Start = converted[cIter].start;
-      e.End = converted[cIter].end;
-      this.events.push(e);
-    }
-  }
   refreshData(): void {
     this.events = [];
     console.log("refresh data");
-    //callback(this.processData.bind(this));
+    const headers = new HttpHeaders().set("Content-Type", "application/json").set("Access-Control-Allow-Headers", "Content-Type").set(
+      "Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
 
-    var request = new XMLHttpRequest();
-
-    var callback = this.processData;
-    request.onreadystatechange = function() {
-      //(<any>this).processData(request.responseText);
-      "use strict";
-      if (request.readyState === 4) {
-
-        callback(request.responseText);
-        //console.log(xmlRequest.responseText);
-        var text = JSON.parse(request.responseText);
-        var jsonData = request.responseText;
-        var converted = angular.fromJson(jsonData);
-        var events = [];
-        /*try {
-          var currentData = document.getElementById('data');
-          var current = currentData.innerText;
-          document.removeChild(currentData);
+    /*this.http.get("http://localhost:5000/v1.0/exchange/calendar/events", { headers }).map((res: Response) => res.json()).subscribe(
+      data => {
+        if (data.success && data.token) {
+          this.saveJwt(data.token);
+        } else {
+          this.deleteJwt();
         }
-        catch{
-          console.log("No current data");
-        }
+        // put data into observavle
+        this.observer.next({
+          data.
+          message: data.message,
+          type: data.success
+        });
+        //  return JSON.stringify(data);
+      },
+      err => {
+        // put data into observavle
+        this.observer.next({
+          message: 'Error connecting to server',
+          type: false
+        })
+        //return JSON.stringify(err);
+      },
+      () => { }
+    );*/
 
-        var d  = document.createElement("div");
-        d.id = 'jsondata';
-        d.classList.add('hidden');
-        d.innerText = current;
-        //console.log("converted");*/
-        for (var cIter = 0; cIter < converted.length; cIter++){
-          var e = new Event();
-          e.Subject = converted[cIter].subject.toString();
-          e.Start = converted[cIter].start;
-          e.End = converted[cIter].end;
-          events.push(e);
-        }
-        //document.appendChild(d);
-      }
-    }
-    request.open('GET', 'http://localhost:5000/v1.0/exchange/calendar/events', true);
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.setRequestHeader('Access-Control-Allow-Headers','Content-Type');
-    request.setRequestHeader('Access-Control-Allow-Headers','Content-Type, X-Requested-With');
-    var data = request.send();
+    //var text = JSON.parse(resp.toString());
+    var data = this.http.get("http://localhost:5000/v1.0/exchange/calendar/events",{headers})
+                   .toPromise()
+                   .then((response: Response) => response.json())
+                   .catch();
+    console.log("BUNGHOLIO");
+    console.log(data);
 
 
     for (var i = 0; i < this.timeSlots.length; i++) {
@@ -585,7 +456,7 @@ export class AppComponent implements OnInit {
       e.End = this.timeSlots[i].End;
       this.events.push(e);
     }
-    //console.log(this.events);
+
     this.consolidate_events();
   }
   reset(): void {
@@ -599,7 +470,6 @@ export class AppComponent implements OnInit {
   resetModal(): void {
     this.helpPressed = false;
     this.helpRequested = false;
-    this.helpRequest();
     /*var m = document.getElementsByClassName("modal");
     for (var mChild in m) {
       setTimeout(function() {
