@@ -42,3 +42,6 @@ testem.log
 Thumbs.db
 
 /web/src/environments/environment.*
+
+# sqlite
+*.db
