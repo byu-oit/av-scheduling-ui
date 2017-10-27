@@ -27,7 +27,7 @@
   <div class="buttonBarBackground"></div>
   <div class="buttonWrapper">
     <div *ngIf="showHelpButton" (click)="helpClick()" class="helpButton font-size-10 font-sans">?</div>
-    <div class="bookNowButton" (click)="bookNow()">
+    <div *ngIf="allowBookNowFunction" class="bookNowButton" (click)="bookNow()">
       <div class="plusIcon buttonIcon"></div>
       <div class="button-label">BOOK NOW</div>
     </div>
