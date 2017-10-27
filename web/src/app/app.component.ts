@@ -192,7 +192,7 @@ export class AppComponent implements OnInit {
   resource = RESOURCE;
   showAgenda: boolean;
   showHelpButton: boolean;
-  allowBookNowFunction = environment.allow_book_now_function;
+  allowBookNowFunction = false;
   selectedEvent: Event;
   selectedStartValue: number;
   timeIncrement = environment.time_slot_size; // minutes to increment select boxes by
@@ -666,6 +666,7 @@ export class AppComponent implements OnInit {
     setInterval(() => {
       this.date = new Date();
       this.timePeriod = this.timeSlots[this.currentTimePeriod()];
+      this.percent();
     }, 1000);
   }
 }
