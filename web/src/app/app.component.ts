@@ -162,6 +162,7 @@ export class AppComponent implements OnInit {
   transitionTimer: SimpleTimer;
   controller = this.controller;
   //events: Event[] = [];
+  allowBookNowFunction = environment.allow_book_now_function;
   amPm = AMPM;
   bookEvent: boolean;
   calendarWorkdayEndHour: number;
@@ -191,8 +192,7 @@ export class AppComponent implements OnInit {
   refHours: string[] = [];
   resource = RESOURCE;
   showAgenda: boolean;
-  showHelpButton: boolean;
-  allowBookNowFunction = false;
+  showHelpButton = environment.showHelpButton;
   selectedEvent: Event;
   selectedStartValue: number;
   timeIncrement = environment.time_slot_size; // minutes to increment select boxes by
@@ -301,7 +301,6 @@ export class AppComponent implements OnInit {
     this.newEvent = null;
     this.occupied = false;
     this.showAgenda = false;
-    this.showHelpButton = environment.showHelpButton;
     this.selectedEvent = null;
     this.selectedStartValue = 0;
     this.unoccupied = !(this.occupied);
@@ -476,17 +475,28 @@ export class AppComponent implements OnInit {
     //var timeDiff =
   }
   helpClick(): void {
-    this.helpRequested = true;
-    this.transitionTimer.newTimer('modalTransition', 1);
-    this.subscribeHelpTimer();
+    this.helpPressed = true;
+    //this.transitionTimer.newTimer('modalTransition', 1);
+    //this.subscribeHelpTimer();
   }
   helpInformationRequest(): void {
     this.resetModal();
     // show information;
   }
   helpRequest(): void {
+    this.helpPressed = false;
+    this.helpRequested = true;
     var resp = this.http.post(environment.slack_webhook_url, "{\"text\":\"Help request from " + this.resource.name + "\"}").subscribe();
     console.log(resp);
+
+    var tmp = setTimeout(function() {
+      this.cancellation = false;
+      this.showAgenda = false;
+      this.bookEvent = false;
+
+      this.newEventEndTimeId = null;
+      this.newEventStartTimeId = null;
+    }, 3000);
   }
   modalTimerCallback(): void {
     if (this.modalTransitionTimerCounter <= this.modalTimeout) {
@@ -515,13 +525,13 @@ export class AppComponent implements OnInit {
       this.percentOfDayExpended = percentSeconds;
     }, 1000);
   }
-  processData(str): any{
+  processData(str): any {
     console.log(str);
     var text = JSON.parse(str);
     var converted = angular.fromJson(str);
     console.log("converted");
     console.log(converted)
-    for (var cIter = 0; cIter < converted.length; cIter++){
+    for (var cIter = 0; cIter < converted.length; cIter++) {
       var e = new Event();
       e.Subject = converted[cIter].subject.toString();
       e.Start = converted[cIter].start;
@@ -562,7 +572,7 @@ export class AppComponent implements OnInit {
         d.classList.add('hidden');
         d.innerText = current;
         //console.log("converted");*/
-        for (var cIter = 0; cIter < converted.length; cIter++){
+        for (var cIter = 0; cIter < converted.length; cIter++) {
           var e = new Event();
           e.Subject = converted[cIter].subject.toString();
           e.Start = converted[cIter].start;
@@ -574,8 +584,8 @@ export class AppComponent implements OnInit {
     }
     request.open('GET', 'http://localhost:5000/v1.0/exchange/calendar/events', true);
     request.setRequestHeader('Content-Type', 'application/json');
-    request.setRequestHeader('Access-Control-Allow-Headers','Content-Type');
-    request.setRequestHeader('Access-Control-Allow-Headers','Content-Type, X-Requested-With');
+    request.setRequestHeader('Access-Control-Allow-Headers', 'Content-Type');
+    request.setRequestHeader('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
     var data = request.send();
 
 
@@ -600,14 +610,13 @@ export class AppComponent implements OnInit {
   resetModal(): void {
     this.helpPressed = false;
     this.helpRequested = false;
-    this.helpRequest();
-    /*var m = document.getElementsByClassName("modal");
+    var m = document.getElementsByClassName("modalContent");
     for (var mChild in m) {
       setTimeout(function() {
         var m = document.getElementsByClassName("modal")[0];
         m.classList.add("hidden");
         }, 2000);
-      }*/
+      }
   }
   resetTransitionTimer(): void {
     this.transitionTimer.delTimer('modalTransition');
@@ -636,10 +645,6 @@ export class AppComponent implements OnInit {
   selectById(selector: string): HTMLElement {
     var element = document.getElementById(selector);
     return element;
-  }
-  sendHelp(): void {
-    this.resetModal();
-    //send help
   }
   submitEvent(tmpSubject: string, tmpStartTime: string, tmpEndTime: string): void {
     var req: Event = new Event();

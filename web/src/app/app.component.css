@@ -180,33 +180,56 @@
 
 .hidden {
   visibility: hidden;
+  display: none;
 }
 
 .modalContent {
   background-size: auto;
   /*background-color: #F2F2F2;*/
   background-color: white;
+  border-radius: 8px;
   color: #141414;
   width: 80%;
-  height: 33%;
+  height: 76%;
   position: fixed;
   vertical-align: middle;
-  top: 33%;
+  top: 12%;
   left: 10%;
   text-align: center;
 }
+.modalContentInnerContainer {
+  padding: 55px;
+  position: relative;
+  font-size: 3.2em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+}
 
+.iconButton {
+  /*width: 33%;
+  height:auto;*/
+  position: relative;
+  float: left;
+  padding:60px;
+  font-size:xx-large;
+}
+.helpLabel {
+  font-size: xx-large;
+}
 .help-cancel {
+  background-repeat: no-repeat;
+  background-size: 23px 23px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
+  border-width: 1.87px;
+  height: 23px;
+  left: 0;
+  margin: 16px auto auto 16px;
   position: relative;
   top: 0;
-  left: 0;
-  margin: 5px auto auto 5px;
-  width: 38px;
-  height: 38px;
+  width: 23px;
   z-index: 9800;
-  background-repeat: no-repeat;
-  background-size: 36px 36px;
-  background-image: url('assets/X.png')
+  /*background-image: url('assets/X.png')*/
 }
 
 .help-message-background {}
