@@ -31,7 +31,7 @@
       <div class="plusIcon buttonIcon"></div>
       <div class="button-label">BOOK NOW</div>
     </div>
-    <div class="scheduleButton" (click)="scheduleEvent()">
+    <div *ngIf="allow_book_now_function" class="scheduleButton" (click)="scheduleEvent()">
       <div class="calendarIcon buttonIcon"></div>
       <div class="button-label">VIEW SCHEDULE</div>
     </div>
