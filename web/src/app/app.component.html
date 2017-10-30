@@ -219,10 +219,11 @@
 <div *ngIf="helpPressed || helpRequested" class="modal helpModal stayOnTop" (click)="resetModal()">
 </div>
 <div *ngIf="helpPressed" class="modalContent stayOnTop">
-  <div class="help-cancel" (click)="resetModal()"></div>
+  <div class="help-cancel" (click)="resetModal()">
+    <i class="material-icons">close</i>
+  </div>
   <div class="help-message-background"></div>
   <div class="help-message-container">
-
     <div class="font-sans helpLabel">
       What sort of help would you like?
     </div>
