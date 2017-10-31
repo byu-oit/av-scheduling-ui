@@ -393,22 +393,6 @@ export class AppComponent implements OnInit {
       this.percentOfDayExpended = percentSeconds;
     }, 1000);
   }
-  /*processData(res){
-
-    if (res.status < 200 || res.status >= 300) {
-      throw new Error('Bad response status: ' + res.status);
-    }
-    console.log("DATA!!");
-    var converted = res.json();
-    console.log(converted);
-    for (var cIter = 0; cIter < converted.length; cIter++) {
-       var e = new Event();
-       e.Subject = converted[cIter].subject.toString();
-       e.Start = converted[cIter].start;
-       e.End = converted[cIter].end;
-       this.events.push(e);
-     }
-  }*/
   refreshData(): void {
     this.events = [];
     var url = 'http://' + ip + ':5000/v1.0/exchange/calendar/events';
@@ -422,14 +406,14 @@ export class AppComponent implements OnInit {
           },this);
         });
 
-    for (var i = 0; i < this.timeSlots.length; i++) {
+  /*  for (var i = 0; i < this.timeSlots.length; i++) {
       var e = new Event();
       e.Subject = "Available";
       e.Start = this.timeSlots[i].Start;
       e.End = this.timeSlots[i].End;
       this.events.push(e);
     }
-    this.consolidate_events();
+    this.consolidate_events();*/
   }
   reset(): void {
     this.cancellation = false;
