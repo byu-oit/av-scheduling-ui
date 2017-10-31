@@ -57,7 +57,9 @@
     "styleExt": "css",
     "component": {},
     "serve": {
-      "port": 8011
+      "port": 8011,
+	"host": "0.0.0.0",
+	"disableHostCheck": true
     }
   }
 }
