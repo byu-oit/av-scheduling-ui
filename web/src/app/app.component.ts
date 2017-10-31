@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
   calendarWorkdayStartHour: number;
   cancellation: boolean;
   currentEvent: Event;
+  currentTimeout: any;
   eventData: string;
   timePeriod: Timeslot;
   date: Date;
@@ -175,10 +176,10 @@ export class AppComponent implements OnInit {
     this.helpRequested = false;
     this.helpPressed = false;
     this.newEvent = null;
-    if (this.currentEvent != null){
+    if (this.currentEvent != null) {
       this.occupied = true;
     }
-    else{
+    else {
       this.occupied = false;
     }
     //this.occupied = false;
@@ -288,8 +289,8 @@ export class AppComponent implements OnInit {
   }
   currentMeeting() {
     var now = new Date();
-    for (var i=0; i<this.events.length; i++){
-      if ((new Date(this.events[i].Start) <= now) && (new Date(this.events[i].End)>= now)){
+    for (var i = 0; i < this.events.length; i++) {
+      if ((new Date(this.events[i].Start) <= now) && (new Date(this.events[i].End) >= now)) {
         this.currentEvent = this.events[i];
         console.log(this.currentEvent);
         return;
@@ -360,10 +361,10 @@ export class AppComponent implements OnInit {
     return (duration);
   }
   evalTime(): void {
-    if (this.currentEvent != null){
+    if (this.currentEvent != null) {
       this.occupied = true;
     }
-    else{
+    else {
       this.occupied = false;
     }
 
@@ -371,6 +372,7 @@ export class AppComponent implements OnInit {
   }
   helpClick(): void {
     this.helpPressed = true;
+    this.startScreenResetTimeout(10);
   }
   helpInformationRequest(): void {
     this.resetModal();
@@ -380,16 +382,9 @@ export class AppComponent implements OnInit {
     this.helpPressed = false;
     this.helpRequested = true;
     var resp = this.http.post(environment.slack_webhook_url, "{\"text\":\"Help request from " + this.resource.name + "\"}").subscribe();
-    console.log(resp);
+    //console.log(resp);
 
-    var tmp = setTimeout(function() {
-      this.cancellation = false;
-      this.showAgenda = false;
-      this.bookEvent = false;
-
-      this.newEventEndTimeId = null;
-      this.newEventStartTimeId = null;
-    }, 3000);
+    this.startScreenResetTimeout(3);
   }
   modalTimerCallback(): void {
     if (this.modalTransitionTimerCounter <= this.modalTimeout) {
@@ -422,26 +417,26 @@ export class AppComponent implements OnInit {
     this.events = [];
     var url = 'http://' + ip + ':5000/v1.0/exchange/calendar/events';
     this.http.get(url).subscribe(data => {
-        angular.forEach(data,function(obj){
-            var e = new Event();
-            e.Subject = obj.subject;
-            e.Start = obj.start;
-            e.End = obj.end;
-            this.events.push(e);
-          },this);
-        });
+      angular.forEach(data, function(obj) {
+        var e = new Event();
+        e.Subject = obj.subject;
+        e.Start = obj.start;
+        e.End = obj.end;
+        this.events.push(e);
+      }, this);
+    });
 
-  /*  for (var i = 0; i < this.timeSlots.length; i++) {
-      var e = new Event();
-      e.Subject = "Available";
-      e.Start = this.timeSlots[i].Start;
-      e.End = this.timeSlots[i].End;
-      this.events.push(e);
-    }
-    this.consolidate_events();*/
-  this.currentMeeting();
+    /*  for (var i = 0; i < this.timeSlots.length; i++) {
+        var e = new Event();
+        e.Subject = "Available";
+        e.Start = this.timeSlots[i].Start;
+        e.End = this.timeSlots[i].End;
+        this.events.push(e);
+      }
+      this.consolidate_events();*/
+    this.currentMeeting();
     console.log(this.events);
-  console.log(this.currentEvent);
+    console.log(this.currentEvent);
   }
   reset(): void {
     this.cancellation = false;
@@ -459,7 +454,7 @@ export class AppComponent implements OnInit {
       setTimeout(function() {
         var m = document.getElementsByClassName("modal")[0];
         m.classList.add("hidden");
-      }, 2000);
+      }, 2000,this);
     }
   }
   resetTransitionTimer(): void {
@@ -467,7 +462,8 @@ export class AppComponent implements OnInit {
   }
   scheduleEvent(): void {
     this.reset();
-    this.refreshData();
+    this.startScreenResetTimeout(10);
+    //this.refreshData();
     this.showAgenda = true;
   }
   scrollReferenceEvent(elem): void {
@@ -490,6 +486,19 @@ export class AppComponent implements OnInit {
     var element = document.getElementById(selector);
     return element;
   }
+  startScreenResetTimeout(ttl): void { //ttl in s
+    var t = ttl * 1000; //convert s to ms
+    var that = this;
+    this.stopScreenResetTimeout();
+    this.currentTimeout = setTimeout(function(){
+      that.reset();
+    },t);
+  }
+  stopScreenResetTimeout(): void {
+    if (this.currentTimeout != null) {
+      clearTimeout(this.currentTimeout);
+    }
+  }
   submitEvent(tmpSubject: string, tmpStartTime: string, tmpEndTime: string): void {
     var req: Event = new Event();
     req.Subject = tmpSubject;
@@ -501,7 +510,7 @@ export class AppComponent implements OnInit {
 
     this.refreshData();
   }
-  subscribeHelpTimer() {
+  subscribeHelpTimer(): void {
     if (this.modalTransitionTimerID) {
       // Unsubscribe if timer Id is defined
       this.transitionTimer.unsubscribe(this.modalTransitionTimerID);
