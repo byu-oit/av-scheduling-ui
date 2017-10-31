@@ -175,7 +175,13 @@ export class AppComponent implements OnInit {
     this.helpRequested = false;
     this.helpPressed = false;
     this.newEvent = null;
-    this.occupied = false;
+    if (this.currentEvent != null){
+      this.occupied = true;
+    }
+    else{
+      this.occupied = false;
+    }
+    //this.occupied = false;
     this.showAgenda = false;
     this.selectedEvent = null;
     this.selectedStartValue = 0;
@@ -280,6 +286,18 @@ export class AppComponent implements OnInit {
       }
     }
   }
+  currentMeeting() {
+    var now = new Date();
+    for (var i=0; i<this.events.length; i++){
+      if ((new Date(this.events[i].Start) <= now) && (new Date(this.events[i].End)>= now)){
+        this.currentEvent = this.events[i];
+        console.log(this.currentEvent);
+        return;
+      }
+    }
+    this.currentEvent = null;
+    console.log(this.currentEvent);
+  }
   /*getTimePeriod(d:Date): number {
     var t = new Date(d.getDate());
     var msIn15Min: number = 900000;
@@ -341,8 +359,15 @@ export class AppComponent implements OnInit {
     }
     return (duration);
   }
-  evalTime(time: Date): void {
-    //var timeDiff =
+  evalTime(): void {
+    if (this.currentEvent != null){
+      this.occupied = true;
+    }
+    else{
+      this.occupied = false;
+    }
+
+    this.unoccupied = !(this.occupied);
   }
   helpClick(): void {
     this.helpPressed = true;
@@ -414,6 +439,9 @@ export class AppComponent implements OnInit {
       this.events.push(e);
     }
     this.consolidate_events();*/
+  this.currentMeeting();
+    console.log(this.events);
+  console.log(this.currentEvent);
   }
   reset(): void {
     this.cancellation = false;
@@ -488,6 +516,8 @@ export class AppComponent implements OnInit {
       this.date = new Date();
       this.timePeriod = this.timeSlots[this.currentTimePeriod()];
       this.percent();
+      this.currentMeeting();
+      this.evalTime();
     }, 1000);
   }
 }
