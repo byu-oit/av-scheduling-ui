@@ -782,15 +782,14 @@ li {
   width: 86%;
   height: 2px;
   border-bottom: 1px solid rgb(86, 180, 239);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(82, 168, 236, 0.6);
-  display:none;
+  display: none;
 }
 
 .current-time-bar-bottom {
   position: relative;
   width: 100%;
   height: auto;
-  display:none;
+  display: none;
 }
 
 .roomTitle {
