@@ -1,7 +1,6 @@
 import { Component, ElementRef, HostListener, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
-import { DataService } from './data';
 import { SimpleTimer } from 'ng2-simple-timer';
 
 import { environment } from '../environments/environment';
