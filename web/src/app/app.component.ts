@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { SimpleTimer } from 'ng2-simple-timer';
@@ -6,6 +6,9 @@ import { SimpleTimer } from 'ng2-simple-timer';
 import { environment } from '../environments/environment';
 import { Event, Timeslot } from './model/o365.model';
 import * as angular from 'angular';
+import { MdSlideToggleChange } from '@angular/material';
+import { IKeyboardLayout, MD_KEYBOARD_LAYOUTS, MdKeyboardComponent, MdKeyboardRef, MdKeyboardService } from '@ngx-material-keyboard/core';
+
 
 export class Resource {
   id: string;
@@ -43,6 +46,8 @@ const TIMEZONE = environment.timezone;
 
 export class AppComponent implements OnInit {
 
+  private _keyboardRef: MdKeyboardRef<MdKeyboardComponent>;
+
   transitionTimer: SimpleTimer;
   controller = this.controller;
   allowBookNowFunction = environment.allow_book_now_function;
@@ -54,14 +59,19 @@ export class AppComponent implements OnInit {
   currentTimeout: any;
   eventData: string;
   timePeriod: Timeslot;
+  darkTheme: boolean;
   date: Date;
   dayMillis: number;
+  defaultLocale: string;
+  duration: number;
   timeOptions = {
     hour: "2-digit", minute: "2-digit"
   };
   events: Event[] = [];
+  hasAction: boolean;
   helpRequested: boolean;
   helpPressed: boolean;
+  layout: string;
   LOCALE = "en-us";
   modalTransitionTimerCounter = 0;
   modalTransitionTimerID = "modalTransitionTimer";
@@ -84,10 +94,30 @@ export class AppComponent implements OnInit {
   unoccupied: boolean;
   validTimeIncrements: TimeIncrement[] = [];
   percentOfDayExpended: number;
+  layouts: {
+    name: string;
+    layout: IKeyboardLayout;
+  }[];
 
-  constructor(private http: HttpClient) { }
+  get keyboardVisible(): boolean {
+    return this._keyboardService.isOpened;
+  }
+
+  constructor(private http: HttpClient,
+    private _keyboardService: MdKeyboardService,
+    @Inject(LOCALE_ID) public locale,
+    @Inject(MD_KEYBOARD_LAYOUTS) private _layouts) { }
 
   ngOnInit(): void {
+    this.defaultLocale = ` ${this.locale}`.slice(1);
+    this.layouts = Object
+      .keys(this._layouts)
+      .map((name: string) => ({
+        name: name,
+        layout: this._layouts[name]
+      }))
+      .sort((a, b) => a.layout.name.localeCompare(b.layout.name));
+
     document.addEventListener("touchstart", function() { }, true);
     this.utcTime();
 
@@ -166,7 +196,7 @@ export class AppComponent implements OnInit {
       tmpTime1 = null;
       tmpTime2 = null;
     }
-    console.log(this.timeSlots);
+    //console.log(this.timeSlots);
 
     this.bookEvent = false;
     this.cancellation = false;
@@ -204,6 +234,27 @@ export class AppComponent implements OnInit {
     }*/
     this.refreshData();
 
+  }
+
+  openKeyboard(locale = this.defaultLocale) {
+    this._keyboardRef = this._keyboardService.open(locale, {
+      darkTheme: this.darkTheme,
+      duration: this.duration,
+      hasAction: this.hasAction
+    });
+  }
+  closeCurrentKeyboard() {
+    if (this._keyboardRef) {
+      this._keyboardRef.dismiss();
+    }
+  }
+  toggleDarkTheme(toggle: MdSlideToggleChange) {
+    this.darkTheme = toggle.checked;
+    this._keyboardRef.darkTheme = toggle.checked;
+  }
+  toggleAction(toggle: MdSlideToggleChange) {
+    this.hasAction = toggle.checked;
+    this._keyboardRef.hasAction = toggle.checked;
   }
 
   availabilityClass(e: Event): string {
@@ -292,12 +343,12 @@ export class AppComponent implements OnInit {
     for (var i = 0; i < this.events.length; i++) {
       if ((new Date(this.events[i].Start) <= now) && (new Date(this.events[i].End) >= now)) {
         this.currentEvent = this.events[i];
-        console.log(this.currentEvent);
+        //console.log(this.currentEvent);
         return;
       }
     }
     this.currentEvent = null;
-    console.log(this.currentEvent);
+    //console.log(this.currentEvent);
   }
   /*getTimePeriod(d:Date): number {
     var t = new Date(d.getDate());
@@ -435,8 +486,8 @@ export class AppComponent implements OnInit {
       }
       this.consolidate_events();*/
     this.currentMeeting();
-    console.log(this.events);
-    console.log(this.currentEvent);
+    //console.log(this.events);
+    //console.log(this.currentEvent);
   }
   reset(): void {
     this.cancellation = false;
