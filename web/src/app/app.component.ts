@@ -462,7 +462,7 @@ export class AppComponent implements OnInit {
   }
   scheduleEvent(): void {
     this.reset();
-    this.startScreenResetTimeout(10);
+    //this.startScreenResetTimeout(10);
     //this.refreshData();
     this.showAgenda = true;
   }
