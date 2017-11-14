@@ -39,7 +39,7 @@ const TIMEZONE = environment.timezone;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css','./keyboard.scss']
+  styleUrls: ['./app.component.css','./keyboard.css']
 })
 
 
