@@ -2,9 +2,12 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms'; // <-- NgModel lives here
 import { MomentModule } from 'angular2-moment';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-//import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule, ProgressBarModule, GrowlModule } from 'primeng/primeng';
+import { MdInputModule } from '@angular/material';
+import { MdKeyboardModule } from '@ngx-material-keyboard/core';
 
 import { AppComponent } from './app.component';
 import { AppState, InternalStateType } from './app.service';
@@ -28,14 +31,20 @@ type StoreType = {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     MomentModule,
     HttpClientModule,
+    HttpModule,
+
     NgbModule.forRoot(),
     InputTextModule,
     ProgressBarModule,
-    GrowlModule
+    GrowlModule,
+
+    MdInputModule,
+    MdKeyboardModule,
     //NgVirtualKeyboardModule
   ],
   providers: [SimpleTimer,AuthProvider,ValueService,AppState],

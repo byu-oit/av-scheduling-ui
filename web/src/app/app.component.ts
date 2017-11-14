@@ -1,10 +1,12 @@
-import { Component, ElementRef, HostListener, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { SimpleTimer } from 'ng2-simple-timer';
 
 import { environment } from '../environments/environment';
 import { Event, Timeslot } from './model/o365.model';
+
+import { IKeyboardLayout, MD_KEYBOARD_LAYOUTS, MdKeyboardComponent, MdKeyboardRef, MdKeyboardService } from '@ngx-material-keyboard/core';
 import * as angular from 'angular';
 
 export class Resource {
@@ -37,7 +39,7 @@ const TIMEZONE = environment.timezone;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css','./keyboard.scss']
 })
 
 
@@ -85,10 +87,47 @@ export class AppComponent implements OnInit {
   validTimeIncrements: TimeIncrement[] = [];
   percentOfDayExpended: number;
 
-  constructor(private http: HttpClient) { }
+  private _keyboardRef: MdKeyboardRef<MdKeyboardComponent>;
+
+  darkTheme: boolean;
+
+  duration: number;
+
+  hasAction: boolean;
+
+  isDebug: boolean;
+
+  defaultLocale: string;
+
+  layout: string;
+
+  layouts: {
+    name: string;
+    layout: IKeyboardLayout;
+  }[];
+
+  get keyboardVisible(): boolean {
+    return this._keyboardService.isOpened;
+  }
+
+  constructor(private _keyboardService: MdKeyboardService,
+    @Inject(LOCALE_ID) public locale,
+    @Inject(MD_KEYBOARD_LAYOUTS) private _layouts,
+    private http: HttpClient) { }
 
   ngOnInit(): void {
     document.addEventListener("touchstart", function() { }, true);
+
+    this.defaultLocale = ` ${this.locale}`.slice(1);
+    this.layouts = Object
+      .keys(this._layouts)
+      .map((name: string) => ({
+        name: name,
+        layout: this._layouts[name]
+      }))
+      .sort((a, b) => a.layout.name.localeCompare(b.layout.name));
+
+    this.darkTheme = true;
     this.utcTime();
 
     this.transitionTimer = new SimpleTimer();
@@ -204,6 +243,21 @@ export class AppComponent implements OnInit {
     }*/
     this.refreshData();
 
+  }
+
+  openKeyboard(locale = this.defaultLocale) {
+    this._keyboardRef = this._keyboardService.open(locale, {
+      darkTheme: this.darkTheme,
+      duration: this.duration,
+      hasAction: this.hasAction,
+      isDebug: this.isDebug
+    });
+  }
+
+  closeCurrentKeyboard() {
+    if (this._keyboardRef) {
+      this._keyboardRef.dismiss();
+    }
   }
 
   availabilityClass(e: Event): string {
