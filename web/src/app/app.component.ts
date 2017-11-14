@@ -118,7 +118,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     document.addEventListener("touchstart", function() { }, true);
 
-    this.defaultLocale = ` ${this.locale}`.slice(1);
+    this.defaultLocale = ` ${this.LOCALE}`.slice(1);
     this.layouts = Object
       .keys(this._layouts)
       .map((name: string) => ({
@@ -127,7 +127,7 @@ export class AppComponent implements OnInit {
       }))
       .sort((a, b) => a.layout.name.localeCompare(b.layout.name));
 
-    this.darkTheme = true;
+    this.darkTheme=true;
     this.utcTime();
 
     this.transitionTimer = new SimpleTimer();
@@ -247,7 +247,8 @@ export class AppComponent implements OnInit {
 
   openKeyboard(locale = this.defaultLocale) {
     this._keyboardRef = this._keyboardService.open(locale, {
-      darkTheme: this.darkTheme,
+      //darkTheme: this.darkTheme,
+      darkTheme: true,
       duration: this.duration,
       hasAction: this.hasAction,
       isDebug: this.isDebug
@@ -258,6 +259,10 @@ export class AppComponent implements OnInit {
     if (this._keyboardRef) {
       this._keyboardRef.dismiss();
     }
+  }
+  toggleDarkTheme(dark: boolean) {
+    this.darkTheme = dark;
+    this._keyboardRef.darkTheme = dark;
   }
 
   availabilityClass(e: Event): string {

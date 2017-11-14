@@ -55,15 +55,15 @@
     <div class="book-now-form">
       <div class="book-now-title-block font-size-3">
         <label class="book-now-title">TITLE</label>
-        <md-input-container name="book-now-title-input" class="font-serif font-size-2 white" [(ngModel)]="newEventTitle">
+        <!--<md-input-container name="book-now-title-input" class="font-serif font-size-2 white" [(ngModel)]="newEventTitle">
           <input
           mdInput
           mdKeyboard
           (click)="openKeyboard(locale)"
           placeholder="Locale"
           value="Sushi" >
-        </md-input-container>
-        <!--<textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="font-serif font-size-2 white" ng-virtual-keyboard ng-virtual-keyboard-layout="alphanumeric" ng-virtual-keyboard-placeholder="Ad-hoc meeting" [(ngModel)]="newEventTitle"></textarea>-->
+        </md-input-container>-->
+        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="font-serif font-size-2 white" mdInput mdKeyboard (click)="openKeyboard(locale)"ng-virtual-keyboard ng-virtual-keyboard-layout="alphanumeric" placeholder="Ad-hoc meeting" [(ngModel)]="newEventTitle"></textarea>
       </div>
       <div class="book-now-start-block">
         <div id="book-now-start-label">
