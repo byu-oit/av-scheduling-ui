@@ -63,7 +63,9 @@
           placeholder="Locale"
           value="Sushi" >
         </md-input-container>-->
+        <md-input-container>
         <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="font-serif font-size-2 white" mdInput mdKeyboard (click)="openKeyboard(locale)"ng-virtual-keyboard ng-virtual-keyboard-layout="alphanumeric" placeholder="Ad-hoc meeting" [(ngModel)]="newEventTitle"></textarea>
+        </md-input-container>
       </div>
       <div class="book-now-start-block">
         <div id="book-now-start-label">
@@ -143,18 +145,18 @@
     <div class="subpage-title-booking">
       {{resource.name}} Schedule
     </div>
-    <div class="book-now-clock-small">
+    <!--<div class="book-now-clock-small">
       {{ date | amDateFormat:'h:mm'}}
-    </div>
+    </div>-->
   </div>
   <div class="agenda-banner occupied" *ngIf="occupied">
     <div class="schedule-back-x" (click)="reset()"></div>
     <div class="subpage-title-booking">
       {{resource.name}} Schedule
     </div>
-    <div class="book-now-clock-small">
+    <!--<div class="book-now-clock-small">
       {{ date | amDateFormat:'h:mm'}}
-    </div>
+    </div>-->
   </div>
   <div id="agenda-lower-section-wrapper" class="agenda-lower-section-wrapper">
     <div id="agenda-time-reference-sidebar" class="agenda-time-reference-sidebar font-sans white">
@@ -192,12 +194,12 @@
         </li>
       </ul>
     </div>
-    <!--  <div class="book-now-clock">
+    <div class="clock">
     {{ date | amDateFormat:'h:mm'}}
   </div>
-  <div class="book-now-date">
+  <div class="date">
     {{date | amDateFormat:'dddd, MMM DD'}}
-  </div>-->
+  </div>
   </div>
 </div>
 <div class="cancelEvent" *ngIf="cancellation">

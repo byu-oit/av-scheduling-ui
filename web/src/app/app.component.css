@@ -398,7 +398,7 @@ select {
   z-index: 32;
   position: absolute;
   float: right;
-  width: 80%;
+  width: 52%;
 }
 
 .agenda-time-reference-sidebar {
@@ -516,6 +516,18 @@ li {
   &:hover {
     border: @scrollbar-padding solid rgba(255, 255, 255, 0);
   }
+}
+
+::-webkit-scrollbar-button:vertical:decrement{
+	background-image: url("assets/arrow_up_white_48dp_1x.png"), -webkit-linear-gradient(left,  #f9f9f9 50%,#e2e2e2 100%) ;
+	background-repeat: no-repeat;
+    background-position: 3px 4px, 0 0;
+}
+
+::-webkit-scrollbar-button:vertical:increment{
+	background-image: url("assets/arrow_up_white_48dp_1x.png"), -webkit-linear-gradient(left,  #f9f9f9 50%,#e2e2e2 100%) ;
+	background-repeat: no-repeat;
+    background-position: 3px 5px, 0 0;
 }
 
 .agenda-view-row-container {
