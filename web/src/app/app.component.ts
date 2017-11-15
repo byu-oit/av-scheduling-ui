@@ -205,7 +205,7 @@ export class AppComponent implements OnInit {
       tmpTime1 = null;
       tmpTime2 = null;
     }
-    console.log(this.timeSlots);
+    //console.log(this.timeSlots);
 
     this.bookEvent = false;
     this.cancellation = false;
@@ -308,6 +308,7 @@ export class AppComponent implements OnInit {
   }
   bookNow(): void {
     this.reset();
+    this.startScreenResetTimeout(10);
     this.bookEvent = true;
   }
   cancelEvent(event: Event): void {
@@ -322,10 +323,10 @@ export class AppComponent implements OnInit {
     this.reset();
   }
   consolidate_events(): void {
-    console.log("Consolidating events");
+    //console.log("Consolidating events");
     var consolidate = true;
     var i = this.events.length - 1;
-    //console.log(i.toString());
+    ////console.log(i.toString());
     while (consolidate) {
       if (i > 0) {
         if (this.events[i].Subject === this.events[i - 1].Subject) {
@@ -351,12 +352,12 @@ export class AppComponent implements OnInit {
     for (var i = 0; i < this.events.length; i++) {
       if ((new Date(this.events[i].Start) <= now) && (new Date(this.events[i].End) >= now)) {
         this.currentEvent = this.events[i];
-        console.log(this.currentEvent);
+        //console.log(this.currentEvent);
         return;
       }
     }
     this.currentEvent = null;
-    console.log(this.currentEvent);
+    //console.log(this.currentEvent);
   }
   /*getTimePeriod(d:Date): number {
     var t = new Date(d.getDate());
@@ -441,7 +442,7 @@ export class AppComponent implements OnInit {
     this.helpPressed = false;
     this.helpRequested = true;
     var resp = this.http.post(environment.slack_webhook_url, "{\"text\":\"Help request from " + this.resource.name + "\"}").subscribe();
-    //console.log(resp);
+    ////console.log(resp);
 
     this.startScreenResetTimeout(3);
   }
@@ -494,13 +495,14 @@ export class AppComponent implements OnInit {
       }
       this.consolidate_events();*/
     this.currentMeeting();
-    console.log(this.events);
-    console.log(this.currentEvent);
+    //console.log(this.events);
+    //console.log(this.currentEvent);
   }
   reset(): void {
     this.cancellation = false;
     this.showAgenda = false;
     this.bookEvent = false;
+    //this.closeCurrentKeyboard();
 
     this.newEventEndTimeId = null;
     this.newEventStartTimeId = null;
@@ -551,6 +553,7 @@ export class AppComponent implements OnInit {
     this.stopScreenResetTimeout();
     this.currentTimeout = setTimeout(function(){
       that.reset();
+      that.closeCurrentKeyboard();
     },t);
   }
   stopScreenResetTimeout(): void {

@@ -63,7 +63,9 @@
           placeholder="Locale"
           value="Sushi" >
         </md-input-container>-->
+        <md-input-container>
         <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="font-serif font-size-2 white" mdInput mdKeyboard (click)="openKeyboard(locale)"ng-virtual-keyboard ng-virtual-keyboard-layout="alphanumeric" placeholder="Ad-hoc meeting" [(ngModel)]="newEventTitle"></textarea>
+        </md-input-container>
       </div>
       <div class="book-now-start-block">
         <div id="book-now-start-label">
