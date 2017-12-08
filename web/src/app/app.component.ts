@@ -524,7 +524,8 @@ export class AppComponent implements OnInit {
   scheduleEvent(): void {
     this.reset();
     this.startScreenResetTimeout(10);
-    //this.refreshData();
+    ///TODO: Figure out less jarring way of refresh
+    this.refreshData();
     this.showAgenda = true;
   }
   scrollReferenceEvent(elem): void {
