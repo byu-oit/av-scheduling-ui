@@ -163,6 +163,12 @@
   z-index: 300;
 }
 
+.cdk-overlay-container{
+  position: absolute;
+  top: 223px;
+  width: 98%;
+}
+
 .saveTray {
   background: url('assets/SaveTray.svg') no-repeat top left;
   height: 21px;
