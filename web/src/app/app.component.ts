@@ -309,7 +309,7 @@ export class AppComponent implements OnInit {
   }
   bookNow(): void {
     this.reset();
-    //this.startScreenResetTimeout(10);
+    this.startScreenResetTimeout(10);
     this.bookEvent = true;
   }
   cancelEvent(event: Event): void {
