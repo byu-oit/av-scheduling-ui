@@ -55,67 +55,29 @@
     <div class="book-now-form">
       <div class="book-now-title-block font-size-3">
         <label class="book-now-title">TITLE</label>
-        <!--<md-input-container name="book-now-title-input" class="font-serif font-size-2 white" [(ngModel)]="newEventTitle">
-          <input
-          mdInput
-          mdKeyboard
-          (click)="openKeyboard(locale)"
-          placeholder="Locale"
-          value="Sushi" >
-        </md-input-container>-->
         <md-input-container>
-        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="" class="font-serif font-size-2 white" mdInput mdKeyboard (click)="openKeyboard(locale)"ng-virtual-keyboard ng-virtual-keyboard-layout="alphanumeric" placeholder="Ad-hoc meeting" [(ngModel)]="newEventTitle"></textarea>
+        <textarea name="book-now-title-input" cols="1" rows="2" placeholder="Ad-hoc meeting" class="font-serif font-size-2 white" mdInput mdKeyboard (click)="openKeyboard(locale)" ng-virtual-keyboard ng-virtual-keyboard-layout="alphanumeric" placeholder="Ad-hoc meeting" [(ngModel)]="newEventTitle"></textarea>
         </md-input-container>
       </div>
       <div class="book-now-start-block">
         <div id="book-now-start-label">
-          <label class="book-now-start-label">START TIME</label>
+          <label class="book-now-start-label font400">START TIME</label>
         </div>
         <div class="book-now-start-select">
           <select id="newEventStartTime" [(ngModel)]="newEventStartTimeId" (change)="onStartChange($event.target.value)">
             <option *ngFor="let inc of validTimeIncrements" value="{{inc.id}}">{{inc.value}}</option>
           </select>
         </div>
-        <!--<div class="book-now-start-hour">
-          <select [(ngModel)]="newEventStartHour">
-            <option *ngFor="let hour of hours" [value]="hour" [attr.selected]="this.newEventStartHour==hour ? true : null">{{hour}}</option>
-          </select>
-        </div>
-        <div class="book-now-start-minutes">
-          <select [(ngModel)]="newEventStartMinute">
-            <option *ngFor="let minute of minutes" [value]="minute" [attr.selected]="this.newEventStartMinute==minute ? true : null">: {{minute}}</option>
-          </select>
-        </div>
-        <div class="book-now-start-ampm">
-          <select [(ngModel)]="newEventStartAmPm">
-            <option *ngFor="let opt of amPm" [value]="opt.value" [attr.selected]="this.newEventStartAmPm==opt ? true : null">{{opt}}</option>
-          </select>
-        </div>-->
       </div>
       <div class="book-now-end-block">
         <div id="book-now-end-label">
-          <label class="book-now-end-label">END TIME</label>
+          <label class="book-now-end-label font400">END TIME</label>
         </div>
         <div class="book-now-end-select">
           <select id="newEventEndTime" [(ngModel)]="newEventEndTimeId">
             <option *ngFor="let inc of validTimeIncrements" value="{{inc.id}}">{{inc.value}}</option>
           </select>
         </div>
-        <!--<div class="book-now-end-hour">
-          <select [(ngModel)]="newEventEndHour">
-            <option *ngFor="let hour of hours" [value]="hour" [attr.selected]="this.newEventEndHour==hour ? true : null">{{hour}}</option>
-          </select>
-        </div>
-        <div class="book-now-end-minutes">
-          <select [(ngModel)]="newEventEndMinute">
-            <option *ngFor="let minute of minutes" [value]="minute" [attr.selected]="this.newEventEndMinute==minute ? true : null">: {{minute}}</option>
-          </select>
-        </div>
-        <div class="book-now-end-ampm">
-          <select [(ngModel)]="newEventEndAmPm">
-            <option *ngFor="let opt of amPm" [value]="opt.value" [attr.selected]="this.newEventEndAmPm==opt ? true : null">{{opt}}</option>
-          </select>
-        </div>-->
       </div>
     </div>
   </div>

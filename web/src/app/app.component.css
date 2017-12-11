@@ -356,12 +356,13 @@ select {
   border: none;
   color: rgb(254, 254, 254);
   font-family: "Roboto";
-  font-size: .1em;
+  /*font-size: 1em;*/
   font-weight: 300;
-  height: 14px;
+  height: 19px;
   line-height: 1.4;
   opacity: 0.702;
-  width: 59px;
+  /*width: 59px;*/
+  width:72px;
 }
 &[disabled], &:disabled{
   opacity: 0.4;
@@ -1058,7 +1059,6 @@ textarea {
   font-size: 18px;
   font-family: "Roboto";
   color: white;
-  font-weight: 200;
   line-height: 1.125;
   text-align: left;
   position: fixed;
@@ -1187,7 +1187,6 @@ textarea {
   color: white;
   font-family: "Roboto";
   font-size: 18px;
-  font-weight: 200;
   height: 50px;
   left: 7%;
   line-height: 1.125;

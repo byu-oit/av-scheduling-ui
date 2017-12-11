@@ -127,7 +127,7 @@ export class AppComponent implements OnInit {
       }))
       .sort((a, b) => a.layout.name.localeCompare(b.layout.name));
 
-    this.darkTheme=true;
+    //this.darkTheme=true;
     this.utcTime();
 
     this.transitionTimer = new SimpleTimer();
@@ -248,7 +248,8 @@ export class AppComponent implements OnInit {
   openKeyboard(locale = this.defaultLocale) {
     this._keyboardRef = this._keyboardService.open(locale, {
       //darkTheme: this.darkTheme,
-      darkTheme: true,
+      //darkTheme: true,
+      darkTheme:false,
       duration: this.duration,
       hasAction: this.hasAction,
       isDebug: this.isDebug
@@ -308,7 +309,7 @@ export class AppComponent implements OnInit {
   }
   bookNow(): void {
     this.reset();
-    this.startScreenResetTimeout(10);
+    //this.startScreenResetTimeout(10);
     this.bookEvent = true;
   }
   cancelEvent(event: Event): void {
