@@ -145,7 +145,7 @@
   top: 73%;
   vertical-align: middle;
   width: 160px;
-  /*z-index: 9002;*/
+  z-index: 9002;
 }
 
 .cancel-book-now-button, .cancel-book-now-button > .button-label {
@@ -155,7 +155,7 @@
   top: 85%;
   vertical-align: middle;
   width: 160px;
-  /*z-index: 9001;*/
+  z-index: 9001;
 }
 
 .button-label {
@@ -368,9 +368,12 @@
 }
 
 select {
-  -moz-transform: matrix( 2.78609839089217, 0, 0, 2.78609839089217, 0, 0);
+  /*-moz-transform: matrix( 2.78609839089217, 0, 0, 2.78609839089217, 0, 0);
   -ms-transform: matrix( 2.78609839089217, 0, 0, 2.78609839089217, 0, 0);
-  -webkit-transform: matrix( 2.78609839089217, 0, 0, 2.78609839089217, 0, 0);
+  -webkit-transform: matrix( 2.78609839089217, 0, 0, 2.78609839089217, 0, 0);*/
+  -moz-transform: matrix( 2.25, 0, 0, 2.25, 0, 0);
+  -ms-transform: matrix( 2.25, 0, 0, 2.25, 0, 0);
+  -webkit-transform: matrix( 2.25, 0, 0, 2.25, 0, 0);
   /*background-color: rgb(156, 156, 156);*/
   background-color: rgb(62,64,68);
   border-radius: 10px;
@@ -383,7 +386,7 @@ select {
   line-height: 1.4;
   opacity: 0.702;
   /*width: 59px;*/
-  width:72px;
+  width:85px;
 }
 &[disabled], &:disabled{
   opacity: 0.4;
@@ -1081,6 +1084,27 @@ textarea {
   resize: none;
   text-align: left;
   width: 308px;
+}
+.textarea {
+  background-color: rgb(62,64,68);
+  color: white !important;
+  display: block;
+  font-family: "RobotoSlab";
+  font-size: 1.2em;
+  font-weight: 200;
+  height: inherit;
+  line-height: 1.4;
+  margin-left: 88px;
+  opacity: 0.2;
+  overflow: hidden;
+  padding-left:25px;
+  padding-right:25px;
+  padding-top:10px;
+  position: fixed;
+  resize: none;
+  text-align: left;
+  width: 308px;
+  z-index: 9999;
 }
 
 .book-now-end-label {

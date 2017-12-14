@@ -71,7 +71,8 @@ export class AppComponent implements OnInit {
   modalTransitionTimerID = "modalTransitionTimer";
   modalTimeout = environment.popupWindowTimeout;
   newEvent: Event;
-  newEventTitle: string;
+  //newEventTitle: string;
+  newEventTitle = "Ad-hoc Meeting";
   newEventEndTimeId: string;
   newEventStartTimeId: string;
   occupied: boolean;
@@ -508,12 +509,16 @@ export class AppComponent implements OnInit {
   }
   reset(): void {
     this.cancellation = false;
+    this.helpInformation = false;
+    this.helpPressed = false;
+    this.helpRequested = false;
+    this.restartRequested = false;
     this.showAgenda = false;
     this.bookEvent = false;
-    //this.closeCurrentKeyboard();
-
+    this.cancellation = false;
     this.newEventEndTimeId = null;
     this.newEventStartTimeId = null;
+    this.showAgenda = false;
   }
   resetModal(): void {
     this.helpPressed = false;
@@ -533,6 +538,7 @@ export class AppComponent implements OnInit {
     this.helpInformation = false;
     this.restartRequested = true;
     this.startScreenResetTimeout(3);
+    this.refreshData();
     window.location.reload(false);
   }
   resetTimeouts(): void {
@@ -540,7 +546,7 @@ export class AppComponent implements OnInit {
   }
   scheduleEvent(): void {
     this.reset();
-    //this.startScreenResetTimeout(10);
+    this.startScreenResetTimeout(10);
     //this.refreshData();
     this.showAgenda = true;
   }
