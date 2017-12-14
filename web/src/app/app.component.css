@@ -550,13 +550,14 @@ li {
 
 ::-webkit-scrollbar-button:vertical:decrement{
 	background-image: url("./assets/ic_keyboard_arrow_up_white_24px.svg");
-	background-size: 200%;
+	background-size: 100%;
   /*width: 20px;
   height: 20px;*/
 }
 
 ::-webkit-scrollbar-button:vertical:increment{
 	background-image: url("./assets/ic_keyboard_arrow_down_white_24px.svg");
+  background-size: 100%;
 }
 
 .agenda-view-row-container {
