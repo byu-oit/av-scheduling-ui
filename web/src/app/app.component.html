@@ -203,6 +203,27 @@
     <div (click)="helpRequest()" class="sendHelp font-serif iconButton"><i class="material-icons">live_help</i><br />SEND HELP</div>
   </div>
 </div>
+<div *ngIf="helpInformation" class="modalContent stayOnTop">
+  <div class="help-cancel" (click)="resetModal()">
+    <i class="material-icons">close</i>
+  </div>
+  <div class="help-message-background"></div>
+  <div class="help-message-container">
+    <div class="font-sans helpLabel">
+      How do I...?
+    </div>
+    <div (click)="restartBrowser()" class="restartBrowser font-serif iconButton"><i class="material-icons">power_settings_new</i><br />RESTART PANEL</div>
+    <!--<div (click)="helpRequest()" class="sendHelp font-serif iconButton"><i class="material-icons">live_help</i><br />SEND HELP</div>-->
+  </div>
+</div>
+<div *ngIf="restartRequested" class="modalContent stayOnTop">
+  <div class="help-cancel" (click)="resetModal()">
+    <i class="material-icons">close</i>
+  </div>
+  <div class="modalContentInnerContainer" (click)="resetModal()">
+    Restarting the scheduling panel
+  </div>
+</div>
 <div *ngIf="helpRequested" class="modalContent stayOnTop" (click)="reset()">
   <div class="help-cancel" (click)="resetModal()">
     <i class="material-icons">close</i>

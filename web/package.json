@@ -4,9 +4,9 @@
   "license": "APACHE v2",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod --aot=false --base-href=/web/",
-    "test": "ng test",
+    "start": "ng serve --sourcemap=false",
+    "build": "ng build --prod --base-href=/web/",
+    "test": "ng test --sourcemap=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

@@ -989,7 +989,8 @@ li {
   float: left;
   font-family: 'Roboto', sans-serif;
   font-size: 5.2em;
-  left: 58%;
+  /*left: 58%;*/
+  left: 61%;
   line-height: 0.5;
   position: fixed;
   text-align: right;
@@ -1007,7 +1008,8 @@ li {
   font-family: 'Roboto Slab', serif;
   font-weight: 400;
   font-size: 1.45em;
-  left: 37%;
+  /*left: 37%;*/
+  left: 40%;
   line-height: 0.5;
   position: fixed;
   text-align: right;

@@ -54,6 +54,7 @@ export class AppComponent implements OnInit {
   cancellation: boolean;
   currentEvent: Event;
   currentTimeout: any;
+  currentTimeoutTTL = 0;
   eventData: string;
   timePeriod: Timeslot;
   date: Date;
@@ -63,6 +64,7 @@ export class AppComponent implements OnInit {
   };
   events: Event[] = [];
   helpRequested: boolean;
+  helpInformation: boolean;
   helpPressed: boolean;
   LOCALE = "en-us";
   modalTransitionTimerCounter = 0;
@@ -75,6 +77,7 @@ export class AppComponent implements OnInit {
   occupied: boolean;
   refHours: string[] = [];
   resource = RESOURCE;
+  restartRequested: boolean;
   showAgenda: boolean;
   showHelpButton = environment.showHelpButton;
   selectedEvent: Event;
@@ -116,7 +119,8 @@ export class AppComponent implements OnInit {
     private http: HttpClient) { }
 
   ngOnInit(): void {
-    document.addEventListener("touchstart", function() { }, true);
+    //var that = this;
+    document.addEventListener("touchstart", function() {}, true);
 
     this.defaultLocale = ` ${this.LOCALE}`.slice(1);
     this.layouts = Object
@@ -214,6 +218,8 @@ export class AppComponent implements OnInit {
     this.currentEvent = this.events[1];
     this.helpRequested = false;
     this.helpPressed = false;
+    this.helpInformation = false;
+    this.restartRequested = false;
     this.newEvent = null;
     if (this.currentEvent != null) {
       this.occupied = true;
@@ -309,7 +315,7 @@ export class AppComponent implements OnInit {
   }
   bookNow(): void {
     this.reset();
-    this.startScreenResetTimeout(10);
+    this.startScreenResetTimeout(70);
     this.bookEvent = true;
   }
   cancelEvent(event: Event): void {
@@ -436,7 +442,9 @@ export class AppComponent implements OnInit {
     this.startScreenResetTimeout(10);
   }
   helpInformationRequest(): void {
-    this.resetModal();
+    this.helpPressed = false;
+    this.helpInformation = true;
+    //this.resetModal();
     // show information;
   }
   helpRequest(): void {
@@ -444,7 +452,6 @@ export class AppComponent implements OnInit {
     this.helpRequested = true;
     var resp = this.http.post(environment.slack_webhook_url, "{\"text\":\"Help request from " + this.resource.name + "\"}").subscribe();
     ////console.log(resp);
-
     this.startScreenResetTimeout(3);
   }
   modalTimerCallback(): void {
@@ -522,6 +529,15 @@ export class AppComponent implements OnInit {
   resetTransitionTimer(): void {
     this.transitionTimer.delTimer('modalTransition');
   }
+  restartBrowser(): void {
+    this.helpInformation = false;
+    this.restartRequested = true;
+    this.startScreenResetTimeout(3);
+    window.location.reload(false);
+  }
+  resetTimeouts(): void {
+    this.startScreenResetTimeout(this.currentTimeoutTTL);
+  }
   scheduleEvent(): void {
     this.reset();
     //this.startScreenResetTimeout(10);
@@ -550,6 +566,7 @@ export class AppComponent implements OnInit {
   }
   startScreenResetTimeout(ttl): void { //ttl in s
     var t = ttl * 1000; //convert s to ms
+    this.currentTimeoutTTL = t;
     var that = this;
     this.stopScreenResetTimeout();
     this.currentTimeout = setTimeout(function(){
