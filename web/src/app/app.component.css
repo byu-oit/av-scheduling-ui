@@ -96,6 +96,27 @@
   color: black;
 }
 
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+}
 
 /* NEW ADDITIONS */
 
@@ -528,15 +549,14 @@ li {
 }
 
 ::-webkit-scrollbar-button:vertical:decrement{
-	background-image: url("./assets/arrow_up_white_48dp_1x.png"), -webkit-linear-gradient(left,  #f9f9f9 50%,#e2e2e2 100%) ;
-	background-repeat: no-repeat;
-    background-position: 3px 4px, 0 0;
+	background-image: url("./assets/ic_keyboard_arrow_up_white_24px.svg");
+	background-size: 200%;
+  /*width: 20px;
+  height: 20px;*/
 }
 
 ::-webkit-scrollbar-button:vertical:increment{
-	background-image: url("./assets/arrow_up_white_48dp_1x.png"), -webkit-linear-gradient(left,  #f9f9f9 50%,#e2e2e2 100%) ;
-	background-repeat: no-repeat;
-    background-position: 3px 5px, 0 0;
+	background-image: url("./assets/ic_keyboard_arrow_down_white_24px.svg");
 }
 
 .agenda-view-row-container {
