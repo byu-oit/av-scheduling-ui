@@ -400,12 +400,14 @@ select {
 }
 
 .agenda-view-table {
-  left: 60px;
+  /*left: 60px;*/
+  left: -24px;
   top: 0;
   z-index: 32;
   position: absolute;
   float: right;
-  width: 52%;
+  /*width: 52%;*/
+  width: 60%;
 }
 
 .agenda-time-reference-sidebar {
