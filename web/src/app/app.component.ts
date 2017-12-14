@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
-import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { SimpleTimer } from 'ng2-simple-timer';
 
 import { environment } from '../environments/environment';
@@ -595,11 +595,11 @@ export class AppComponent implements OnInit {
   }
   getNewEndTime(newTime): void {
     this.newEventEndTimeValue = this.getSelectedText("newEventEndTime",newTime);
-    console.log("end: " + this.newEventEndTimeValue);
+    //console.log("end: " + this.newEventEndTimeValue);
   }
   getNewStartTime(newTime): void{
     this.newEventStartTimeValue = this.getSelectedText("newEventStartTime",newTime);
-    console.log("start: " + this.newEventStartTimeValue);
+    //console.log("start: " + this.newEventStartTimeValue);
   }
   submitEventForm(): void {
     var e = this.newEventEndTimeValue;
@@ -607,20 +607,62 @@ export class AppComponent implements OnInit {
     this.submitEvent(this.newEventTitle, s,e);
   }
   submitEvent(tmpSubject: string, tmpStartTime: string, tmpEndTime: string): void {
-    var now  = new Date();
-    var req: Event = new Event();
+    var req = new Event();
+    var today = new Date();
+    var M = today.getMonth(); //month is zero-indexed
+    var d = today.getDate();
+    var y = today.getFullYear();
+    var tzoffset = today.getTimezoneOffset();
+
+    var sH = 0;
+    var sM = 0;
+    var eH = 0;
+    var eM = 0;
+    const [starttime, startmodifier] = tmpStartTime.split(' ');
+    let [starthours, startminutes] = starttime.split(':');
+    if (starthours === '12') {
+      starthours = '00';
+    }
+    if (startmodifier === 'PM') {
+      sH = parseInt(starthours, 10) + 12;
+    }
+    else {
+      sH = parseInt(starthours)
+    }
+    sM = parseInt(startminutes);
+
+    const [endtime, endmodifier] = tmpEndTime.split(' ');
+    let [endhours, endminutes] = endtime.split(':');
+    if (endhours === '12') {
+      endhours = '00';
+    }
+    if (endmodifier === 'PM') {
+      eH = parseInt(endhours, 10) + 12;
+    }
+    else{
+      eH = parseInt(endhours)
+    }
+    eM = parseInt(endminutes);
+
+    //new Date(year, month, day, hours, minutes, seconds, milliseconds);
+    var startTime = new Date(y,M,d,sH,sM,0);
+    var endTime = new Date(y,M,d,eH,eM,0);
+
     req.Subject = tmpSubject;
-    req.End = new Date(now.getMonth().toString() + "/" + now.getDay().toString() + "/" + now.getFullYear().toString() + " " + tmpEndTime);
-    req.Start = new Date(now.getMonth().toString() + "/" + now.getDay().toString() + "/" + now.getFullYear().toString() + " " + tmpStartTime);
+    req.Start = new Date(startTime.getTime() - tzoffset*60000);
+    req.End = new Date(endTime.getTime() - tzoffset*60000);
+
     /////////
     ///  SUBMIT
     ///////
     var url = 'http://' + ip + ':5000/v1.0/exchange/calendar/events';
-    //var resp = this.http.post(url, "{\"subject\":\"" + tmpSubject + "\", \"start\":\""+ req.Start + "\",\"end\":\""+req.End +"\"}").subscribe();
-    var resp = this.http.post(url,JSON.stringify(req)).subscribe();
-    this.startScreenResetTimeout(3);
+
+    var resp = this.http.post(url,JSON.stringify(req),{headers: new HttpHeaders().set('Content-Type', 'application/json')}).subscribe();
+
+    this.restartRequested = true;
+    this.startScreenResetTimeout(1);
     this.refreshData();
-    //this.restartBrowser();
+    window.location.reload(false);
   }
   subscribeHelpTimer(): void {
     if (this.modalTransitionTimerID) {
