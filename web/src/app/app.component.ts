@@ -74,7 +74,9 @@ export class AppComponent implements OnInit {
   //newEventTitle: string;
   newEventTitle = "Ad-hoc Meeting";
   newEventEndTimeId: string;
+  newEventEndTimeValue: string;
   newEventStartTimeId: string;
+  newEventStartTimeValue: string;
   occupied: boolean;
   refHours: string[] = [];
   resource = RESOURCE;
@@ -438,6 +440,10 @@ export class AppComponent implements OnInit {
 
     this.unoccupied = !(this.occupied);
   }
+  getSelectedText(elementId,index): string {
+    var elem = document.getElementById(elementId).getElementsByTagName( 'option' )[index];
+    return elem.text;
+  }
   helpClick(): void {
     this.helpPressed = true;
     this.startScreenResetTimeout(10);
@@ -469,6 +475,8 @@ export class AppComponent implements OnInit {
   onStartChange(selectedStartOption): void {
     var i = Number(selectedStartOption) + 1;
     this.newEventEndTimeId = i.toString();
+    this.getNewStartTime(selectedStartOption);
+    this.getNewEndTime(this.newEventEndTimeId);
   }
   percent(): void {
     setInterval(function() {
@@ -585,16 +593,34 @@ export class AppComponent implements OnInit {
       clearTimeout(this.currentTimeout);
     }
   }
+  getNewEndTime(newTime): void {
+    this.newEventEndTimeValue = this.getSelectedText("newEventEndTime",newTime);
+    console.log("end: " + this.newEventEndTimeValue);
+  }
+  getNewStartTime(newTime): void{
+    this.newEventStartTimeValue = this.getSelectedText("newEventStartTime",newTime);
+    console.log("start: " + this.newEventStartTimeValue);
+  }
+  submitEventForm(): void {
+    var e = this.newEventEndTimeValue;
+    var s = this.newEventStartTimeValue;
+    this.submitEvent(this.newEventTitle, s,e);
+  }
   submitEvent(tmpSubject: string, tmpStartTime: string, tmpEndTime: string): void {
+    var now  = new Date();
     var req: Event = new Event();
     req.Subject = tmpSubject;
-    req.End = new Date(tmpEndTime);
-    req.Start = new Date(tmpStartTime);
+    req.End = new Date(now.getMonth().toString() + "/" + now.getDay().toString() + "/" + now.getFullYear().toString() + " " + tmpEndTime);
+    req.Start = new Date(now.getMonth().toString() + "/" + now.getDay().toString() + "/" + now.getFullYear().toString() + " " + tmpStartTime);
     /////////
     ///  SUBMIT
     ///////
-
+    var url = 'http://' + ip + ':5000/v1.0/exchange/calendar/events';
+    //var resp = this.http.post(url, "{\"subject\":\"" + tmpSubject + "\", \"start\":\""+ req.Start + "\",\"end\":\""+req.End +"\"}").subscribe();
+    var resp = this.http.post(url,JSON.stringify(req)).subscribe();
+    this.startScreenResetTimeout(3);
     this.refreshData();
+    //this.restartBrowser();
   }
   subscribeHelpTimer(): void {
     if (this.modalTransitionTimerID) {
