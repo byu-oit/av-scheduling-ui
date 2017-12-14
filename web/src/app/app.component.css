@@ -525,6 +525,7 @@ li {
   height: ((@scrollbar-padding * 2) + @scrollbar-height);
   background-color: rgba(255, 255, 255, 0);
   padding: 15px;
+  /*width:13px;*/
 }
 
 ::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb {
@@ -550,14 +551,16 @@ li {
 
 ::-webkit-scrollbar-button:vertical:decrement{
 	background-image: url("./assets/ic_keyboard_arrow_up_white_24px.svg");
-	background-size: 100%;
+	background-size: 200%;
+  background-position: top -5px left -7px;
   /*width: 20px;
   height: 20px;*/
 }
 
 ::-webkit-scrollbar-button:vertical:increment{
 	background-image: url("./assets/ic_keyboard_arrow_down_white_24px.svg");
-  background-size: 100%;
+  background-size: 200%;
+  background-position: top -10px left -7px;
 }
 
 .agenda-view-row-container {
