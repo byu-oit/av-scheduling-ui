@@ -431,6 +431,7 @@ export class AppComponent implements OnInit {
     return (duration);
   }
   evalTime(): void {
+    //this.refreshData();
     if (this.currentEvent != null) {
       this.occupied = true;
     }
@@ -516,6 +517,7 @@ export class AppComponent implements OnInit {
     //console.log(this.currentEvent);
   }
   reset(): void {
+    this.refreshData();
     this.cancellation = false;
     this.helpInformation = false;
     this.helpPressed = false;
