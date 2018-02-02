@@ -45,6 +45,7 @@ const TIMEZONE = environment.timezone;
 
 export class AppComponent implements OnInit {
 
+  debug = environment.debug;
   transitionTimer: SimpleTimer;
   controller = this.controller;
   allowBookNowFunction = environment.allow_book_now_function;
@@ -201,6 +202,8 @@ export class AppComponent implements OnInit {
       if (t.Start.getHours() > 12) {
         h = +(t.Start.getHours()) - 12;
       }
+
+
       if (this.refHours.length <= 0) {
         this.refHours.push(h.toPrecision(1).toString());
       }
@@ -503,8 +506,8 @@ export class AppComponent implements OnInit {
         this.events.push(e);
       }, this);
     });
-
-    /*  for (var i = 0; i < this.timeSlots.length; i++) {
+    console.log(this.timeSlots.length);
+      /*for (var i = 0; i < this.timeSlots.length; i++) {
         var e = new Event();
         e.Subject = "Available";
         e.Start = this.timeSlots[i].Start;
@@ -606,7 +609,7 @@ export class AppComponent implements OnInit {
   submitEventForm(): void {
     var e = this.newEventEndTimeValue;
     var s = this.newEventStartTimeValue;
-    this.submitEvent(this.newEventTitle, s,e);
+    this.submitEvent("Ad-hoc Meeting", s,e);
   }
   submitEvent(tmpSubject: string, tmpStartTime: string, tmpEndTime: string): void {
     var req = new Event();
@@ -661,10 +664,10 @@ export class AppComponent implements OnInit {
 
     var resp = this.http.post(url,JSON.stringify(req),{headers: new HttpHeaders().set('Content-Type', 'application/json')}).subscribe();
 
-    this.restartRequested = true;
+    //this.restartRequested = true;
     this.startScreenResetTimeout(1);
-    this.refreshData();
-    window.location.reload(false);
+    //this.refreshData();
+    //window.location.reload(false);
   }
   subscribeHelpTimer(): void {
     if (this.modalTransitionTimerID) {
