@@ -2,6 +2,7 @@ export const environment = {
   allow_book_now_function: false,
   clientId: 'MICROSOFT_APP_ID',                             // Client/App ID for identity registered with API provider (i.e. https://apps.dev.microsoft.com)
   clientSecret: 'PASSWORD_FOR_SPECIFIED_APP_ID',            // Client Secret for identity registered with API provider (i.e. https://apps.dev.microsoft.com)
+  debug: true,                                              // True/false to control whether debug statements show in logs and/or console messages
   domain: 'byu.edu',                                        // Domain following the resource_id
   exchange_username: 'exchuser',                            // Username for accessing delegated Exchange resources
   exchange_password: 'exchpw',                              // Password for user to access delegated Exchange resources
