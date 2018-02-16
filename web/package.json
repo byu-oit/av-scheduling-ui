@@ -28,6 +28,7 @@
     "@ngx-material-keyboard/core": "ngx-material-keyboard/core#0.0.4",
     "@types/adal": "^1.0.29",
     "adal-angular": "^1.0.15",
+    "angular-bootstrap-plus": "^0.7.0",
     "angular-material-keyboard": "0.0.9",
     "angular-oauth2-oidc": "^2.1.8",
     "angular2-moment": "^1.7.0",
