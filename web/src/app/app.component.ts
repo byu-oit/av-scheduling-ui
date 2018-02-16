@@ -6,8 +6,12 @@ import { SimpleTimer } from 'ng2-simple-timer';
 import { environment } from '../environments/environment';
 import { Event, Timeslot } from './model/o365.model';
 
+import { SelectComponent, IOption } from 'ng-select';
+
 import { IKeyboardLayout, MD_KEYBOARD_LAYOUTS, MdKeyboardComponent, MdKeyboardRef, MdKeyboardService } from '@ngx-material-keyboard/core';
 import * as angular from 'angular';
+
+declare var hljs: any;
 
 export class Resource {
   id: string;
@@ -16,9 +20,10 @@ export class Resource {
   o365Name: string;
 }
 
-export class TimeIncrement {
+export class TimeIncrement implements IOption {
   id: number;
   value: string;
+  label: string;
   dateTimeValue: Date;
 }
 
@@ -44,7 +49,7 @@ const TIMEZONE = environment.timezone;
 
 
 export class AppComponent implements OnInit {
-
+  disableFilterThreshold = 1440;
   debug = environment.debug;
   transitionTimer: SimpleTimer;
   controller = this.controller;
@@ -171,8 +176,9 @@ export class AppComponent implements OnInit {
         this.validTimeIncrements.push({
           id: i,
           dateTimeValue: d,
-          value: d.toLocaleTimeString(this.LOCALE, this.timeOptions)
+          value: d.toLocaleTimeString(this.LOCALE, this.timeOptions),
           //value: hours.toString() + ":" + mins.toString() + " " + amPm
+	  label: d.toLocaleTimeString(this.LOCALE, this.timeOptions)
         });
       }
       d.setMinutes(mins + this.timeIncrement);
@@ -321,7 +327,7 @@ export class AppComponent implements OnInit {
   }
   bookNow(): void {
     this.reset();
-    this.startScreenResetTimeout(70);
+    //this.startScreenResetTimeout(70);
     this.bookEvent = true;
   }
   cancelEvent(event: Event): void {

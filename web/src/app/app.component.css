@@ -358,7 +358,7 @@
 .book-now-start-select {
   position: fixed;
   top: 75%;
-  left: 13%;
+  left: 7%;
 }
 
 .book-now-end-select {
@@ -367,26 +367,17 @@
   left: 42%;
 }
 
-select {
-  /*-moz-transform: matrix( 2.78609839089217, 0, 0, 2.78609839089217, 0, 0);
-  -ms-transform: matrix( 2.78609839089217, 0, 0, 2.78609839089217, 0, 0);
-  -webkit-transform: matrix( 2.78609839089217, 0, 0, 2.78609839089217, 0, 0);*/
-  -moz-transform: matrix( 2.25, 0, 0, 2.25, 0, 0);
-  -ms-transform: matrix( 2.25, 0, 0, 2.25, 0, 0);
-  -webkit-transform: matrix( 2.25, 0, 0, 2.25, 0, 0);
-  /*background-color: rgb(156, 156, 156);*/
+ng-select {
   background-color: rgb(62,64,68);
   border-radius: 10px;
-  border: none;
+  border: 0px;
   color: rgb(254, 254, 254);
   font-family: "Roboto";
-  /*font-size: 1em;*/
   font-weight: 300;
-  height: 19px;
+  height: 36px;
   line-height: 1.4;
   opacity: 0.702;
-  /*width: 59px;*/
-  width:85px;
+  width:161px;
 }
 &[disabled], &:disabled{
   opacity: 0.4;
@@ -396,7 +387,15 @@ select {
   color: rgb(156, 156, 156);
 }
 
+span {
+  color: black;
+}
 
+div.below {
+  color: rgb(254,254,254);
+  border: 0px !important;
+  outline-width: 0px;
+}
 
 .scheduleEvent {
   background-color: black;

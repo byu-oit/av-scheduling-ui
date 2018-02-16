@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule, ProgressBarModule, GrowlModule } from 'primeng/primeng';
 import { MdInputModule } from '@angular/material';
 import { MdKeyboardModule } from '@ngx-material-keyboard/core';
+import { SelectModule } from 'ng-select';
 
 import { AppComponent } from './app.component';
 import { AppState, InternalStateType } from './app.service';
@@ -37,6 +38,7 @@ type StoreType = {
     MomentModule,
     HttpClientModule,
     HttpModule,
+    SelectModule,
 
     NgbModule.forRoot(),
     InputTextModule,

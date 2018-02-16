@@ -62,9 +62,8 @@
                     <label class="book-now-start-label font400">START TIME</label>
                 </div>
                 <div class="book-now-start-select">
-                    <select id="newEventStartTime" [(ngModel)]="newEventStartTimeId" (change)="onStartChange($event.target.value)">
-                      <option *ngFor="let inc of validTimeIncrements" value="{{inc.id}}">{{inc.value}}</option>
-                    </select>
+		    <ng-select  [noFilter]="disableFilterThreshold" [options]="validTimeIncrements" [(ngModel)]="newEventStartTimeId" (change)="onStartChange($event.target.value)">
+</ng-select>
                 </div>
             </div>
             <div class="book-now-end-block">
