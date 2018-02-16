@@ -34,7 +34,6 @@
     "angular2-moment": "^1.7.0",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^7.1.6",
-    "bootstrap": "^4.0.0-beta",
     "circular-dependency-plugin": "^4.2.1",
     "core-js": "2.5.1",
     "extract-text-webpack-plugin": "^3.0.1",
