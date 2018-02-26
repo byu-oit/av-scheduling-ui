@@ -94,9 +94,9 @@ func main() {
 	wg.Add(2)
 
 	go bootstrapEnvironment(wg)
-	go startAngular(wg)
+//	go startAngular(wg)
 
-	port := ":8012"
+	port := ":8011"
 
 	router := echo.New()
 	router.Pre(middleware.RemoveTrailingSlash())
@@ -112,19 +112,14 @@ func main() {
 		router.Logger.Fatal(err)
 	}
 
-	/*outer.Use(middleware.Proxy(&middleware.RoundRobinBalancer{
-		Targets: []*middleware.ProxyTarget{
-			&middleware.ProxyTarget{
-				URL: TARGET_URL,
-			},
-		},
-	}))*/
-
-	server := http.Server{
+/*	server := http.Server{
 		Addr:           port,
 		MaxHeaderBytes: 1024 * 10,
-	}
+	}*/
+	fs := http.FileServer(http.Dir("web/dist"))
+	http.Handle("/", fs)
 
-	router.StartServer(&server)
+//	router.StartServer(&server)
+	http.ListenAndServe(port, nil)
 
 }
