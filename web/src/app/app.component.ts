@@ -337,6 +337,27 @@ ngOnInit(): void {
 
     this.unoccupied = !(this.occupied);
   }
+resetTimeouts(): void {
+    //this.startScreenResetTimeout(this.currentTimeoutTTL);
+  }
+  scheduleEvent(): void {
+    this.reset();
+    //this.startScreenResetTimeout(10);
+    //this.refreshData();
+    this.showAgenda = true;
+  }
+  scrollReferenceEvent(elem): void {
+    var a = document.getElementById("agenda");
+    var t = document.getElementById("current-time-bar-wrapper");
+    a.scrollTop = elem.scrollTop;
+    t.scrollTop = elem.scrollTop;
+  }
+  scrollAgendaEvent(elem): void {
+    var a = document.getElementById("refHours");
+    var t = document.getElementById("current-time-bar-wrapper");
+    a.scrollTop = elem.scrollTop;
+    t.scrollTop = elem.scrollTop;
+  }
   selectByClass(selector: string): HTMLCollectionOf<Element> {
     var elements = document.getElementsByClassName(selector);
     return elements;
