@@ -1,13 +1,11 @@
 import { Component, ElementRef, HostListener, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
-import { SimpleTimer } from 'ng2-simple-timer';
-
 import { environment } from '../environments/environment';
 import { Event, Timeslot } from './model/o365.model';
 
-import { IKeyboardLayout, MD_KEYBOARD_LAYOUTS, MdKeyboardComponent, MdKeyboardRef, MdKeyboardService } from '@ngx-material-keyboard/core';
-import * as angular from 'angular';
+import { SimpleTimer } from 'ng2-simple-timer';
+//import * as angular from 'angular';
 
 export class Resource {
   id: string;
@@ -39,103 +37,67 @@ const TIMEZONE = environment.timezone;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css','./keyboard.css']
+  styleUrls: ['./app.component.css']
 })
+export class AppComponent {
+//newEventTitle: string;
+allowBookNowFunction = environment.allow_book_now_function;
+bookEvent: boolean;
+calendarWorkdayEndHour: number;
+calendarWorkdayStartHour: number;
+cancellation: boolean;
+controller = this.controller;
+currentEvent: Event;
+currentTimeout: any;
+currentTimeoutTTL = 0;
+date: Date;
+dayMillis: number;
+debug = environment.debug;
+eventData: string;
+events: Event[] = [];
+helpInformation: boolean;
+helpPressed: boolean;
+helpRequested: boolean;
+LOCALE = "en-us";
+modalTimeout = environment.popupWindowTimeout;
+modalTransitionTimerCounter = 0;
+modalTransitionTimerID = "modalTransitionTimer";
+newEvent: Event;
+newEventEndTimeId: string;
+newEventEndTimeValue: string;
+newEventStartTimeId: string;
+newEventStartTimeValue: string;
+newEventTitle = "Ad-hoc Meeting";
+occupied: boolean;
+percentOfDayExpended: number;
+refHours: string[] = [];
+resource = RESOURCE;
+restartRequested: boolean;
+schedulingWindow = 5; // minutes after a time window start time when the resource still be scheduled
+selectedEvent: Event;
+selectedStartValue: number;
+showAgenda: boolean;
+showHelpButton = environment.showHelpButton;
+timeIncrement = environment.time_slot_size; // minutes to increment select boxes by
+timeOptions = {
+  hour: "2-digit", minute: "2-digit"
+};
+timePeriod: Timeslot;
+timeSlots: Timeslot[] = [];
+title = 'Room Scheduler';
+transitionTimer: SimpleTimer;
+unoccupied: boolean;
+validTimeIncrements: TimeIncrement[] = [];
 
-
-export class AppComponent implements OnInit {
-
-  debug = environment.debug;
-  transitionTimer: SimpleTimer;
-  controller = this.controller;
-  allowBookNowFunction = environment.allow_book_now_function;
-  bookEvent: boolean;
-  calendarWorkdayEndHour: number;
-  calendarWorkdayStartHour: number;
-  cancellation: boolean;
-  currentEvent: Event;
-  currentTimeout: any;
-  currentTimeoutTTL = 0;
-  eventData: string;
-  timePeriod: Timeslot;
-  date: Date;
-  dayMillis: number;
-  timeOptions = {
-    hour: "2-digit", minute: "2-digit"
-  };
-  events: Event[] = [];
-  helpRequested: boolean;
-  helpInformation: boolean;
-  helpPressed: boolean;
-  LOCALE = "en-us";
-  modalTransitionTimerCounter = 0;
-  modalTransitionTimerID = "modalTransitionTimer";
-  modalTimeout = environment.popupWindowTimeout;
-  newEvent: Event;
-  //newEventTitle: string;
-  newEventTitle = "Ad-hoc Meeting";
-  newEventEndTimeId: string;
-  newEventEndTimeValue: string;
-  newEventStartTimeId: string;
-  newEventStartTimeValue: string;
-  occupied: boolean;
-  refHours: string[] = [];
-  resource = RESOURCE;
-  restartRequested: boolean;
-  showAgenda: boolean;
-  showHelpButton = environment.showHelpButton;
-  selectedEvent: Event;
-  selectedStartValue: number;
-  timeIncrement = environment.time_slot_size; // minutes to increment select boxes by
-  timeSlots: Timeslot[] = [];
-  title = 'Room Scheduler';
-  schedulingWindow = 5; // minutes after a time window start time when the resource still be scheduled
-  unoccupied: boolean;
-  validTimeIncrements: TimeIncrement[] = [];
-  percentOfDayExpended: number;
-
-  private _keyboardRef: MdKeyboardRef<MdKeyboardComponent>;
-
-  darkTheme: boolean;
-
-  duration: number;
-
-  hasAction: boolean;
 
   isDebug: boolean;
+  duration: number;
 
-  defaultLocale: string;
+ constructor(private http: HttpClient) { }
 
-  layout: string;
-
-  layouts: {
-    name: string;
-    layout: IKeyboardLayout;
-  }[];
-
-  get keyboardVisible(): boolean {
-    return this._keyboardService.isOpened;
-  }
-
-  constructor(private _keyboardService: MdKeyboardService,
-    @Inject(LOCALE_ID) public locale,
-    @Inject(MD_KEYBOARD_LAYOUTS) private _layouts,
-    private http: HttpClient) { }
-
-  ngOnInit(): void {
+ ngOnInit(): void {
     //var that = this;
     document.addEventListener("touchstart", function() {}, true);
-
-    this.defaultLocale = ` ${this.LOCALE}`.slice(1);
-    this.layouts = Object
-      .keys(this._layouts)
-      .map((name: string) => ({
-        name: name,
-        layout: this._layouts[name]
-      }))
-      .sort((a, b) => a.layout.name.localeCompare(b.layout.name));
-
-    //this.darkTheme=true;
     this.utcTime();
 
     this.transitionTimer = new SimpleTimer();
@@ -202,8 +164,6 @@ export class AppComponent implements OnInit {
       if (t.Start.getHours() > 12) {
         h = +(t.Start.getHours()) - 12;
       }
-
-
       if (this.refHours.length <= 0) {
         this.refHours.push(h.toPrecision(1).toString());
       }
@@ -216,7 +176,6 @@ export class AppComponent implements OnInit {
       tmpTime2 = null;
     }
     //console.log(this.timeSlots);
-
     this.bookEvent = false;
     this.cancellation = false;
     this.calendarWorkdayEndHour = 17;
@@ -240,11 +199,9 @@ export class AppComponent implements OnInit {
     this.unoccupied = !(this.occupied);
 
     /*for (var i = this.calendarWorkdayStartHour; i <= this.calendarWorkdayEndHour; i++) {
-
       if (i > 12) {
         var iNum = +i;
         var nNum = iNum - 12;
-
         this.refHours.push(nNum.toString());
       }
       else {
@@ -257,27 +214,6 @@ export class AppComponent implements OnInit {
 
   }
 
-  openKeyboard(locale = this.defaultLocale) {
-    this._keyboardRef = this._keyboardService.open(locale, {
-      //darkTheme: this.darkTheme,
-      //darkTheme: true,
-      darkTheme:false,
-      duration: this.duration,
-      hasAction: this.hasAction,
-      isDebug: this.isDebug
-    });
-  }
-
-  closeCurrentKeyboard() {
-    if (this._keyboardRef) {
-      this._keyboardRef.dismiss();
-    }
-  }
-  toggleDarkTheme(dark: boolean) {
-    this.darkTheme = dark;
-    this._keyboardRef.darkTheme = dark;
-  }
-
   availabilityClass(e: Event): string {
     if (e.Subject.toString() == 'Available') {
       return "agenda-view-row-available";
@@ -286,8 +222,6 @@ export class AppComponent implements OnInit {
       return "agenda-view-row-unavailable";
     }
   }
-
-
   bookNewEvent(): void {
     /*//this.reset();
     var d = new Date();
@@ -314,7 +248,6 @@ export class AppComponent implements OnInit {
       var eI = +(this.newEventEndHour);
       eH = (eI + 12).toString();
     }
-
     s += sH + ":" + this.newEventStartMinute + ":000";
     e += eH + ":" + this.newEventEndMinute + ":000";*/
     this.reset();
@@ -498,13 +431,13 @@ export class AppComponent implements OnInit {
     this.events = [];
     var url = 'http://' + ip + ':5000/v1.0/exchange/calendar/events';
     this.http.get(url).subscribe(data => {
-      angular.forEach(data, function(obj) {
+      /*angular.forEach(data, function(obj) {
         var e = new Event();
         e.Subject = obj.subject;
         e.Start = obj.start;
         e.End = obj.end;
         this.events.push(e);
-      }, this);
+      }, this);*/
     });
     console.log(this.timeSlots.length);
       /*for (var i = 0; i < this.timeSlots.length; i++) {
@@ -590,7 +523,7 @@ export class AppComponent implements OnInit {
     this.stopScreenResetTimeout();
     this.currentTimeout = setTimeout(function(){
       that.reset();
-      that.closeCurrentKeyboard();
+      //that.closeCurrentKeyboard();
     },t);
   }
   stopScreenResetTimeout(): void {
@@ -688,4 +621,5 @@ export class AppComponent implements OnInit {
       this.evalTime();
     }, 1000);
   }
+
 }
