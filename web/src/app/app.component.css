@@ -314,7 +314,8 @@
 
 .window, .bookNow, .scheduleEvent {
   background-size: 100% 100%;
-  background: url("assets/YMountain.png");
+  /*background: url("assets/YMountain.png");*/
+  background: url("assets/Y-Mountain-blue-1x.png");
   display: block;
   height: 100%;
   left: 0px;
@@ -322,6 +323,18 @@
   top: 0px;
   width: 800px;
 }
+/*Full screen background */
+/*.bookNow, .scheduleEvent, .window {
+    background: url(Y-Mountain-blue-1x.1a2f0ef….png);
+    display: block;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-position: 0;
+    background-size: 100%;
+  }*/
 
 .book-now-container-background {
   background-color: black;
