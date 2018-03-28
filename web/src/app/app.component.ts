@@ -84,6 +84,7 @@ export class AppComponent implements OnInit {
   restartRequested: boolean;
   showAgenda: boolean;
   showHelpButton = environment.showHelpButton;
+  showWaitSpinner: boolean;
   selectedEvent: Event;
   selectedStartValue: number;
   timeIncrement = environment.time_slot_size; // minutes to increment select boxes by
@@ -226,6 +227,7 @@ export class AppComponent implements OnInit {
     this.helpPressed = false;
     this.helpInformation = false;
     this.restartRequested = false;
+    this.showWaitSpinner = false;
     this.newEvent = null;
     if (this.currentEvent != null) {
       this.occupied = true;
@@ -532,6 +534,7 @@ export class AppComponent implements OnInit {
     this.newEventEndTimeId = null;
     this.newEventStartTimeId = null;
     this.showAgenda = false;
+    this.showWaitSpinner = false;
   }
   resetModal(): void {
     this.helpPressed = false;
@@ -607,6 +610,7 @@ export class AppComponent implements OnInit {
     //console.log("start: " + this.newEventStartTimeValue);
   }
   submitEventForm(): void {
+    this.showWaitSpinner=true;
     var e = this.newEventEndTimeValue;
     var s = this.newEventStartTimeValue;
     this.submitEvent("Ad-hoc Meeting", s,e);
@@ -687,5 +691,8 @@ export class AppComponent implements OnInit {
       this.currentMeeting();
       this.evalTime();
     }, 1000);
+  }
+  wait(): void {
+    this.showWaitSpinner = true;
   }
 }
