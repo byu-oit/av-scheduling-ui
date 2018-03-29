@@ -30,7 +30,7 @@
     "adal-angular": "^1.0.15",
     "angular-material-keyboard": "0.0.9",
     "angular-oauth2-oidc": "^2.1.8",
-    "angular2-moment": "^1.7.0",
+    "angular2-moment": "^1.8.0",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^7.1.6",
     "bootstrap": "^4.0.0-beta",
