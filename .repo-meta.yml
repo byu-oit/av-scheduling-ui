@@ -25,11 +25,14 @@ software:
     microservice: true # optional
     technologies_used: # optional
       - TypeScript
+      - AngularJS
       - CSS
+      - REST Web Services
       - HTML
       - JavaScript
       - Go
       - Shell
+      - Slack
     stages:
       development:
         urls:      # optional
