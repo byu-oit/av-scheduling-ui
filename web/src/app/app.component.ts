@@ -35,6 +35,8 @@ declare var newEvent: Event;
 const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear", "My schedule is wide open"]
 
 const TIMEZONE = environment.timezone;
+declare var timeoutID: number;
+declare var timeoutTTL: number;
 
 @Component({
   selector: 'app-root',
@@ -78,6 +80,9 @@ export class AppComponent implements OnInit {
   newEventEndTimeValue: string;
   newEventStartTimeId: string;
   newEventStartTimeValue: string;
+  noEvents: boolean;
+  noEvents_message = "No Events Today";
+  numTimeslots: number = 0;
   occupied: boolean;
   refHours: string[] = [];
   resource = RESOURCE;
@@ -125,97 +130,24 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     //var that = this;
-    document.addEventListener("touchstart", function() {}, true);
+    window.addEventListener('load', function(){
 
+      document.addEventListener('touchstart', function(e){
+        if (timeoutID > 0 && timeoutID != null){
+          window.clearTimeout(timeoutID);
+          timeoutID = window.setTimeout(timeoutTTL);
+        }
+          e.preventDefault()
+      }, false)
+
+    }, false)
+    this.noEvents = true;
     this.defaultLocale = ` ${this.LOCALE}`.slice(1);
-    this.layouts = Object
-      .keys(this._layouts)
-      .map((name: string) => ({
-        name: name,
-        layout: this._layouts[name]
-      }))
-      .sort((a, b) => a.layout.name.localeCompare(b.layout.name));
 
-    //this.darkTheme=true;
     this.utcTime();
 
     this.transitionTimer = new SimpleTimer();
-    // Populate valid time scheduling window
-    var d = new Date();
-    var tomorrow = new Date();
-    tomorrow.setDate(d.getDate() + 1);
-    tomorrow.setTime(0);
 
-    var minutes = d.getMinutes();
-    //var hours = d.getHours();
-    var m = 0;
-    if (this.timeIncrement == 15) {
-      m = (((minutes + 7.5) / 15 | 0) * 15) % 60; // Nearest 15 minute interval, rounded down
-    }
-    else {
-      m = (((minutes + 15) / 30 | 0) * 30) % 60;
-      //m = (Math.round(minutes/30) * 30) % 60;
-    }
-    //    var h = ((((minutes/105) + .5) | 0) + hours) % 24;  // Not quite right.
-    d.setMinutes(m);
-    d.setSeconds(0);
-
-    for (var i = 0; i < 96; i++) {
-      var amPm = "AM";
-      var mins = d.getMinutes();
-      var hours = d.getHours();
-      if (hours > 12) {
-        amPm = "PM";
-        hours = hours - 12;
-      }
-      if ((new Date).getDay() == d.getDay()) {
-        this.validTimeIncrements.push({
-          id: i,
-          dateTimeValue: d,
-          value: d.toLocaleTimeString(this.LOCALE, this.timeOptions)
-          //value: hours.toString() + ":" + mins.toString() + " " + amPm
-        });
-      }
-      d.setMinutes(mins + this.timeIncrement);
-    }
-
-    //Populate timeslots
-    for (var j = 0; j < 96; j++) {
-      var tmpTime1 = new Date();
-      var tmpTime2 = new Date(tmpTime1.valueOf());
-      var t2 = 0;
-
-      var t = new Timeslot();
-      tmpTime1.setMinutes(j * 15);
-
-      t.Start = tmpTime1;
-      if (j < 96) {
-        t2 = j + 1;
-      }
-      else {
-        t2 = j;
-      }
-      tmpTime2.setMinutes((j + 1) * 15);
-      t.End = tmpTime2;
-
-      this.timeSlots.push(t);
-      /*var h = t.Start.getHours();
-      if (t.Start.getHours() > 12) {
-        h = +(t.Start.getHours()) - 12;
-      }
-
-
-      if (this.refHours.length <= 0) {
-        this.refHours.push(h.toPrecision(1).toString());
-      }
-      else {
-        if (this.refHours[-1].valueOf() != h.toPrecision(1).toString()) {
-          this.refHours.push(h.toPrecision(1).toString());
-        }
-      }*/
-      tmpTime1 = null;
-      tmpTime2 = null;
-    }
     //console.log(this.timeSlots);
 
     this.bookEvent = false;
@@ -257,6 +189,100 @@ export class AppComponent implements OnInit {
     }*/
     this.refreshData();
 
+  }
+
+  calcTimeslots(): void {
+    this.numTimeslots = ( this.calendarWorkdayEndHour - this.calendarWorkdayStartHour ) * (60 / this.timeIncrement);
+
+    this.populateRefHours();
+    this.populateTimeslots();
+  }
+
+  populateRefHours(): void {
+    this.refHours = [];
+    for (var i=this.calendarWorkdayStartHour; i < this.calendarWorkdayEndHour; i++ ){
+      this.refHours.push(i.toString());
+    }
+  }
+
+  populateTimeslots(): void {
+
+        // Populate valid time scheduling window
+        var d = new Date();
+        var tomorrow = new Date();
+        tomorrow.setDate(d.getDate() + 1);
+        tomorrow.setTime(0);
+
+        var minutes = d.getMinutes();
+        //var hours = d.getHours();
+        var m = 0;
+        if (this.timeIncrement == 15) {
+          m = (((minutes + 7.5) / 15 | 0) * 15) % 60; // Nearest 15 minute interval, rounded down
+        }
+        else {
+          m = (((minutes + 15) / 30 | 0) * 30) % 60;
+          //m = (Math.round(minutes/30) * 30) % 60;
+        }
+        //    var h = ((((minutes/105) + .5) | 0) + hours) % 24;  // Not quite right.
+        d.setMinutes(m);
+        d.setSeconds(0);
+
+        for (var i = 0; i < this.numTimeslots; i++) {
+          var amPm = "AM";
+          var mins = d.getMinutes();
+          var hours = d.getHours();
+          if (hours > 12) {
+            amPm = "PM";
+            hours = hours - 12;
+          }
+          if ((new Date).getDay() == d.getDay()) {
+            this.validTimeIncrements.push({
+              id: i,
+              dateTimeValue: d,
+              value: d.toLocaleTimeString(this.LOCALE, this.timeOptions)
+              //value: hours.toString() + ":" + mins.toString() + " " + amPm
+            });
+          }
+          d.setMinutes(mins + this.timeIncrement);
+        }
+
+        //Populate timeslots
+        for (var j = 0; j < 96; j++) {
+          var tmpTime1 = new Date();
+          var tmpTime2 = new Date(tmpTime1.valueOf());
+          var t2 = 0;
+
+          var t = new Timeslot();
+          tmpTime1.setMinutes(j * 15);
+
+          t.Start = tmpTime1;
+          if (j < 96) {
+            t2 = j + 1;
+          }
+          else {
+            t2 = j;
+          }
+          tmpTime2.setMinutes((j + 1) * 15);
+          t.End = tmpTime2;
+
+          this.timeSlots.push(t);
+          /*var h = t.Start.getHours();
+          if (t.Start.getHours() > 12) {
+            h = +(t.Start.getHours()) - 12;
+          }
+
+
+          if (this.refHours.length <= 0) {
+            this.refHours.push(h.toPrecision(1).toString());
+          }
+          else {
+            if (this.refHours[-1].valueOf() != h.toPrecision(1).toString()) {
+              this.refHours.push(h.toPrecision(1).toString());
+            }
+          }*/
+          tmpTime1 = null;
+          tmpTime2 = null;
+        }
   }
 
   openKeyboard(locale = this.defaultLocale) {
@@ -497,7 +523,9 @@ export class AppComponent implements OnInit {
     }, 1000);
   }
   refreshData(): void {
+    this.populateRefHours();
     this.events = [];
+    this.noEvents = true;
     var url = 'http://' + ip + ':5000/v1.0/exchange/calendar/events';
     this.http.get(url).subscribe(data => {
       angular.forEach(data, function(obj) {
@@ -506,9 +534,10 @@ export class AppComponent implements OnInit {
         e.Start = obj.start;
         e.End = obj.end;
         this.events.push(e);
+        this.noEvents = false;
       }, this);
     });
-    console.log(this.timeSlots.length);
+
       /*for (var i = 0; i < this.timeSlots.length; i++) {
         var e = new Event();
         e.Subject = "Available";
@@ -517,22 +546,19 @@ export class AppComponent implements OnInit {
         this.events.push(e);
       }
       this.consolidate_events();*/
+
     this.currentMeeting();
-    //console.log(this.events);
-    //console.log(this.currentEvent);
   }
   reset(): void {
     this.refreshData();
+    this.bookEvent = false;
     this.cancellation = false;
     this.helpInformation = false;
     this.helpPressed = false;
     this.helpRequested = false;
-    this.restartRequested = false;
-    this.showAgenda = false;
-    this.bookEvent = false;
-    this.cancellation = false;
     this.newEventEndTimeId = null;
     this.newEventStartTimeId = null;
+    this.restartRequested = false;
     this.showAgenda = false;
     this.showWaitSpinner = false;
   }
