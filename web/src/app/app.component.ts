@@ -6,7 +6,7 @@ import { SimpleTimer } from 'ng2-simple-timer';
 import { environment } from '../environments/environment';
 import { Event, Timeslot } from './model/o365.model';
 
-import { IKeyboardLayout, MD_KEYBOARD_LAYOUTS, MdKeyboardComponent, MdKeyboardRef, MdKeyboardService } from '@ngx-material-keyboard/core';
+//import { IKeyboardLayout, MD_KEYBOARD_LAYOUTS, MdKeyboardComponent, MdKeyboardRef, MdKeyboardService } from '@ngx-material-keyboard/core';
 import * as angular from 'angular';
 
 export class Resource {
@@ -35,6 +35,8 @@ declare var newEvent: Event;
 const NOEVENTS_MESSAGES: string[] = ["No Events Today", "Your schedule is clear", "My schedule is wide open"]
 
 const TIMEZONE = environment.timezone;
+declare var timeoutID: number;
+declare var timeoutTTL: number;
 
 @Component({
   selector: 'app-root',
@@ -78,6 +80,7 @@ export class AppComponent implements OnInit {
   newEventEndTimeValue: string;
   newEventStartTimeId: string;
   newEventStartTimeValue: string;
+  numTimeslots: number = 0;
   occupied: boolean;
   refHours: string[] = [];
   resource = RESOURCE;
@@ -95,7 +98,7 @@ export class AppComponent implements OnInit {
   validTimeIncrements: TimeIncrement[] = [];
   percentOfDayExpended: number;
 
-  private _keyboardRef: MdKeyboardRef<MdKeyboardComponent>;
+  //private _keyboardRef: MdKeyboardRef<MdKeyboardComponent>;
 
   darkTheme: boolean;
 
@@ -107,7 +110,7 @@ export class AppComponent implements OnInit {
 
   defaultLocale: string;
 
-  layout: string;
+ /* layout: string;
 
   layouts: {
     name: string;
@@ -116,106 +119,35 @@ export class AppComponent implements OnInit {
 
   get keyboardVisible(): boolean {
     return this._keyboardService.isOpened;
-  }
+  }*/
 
-  constructor(private _keyboardService: MdKeyboardService,
+  /*constructor(private _keyboardService: MdKeyboardService,
     @Inject(LOCALE_ID) public locale,
     @Inject(MD_KEYBOARD_LAYOUTS) private _layouts,
-    private http: HttpClient) { }
+    private http: HttpClient) { }*/
+constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     //var that = this;
-    document.addEventListener("touchstart", function() {}, true);
+    /*window.addEventListener('load', function(){
+
+      document.addEventListener('touchstart', function(e){
+        if (timeoutID > 0 && timeoutID != null){
+          window.clearTimeout(timeoutID);
+          timeoutID = window.setTimeout(timeoutTTL);
+        }
+          e.preventDefault()
+      }, false)
+
+    }, false)*/
+    document.addEventListener('touchstart',function(){});
 
     this.defaultLocale = ` ${this.LOCALE}`.slice(1);
-    this.layouts = Object
-      .keys(this._layouts)
-      .map((name: string) => ({
-        name: name,
-        layout: this._layouts[name]
-      }))
-      .sort((a, b) => a.layout.name.localeCompare(b.layout.name));
 
-    //this.darkTheme=true;
     this.utcTime();
 
     this.transitionTimer = new SimpleTimer();
-    // Populate valid time scheduling window
-    var d = new Date();
-    var tomorrow = new Date();
-    tomorrow.setDate(d.getDate() + 1);
-    tomorrow.setTime(0);
 
-    var minutes = d.getMinutes();
-    //var hours = d.getHours();
-    var m = 0;
-    if (this.timeIncrement == 15) {
-      m = (((minutes + 7.5) / 15 | 0) * 15) % 60; // Nearest 15 minute interval, rounded down
-    }
-    else {
-      m = (((minutes + 15) / 30 | 0) * 30) % 60;
-      //m = (Math.round(minutes/30) * 30) % 60;
-    }
-    //    var h = ((((minutes/105) + .5) | 0) + hours) % 24;  // Not quite right.
-    d.setMinutes(m);
-    d.setSeconds(0);
-
-    for (var i = 0; i < 96; i++) {
-      var amPm = "AM";
-      var mins = d.getMinutes();
-      var hours = d.getHours();
-      if (hours > 12) {
-        amPm = "PM";
-        hours = hours - 12;
-      }
-      if ((new Date).getDay() == d.getDay()) {
-        this.validTimeIncrements.push({
-          id: i,
-          dateTimeValue: d,
-          value: d.toLocaleTimeString(this.LOCALE, this.timeOptions)
-          //value: hours.toString() + ":" + mins.toString() + " " + amPm
-        });
-      }
-      d.setMinutes(mins + this.timeIncrement);
-    }
-
-    //Populate timeslots
-    for (var j = 0; j < 96; j++) {
-      var tmpTime1 = new Date();
-      var tmpTime2 = new Date(tmpTime1.valueOf());
-      var t2 = 0;
-
-      var t = new Timeslot();
-      tmpTime1.setMinutes(j * 15);
-
-      t.Start = tmpTime1;
-      if (j < 96) {
-        t2 = j + 1;
-      }
-      else {
-        t2 = j;
-      }
-      tmpTime2.setMinutes((j + 1) * 15);
-      t.End = tmpTime2;
-
-      this.timeSlots.push(t);
-      /*var h = t.Start.getHours();
-      if (t.Start.getHours() > 12) {
-        h = +(t.Start.getHours()) - 12;
-      }
-
-
-      if (this.refHours.length <= 0) {
-        this.refHours.push(h.toPrecision(1).toString());
-      }
-      else {
-        if (this.refHours[-1].valueOf() != h.toPrecision(1).toString()) {
-          this.refHours.push(h.toPrecision(1).toString());
-        }
-      }*/
-      tmpTime1 = null;
-      tmpTime2 = null;
-    }
     //console.log(this.timeSlots);
 
     this.bookEvent = false;
@@ -256,10 +188,103 @@ export class AppComponent implements OnInit {
       newDate.setHours(i);
     }*/
     this.refreshData();
-
   }
 
-  openKeyboard(locale = this.defaultLocale) {
+  calcTimeslots(): void {
+    this.numTimeslots = ( this.calendarWorkdayEndHour - this.calendarWorkdayStartHour ) * (60 / this.timeIncrement);
+
+    this.populateRefHours();
+    this.populateTimeslots();
+  }
+
+  populateRefHours(): void {
+    this.refHours = [];
+    for (var i=this.calendarWorkdayStartHour; i < this.calendarWorkdayEndHour; i++ ){
+      this.refHours.push(i.toString());
+    }
+  }
+
+  populateTimeslots(): void {
+
+        // Populate valid time scheduling window
+        var d = new Date();
+        var tomorrow = new Date();
+        tomorrow.setDate(d.getDate() + 1);
+        tomorrow.setTime(0);
+
+        var minutes = d.getMinutes();
+        //var hours = d.getHours();
+        var m = 0;
+        if (this.timeIncrement == 15) {
+          m = (((minutes + 7.5) / 15 | 0) * 15) % 60; // Nearest 15 minute interval, rounded down
+        }
+        else {
+          m = (((minutes + 15) / 30 | 0) * 30) % 60;
+          //m = (Math.round(minutes/30) * 30) % 60;
+        }
+        //    var h = ((((minutes/105) + .5) | 0) + hours) % 24;  // Not quite right.
+        d.setMinutes(m);
+        d.setSeconds(0);
+
+        for (var i = 0; i < this.numTimeslots; i++) {
+          var amPm = "AM";
+          var mins = d.getMinutes();
+          var hours = d.getHours();
+          if (hours > 12) {
+            amPm = "PM";
+            hours = hours - 12;
+          }
+          if ((new Date).getDay() == d.getDay()) {
+            this.validTimeIncrements.push({
+              id: i,
+              dateTimeValue: d,
+              value: d.toLocaleTimeString(this.LOCALE, this.timeOptions)
+              //value: hours.toString() + ":" + mins.toString() + " " + amPm
+            });
+          }
+          d.setMinutes(mins + this.timeIncrement);
+        }
+
+        //Populate timeslots
+        for (var j = 0; j < 96; j++) {
+          var tmpTime1 = new Date();
+          var tmpTime2 = new Date(tmpTime1.valueOf());
+          var t2 = 0;
+
+          var t = new Timeslot();
+          tmpTime1.setMinutes(j * 15);
+
+          t.Start = tmpTime1;
+          if (j < 96) {
+            t2 = j + 1;
+          }
+          else {
+            t2 = j;
+          }
+          tmpTime2.setMinutes((j + 1) * 15);
+          t.End = tmpTime2;
+
+          this.timeSlots.push(t);
+          /*var h = t.Start.getHours();
+          if (t.Start.getHours() > 12) {
+            h = +(t.Start.getHours()) - 12;
+          }
+
+
+          if (this.refHours.length <= 0) {
+            this.refHours.push(h.toPrecision(1).toString());
+          }
+          else {
+            if (this.refHours[-1].valueOf() != h.toPrecision(1).toString()) {
+              this.refHours.push(h.toPrecision(1).toString());
+            }
+          }*/
+          tmpTime1 = null;
+          tmpTime2 = null;
+        }
+  }
+
+  /*openKeyboard(locale = this.defaultLocale) {
     this._keyboardRef = this._keyboardService.open(locale, {
       //darkTheme: this.darkTheme,
       //darkTheme: true,
@@ -278,7 +303,7 @@ export class AppComponent implements OnInit {
   toggleDarkTheme(dark: boolean) {
     this.darkTheme = dark;
     this._keyboardRef.darkTheme = dark;
-  }
+  }*/
 
   availabilityClass(e: Event): string {
     if (e.Subject.toString() == 'Available') {
@@ -497,6 +522,19 @@ export class AppComponent implements OnInit {
     }, 1000);
   }
   refreshData(): void {
+    this.populateRefHours();
+    var now = new Date();
+    var msIn15Min: number = 900000;
+    var secondsInADay: number = 24 * 60 * 60;
+    var hours: number = now.getHours() * 60 * 60;
+    var minutes: number = now.getMinutes() * 60;
+    var seconds: number = now.getSeconds();
+    var ms: number = (hours + minutes + seconds) * 1000;
+    var t1: number = now.getTime();
+    now.setHours(this.calendarWorkdayStartHour);
+    now.setMinutes(0);
+    now.setSeconds(0);
+
     this.events = [];
     var url = 'http://' + ip + ':5000/v1.0/exchange/calendar/events';
     this.http.get(url).subscribe(data => {
@@ -505,21 +543,24 @@ export class AppComponent implements OnInit {
         e.Subject = obj.subject;
         e.Start = obj.start;
         e.End = obj.end;
+        var eMillisStart = new Date(obj.start);
+        var eMillisEnd = new Date(obj.end);
+        // Convert the difference between the event start time and beginning work day to slot number;
+        var eStartPosition = (eMillisStart.getTime() - now.getTime()) / 1000 / 60 / 60 * 4;
+        var espString = (Math.round(eStartPosition * 4) / 4).toFixed(0);
+        var eDuration = (eMillisEnd.getTime() - eMillisStart.getTime()) / 1000 / 60 / 60 * 4;
+        var edString = (Math.round(eDuration * 4) / 4).toFixed(0);
+        var calcHeight = 30 * parseInt(edString);
+        e.Style = {
+          "grid-row": parseInt(espString) + 1,
+          "grid-row-end": "span " + parseInt(edString),
+          "height": calcHeight + "px" };
+
         this.events.push(e);
       }, this);
     });
-    console.log(this.timeSlots.length);
-      /*for (var i = 0; i < this.timeSlots.length; i++) {
-        var e = new Event();
-        e.Subject = "Available";
-        e.Start = this.timeSlots[i].Start;
-        e.End = this.timeSlots[i].End;
-        this.events.push(e);
-      }
-      this.consolidate_events();*/
+
     this.currentMeeting();
-    //console.log(this.events);
-    //console.log(this.currentEvent);
   }
   reset(): void {
     this.refreshData();
@@ -562,7 +603,7 @@ export class AppComponent implements OnInit {
   }
   scheduleEvent(): void {
     this.reset();
-    this.startScreenResetTimeout(10);
+    /////this.startScreenResetTimeout(10);
     //this.refreshData();
     this.showAgenda = true;
   }
@@ -593,7 +634,7 @@ export class AppComponent implements OnInit {
     this.stopScreenResetTimeout();
     this.currentTimeout = setTimeout(function(){
       that.reset();
-      that.closeCurrentKeyboard();
+      //that.closeCurrentKeyboard();
     },t);
   }
   stopScreenResetTimeout(): void {

@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule, ProgressBarModule, GrowlModule } from 'primeng/primeng';
 import { MdInputModule } from '@angular/material';
-import { MdKeyboardModule } from '@ngx-material-keyboard/core';
+//import { MdKeyboardModule } from '@ngx-material-keyboard/core';
 
 import { AppComponent } from './app.component';
 import { AppState, InternalStateType } from './app.service';
@@ -44,7 +44,7 @@ type StoreType = {
     GrowlModule,
 
     MdInputModule,
-    MdKeyboardModule,
+    //MdKeyboardModule,
     //NgVirtualKeyboardModule
   ],
   providers: [SimpleTimer,AuthProvider,ValueService,AppState],

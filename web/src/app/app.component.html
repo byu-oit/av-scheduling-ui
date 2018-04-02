@@ -117,13 +117,6 @@
     </div>-->
     </div>
     <div id="agenda-lower-section-wrapper" class="agenda-lower-section-wrapper">
-        <div id="agenda-time-reference-sidebar" class="agenda-time-reference-sidebar font-sans white">
-            <ul id="refHours" class="refHours" (scroll)="scrollAgendaEvent($event.target)">
-                <li *ngFor="let hour of refHours" class="refHours-hour">
-                    <div class="refHours-view-row-container">{{hour}}</div>
-                </li>
-            </ul>
-        </div>
         <div id="current-time-bar-wrapper" class="current-time-bar-wrapper">
             <div class="current-time-bar-top" [style.top]="percentOfDayExpended">
 
@@ -132,9 +125,34 @@
 
             </div>
         </div>
-        <div class="agenda-view-table">
-            <ul id="agenda" class="agenda" (scroll)="scrollAgendaEvent($event.target)">
-                <li *ngFor="let event of events" class="agenda-view-row-unavailable" ng-class="availabilityClass(event)">
+        <div class="agenda-grid">
+            <!-- <<div id="agenda-time-reference-sidebar" class="agenda-time-reference-column font-sans white"> -->
+            <!-- <div *ngFor="let hour of refHours" class="agenda-row"> -->
+                <!-- reference  refHours refHours-hour agenda-reference-hour  " -->
+                <div *ngFor="let hour of refHours" class="reference-hour">{{ hour >= 13 ? (hour - 12) : hour }}</div>
+                <div *ngFor="let event of events" class="agenda-grid-content" [ngStyle]="event.Style">
+                    <div class="agenda-view-row-container" [ngClass]="availabilityClass(event)" [ngStyle]="event.Style">
+                    <div class="agenda-row-section1 font-serif font-size-2 white">
+                        {{event.Subject}}
+                    </div>
+                    <div class="agenda-row-section2">
+                        <div class="agenda-row-duration font-sans font-size-2 white"><strong>{{durationString(event)}}</strong></div>
+                        <div class="agenda-row-start-end font-serif font-size-2 white">
+                            {{event.Start | amDateFormat:'h:mm a'}} - {{event.End | amDateFormat:'h:mm a'}}
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- appointment -->
+                <!-- <div class="agenda-grid-content noborder"> -->
+                <!-- <div class="agenda-grid-content firstQuarterHour noborder"></div>
+                <div class="agenda-grid-content secondQuarterHour noborder"></div>
+                <div class="agenda-grid-content thirdQuarterHour noborder"></div>
+                <div class="agenda-grid-content fourthQuarterHour noborder"></div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+
+            <!-- <li *ngFor="let event of events" class="agenda-view-row-unavailable" ng-class="availabilityClass(event)">
                     <div class="agenda-view-row-container" ng-class="availabilityClass(event)">
                         <div class="agenda-row-section1 font-serif font-size-2 white">
                             {{event.Subject}}
@@ -149,8 +167,7 @@
                             </div>
                         </div>
                     </div>
-                </li>
-            </ul>
+                </li> -->
         </div>
         <div class="clock">
             {{ date | amDateFormat:'h:mm'}}
