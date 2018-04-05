@@ -22,9 +22,14 @@ var (
 	basepath   = filepath.Dir(b)
 )
 
+func buildAngular(wg *sync.WaitGroup) {
+
+	wg.Done()
+}
+
 func bootstrapEnvironment(wg *sync.WaitGroup) {
-	env_dev := basepath + "/web/src/environments/environment.ts"
-	env_prd := basepath + "/web/src/environments/environment.prod.ts"
+	envDev := basepath + "/web/src/environments/environment.ts"
+	envPrd := basepath + "/web/src/environments/environment.prod.ts"
 	// Development Server environment
 	prefix := "export const environment = {"
 
@@ -86,8 +91,15 @@ func bootstrapEnvironment(wg *sync.WaitGroup) {
 	prdLines := strings.Join(prdStrings, "")
 	//log.Println(devLines)
 
-	if _, err_dev := os.Stat(env_dev); os.IsNotExist(err_dev) {
-		devFile, errDevFile := os.Create(env_dev)
+	if _, errDev := os.Stat(envDev); os.IsNotExist(errDev) {
+		errDevFileRemove := os.Remove(envDev)
+
+		if errDevFileRemove != nil {
+			log.Fatal("Cowardly refusing to go on - environment file was not changed")
+			return
+		}
+
+		devFile, errDevFile := os.Create(envDev)
 		if errDevFile != nil {
 			log.Fatal(errDevFile.Error())
 		}
@@ -98,8 +110,15 @@ func bootstrapEnvironment(wg *sync.WaitGroup) {
 		devFile.Close()
 	}
 
-	if _, err_prd := os.Stat(env_prd); os.IsNotExist(err_prd) {
-		prdFile, errPrdFile := os.Create(env_prd)
+	if _, errPrd := os.Stat(envPrd); os.IsNotExist(errPrd) {
+		errPrdFileRemove := os.Remove(envPrd)
+
+		if errPrdFileRemove != nil {
+			log.Fatal("Cowardly refusing to go on - prod environment file was not changed")
+			return
+		}
+
+		prdFile, errPrdFile := os.Create(envPrd)
 		if errPrdFile != nil {
 			log.Fatal(errPrdFile.Error())
 		}
@@ -146,37 +165,26 @@ func main() {
 	wg.Add(2)
 
 	go bootstrapEnvironment(wg)
-	go startAngular(wg)
+	//go startAngular(wg)
+	go buildAngular(wg)
 
-	port := ":8012"
+	port := ":8011"
 
 	router := echo.New()
 	router.Pre(middleware.RemoveTrailingSlash())
 	router.Use(middleware.CORS())
 
-	// Use the `secure` routing group to require authentication
-	//secure := router.Group("", echo.WrapMiddleware(authmiddleware.Authenticate))
-
 	router.Static("/*", "public")
 
-	/*TARGET_URL, err := url.Parse(ANGULAR)
-	if err != nil {
-		router.Logger.Fatal(err)
-	}
+	// server := http.Server{
+	// 	Addr:           port,
+	// 	MaxHeaderBytes: 1024 * 10,
+	// }
 
-	/*outer.Use(middleware.Proxy(&middleware.RoundRobinBalancer{
-		Targets: []*middleware.ProxyTarget{
-			&middleware.ProxyTarget{
-				URL: TARGET_URL,
-			},
-		},
-	}))*/
+	fs := http.FileServer(http.Dir("web/dist"))
+	http.Handle("/", fs)
 
-	server := http.Server{
-		Addr:           port,
-		MaxHeaderBytes: 1024 * 10,
-	}
-
-	router.StartServer(&server)
+	// router.StartServer(&server)
+	http.ListenAndServe(port, nil)
 
 }
