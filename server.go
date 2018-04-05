@@ -24,7 +24,21 @@ var (
 
 func buildAngular(wg *sync.WaitGroup) {
 
-	wg.Done()
+	ng, lookErr := exec.LookPath("ng")
+	if lookErr != nil {
+		log.Fatalf("Error building angular package: %v", lookErr)
+	}
+
+	argsNg := []string{"ng", "build", "--aot", "--prod"}
+	env := os.Environ()
+	syscall.Chdir("web")
+	ngExecErr := syscall.Exec(ng, argsNg, env)
+
+	if ngExecErr != nil {
+		log.Fatal(ngExecErr)
+	}
+
+	wg.Done() // Need to signal to waitgroup that this goroutine is done
 }
 
 func bootstrapEnvironment(wg *sync.WaitGroup) {
