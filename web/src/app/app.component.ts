@@ -131,7 +131,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     //var that = this;
     window.addEventListener('load', function(){
-
       document.addEventListener('touchstart', function(e){
         if (timeoutID > 0 && timeoutID != null){
           window.clearTimeout(timeoutID);
@@ -351,6 +350,7 @@ export class AppComponent implements OnInit {
     this.reset();
     this.startScreenResetTimeout(70);
     this.bookEvent = true;
+    this.calcTimeslots();
   }
   cancelEvent(event: Event): void {
     this.reset();
